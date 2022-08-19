@@ -3,7 +3,7 @@
 ### Job4me
 This system is designed as a solution for the issues related to finding jobs, starting from searching for jobs to rejection or acceptance. Since the whole process is considered, it is not only for job seekers but also for the companies/recruiters.
 
-## Group Members -:
+### Group Members -:
 
 IT20127046 - Samararathna L.H
 
