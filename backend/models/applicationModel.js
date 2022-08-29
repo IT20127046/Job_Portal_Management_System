@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 
 const application = new mongoose.Schema({ 
-    applicationNo: { type: String, required: true },
     vacancyNo: { type: String, required: true },
     companyId: { type: String, required: true },
     applicantId: { type: String, required: true },
