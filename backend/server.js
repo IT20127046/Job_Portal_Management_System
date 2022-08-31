@@ -17,6 +17,9 @@ app.use(sampleRoutes);
 const applicationRoutes = require('./routes/applicationRoutes');
 app.use(applicationRoutes);
 
+const interviewRoutes = require('./routes/interviewRoutes');
+app.use(interviewRoutes);
+
 const port = process.env.PORT || 5000;
 const uri = process.env.MONGO_URI;
 
