@@ -19,6 +19,7 @@ const application = new mongoose.Schema({
     coverLetter: { type: String, required: true },
     additionalInformation: { type: String},
     status: { type: String, required: true },
+    comments: { type: String},
 });
 
 module.exports = mongoose.model("Application", application);
