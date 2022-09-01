@@ -18,6 +18,7 @@ function App() {
   
     <BrowserRouter>
   <Routes>
+     {/* ---------------Admin--------------- */}
     <Route path="/admin/home" element={<AdminHome />} />
     <Route path="/admin/login" element={<AdminLogin/>} />
     </Routes>
@@ -26,7 +27,7 @@ function App() {
 
     <NavBar/>
       <Routes>
-     
+      {/* ---------------Job Recruters / Job Seekers --------------- */}
         <Route path="/" element={<LandingPage />} />
         <Route path="/application" element={<ApplicationPage/>} />
         <Route path="/all_applications" element={<AllApplications/>} />
