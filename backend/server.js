@@ -23,6 +23,9 @@ app.use(interviewRoutes);
 const userRoutes = require('./routes/userRoutes');
 app.use(userRoutes);
 
+const adminRoutes = require('./routes/adminRoutes');
+app.use(adminRoutes);
+
 const port = process.env.PORT || 5000;
 const uri = process.env.MONGO_URI;
 
