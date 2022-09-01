@@ -198,7 +198,7 @@ export default class UserLogin extends Component {
 				</div>
 				<div className={styles.right}>
 					<h5>Are you new here ?</h5>
-                    <Link to="/signup">
+                    <Link to="/user/registration">
 						<button type="button" className={styles.white_btn}>
 							 Sign Up
 						</button>

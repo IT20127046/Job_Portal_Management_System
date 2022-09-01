@@ -239,7 +239,7 @@ export default class CreateUser extends Component {
 			<div className={styles.signup_form_container}>
 				<div className={styles.left}>
 					<h5>Already have an account ?</h5>
-					<Link to="/login">
+					<Link to="/user/login">
 						<button type="button" className={styles.white_btn}>
 							Sign-in
 						</button>
