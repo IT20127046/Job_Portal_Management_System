@@ -12,10 +12,8 @@ app.use(bodyparser.json());
 app.use(cors());
 
 // Routes
-const sampleRoutes = require('./routes/sampleRoutes');
-app.use(sampleRoutes);
-const applicationRoutes = require('./routes/applicationRoutes');
-app.use(applicationRoutes);
+const vacancyRoutes = require('../backend/routes/vacancy_management/vacancyRoutes');
+app.use(vacancyRoutes);
 
 const port = process.env.PORT || 5000;
 const uri = process.env.MONGO_URI;
