@@ -79,4 +79,22 @@ const get_application = function (req, res){
   });
 } 
 
-module.exports = { save_application, getAll_applications, getAll_receivedApplications, getAll_submittedApplications, get_application }
+// Update application
+const update_application = function (req, res){
+  ApplicationModel.findByIdAndUpdate(
+      req.params.id,
+      {
+          $set:req.body
+      },
+      (err, application)=>{
+          if(err){
+              return res.status(400).json({error:err});
+          }
+          return res.status(200).json({
+              success:true
+          });
+      }
+  );
+}
+
+module.exports = { save_application, getAll_applications, getAll_receivedApplications, getAll_submittedApplications, get_application, update_application }
