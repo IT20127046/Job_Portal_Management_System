@@ -187,7 +187,7 @@ class NavBar extends Component {
 
 
           <li className='nav-item'>
-            <a href='/user/login' onClick={this.logOut.bind(this)} className="nav-link" style={{ textDecoration: 'none', color: 'white' }}>
+            <a href='/user/login' onClick={this.logOut.bind(this)} className="nav-link bg-dark" style={{ textDecoration: 'none', color: 'white' }}>
               Log out
             </a>
           </li>
