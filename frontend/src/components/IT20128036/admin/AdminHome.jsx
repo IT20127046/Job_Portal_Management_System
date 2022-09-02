@@ -45,7 +45,7 @@ export default class AdminHome extends Component {
                 <i class="fa fa-user" aria-hidden="true"></i>
                 <h6>User Management</h6>
                 <br />
-                <a type="button" className="btn btn-outline-dark" href={'/admin/users'}><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></a>
+                <a type="button" className="btn btn-outline-dark" href={'/admin/userroles'}><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i></a>
               </center>
             </div>
             <div className='col p-3 mb-2 m-2 bg-light text-dark rounded'>

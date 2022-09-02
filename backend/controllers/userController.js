@@ -217,4 +217,22 @@ const updateUser = function(req, res) {
 };
 
 
-module.exports = {userRegistration, userLogin, getUser, getUsers, getUserByType,updateUser};
+
+//delete user
+const removeUser =  (req, res) => {
+  Users.findByIdAndDelete(req.params.id).exec((err, deletedUser) => {
+    if (err) {
+      return res.status(400).json({
+        error: err,
+      });
+    }
+
+    return res.json({
+      message: "Deleted succesfully",
+      deletedUser,
+    });
+  });
+};
+
+
+module.exports = {userRegistration, userLogin, getUser, getUsers, getUserByType,updateUser,removeUser};

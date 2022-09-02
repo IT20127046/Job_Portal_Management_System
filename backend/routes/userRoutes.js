@@ -21,6 +21,6 @@ UserRouter.get('/users/:type', UserController.getUserByType);
 UserRouter.put('/user/update/:id', UserController.updateUser);
 
 // Delete Sample
-// UserRouter.delete('/sample/delete/:id', SampleController.delete_sample);
+UserRouter.delete('/user/delete/:id', UserController.removeUser);
 
 module.exports = UserRouter;

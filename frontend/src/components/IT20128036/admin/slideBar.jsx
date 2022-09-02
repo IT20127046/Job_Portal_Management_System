@@ -15,7 +15,7 @@ export default class RightSidePanel extends Component {
           <hr />
 
           <div>
-            <a href=''>
+            <a href='/admin/userroles'>
               <div className="p-2 mb-2 text-white" style={{ background: '#212F3C', textDecoration: 'none' }}>
                 <a className="btn text-white">
                   <i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;Users 
@@ -74,6 +74,15 @@ export default class RightSidePanel extends Component {
               </div>
             </a>
           </div>
+
+
+          <div className="p-3 mb-2 bg-light text-dark">
+          <a href="#" style={{ textDecoration: 'none' }}><p className="h6"><i class="fa fa-comments" aria-hidden="true"></i>&nbsp;&nbsp;User Inquiries</p>
+          </a>
+          <div>
+            
+          </div>
+        </div>
 
         </div>
 

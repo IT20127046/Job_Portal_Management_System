@@ -9,6 +9,18 @@ import LandingPage from "./components/IT20128036/LandingPage";
 import NavBar from "./components/IT20128036/NavBar";
 import AdminHome from "./components/IT20128036/admin/AdminHome";
 import AdminLogin from "./components/IT20128036/admin/AdminLogin";
+import UserRoles from "./components/IT20128036/userManagement/userRoles";
+import EditUser from "./components/IT20128036/userManagement/editUsers";
+import UserRoles_JonRecruiter from "./components/IT20128036/userManagement/userRole_JobRecruiter";
+import UserRoles_JobSeeker from "./components/IT20128036/userManagement/userRole_JobSeeker";
+
+
+// import Demo from "./components/IT20128036/userManagement/barChartSample";
+
+
+
+
+
 
 
 function App() {
@@ -21,10 +33,19 @@ function App() {
      {/* ---------------Admin--------------- */}
     <Route path="/admin/home" element={<AdminHome />} />
     <Route path="/admin/login" element={<AdminLogin/>} />
+    <Route path="/admin/userroles" element={<UserRoles/>} />
+    <Route path="/admin/edituser/:id" element={<EditUser/>} />
+    <Route path="/admin/user/recruiter" element={<UserRoles_JonRecruiter/>} />
+    <Route path="/admin/user/seeker" element={<UserRoles_JobSeeker/>} />
+
+
+    
+
+
+    
     </Routes>
 
  
-
     <NavBar/>
       <Routes>
       {/* ---------------Job Recruters / Job Seekers --------------- */}
