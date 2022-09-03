@@ -14,4 +14,10 @@ ApplicationRouter.get('/applications/received/:id', ApplicationController.getAll
 // get all submitted applications according to the user
 ApplicationRouter.get('/applications/submitted/:id', ApplicationController.getAll_submittedApplications);
 
+// get details of the selected application
+ApplicationRouter.get('/applications/:id', ApplicationController.get_application);
+
+// Update record    
+ApplicationRouter.patch('/applications/update/:id', ApplicationController.update_application);
+
 module.exports = ApplicationRouter;

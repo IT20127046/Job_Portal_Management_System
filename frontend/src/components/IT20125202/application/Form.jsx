@@ -52,9 +52,6 @@ const Form = () => {
     }
 
 
-
-
-
     const saveData = async (e) => {
         e.preventDefault();
 
@@ -76,7 +73,8 @@ const Form = () => {
             referees: referees,
             coverLetter: coverLetter,
             additionalInformation: additionalInformation,
-            status: 'Pending'
+            status: 'Pending',
+            comments: ''
         }
 
         // console.log(application);
