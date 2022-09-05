@@ -22,6 +22,8 @@ export default function JobSeekerView() {
   }
     
   return (
-    <div>JobSeekerView</div>
+    <div>
+      <h1>JobSeekerView</h1>
+    </div>
   )
 }
