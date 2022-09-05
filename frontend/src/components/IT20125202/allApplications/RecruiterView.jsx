@@ -1,18 +1,21 @@
 import axios from 'axios';
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
+import jwt_decode from 'jwt-decode';
 
 export default function RecruiterView() {
 
     let navigate = useNavigate();
 
-    const companyId = '002';
-    // const [companyId, setCompanyId] = React.useState('');
+    const [companyId, setCompanyId] = React.useState('');
     const [applications, setApplications] = React.useState([]);
 
     useEffect(() => {
         document.title = "All Application";
-        // setCompanyId('001');      //need to get from the session
+        const usertoken = localStorage.userToken;
+        const decoded = jwt_decode(usertoken);
+
+        setCompanyId(decoded._id);
 
         axios.get(`http://localhost:5000/applications/received/${companyId}`).then(res => {
             if (res.data.success) {

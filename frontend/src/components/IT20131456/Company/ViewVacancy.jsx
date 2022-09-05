@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import swal from "sweetalert";
 
 export default function ViewVacancy() {
   const [vacancy, setVacancy] = useState([]);
+  const [filteredResults, setFilteredResults] = useState([]);
+  const [searchInput, setSearchInput] = useState("");
 
   useEffect(() => {
     axios.get(`http://localhost:5000/vacancy/getAll`).then((response) => {
@@ -14,17 +17,32 @@ export default function ViewVacancy() {
     console.log(id);
     axios.delete(`http://localhost:5000/vacancy/delete/${id}`).then((res) => {
       if (res.data.success) {
+        swal("Are you sure to delete the vacancy?", "", "warning");
       }
-      // alert("Delete Successful");
-      window.location = "/";
+      setTimeout(() => {
+        window.location.reload();
+      }, "6000");
     });
   };
+  //search record
 
-  
+  const searchItems = (searchValue) => {
+    setSearchInput(searchValue);
+    if (searchInput !== "") {
+      const filteredData = vacancy.filter((item) => {
+        return Object.values(item)
+          .join("")
+          .toLowerCase()
+          .includes(searchInput.toLowerCase());
+      });
+      setFilteredResults(filteredData);
+    } else {
+      setFilteredResults(vacancy);
+    }
+  };
 
   return (
-    <div className="container px-5 my-3">      
-       <br />      
+    <div className="container px-5 mb-5">
       <div className="row">
         <div className="float-left col-lg-9 mt-2 mb-2">
           &nbsp;
@@ -37,8 +55,7 @@ export default function ViewVacancy() {
             className="form-control border border-dark"
             type="search"
             placeholder="Search"
-            name="searchQuery"
-            // onChange={this.handleSearchArea}
+            onChange={(e) => searchItems(e.target.value)}
           ></input>
         </div>
 
@@ -75,45 +92,91 @@ export default function ViewVacancy() {
         </thead>
 
         <tbody>
-          {vacancy.map((data, index) => (
-            <tr>
-              <th>{index + 1}</th>
-              <td>{data.jobId}</td>
-              <td>{data.jobTitle}</td>
-              <td>{data.jobType}</td>
-              <td>{data.closingDate}</td>
-              <td>{data.noOfVacancy}</td>
-              <td style={{ marginLeft: "20%",marginTop:"10%" }}
-                className= {
-                  data.adminStatus == "Pending"
-                    ? "badge bg-warning text-dark"
-                    : data.adminStatus == "Approve"
-                    ? "badge bg-success text-white"
-                    : data.adminStatus == "Decline"
-                    ? "badge bg-danger text-white"
-                    : ""
-                } 
-              >
-                {data.adminStatus}
-              </td>
-              <td className="text-center">
-                <a
-                  className="btn btn-outline-success "
-                  href={`/update/vacancy/${data._id}`}
-                >
-                  <i className="fa fa-edit"></i>&nbsp;Edit
-                </a>
-                &nbsp; &nbsp; &nbsp;
-                <button
-                  className="btn btn-outline-danger"
-                  type="submit"
-                  onClick={() => onDelete(data._id)}
-                >
-                  <i className="fa fa-trash"></i>&nbsp;Delete
-                </button>
-              </td>
-            </tr>
-          ))}
+          {searchInput.length > 1
+            ? filteredResults.map((item, index) => {
+                return (
+                  <tr>
+                    <th>{index + 1}</th>
+                    <td>{item.jobId}</td>
+                    <td>{item.jobTitle}</td>
+                    <td>{item.jobType}</td>
+                    <td>{item.closingDate}</td>
+                    <td>{item.noOfVacancy}</td>
+                    <td
+                      style={{ marginLeft: "20%", marginTop: "10%" }}
+                      className={
+                        item.adminStatus == "Pending"
+                          ? "badge bg-warning text-dark"
+                          : item.adminStatus == "Approve"
+                          ? "badge bg-success text-white"
+                          : item.adminStatus == "Decline"
+                          ? "badge bg-danger text-white"
+                          : ""
+                      }
+                    >
+                      {item.adminStatus}
+                    </td>
+                    <td className="text-center">
+                      <a
+                        className="btn btn-outline-success "
+                        href={`/update/vacancy/${item._id}`}
+                      >
+                        <i className="fa fa-edit"></i>&nbsp;Edit
+                      </a>
+                      &nbsp; &nbsp; &nbsp;
+                      <button
+                        className="btn btn-outline-danger"
+                        type="submit"
+                        onClick={() => onDelete(item._id)}
+                      >
+                        <i className="fa fa-trash"></i>&nbsp;Delete
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })
+            : vacancy.map((item, index) => {
+                return (
+                  <tr>
+                    <th>{index + 1}</th>
+                    <td>{item.jobId}</td>
+                    <td>{item.jobTitle}</td>
+                    <td>{item.jobType}</td>
+                    <td>{item.closingDate}</td>
+                    <td>{item.noOfVacancy}</td>
+                    <td
+                      style={{ marginLeft: "20%", marginTop: "10%" }}
+                      className={
+                        item.adminStatus == "Pending"
+                          ? "badge bg-warning text-dark"
+                          : item.adminStatus == "Approve"
+                          ? "badge bg-success text-white"
+                          : item.adminStatus == "Decline"
+                          ? "badge bg-danger text-white"
+                          : ""
+                      }
+                    >
+                      {item.adminStatus}
+                    </td>
+                    <td className="text-center">
+                      <a
+                        className="btn btn-outline-success "
+                        href={`/update/vacancy/${item._id}`}
+                      >
+                        <i className="fa fa-edit"></i>&nbsp;Edit
+                      </a>
+                      &nbsp; &nbsp; &nbsp;
+                      <button
+                        className="btn btn-outline-danger"
+                        type="submit"
+                        onClick={() => onDelete(item._id)}
+                      >
+                        <i className="fa fa-trash"></i>&nbsp;Delete
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
         </tbody>
       </table>
     </div>

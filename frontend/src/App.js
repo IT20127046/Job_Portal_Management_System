@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./components/Index";
 import ApplicationPage from "./components/IT20125202/application/ApplicationPage";
 import AllApplications from "./components/IT20125202/allApplications/AllApplications";
 import ApplicationDetails from "./components/IT20125202/applicationDetails/ApplicationDetails";

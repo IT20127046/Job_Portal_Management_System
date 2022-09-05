@@ -1,19 +1,22 @@
 import React, { useEffect } from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import jwt_decode from 'jwt-decode';
 
 export default function JobSeekerView() {
-    
-    let navigate = useNavigate(); 
 
-    const applicantId = '002';
-    // const [applicantId, setApplicantId] = React.useState('');
+    let navigate = useNavigate();
+
+    const [applicantId, setApplicantId] = React.useState('');
     const [applications, setApplications] = React.useState([]);
 
     useEffect(() => {
         document.title = "All Application";
-        // setApplicantId('001');      //need to get from the session
+        const usertoken = localStorage.userToken;
+        const decoded = jwt_decode(usertoken);
 
+        setApplicantId(decoded._id);
+        // console.log(applicantId);
         axios.get(`http://localhost:5000/applications/submitted/${applicantId}`).then(res => {
             if (res.data.success) {
                 setApplications(res.data.exsitingApplications);
