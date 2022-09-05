@@ -1,63 +1,58 @@
 import React, { useState } from "react";
 import axios from "axios";
-import Vacancy1 from "../../../images/vacancy1.png";
-
+import swal from "sweetalert";
+import Vacancy1 from "../../../images/createVacancy.jpg";
 
 export default function CreateVacancy() {
-
-  const [jobId,setJobId] = useState("ab");  
-  const [jobTitle, setJobTitle] = useState("");  
-  const [companyId, setCompanyId] = useState("jjj");  
-  const [company, setCompany] = useState("");  
-  const [workPlaceType, setWorkPlaceType] = useState("");  
-  const [location, setLocation] = useState("");  
-  const [noOfVacancy, setNoOfVacancy] = useState("");  
-  const [jobType, setJobType] = useState("");  
+  const [jobId, setJobId] = useState("ab");
+  const [jobTitle, setJobTitle] = useState("");
+  const [companyId, setCompanyId] = useState("jjj");
+  const [company, setCompany] = useState("");
+  const [workPlaceType, setWorkPlaceType] = useState("");
+  const [location, setLocation] = useState("");
+  const [noOfVacancy, setNoOfVacancy] = useState("");
+  const [jobType, setJobType] = useState("");
   const [description, setDescription] = useState("");
-  const [image, setImage] = useState("");  
+  const [image, setImage] = useState("");
   const [closingDate, setClosingDate] = useState("");
   const [adminStatus, setAdminStatus] = useState("Pending");
 
-  const onSubmit = () => {  
-
-    // for(var i=0;i<=1;i++){
-
-    //   jobId = jobId+i;   
-    // }
+  const onSubmit = (e) => {
+    e.preventDefault();
 
     const data = {
-      
-      jobId:jobId,
-      jobTitle:jobTitle,
-      companyId:companyId,
-      company:company,
-      workPlaceType:workPlaceType,
-      location:location,
-      noOfVacancy:noOfVacancy,
-      jobType:jobType,
-      description:description,
-      image:image,
-      closingDate:closingDate,
-      adminStatus:adminStatus,
-    };    
+      jobId: jobId,
+      jobTitle: jobTitle,
+      companyId: companyId,
+      company: company,
+      workPlaceType: workPlaceType,
+      location: location,
+      noOfVacancy: noOfVacancy,
+      jobType: jobType,
+      description: description,
+      image: image,
+      closingDate: closingDate,
+      adminStatus: adminStatus,
+    };
 
     axios.post(`http://localhost:5000/vacancy/add`, data).then((res) => {
       if (res.data.success) {
-        console.log();
-        // alert("Added Success");
-       
-        window.location = '/';    
+        swal("Vacancy created successfully", "", "success");
 
-        setJobId("");  
-        setJobTitle("");  
-        setCompanyId(""); 
-        setCompany("");  
-        setWorkPlaceType("");  
-        setLocation("");  
-        setNoOfVacancy("");  
-        setJobType("");  
+        setTimeout(() => {
+          window.location = "/view/vacancy";
+        }, "3000");
+
+        setJobId("");
+        setJobTitle("");
+        setCompanyId("");
+        setCompany("");
+        setWorkPlaceType("");
+        setLocation("");
+        setNoOfVacancy("");
+        setJobType("");
         setDescription("");
-        setImage("");  
+        setImage("");
         setClosingDate("");
         setAdminStatus("");
       }
@@ -67,20 +62,18 @@ export default function CreateVacancy() {
   return (
     <div>
       <br />
-      <div className="container shadow p-3 mb-5 border border-dark rounded mt-5 col-lg-6 ">
+      <div className="container shadow border border-dark rounded col-lg-6 mb-5 ">
         <div className="form-group row">
-          <div className="col-lg-12 margin-tb">
-            <div className="float-left">
-              &nbsp;
-              <div className="text-center">
-                <img src={Vacancy1} style={{ width: "15%" }} />
-              </div>
-              <h2 className="text-center">Find A Greate Hire, Fast</h2>
-              &nbsp;
-            </div>
+          <div className="col-lg-12 text-center">
+            <img
+              src={Vacancy1}
+              className="mt-3 "
+              style={{ width: "100%", height: "23vh" }}
+            />
           </div>
         </div>
-        <form >
+        <br />
+        <form onSubmit={onSubmit}>
           <div className="col-md-12">
             <div className="form-group">
               <strong>Job Title :</strong>
@@ -92,9 +85,12 @@ export default function CreateVacancy() {
                 onChange={(e) => setJobTitle(e.target.value)}
                 required
               />
+              <small className="text-muted">
+                Start each word with a capital letter
+              </small>
             </div>
           </div>
-           &nbsp;
+          &nbsp;
           <div className="col-md-12">
             <div className="form-group">
               <strong>Company Name :</strong>
@@ -112,7 +108,12 @@ export default function CreateVacancy() {
           <div className="col-md-12">
             <div className="form-group">
               <strong>Work Place Type :</strong>
-              <select className="form-select" name="workPlaceType" onChange={(e) => setWorkPlaceType(e.target.value)} required>
+              <select
+                className="form-select"
+                name="workPlaceType"
+                onChange={(e) => setWorkPlaceType(e.target.value)}
+                required
+              >
                 <option value="Not Selected">Not Selected</option>
                 <option value="On-Site">On-Site</option>
                 <option value="Remote">Remote</option>
@@ -139,10 +140,12 @@ export default function CreateVacancy() {
             <div className="form-group">
               <strong>No of Vacancy :</strong>
               <input
-                type="text"
+                type="number"
                 className="form-control"
                 placeholder="Enter number"
                 name="noOfVacancy"
+                pattern="[0-9]{1,2}"
+                title="Please input the number"
                 onChange={(e) => setNoOfVacancy(e.target.value)}
                 required
               />
@@ -183,11 +186,13 @@ export default function CreateVacancy() {
           &nbsp;
           <div className="col-md-12">
             <div className="form-group">
-              <strong>Job Description :</strong>
+              <strong>Job Description (Maximum word 1000) :</strong>
               <textarea
                 class="form-control"
                 name="description"
                 rows="2"
+                maxLength="1000"
+                placeholder="Enter a short description of your vacancy"
                 onChange={(e) => setDescription(e.target.value)}
                 required
               ></textarea>
@@ -199,14 +204,15 @@ export default function CreateVacancy() {
               <div className="form-group">
                 <strong>Choose a photo :</strong>
                 <input
-                    type="file" 
-                    name='image'
-                    className="form-control"
-                    multiple={true}
-                    onChange={(e) => {
-                    setImage(e.target.files[0].name)
-                    }}
-                  />
+                  type="file"
+                  name="image"
+                  className="form-control"
+                  multiple={true}
+                  onChange={(e) => {
+                    setImage(e.target.files[0].name);
+                  }}
+                  required
+                />
               </div>
             </div>
             <div className="col-md-6">
@@ -227,17 +233,16 @@ export default function CreateVacancy() {
           <div className="col-md-6">
             <div className="form-group">
               <strong>Agree term and conditions&nbsp;&nbsp;</strong>
-              <input
-                className="form-check-input"
-                type="checkbox"
-                required                            
-              />
+              <input className="form-check-input" type="checkbox" required />
             </div>
-          </div> 
+          </div>
           <div className=" my-4 mx-3">
-            <div className="form-group" style={{textAlign:"right"}}>
-              <button className="btn btn-outline-primary col-md-3" type='submit' >
-                Submit 
+            <div className="form-group" style={{ textAlign: "center" }}>
+              <button
+                className="btn btn-outline-primary col-md-3"
+                type="submit"
+              >
+                Submit
               </button>
             </div>
           </div>
