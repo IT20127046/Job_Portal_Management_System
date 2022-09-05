@@ -77,7 +77,7 @@ export default class RightSidePanel extends Component {
 
 
           <div className="p-3 mb-2 bg-light text-dark">
-          <a href="#" style={{ textDecoration: 'none' }}><p className="h6"><i class="fa fa-comments" aria-hidden="true"></i>&nbsp;&nbsp;User Inquiries</p>
+          <a href="/admin/inquiries" style={{ textDecoration: 'none' }}><p className="h6"><i class="fa fa-comments" aria-hidden="true"></i>&nbsp;&nbsp;User Inquiries</p>
           </a>
           <div>
             

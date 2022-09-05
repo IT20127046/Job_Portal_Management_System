@@ -13,7 +13,10 @@ import UserRoles from "./components/IT20128036/userManagement/userRoles";
 import EditUser from "./components/IT20128036/userManagement/editUsers";
 import UserRoles_JonRecruiter from "./components/IT20128036/userManagement/userRole_JobRecruiter";
 import UserRoles_JobSeeker from "./components/IT20128036/userManagement/userRole_JobSeeker";
-
+import ContactUs from "./components/IT20128036/ContactUs";
+import UserInquiries from "./components/IT20128036/userManagement/userInquiries";
+import ReplyToUser from "./components/IT20128036/userManagement/replyInquiries";
+import ViewInquiries from "./components/IT20128036/ViewInquiries";
 
 // import Demo from "./components/IT20128036/userManagement/barChartSample";
 
@@ -37,6 +40,8 @@ function App() {
     <Route path="/admin/edituser/:id" element={<EditUser/>} />
     <Route path="/admin/user/recruiter" element={<UserRoles_JonRecruiter/>} />
     <Route path="/admin/user/seeker" element={<UserRoles_JobSeeker/>} />
+    <Route path="/admin/inquiries" element={<UserInquiries/>} />
+    <Route path="/admin/inquiries/reply/:id" element={<ReplyToUser/>} />
 
 
     
@@ -55,6 +60,10 @@ function App() {
         <Route path="/application_details/:id" element={<ApplicationDetails/>} />
         <Route path="/user/registration" element={<CreateUser/>} />
         <Route path="/user/login" element={<UserLogin/>} />
+        <Route path="/user/inq" element={<ContactUs/>} />
+        <Route path="/user/view/inq" element={<ViewInquiries/>} />
+      
+        
     
       </Routes>
 
