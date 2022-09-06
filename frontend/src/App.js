@@ -23,7 +23,7 @@ import ViewInquiries from "./components/IT20128036/ViewInquiries";
 import UpdateVacancy from "./components/IT20131456/Company/UpdateVacancy";
 import ViewVacancy from "./components/IT20131456/Company/ViewVacancy";
 import ViewVacancyAdmin from "./components/IT20131456/Admin/ViewVacancyAdmin";
-import ViewPostedVacancy from "./components/IT20131456/Jobseeker/ViewPostedVacancies";
+import ViewPostedVacancies from "./components/IT20131456/Jobseeker/ViewPostedVacancies";
 
 // import Demo from "./components/IT20128036/userManagement/barChartSample";
 
@@ -61,7 +61,7 @@ function App() {
         <Route path="/user/view/inq" element={<ViewInquiries />} />        
         <Route path="/view/vacancy" element={<ViewVacancy />} />
         <Route path="/update/vacancy/:id" element={<UpdateVacancy />} />
-        <Route path="/view/vacancy/jobseeker" element={<ViewPostedVacancy />} />
+        <Route path="/view/vacancy/jobseeker" element={<ViewPostedVacancies/>} />
       </Routes>
     </BrowserRouter>
   );
