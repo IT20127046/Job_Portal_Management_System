@@ -26,6 +26,7 @@ app.use(userRoutes);
 const adminRoutes = require('./routes/adminRoutes');
 app.use(adminRoutes);
 
+
 const InquiriesRoutes = require('./routes/InquiriesRoutes');
 app.use(InquiriesRoutes);
 
