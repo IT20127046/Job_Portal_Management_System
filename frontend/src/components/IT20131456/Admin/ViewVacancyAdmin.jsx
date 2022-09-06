@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import AdminNavBar from "../../IT20128036/admin/AdminNavBar";
-import swal from "sweetalert";
 import RightSidePanel from "../../IT20128036/admin/slideBar";
 
 export default function ViewVacancy() {
