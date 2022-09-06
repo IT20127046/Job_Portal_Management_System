@@ -74,7 +74,7 @@ export default function CreateVacancy() {
           <i class="fa fa-bar-chart"></i>&nbsp;Genarate Report
         </a>
         <div className="modal" id="exampleModal">
-          <div className="modal-dialog modal-lg">
+          <div className="modal-dialog modal-dialog-scrollable modal-lg pb-5">
             <div className="modal-content ">
               <div className="modal-header">
                 <div className="text-center">

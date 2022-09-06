@@ -48,7 +48,7 @@ export default function ViewVacancy() {
         <div className="float-left col-lg-9 mt-2 mb-2">
           &nbsp;
           <h2>Posted Vacancies</h2>
-        </div>
+        </div>        
         <div className="col-lg-3 mt-2 mb-2">
           &nbsp;
           <input
@@ -62,7 +62,7 @@ export default function ViewVacancy() {
         <hr />
       </div>
       <div>
-        <CreateVacancy />
+      <CreateVacancy/>
       </div>
       &nbsp;
       <table className="table table-striped table-bordered">
