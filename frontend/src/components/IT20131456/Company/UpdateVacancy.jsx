@@ -74,7 +74,7 @@ export default function UpdateVacancy() {
           <hr />
         </div>
       </div>
-      <div className="container bg-white p-3 mb-5 border border-dark rounded mt-3 col-lg-10 ">
+      <div className="container bg-light p-3 mb-5  rounded mt-3 col-lg-10 ">
         <form>
           <div className="row mt-3">
             <div className="col-md-6">
