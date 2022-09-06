@@ -16,12 +16,10 @@ import UserRoles from "./components/IT20128036/userManagement/userRoles";
 import EditUser from "./components/IT20128036/userManagement/editUsers";
 import UserRoles_JonRecruiter from "./components/IT20128036/userManagement/userRole_JobRecruiter";
 import UserRoles_JobSeeker from "./components/IT20128036/userManagement/userRole_JobSeeker";
-
 import ContactUs from "./components/IT20128036/ContactUs";
 import UserInquiries from "./components/IT20128036/userManagement/userInquiries";
 import ReplyToUser from "./components/IT20128036/userManagement/replyInquiries";
 import ViewInquiries from "./components/IT20128036/ViewInquiries";
-
 import CreateVacancy from "./components/IT20131456/Company/CreateVacancy";
 import UpdateVacancy from "./components/IT20131456/Company/UpdateVacancy";
 import ViewVacancy from "./components/IT20131456/Company/ViewVacancy";
@@ -75,13 +73,10 @@ function App() {
         <Route path="/interview/schdule" element={<ScheduleInterview/>} />
         
         <Route path="/user/registration" element={<CreateUser/>} />
+        <Route path="/user/login" element={<UserLogin/>} />  
         <Route path="/user/login" element={<UserLogin/>} />
-
         <Route path="/user/inq" element={<ContactUs/>} />
         <Route path="/user/view/inq" element={<ViewInquiries/>} />
-      
-        
-
         <Route path="/create/vacancy" element={<CreateVacancy />} />
         <Route path="/view/vacancy" element={<ViewVacancy />} />
         <Route path="/update/vacancy/:id" element={<UpdateVacancy />} /> 
