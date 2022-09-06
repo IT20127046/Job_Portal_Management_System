@@ -26,8 +26,9 @@ app.use(userRoutes);
 const adminRoutes = require('./routes/adminRoutes');
 app.use(adminRoutes);
 
-const vacancyRoutes = require('../backend/routes/vacancy_management/vacancyRoutes');
-app.use(vacancyRoutes);
+
+const InquiriesRoutes = require('./routes/InquiriesRoutes');
+app.use(InquiriesRoutes);
 
 const port = process.env.PORT || 5000;
 const uri = process.env.MONGO_URI;

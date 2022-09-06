@@ -1,5 +1,6 @@
 import React from 'react'
 import { useEffect } from 'react';
+import jwt_decode from 'jwt-decode';
 import JobSeekerView from './JobSeekerView';
 import RecruiterView from './RecruiterView';
 
@@ -8,16 +9,19 @@ export default function AllApplications() {
 
     useEffect(() => {
         document.title = "All Application";
-        setUserType('recruiter');      //need to get from the session
-        // setUserType('jobseeker');   
+
+        const usertoken = localStorage.userToken;
+        const decoded = jwt_decode(usertoken);
+
+        setUserType(decoded.type);       
     }, []);
 
     return (
         <div>
-            {userType === 'recruiter' && (
+            {userType === 'Job Recruiter' && (
                 <RecruiterView/>           
             )}
-            {userType === 'jobseeker' && (
+            {userType === 'Job Seeker' && (
                 <JobSeekerView/>           
             )}
 

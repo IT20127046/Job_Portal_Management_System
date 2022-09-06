@@ -2,6 +2,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ApplicationPage from "./components/IT20125202/application/ApplicationPage";
 import AllApplications from "./components/IT20125202/allApplications/AllApplications";
 import ApplicationDetails from "./components/IT20125202/applicationDetails/ApplicationDetails";
+import ViewInterviews from './components/IT20127046/Interview/ViewInterviews';
+import RecruiterView from './components/IT20127046/Interview/Recruiter/RecruiterView';
+import JobSeekerView from './components/IT20127046/Interview/JobSeeker/JobSeekerView';
+import ScheduleInterview from './components/IT20127046/Interview/Recruiter/ScheduleInterview';
 import CreateUser from "./components/IT20128036/UserRegistration";
 import UserLogin from "./components/IT20128036/UserLogin";
 import LandingPage from "./components/IT20128036/LandingPage";
@@ -12,6 +16,11 @@ import UserRoles from "./components/IT20128036/userManagement/userRoles";
 import EditUser from "./components/IT20128036/userManagement/editUsers";
 import UserRoles_JonRecruiter from "./components/IT20128036/userManagement/userRole_JobRecruiter";
 import UserRoles_JobSeeker from "./components/IT20128036/userManagement/userRole_JobSeeker";
+import ContactUs from "./components/IT20128036/ContactUs";
+import UserInquiries from "./components/IT20128036/userManagement/userInquiries";
+import ReplyToUser from "./components/IT20128036/userManagement/replyInquiries";
+import ViewInquiries from "./components/IT20128036/ViewInquiries";
+import CreateVacancy from "./components/IT20131456/Company/CreateVacancy";
 import UpdateVacancy from "./components/IT20131456/Company/UpdateVacancy";
 import ViewVacancy from "./components/IT20131456/Company/ViewVacancy";
 
@@ -38,6 +47,8 @@ function App() {
     <Route path="/admin/edituser/:id" element={<EditUser/>} />
     <Route path="/admin/user/recruiter" element={<UserRoles_JonRecruiter/>} />
     <Route path="/admin/user/seeker" element={<UserRoles_JobSeeker/>} />
+    <Route path="/admin/inquiries" element={<UserInquiries/>} />
+    <Route path="/admin/inquiries/reply/:id" element={<ReplyToUser/>} />
 
 
     
@@ -54,10 +65,22 @@ function App() {
         <Route path="/application" element={<ApplicationPage/>} />
         <Route path="/all_applications" element={<AllApplications/>} />
         <Route path="/application_details/:id" element={<ApplicationDetails/>} />
+
+        /** Interview */
+        <Route path="/interview" element={<ViewInterviews/>} />
+        <Route path="/interview/recruiter" element={<RecruiterView/>} />
+        <Route path="/interview/jobseeker" element={<JobSeekerView/>} />
+        <Route path="/interview/schdule" element={<ScheduleInterview/>} />
+        
         <Route path="/user/registration" element={<CreateUser/>} />
-        <Route path="/user/login" element={<UserLogin/>} />       
+        <Route path="/user/login" element={<UserLogin/>} />  
+        <Route path="/user/login" element={<UserLogin/>} />
+        <Route path="/user/inq" element={<ContactUs/>} />
+        <Route path="/user/view/inq" element={<ViewInquiries/>} />
+        <Route path="/create/vacancy" element={<CreateVacancy />} />
         <Route path="/view/vacancy" element={<ViewVacancy />} />
         <Route path="/update/vacancy/:id" element={<UpdateVacancy />} /> 
+
 
     
       </Routes>

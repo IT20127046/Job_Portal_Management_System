@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import './form.css';
 import axios from 'axios';
+import jwt_decode from 'jwt-decode';
 import validateApplication from './validations';
 
 const Form = () => {
@@ -8,7 +9,7 @@ const Form = () => {
     const [vacancyNo, setVacancyNo] = React.useState('002'); //should get from the selected vacancy 
     const [companyId, setCompanyId] = React.useState('002'); //should get from the selected vacancy 
     const [companyName, setCompanyName] = React.useState('compnay name 2'); //should get from the selected vacancy 
-    const [applicantId, setapplicantId] = React.useState('002'); //should get from the current session
+    const [applicantId, setapplicantId] = React.useState(''); //should get from the current session
     const [jobTitle, setJobTitle] = React.useState('title 2'); //should get from the selected vacancy 
     const [firstName, setFirstName] = React.useState('');
     const [lastName, setLastName] = React.useState('');
@@ -24,6 +25,11 @@ const Form = () => {
 
     useEffect(() => {
         document.title = "Application";
+
+        const usertoken = localStorage.userToken;
+        const decoded = jwt_decode(usertoken);
+
+        setapplicantId(decoded._id);
     });
 
 
