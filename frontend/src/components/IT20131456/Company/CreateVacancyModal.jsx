@@ -4,9 +4,8 @@ import swal from "sweetalert";
 
 export default function CreateVacancy() {
   // const [user, setUser] = useState([]);
-  const [jobId, setJobId] = useState("ab");
+  const [jobId, setJobId] = useState("");
   const [jobTitle, setJobTitle] = useState("");
-  const [companyId, setCompanyId] = useState("jjj");
   const [company, setCompany] = useState("");
   const [workPlaceType, setWorkPlaceType] = useState("");
   const [location, setLocation] = useState("");
@@ -23,7 +22,6 @@ export default function CreateVacancy() {
     const data = {
       jobId: jobId,
       jobTitle: jobTitle,
-      companyId: companyId,
       company: company,
       workPlaceType: workPlaceType,
       location: location,
@@ -45,7 +43,6 @@ export default function CreateVacancy() {
 
         setJobId("");
         setJobTitle("");
-        setCompanyId("");
         setCompany("");
         setWorkPlaceType("");
         setLocation("");
@@ -56,8 +53,7 @@ export default function CreateVacancy() {
         setClosingDate("");
         setAdminStatus("");
       }
-    });  
-
+    });
   };
   // useEffect(() => {
   //   axios.get(`http://localhost:5000/users`).then((response) => {
@@ -68,10 +64,10 @@ export default function CreateVacancy() {
 
   useEffect(() => {
     axios.get(`http://localhost:5000/vacancy/getAll`).then((response) => {
-      setJobId(response.data.exsitingVacancy.length)
+      setJobId("J" + String(response.data.exsitingVacancy.length + 1));
     });
   }, []);
-  console.log(jobId)
+
   return (
     <div>
       <div className="container">
@@ -139,7 +135,7 @@ export default function CreateVacancy() {
                   <div className="col-md-12">
                     <div className="form-group">
                       <strong>Work Place Type :</strong>
-                      <select                    
+                      <select
                         className="form-select"
                         name="workPlaceType"
                         onChange={(e) => setWorkPlaceType(e.target.value)}
@@ -262,7 +258,7 @@ export default function CreateVacancy() {
                   &nbsp;
                   <div className="col-md-12 mt-4">
                     <div className="form-group">
-                      <strong>Agree term and conditions&nbsp;&nbsp;</strong>
+            <strong>Agree term and conditions&nbsp;&nbsp;</strong>
                       <input
                         className="form-check-input"
                         type="checkbox"
