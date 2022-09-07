@@ -2,9 +2,10 @@
 
 .inq_container {
 
-	background-image: url("../../images/bgimage.jpg");
+	background-image: url("../../images/background.png");
 	align-items: center;
 	justify-content: center;
+	
 }
 
 

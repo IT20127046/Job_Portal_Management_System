@@ -146,7 +146,7 @@ export default class UserInquiries extends Component {
                 <th scope='col'> # </th>
               
                 <th scope='col'> Name </th>
-                <th scope='col'> Type </th>
+              
                 <th scope='col'> Subject </th>
                 <th scope='col'> Message</th>
                 <th scope='col'> Reply</th>
@@ -167,7 +167,7 @@ export default class UserInquiries extends Component {
                       {Inquiries.name}
                     {/* </a> */}
                   </td>
-                  <td>{Inquiries.type}</td>
+            
                   <td>{Inquiries.title}</td>
                   <td>{Inquiries.msg}</td>
                   <td>{Inquiries.reply}</td>

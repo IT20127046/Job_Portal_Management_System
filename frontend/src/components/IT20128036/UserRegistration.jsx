@@ -58,7 +58,7 @@ export default class CreateUser extends Component {
       validated = false;
       swal({
         title: "",
-        text: "Please enter a valid user name",
+        text: "Please enter a valid username",
         icon: "warning",
       });
     }
@@ -66,7 +66,7 @@ export default class CreateUser extends Component {
       validated = false;
       swal({
         title: "",
-        text: "Please enter a valid name",
+        text: "Please enter a valid username",
         icon: "warning",
       });
     }
@@ -83,6 +83,23 @@ export default class CreateUser extends Component {
       swal({
         title: "",
         text: "Please enter a valid mobile number",
+        icon: "warning",
+      });
+    }
+  
+    else if (user.field === '') {
+      validated = false;
+      swal({
+        title: "",
+        text: "Please select a interest field",
+        icon: "warning",
+      });
+    }
+    else if (user.address === '') {
+      validated = false;
+      swal({
+        title: "",
+        text: "Please enter your address",
         icon: "warning",
       });
     }
@@ -252,7 +269,7 @@ export default class CreateUser extends Component {
                     
 						<input
 							type="text"
-							placeholder="User Name"
+							placeholder="Username"
 							name="name"
 							onChange={this.onChange}
 							value={this.state.name}

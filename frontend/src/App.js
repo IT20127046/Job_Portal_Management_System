@@ -25,6 +25,8 @@ import ViewInquiries from "./components/IT20128036/ViewInquiries";
 import CreateVacancy from "./components/IT20131456/Company/CreateVacancy";
 import UpdateVacancy from "./components/IT20131456/Company/UpdateVacancy";
 import ViewVacancy from "./components/IT20131456/Company/ViewVacancy";
+import Example from "./components/IT20128036/userManagement/barChart";
+import BChart from "./components/IT20128036/userManagement/bChart";
 
 
 // import Demo from "./components/IT20128036/userManagement/barChartSample";
@@ -51,6 +53,9 @@ function App() {
     <Route path="/admin/user/seeker" element={<UserRoles_JobSeeker/>} />
     <Route path="/admin/inquiries" element={<UserInquiries/>} />
     <Route path="/admin/inquiries/reply/:id" element={<ReplyToUser/>} />
+    <Route path="/admin/barchart/view" element={<Example/>} />
+    <Route path="/admin/bchart" element={<BChart/>} />
+
 
 
     
@@ -60,7 +65,7 @@ function App() {
     </Routes>
 
  
-    <NavBar/>
+    {/* <NavBar/> */}
       <Routes>
       {/* ---------------Job Recruters / Job Seekers --------------- */}
         <Route path="/" element={<LandingPage />} />
