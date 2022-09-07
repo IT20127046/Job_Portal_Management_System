@@ -3,10 +3,10 @@ import { useParams } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
 import RecruiterView from './RecruiterView';
 import JobSeekerView from './JobSeekerView';
+import NavBar from '../../IT20128036/NavBar';
 
 export default function ApplicationDetails() {
 
-  let { id } = useParams();
   const [userType, setUserType] = React.useState('');
 
   React.useEffect(() => {
@@ -22,16 +22,17 @@ export default function ApplicationDetails() {
 
   return (
     <div>
+      <NavBar />
       <br />
       <h1 style={{ textAlign: "center" }}> Application Details </h1>
       {
         userType === 'Job Recruiter' && (
-          RecruiterView(id)
+          <RecruiterView />
         )
       }
       {
         userType === 'Job Seeker' && (
-          JobSeekerView(id)
+          <JobSeekerView />
         )
       }
 

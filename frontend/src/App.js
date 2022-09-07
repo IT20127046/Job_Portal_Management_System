@@ -9,7 +9,6 @@ import ScheduleInterview from "./components/IT20127046/Interview/Recruiter/Sched
 import CreateUser from "./components/IT20128036/UserRegistration";
 import UserLogin from "./components/IT20128036/UserLogin";
 import LandingPage from "./components/IT20128036/LandingPage";
-import NavBar from "./components/IT20128036/NavBar";
 import AdminHome from "./components/IT20128036/admin/AdminHome";
 import AdminLogin from "./components/IT20128036/admin/AdminLogin";
 import UserRoles from "./components/IT20128036/userManagement/userRoles";
@@ -41,10 +40,8 @@ function App() {
         <Route path="/admin/inquiries" element={<UserInquiries />} />
         <Route path="/admin/inquiries/reply/:id" element={<ReplyToUser />} />
         <Route path="/view/vacancy/admin" element={<ViewVacancyAdmin />} />
-      </Routes>
 
-      <NavBar />
-      <Routes>
+
         {/* ---------------Job Recruters / Job Seekers --------------- */}
         <Route path="/" element={<LandingPage />} />
         <Route path="/application/:id" element={<ApplicationPage />} />

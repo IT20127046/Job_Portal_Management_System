@@ -3,12 +3,17 @@ import './form.css';
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 import validateApplication from './validations';
+import { useParams, useNavigate } from 'react-router-dom';
+import swal from 'sweetalert';
 
 const Form = () => {
+    const navigate = useNavigate();
+    const { id } = useParams();
+    // console.log(id)
 
-    const [vacancyNo, setVacancyNo] = React.useState('002'); //should get from the selected vacancy 
-    const [companyId, setCompanyId] = React.useState('002'); //should get from the selected vacancy 
-    const [companyName, setCompanyName] = React.useState('compnay name 2'); //should get from the selected vacancy 
+    const [vacancyNo, setVacancyNo] = React.useState(''); //should get from the selected vacancy 
+    const [companyId, setCompanyId] = React.useState(''); //should get from the selected vacancy 
+    const [companyName, setCompanyName] = React.useState(''); //should get from the selected vacancy 
     const [applicantId, setapplicantId] = React.useState(''); //should get from the current session
     const [jobTitle, setJobTitle] = React.useState('title 2'); //should get from the selected vacancy 
     const [firstName, setFirstName] = React.useState('');
@@ -30,8 +35,22 @@ const Form = () => {
         const decoded = jwt_decode(usertoken);
 
         setapplicantId(decoded._id);
-    });
 
+        axios.get(`http://localhost:5000/vacancy/get/${id}`)
+            .then(response => {
+
+                if (response.data.success) {
+                    let data = response.data.exsitingVacancy;
+                    setVacancyNo(data.jobId);
+                    setJobTitle(data.jobTitle);
+                    setCompanyName(data.company);
+                    setCompanyId(data.companyId);
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }, [id]);
 
 
     // handleArrayAdd, handleArrayRemove, handleArrayChange methods are used to add, remove and change elements in arrays
@@ -84,13 +103,17 @@ const Form = () => {
         }
 
         // console.log(application);
-        
         if (validateApplication(application)) {  //validate the application before saving it
             await axios.post('http://localhost:5000/applications/apply', application).then(res => {
 
-                // console.log(res);
-                // console.log(res.data);
-                alert('Application submitted successfully');
+                swal("Application submitted successfully!", "", "success")
+                    .then((value) => {
+                        if (value) {
+                            navigate('/all_applications');
+                        }
+
+                    });
+                // alert('Application submitted successfully');
 
                 setVacancyNo('');
                 setCompanyId('');
@@ -113,7 +136,7 @@ const Form = () => {
 
             }).catch(error => {
                 if (error.response.status === 400) {
-                    alert('Please fill all the marked fields')
+                    swal('Please fill all the marked fields')
                 }
                 // console.log(error);
             }).finally(() => {

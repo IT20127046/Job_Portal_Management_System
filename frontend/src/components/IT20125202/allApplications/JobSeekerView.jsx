@@ -23,10 +23,16 @@ export default function JobSeekerView() {
             }
             // console.log(applications);
         })
-            .catch((error) => {
-                console.log(error);
-            })
-    }, []);
+        .catch((error) => {
+            if (error.response) {
+                console.log(error.response);
+            } else if (error.request){
+                console.log(error.request);
+            } else if (error.message) {
+                console.log(error.message);
+            }
+        })
+    }, [applicantId]);
 
     return (
         <div>
