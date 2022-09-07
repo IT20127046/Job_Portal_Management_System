@@ -54,7 +54,7 @@ export default function ViewVacancy() {
           <hr />
         </div>
       </div>
-      <div className="cardContainer mx-2">
+      <div className="cardContainer mx-2 ">
         <Row xs={1} md={4} className="g-4 mt-2 mx-2">
           {searchInput.length > 1
             ? filteredResults.map((item, index) => {
@@ -83,13 +83,13 @@ export default function ViewVacancy() {
               })
             : vacancy.map((item, index) => {
                 return (
-                  <Col key="index">
-                    <Card className="col-md-10 my-3 mx-5 shadow">
+                  <Col key="index ">
+                    <Card className="col-md-10 my-3 mx-5 shadow ">                   
                       <Card.Img
                         style={{ height: "45vh", width: "100%" }}
                         src={require(`../../../images/vacancy/${item.image}`)}
-                        className="CardImg p-2"
-                      />
+                        className=" p-2"
+                      />             
                       <Card.Body>
                         <h4>{item.jobTitle} </h4>
                         <h5>{item.company} </h5>

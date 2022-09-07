@@ -81,4 +81,37 @@ const delete_Inquiries = function (req, res){
     });
 }
 
-module.exports = {save_Inquiries, getAll_Inquiries, get_Inquiries_By_ID, update_Inquiries, delete_Inquiries};
+
+//get inquiry by uname - user
+
+// const getInquiryByName = function(req, res) {
+//     let userName = req.params.name;
+//     InquiriesModel.find({ name: userName }).exec((err, inquiries) => {
+//       if (err) {
+//         return res.status(400).json({
+//           error: err
+//         })
+//       }
+//       return res.status(200).json({
+//         success: true,
+//         exsitingInquiries: inquiries
+//       })
+//     })
+//   };
+
+
+const getInquiryByName =function(req,res){
+    let name = req.params.name;
+
+    InquiriesModel.find({name:name},(err,inquiries)=>{
+        if(err){
+            return res.status(400).json({success:false, err});
+        }
+        return res.status(200).json({
+            success:true,
+            exsitingInquiries:inquiries
+        });
+    });
+};
+
+module.exports = {save_Inquiries, getAll_Inquiries, get_Inquiries_By_ID, update_Inquiries, delete_Inquiries,getInquiryByName};
