@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import swal from "sweetalert";
 
 export default function CreateVacancy() {
+  // const [user, setUser] = useState([]);
   const [jobId, setJobId] = useState("ab");
   const [jobTitle, setJobTitle] = useState("");
   const [companyId, setCompanyId] = useState("jjj");
@@ -55,9 +56,22 @@ export default function CreateVacancy() {
         setClosingDate("");
         setAdminStatus("");
       }
-    });
-  };
+    });  
 
+  };
+  // useEffect(() => {
+  //   axios.get(`http://localhost:5000/users`).then((response) => {
+  //     setUser(response.data.existingUsers);
+  //     console.log(response.data.existingUsers)
+  //   });
+  // }, []);
+
+  useEffect(() => {
+    axios.get(`http://localhost:5000/vacancy/getAll`).then((response) => {
+      setJobId(response.data.exsitingVacancy.length)
+    });
+  }, []);
+  console.log(jobId)
   return (
     <div>
       <div className="container">
