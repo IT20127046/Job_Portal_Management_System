@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 
 export default function ViewVacancy() {
+
+  const navigate = useNavigate();
+
   const [vacancy, setVacancy] = useState([]);
   const [filteredResults, setFilteredResults] = useState([]);
   const [searchInput, setSearchInput] = useState("");
@@ -83,7 +87,7 @@ export default function ViewVacancy() {
               })
             : vacancy.map((item, index) => {
                 return (
-                  <Col key="index ">
+                  <Col key={index}>
                     <Card className="col-md-10 my-3 mx-5 shadow ">                   
                       <Card.Img
                         style={{ height: "45vh", width: "100%" }}
@@ -96,7 +100,7 @@ export default function ViewVacancy() {
                         <h6>No of Vacancy: {item.noOfVacancy}</h6>
                         <h6>Closing Date: {item.closingDate}</h6>
                         <div className="text-center ">
-                          <button className="btn btn-primary col-md-6 my-3">
+                          <button className="btn btn-primary col-md-6 my-3" onClick={() => navigate(`/application/${item._id}`)}>
                             Apply
                           </button>
                         </div>
