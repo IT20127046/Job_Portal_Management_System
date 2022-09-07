@@ -1,29 +1,141 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function JobSeekerView() {
+  const [interviews, setInterviews] = useState([]);
+  const [applicantId, setApplicantId] = useState("01");
+  const [selected, setSelected] = useState(null);
 
-    const [interview, setInterview] = useState([]);
-    const [applicantId, setApplicantId] = useState("01");
-    
-    useEffect(()=>{
+  useEffect(() => {
+    retriveJobSeekerInterviews();
+  }, []);
 
-      retriveJobSeekerInterviews();
-
-    },[]);
-
-    const retriveJobSeekerInterviews = () => {
-      axios.get(`http://localhost:5000/interview/getAll`).then((res) => {
-            if(res.data.success){
-              setInterview(res.data.exsitingInterview);
-              console.log(res.data.exsitingInterview);
-            }    
+  const retriveJobSeekerInterviews = () => {
+    axios.get(`http://localhost:5000/interview/getAll`).then((res) => {
+      if (res.data.success) {
+        setInterviews(res.data.exsitingInterview);
+        console.log(res.data.exsitingInterview);
+      }
     });
-  }
+  };
+
+  const expendSection = (userInterview) => {
+    if (selected === userInterview) {
+      return setSelected(null);
+    }
+
+    setSelected(userInterview);
+  };
+
+  const searchPanel = {
+    border: "none",
+    backgroundColor: "#EBEDEF",
+    borderRadius: "5px",
+    padding: "10px"
+  };
+
+  const mianPanel = {
+    border: "none",
+    backgroundColor: "#EBEDEF",
+    borderRadius: "5px",
+    padding: "10px"
+  };
+
+  const titleSection = {
+    margin: "20px 40px 20px 40px",
+  };
+
+  const titleBar = {
+    backgroundColor: "DodgerBlue",
+    color: "white",
+    padding: "10px",
+    fontFamily: "Sans-Serif",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    cursor: "pointer",
+    borderRadius: "5px 5px 0 0"
+  };
+
+  const moreDetailsSection = {
     
+    backgroundColor: "white",
+    padding: "10px",
+    borderRadius: "0 0 5px 5px"
+  };
+
   return (
     <div>
-      <h1>JobSeekerView</h1>
+      <div className="container">
+        <br />
+
+        <center>
+          <h4>My Interviews</h4>
+        </center>
+
+        <hr />
+
+        <div className="row">
+
+        <div className="col-3">
+          <div className="container" style={searchPanel}>
+            <center><h5>Serach by Your Job</h5></center>
+            
+            <br/>
+            <div>
+              {interviews.map((interview, index)=> (
+                <div key={index}>
+                  <button className="btn btn-outline-primary mb-2">{interview.jobTitle}</button>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+        </div>
+        <div className="col-9">
+        <div className="container" style={mianPanel}>
+            {interviews.map((userInterview, index) => (
+              <div style={titleSection}>
+                <div
+                  style={titleBar}
+                  onClick={() => expendSection(userInterview)}
+                >
+                  <h5> IFS - {userInterview.jobTitle}</h5>
+                  <span>{selected === userInterview ? "-" : "+"}</span>
+                </div>
+                <div>
+                  {selected === userInterview ? (
+                    <div style={moreDetailsSection}>
+                      <div className="row">
+                        <div className="col">
+                          <p><b>Date</b> - {userInterview.interviewDate}</p>
+                          <p><b>Time</b> - {userInterview.interviewTime}</p>
+                        </div>
+                        <div className="col">
+                          <p><b>Mode</b> - {userInterview.interviewMode}</p>
+                          <p><b>Meeting Link</b> - {userInterview.interviewMode}</p>
+                        </div>
+                        <div>
+                          <p>{userInterview.description}</p>
+                        </div>
+                      </div>
+                      <div className="btn-group">
+                        <button className="btn btn-outline-primary">Yes</button>
+                        <button className="btn btn-outline-primary">Maybe</button>
+                        <button className="btn btn-outline-primary">No</button>
+                      </div>
+                    </div>
+                  ) : (
+                    <div></div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        </div>
+      </div>
     </div>
-  )
+  );
 }

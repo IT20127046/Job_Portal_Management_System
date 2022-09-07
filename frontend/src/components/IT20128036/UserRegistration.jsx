@@ -4,6 +4,7 @@ import { userRegister } from './UserFunctions';
 import swal from 'sweetalert';
 import styles from "./userStyle/styles.module.css";
 import { Link } from "react-router-dom";
+import NavBar from './NavBar';
 
 // email pattern ->  /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
 // mobile pattern ->  /^(\+\d{1,3}[- ]?)?\d{10}$/
@@ -58,7 +59,7 @@ export default class CreateUser extends Component {
       validated = false;
       swal({
         title: "",
-        text: "Please enter a valid user name",
+        text: "Please enter a valid username",
         icon: "warning",
       });
     }
@@ -66,7 +67,7 @@ export default class CreateUser extends Component {
       validated = false;
       swal({
         title: "",
-        text: "Please enter a valid name",
+        text: "Please enter a valid username",
         icon: "warning",
       });
     }
@@ -83,6 +84,23 @@ export default class CreateUser extends Component {
       swal({
         title: "",
         text: "Please enter a valid mobile number",
+        icon: "warning",
+      });
+    }
+  
+    else if (user.field === '') {
+      validated = false;
+      swal({
+        title: "",
+        text: "Please select a interest field",
+        icon: "warning",
+      });
+    }
+    else if (user.address === '') {
+      validated = false;
+      swal({
+        title: "",
+        text: "Please enter your address",
         icon: "warning",
       });
     }
@@ -234,6 +252,8 @@ export default class CreateUser extends Component {
       //     </div>
       //   </div>
       // </div>
+      <div>
+        <NavBar/>
 
 <div className={styles.signup_container}>
 			<div className={styles.signup_form_container}>
@@ -252,7 +272,7 @@ export default class CreateUser extends Component {
                     
 						<input
 							type="text"
-							placeholder="User Name"
+							placeholder="Username"
 							name="name"
 							onChange={this.onChange}
 							value={this.state.name}
@@ -374,7 +394,7 @@ export default class CreateUser extends Component {
 			</div>
 		</div>
 
-      
+    </div> 
     )
   }
 }

@@ -1,101 +1,146 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import swal from "sweetalert";
 
 export default function RecruiterView() {
+  const [interviews, setInterviews] = useState([]);
+  const [search, setSearch] = useState("");
+  const [filteredResults, setFilteredResults] = useState([]);
 
-    const [interviews, setInterviews] = useState([]);
+  useEffect(() => {
+    retriveInterviews();
+  }, []);
 
-    useEffect(()=>{
-        retriveInterviews();
-    }, []);
-
-    const retriveInterviews = () =>{
-        axios.get(`http://localhost:5000/interview/getAll`).then((res) => {
-            if(res.data.success){
-                setInterviews(res.data.exsitingInterview);
-                console.log(res.data.exsitingInterview);
-            }    
+  const retriveInterviews = () => {
+    axios.get(`http://localhost:5000/interview/getAll`).then((res) => {
+      if (res.data.success) {
+        setInterviews(res.data.exsitingInterview);
+        console.log(res.data.exsitingInterview);
+      }
     });
-    }
+  };
 
-    const onDelete = (id) =>{
+  const onDelete = (id) => {
+    swal({
+      title: "Are you sure?",
+      text: "Cancel the interview?",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        axios
+          .delete(`http://localhost:5000/interview/delete/${id}`)
+          .then((res) => {
+            if (res.data.success) {
+              swal("Canceld Successfull!", {
+                icon: "success",
+              });
+              window.location.reload();
+            }
 
+          });
+      } else {
+      }
+    });
+
+  };
+  
+  const searchInterviews = (searchValue) => {
+    setSearch(searchValue);
+    if (search !== "") {
+      const filteredData = interviews.filter((item) => {
+        return Object.values(item)
+          .join("")
+          .toLowerCase()
+          .includes(search.toLowerCase());
+      });
+      setFilteredResults(filteredData);
+    } else {
+      setFilteredResults(interviews);
     }
+  };
 
   return (
-    <div><div className="container">
-    <br />
+    <div>
+      <div className="container">
+        <br />
 
-    <center><h4>Schduled Interviews</h4></center>
-    
-    <hr />
+        <div className="row">
+          <div className="float-left col-lg-9 mt-2 mb-2">
+            &nbsp;
+            <h2>Scheduled Interviews</h2>
+          </div>
+          <div className="col-lg-3 mt-2 mb-2">
+            &nbsp;
+            <input
+              className="form-control border border-dark"
+              type="search"
+              placeholder="Search"
+              onChange={(e) => searchInterviews(e.target.value)}
+            ></input>
+          </div>
+          <hr />
+        </div>
 
-    <div className="container">
-      <div>
-        <a className="btn btn-success m-2" href="">
-          Schdule New Interview
-        </a>
-      </div>
-      <br />
+        <div className="container">
+          <div>
+            <a className="btn btn-primary" href="/interview/schdule">
+              <i className="fa fa-plus"></i>&nbsp; Schedule New Interview
+            </a>
+          </div>
+          <br />
 
-      <div className="mb-4">
-        <input
-          style={{maxWidth:"400px"}} 
-          type="search" 
-          className="form-control border border-dark" 
-          name="searchQuery"
-          id="search" 
-          placeholder="Serach....."
-        />
-      </div>
-
-      <div className="container p-3 mb-2 bg-light text-dark">
-        <table className="table">
-          <thead>
-            <tr>
-              <th scope="col">No</th>
-              <th scope="col">Applicant Name</th>
-              <th scope="col">Job Title</th>
-              <th scope="col">Data</th>
-              <th scope="col">Time</th>
-              <th scope="col">Mode</th>
-              <th scope="col">Status</th>
-              <th scope="col">Update</th>
-              <th scope="col">Delete</th>
-            </tr>
-          </thead>
-          <tbody>
-            {interviews.map((interview, index) => (
-              <tr key={index}>
-                <th scope="row">{index + 1}</th>
-                <td>{interview.applicantName}</td>
-                <td>{interview.jobTitle}</td>
-                <td>{interview.interviewDate}</td>
-                <td>{interview.interviewTime}</td>
-                <td>{interview.interviewMode}</td>
-                <td>{interview.status}</td>
-                <td>
-                  <a
-                    className="btn btn-outline-success"
-                    href={`/edit/documentTemp/${interview._id}`}
-                  >
-                    Update
-                  </a>
-                </td>
-                <td>
-                  <a
-                    className="btn btn-outline-danger"
-                    onClick={() =>onDelete(interview._id)}
-                  >
-                    Delete
-                  </a>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+          <div
+            className="container p-3 mb-2 bg-light text-dark"
+            style={{ borderRadius: "8px" }}
+          >
+            <table className="table table-striped table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col">No</th>
+                  <th scope="col">Applicant Name</th>
+                  <th scope="col">Job Title</th>
+                  <th scope="col">Data</th>
+                  <th scope="col">Time</th>
+                  <th scope="col">Mode</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Update</th>
+                  <th scope="col">Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                {interviews.map((interview, index) => (
+                  <tr key={index}>
+                    <th scope="row">{index + 1}</th>
+                    <td>{interview.applicantName}</td>
+                    <td>{interview.jobTitle}</td>
+                    <td>{interview.interviewDate}</td>
+                    <td>{interview.interviewTime}</td>
+                    <td>{interview.interviewMode}</td>
+                    <td
+                      style={{ margin: "10px" }}
+                      className="badge bg-warning text-dark"
+                    >
+                      {interview.status}
+                    </td>
+                    <td>
+                      <a className="btn btn-success " href={`/interview/update/${interview._id}`}>
+                        <i className="fa fa-edit"></i>&nbsp;Edit
+                      </a>
+                    </td>
+                    <td>
+                      <button className="btn btn-danger" type="submit" onClick={() => onDelete(interview._id)}>
+                        <i className="fa fa-trash"></i>&nbsp;Cancel
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
-  </div></div>
-  )
+  );
 }
