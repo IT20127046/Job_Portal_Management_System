@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import swal from "sweetalert";
+import CreateVacancy from "./CreateVacancyModal";
 
 export default function ViewVacancy() {
   const [vacancy, setVacancy] = useState([]);
@@ -47,8 +48,7 @@ export default function ViewVacancy() {
         <div className="float-left col-lg-9 mt-2 mb-2">
           &nbsp;
           <h2>Posted Vacancies</h2>
-        </div>
-
+        </div>        
         <div className="col-lg-3 mt-2 mb-2">
           &nbsp;
           <input
@@ -62,16 +62,10 @@ export default function ViewVacancy() {
         <hr />
       </div>
       <div>
-        <a className="btn btn-outline-primary" href={"/create/vacancy"}>
-          <i className="fa fa-plus"></i>&nbsp;Add New Vacancy
-        </a>{" "}
-        &nbsp;
-        <a className="btn btn-outline-warning" href={""}>
-          <i class="fa fa-bar-chart"></i>&nbsp;Genarate Report
-        </a>
+      <CreateVacancy/>
       </div>
       &nbsp;
-      <table className="table table-striped table-bordered">
+      <table className="table table-striped table-bordered ">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -160,14 +154,14 @@ export default function ViewVacancy() {
                     </td>
                     <td className="text-center">
                       <a
-                        className="btn btn-outline-success "
+                        className="btn btn-success "
                         href={`/update/vacancy/${item._id}`}
                       >
                         <i className="fa fa-edit"></i>&nbsp;Edit
                       </a>
                       &nbsp; &nbsp; &nbsp;
                       <button
-                        className="btn btn-outline-danger"
+                        className="btn btn-danger"
                         type="submit"
                         onClick={() => onDelete(item._id)}
                       >
