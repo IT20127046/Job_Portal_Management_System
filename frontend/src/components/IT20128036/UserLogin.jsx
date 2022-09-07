@@ -4,6 +4,7 @@ import swal from 'sweetalert';
 import { Link } from "react-router-dom";
 
 import styles from "./styles.module.css";
+import NavBar from './NavBar';
 
 
 export default class UserLogin extends Component {
@@ -147,7 +148,8 @@ export default class UserLogin extends Component {
       
             //     </div>
             //  </div>
-
+<div>
+    <NavBar/>
 
 
 
@@ -208,6 +210,7 @@ export default class UserLogin extends Component {
 			</div>
             </div>
 		</div>
+        </div>
         
         )
     }

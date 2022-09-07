@@ -32,7 +32,9 @@ import ViewPostedVacancies from "./components/IT20131456/Jobseeker/ViewPostedVac
 
 // import Demo from "./components/IT20128036/userManagement/barChartSample";
 
+
 function App() {
+  
   return (
     <BrowserRouter>
 
