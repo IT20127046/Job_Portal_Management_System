@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import jwt_decode from 'jwt-decode';
 import JobSeekerView from './JobSeekerView';
 import RecruiterView from './RecruiterView';
+import NavBar from '../../IT20128036/NavBar';
 
 export default function AllApplications() {
     const [userType, setUserType] = React.useState('');
@@ -18,6 +19,7 @@ export default function AllApplications() {
 
     return (
         <div>
+            <NavBar />
             {userType === 'Job Recruiter' && (
                 <RecruiterView/>           
             )}
