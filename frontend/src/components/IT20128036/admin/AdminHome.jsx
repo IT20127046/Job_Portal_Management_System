@@ -186,9 +186,9 @@ const data2 = [
 
     <div className="col-sm-4  ">
     <h5 className="mt-5">Registered Users</h5>
-    <button type="button" class="btn btn-dark btn mt-2">All - {all}</button><br/>
-    <button type="button" class="btn btn-dark btn mt-2">Job Recruiters - {recruiters}</button><br/>
-    <button type="button" class="btn btn-dark btn mt-2">Job Seekers -      {jobseekers}</button>
+    <a href="/admin/userroles" class="btn btn-dark btn mt-2">All - {all}</a><br/>
+    <a href="/admin/user/recruiter" class="btn btn-dark btn mt-2">Job Recruiters - {recruiters}</a><br/>
+    <a href="/admin/user/seeker" class="btn btn-dark btn mt-2">Job Seekers - {jobseekers}</a>
     
 
     
