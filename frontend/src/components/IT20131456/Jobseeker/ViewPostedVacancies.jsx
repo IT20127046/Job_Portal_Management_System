@@ -62,7 +62,7 @@ export default function ViewVacancy() {
                   <Col key="index">
                     <Card className="col-md-10 my-3 mx-5 shadow">
                       <Card.Img
-                        style={{ height: "43vh", width: "100%" }}
+                        style={{ height: "45vh", width: "100%" }}
                         src={require(`../../../images/vacancy/${item.image}`)}
                         className="CardImg"
                         />
@@ -86,7 +86,7 @@ export default function ViewVacancy() {
                   <Col key="index">
                     <Card className="col-md-10 my-3 mx-5 shadow">
                       <Card.Img
-                        style={{ height: "43vh", width: "100%" }}
+                        style={{ height: "45vh", width: "100%" }}
                         src={require(`../../../images/vacancy/${item.image}`)}
                         className="CardImg p-2"
                       />
