@@ -26,6 +26,9 @@ app.use(userRoutes);
 const adminRoutes = require('./routes/adminRoutes');
 app.use(adminRoutes);
 
+const InquiriesRoutes = require('./routes/InquiriesRoutes');
+app.use(InquiriesRoutes);
+
 const vacancyRoutes = require('../backend/routes/vacancy_management/vacancyRoutes');
 app.use(vacancyRoutes);
 

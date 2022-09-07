@@ -74,7 +74,7 @@ export default function UpdateVacancy() {
           <hr />
         </div>
       </div>
-      <div className="container bg-white p-3 mb-5 border border-dark rounded mt-3 col-lg-10 ">
+      <div className="container bg-light p-3 mb-5  rounded mt-3 col-lg-10 ">
         <form>
           <div className="row mt-3">
             <div className="col-md-6">
@@ -250,14 +250,14 @@ export default function UpdateVacancy() {
           <div className=" my-3">
             <div className="form-group ">
               <a
-                className="btn btn-outline-primary col-md-2"
+                className="btn btn-primary col-md-2"
                 href={"/view/vacancy"}
               >
                 <i class="fa fa-arrow-left"></i>&nbsp;Back
               </a>{" "}
               &nbsp;
               <button
-                className="btn btn-outline-success col-md-2"
+                className="btn btn-success col-md-2"
                 onClick={onSubmit}
                 type="submit"
               >
