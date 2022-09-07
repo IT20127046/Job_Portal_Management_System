@@ -112,7 +112,7 @@ export default function ViewVacancy() {
                 return (
                     <tr>
                     <th>{index + 1}</th>
-                    <td>{item.company}</td>
+                    <td style={{ width:"15%"}} >{item.company}</td>
                     <td>{item.jobTitle}</td>
                     <td>{item.jobType}</td>
                     <td>{item.noOfVacancy}</td>
