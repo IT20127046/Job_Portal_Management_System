@@ -17,6 +17,7 @@ export default function UpdateVacancy() {
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
   const [closingDate, setClosingDate] = useState("");
+  const [companyId, setCompanyId] = useState("");                                   //added - kalani
 
   useEffect(() => {
     axios.get(`http://localhost:5000/vacancy/get/${id}`).then((response) => {
@@ -31,6 +32,7 @@ export default function UpdateVacancy() {
       setDescription(response.data.exsitingVacancy.description);
       setImage(response.data.exsitingVacancy.image);
       setClosingDate(response.data.exsitingVacancy.closingDate);
+      setCompanyId(response.data.exsitingVacancy.companyId);                        //added - kalani
     });
   }, []);
 
@@ -48,6 +50,7 @@ export default function UpdateVacancy() {
       description: description,
       image: image,
       closingDate: closingDate,
+      companyId: companyId,                                                         //added - kalani
     };
 
     axios

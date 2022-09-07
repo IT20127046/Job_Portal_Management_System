@@ -47,7 +47,7 @@ function App() {
       <Routes>
         {/* ---------------Job Recruters / Job Seekers --------------- */}
         <Route path="/" element={<LandingPage />} />
-        <Route path="/application" element={<ApplicationPage />} />
+        <Route path="/application/:id" element={<ApplicationPage />} />
         <Route path="/all_applications" element={<AllApplications />} />
         <Route path="/application_details/:id" element={<ApplicationDetails />}/>     
         <Route path="/interview" element={<ViewInterviews />} />

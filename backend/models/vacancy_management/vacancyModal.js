@@ -45,6 +45,10 @@ const vacancy = new mongoose.Schema({
     type: String,
     required: true,
   },
+  companyId: {        //added - kalani
+    type: String,     //added - kalani
+    required: true    //added - kalani
+  }                   //added - kalani
 });
 
 module.exports = mongoose.model("Vacancy", vacancy);

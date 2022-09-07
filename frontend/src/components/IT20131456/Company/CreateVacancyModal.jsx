@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import swal from "sweetalert";
+import jwt_decode from "jwt-decode";
 
 export default function CreateVacancy() {
   // const [user, setUser] = useState([]);
@@ -15,6 +16,7 @@ export default function CreateVacancy() {
   const [image, setImage] = useState("");
   const [closingDate, setClosingDate] = useState("");
   const [adminStatus, setAdminStatus] = useState("Pending");
+  const [companyId, setCompanyId] = useState("");                     //added - kalani
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -31,6 +33,7 @@ export default function CreateVacancy() {
       image: image,
       closingDate: closingDate,
       adminStatus: adminStatus,
+      companyId: companyId,                                          //added - kalani
     };
 
     axios.post(`http://localhost:5000/vacancy/add`, data).then((res) => {
@@ -63,6 +66,10 @@ export default function CreateVacancy() {
   // }, []);
 
   useEffect(() => {
+    const userToken = localStorage.userToken;                     //added - kalani
+    const decoded = jwt_decode(userToken);                        //added - kalani
+    setCompanyId(decoded._id);                                     //added - kalani
+
     axios.get(`http://localhost:5000/vacancy/getAll`).then((response) => {
       setJobId("J" + String(response.data.exsitingVacancy.length + 1));
     });
