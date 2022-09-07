@@ -1,44 +1,42 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
+import swal from "sweetalert";
 
-export default function ScheduleInterview() {
-  const [applicantId, setApplicantId] = useState("");
-  const [applicantName, setApplicantName] = useState("");
-  const [jobTitle, setJobTitle] = useState("");
+export default function EditInterview() {
+  const { id } = useParams();
+
   const [description, setDescription] = useState("");
   const [interviewDate, setInterviewDate] = useState("");
   const [interviewTime, setInterviewTime] = useState("");
   const [interviewMode, setInterviewMode] = useState("");
-  const [status, setStatus] = useState("Not Completed");
-
-  useEffect(() => {
-    document.title = "SchduleInterview";
+  
+  useEffect(()=>{
+    retriveInterview();
   }, []);
+
+  const retriveInterview = () => {
+    axios.get(`http://localhost:5000/interview/get/${id}`).then((res) => {
+      if (res.data.success) {
+        setDescription(res.data.exsitingInterview.description);
+        setInterviewDate(res.data.exsitingInterview.interviewDate.toUTCString());
+        setInterviewTime(res.data.exsitingInterview.interviewTime);
+        setInterviewMode(res.data.exsitingInterview.interviewMode);
+      }
+    });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const data = {
-      applicantId: applicantId,
-      applicantName: applicantName,
-      jobTitle: jobTitle,
       description: description,
       interviewDate: interviewDate,
       interviewTime: interviewTime,
       interviewMode: interviewMode,
-      status: status,
     };
 
-    saveInterview(data);
-  };
-
-  const saveInterview = (data) => {
-    console.log(data);
-    axios.post(`http://localhost:5000/interview/add`, data).then((res) => {
-      if (res.data.success) {
-        window.location = '/interview/recruiter';
-      }
-    });
+    //saveInterview(data);
   };
 
   return (
@@ -47,77 +45,15 @@ export default function ScheduleInterview() {
         <br />
 
         <h4>
-              <i className="fa fa-plus"></i> Schedule a Interview
-            </h4>
+          <i className="fa fa-plus"></i> Schedule a Interview
+        </h4>
         <hr />
 
         <div>
           <div className="container bg-light shadow p-3 mb-5  rounded mt-3 col-lg-10 ">
             <form>
-              <div className="row mt-3">
-                <div className="col-md-6">
-                  <div className="form-group">
-                    <strong>Applicant ID </strong>
-                    <input
-                      type="text"
-                      className="form-control bg-light"
-                      name="applicantId"
-                      value={applicantId}
-                      onChange={(e) => setApplicantId(e.target.value)}
-                    />
-                  </div>
-                </div>
-                <div className="col-md-6">
-                  <div className="form-group">
-                    <strong>Applicant Name</strong>
-                    <input
-                      type="text"
-                      className="form-control bg-light"
-                      name="applicantName"
-                      value={applicantName}
-                      onChange={(e) => setApplicantName(e.target.value)}
-                    />
-                  </div>
-                </div>
-              </div>
-              &nbsp;
-              <div className="row">
-                <div className="col-md-6">
-                  <div className="form-group">
-                    <strong>Job Title</strong>
-                    <input
-                      type="text"
-                      className="form-control"
-                      name="jobTitle"
-                      placeholder="Enter job title"
-                      value={jobTitle}
-                      onChange={(e) => setJobTitle(e.target.value)}
-                      required
-                    />
-                  </div>
-                </div>
 
-                <div className="col-md-6">
-                  <div className="form-group">
-                    <strong>Interview Mode</strong>
-                    <select
-                      className="form-select"
-                      aria-label="Default select example"
-                      name="interviewMode"
-                      value={interviewMode}
-                      onChange={(e) => {
-                        setInterviewMode(e.target.value);
-                      }}
-                    >
-                      <option defaultValue>Select Mode</option>
-                      <option value="Online">Online</option>
-                      <option value="Physical">Physical</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-              &nbsp;
-              <div className="row">
+            <div className="row">
                 <div className="col-md-6">
                   <div className="form-group">
                     <strong>Interview Date</strong>
@@ -146,6 +82,30 @@ export default function ScheduleInterview() {
                 </div>
               </div>
               &nbsp;
+              
+              <div className="row">
+
+                <div className="col-md-6">
+                  <div className="form-group">
+                    <strong>Interview Mode</strong>
+                    <select
+                      className="form-select"
+                      aria-label="Default select example"
+                      name="interviewMode"
+                      value={interviewMode}
+                      onChange={(e) => {
+                        setInterviewMode(e.target.value);
+                      }}
+                    >
+                      <option defaultValue>Select Mode</option>
+                      <option value="Online">Online</option>
+                      <option value="Physical">Physical</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              &nbsp;
+              
               <div className="form-group">
                 <strong>Description :</strong>
                 <textarea
