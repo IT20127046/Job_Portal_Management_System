@@ -186,8 +186,8 @@ export default class UserRoles extends Component {
                 <th scope='col'> Email </th>
                 <th scope='col'> Mobile </th>
                 <th scope='col'> UserType </th>
-                <th scope='col'> Field of interest </th>
-                <th scope='col'> Address </th>
+                <th scope='col'> Field of Interest </th>
+                {/* <th scope='col'> Address </th> */}
                 
                 {/* <th scope='col'> Registered Date </th> */}
               
@@ -209,7 +209,7 @@ export default class UserRoles extends Component {
                   <td>{users.mobile}</td>
                   <td>{users.type}</td>
                   <td>{users.field}</td>
-                  <td>{users.address}</td>
+                  {/* <td>{users.address}</td> */}
                   {/* <td>{users.dateRegistered}</td> */}
                   {/* <td>{users.password}</td> */}
                   <td>

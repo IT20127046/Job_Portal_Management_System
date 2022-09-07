@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import jwt_decode from 'jwt-decode';
 import image from '../../images/land.png';
+import NavBar from './NavBar';
 
 
 
@@ -10,6 +11,8 @@ export default class LandingPage extends Component {
   }
   render() {
     return (
+      <div>
+      <NavBar/>
 
 
       <div className="" style={{ minHeight: '100vh' }}>
@@ -28,6 +31,7 @@ export default class LandingPage extends Component {
             </div>
           </div>
         {/* </div> */}
+      </div>
       </div>
     )
   }

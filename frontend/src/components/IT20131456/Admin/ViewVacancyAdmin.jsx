@@ -13,6 +13,7 @@ export default function ViewVacancy() {
       setVacancy(response.data.exsitingVacancy);
     });
   }, []);
+
   //search record
 
   const searchItems = (searchValue) => {
@@ -48,105 +49,95 @@ export default function ViewVacancy() {
                 <h2>Vacancies Submitted For Approval</h2>
               </div>
               <div className="col-lg-3 mt-2 mb-2">
-              <input
-                className="form-control border border-dark"
-                type="search"
-                placeholder="Search"
-                onChange={(e) => searchItems(e.target.value)}
-                >
-              </input>
+                <input
+                  className="form-control border border-dark"
+                  type="search"
+                  placeholder="Search"
+                  onChange={(e) => searchItems(e.target.value)}
+                ></input>
               </div>
               <hr />
               <br />
-            </div>  
+            </div>
             <table className="table">
               <thead>
                 <tr>
-                <th scope="col">#</th>
-                <th scope="col">Company</th>
-                <th scope="col">Job Title</th>
-                <th scope="col">Job Type</th>
-                <th scope="col">No of Vacancy</th>
-                <th scope="col">Closing Date</th>
-                <th scope="col">Status</th>
-                <th scope="col">Action</th> 
+                  <th scope="col">#</th>
+                  <th scope="col">Company</th>
+                  <th scope="col">Job Title</th>
+                  <th scope="col">Job Type</th>
+                  <th scope="col">No of Vacancy</th>
+                  <th scope="col">Closing Date</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Action</th>
                 </tr>
               </thead>
               <tbody>
-          {searchInput.length > 1
-            ? filteredResults.map((item, index) => {
-                return (
-                  <tr>
-                    <th>{index + 1}</th>
-                    <td>{item.company}</td>
-                    <td>{item.jobTitle}</td>
-                    <td>{item.jobType}</td>
-                    <td>{item.noOfVacancy}</td>
-                    <td>{item.closingDate}</td>                  
-                    <td
-                      style={{ marginLeft: "20%", marginTop: "10%" }}
-                      className={
-                        item.adminStatus == "Pending"
-                          ? "badge bg-warning text-dark"
-                          : item.adminStatus == "Approve"
-                          ? "badge bg-success text-white"
-                          : item.adminStatus == "Decline"
-                          ? "badge bg-danger text-white"
-                          : ""
-                      }
-                    >
-                      {item.adminStatus}
-                    </td>
-                    <td className="text-center">
-                      <a
-                        className="btn btn-outline-primary"
-                        href={""}
-                      >
-                        <i className="fa fa-eye"></i>&nbsp;View
-                      </a>                      
-                    </td>
-                  </tr>
-                );
-              })
-            : vacancy.map((item, index) => {
-                return (
-                    <tr>
-                    <th>{index + 1}</th>
-                    <td style={{ width:"15%"}} >{item.company}</td>
-                    <td>{item.jobTitle}</td>
-                    <td>{item.jobType}</td>
-                    <td>{item.noOfVacancy}</td>
-                    <td>{item.closingDate}</td>                  
-                    <td
-                      style={{ marginLeft: "20%", marginTop: "10%" }}
-                      className={
-                        item.adminStatus == "Pending"
-                          ? "badge bg-warning text-dark"
-                          : item.adminStatus == "Approve"
-                          ? "badge bg-success text-white"
-                          : item.adminStatus == "Decline"
-                          ? "badge bg-danger text-white"
-                          : ""
-                      }
-                    >
-                      {item.adminStatus}
-                    </td>
-                    <td className="text-center">
-                      <a
-                        className="btn btn-outline-primary"
-                        href={""}
-                      >
-                        <i className="fa fa-eye"></i>&nbsp;View
-                      </a>                      
-                    </td>
-                  </tr>
-                );
-              })}
-        </tbody>
-
-        
+                {searchInput.length > 1
+                  ? filteredResults.map((item, index) => {
+                      return (
+                        <tr>
+                          <th>{index + 1}</th>
+                          <td>{item.company}</td>
+                          <td>{item.jobTitle}</td>
+                          <td>{item.jobType}</td>
+                          <td>{item.noOfVacancy}</td>
+                          <td>{item.closingDate}</td>
+                          <td
+                            style={{ marginLeft: "20%", marginTop: "10%" }}
+                            className={
+                              item.adminStatus == "Pending"
+                                ? "badge bg-warning text-dark"
+                                : item.adminStatus == "Approve"
+                                ? "badge bg-success text-white"
+                                : item.adminStatus == "Decline"
+                                ? "badge bg-danger text-white"
+                                : ""
+                            }
+                          >
+                            {item.adminStatus}
+                          </td>
+                          <td className="text-center">
+                            <a className="btn btn-outline-primary" href={""}>
+                              <i className="fa fa-eye"></i>&nbsp;View
+                            </a>
+                          </td>
+                        </tr>
+                      );
+                    })
+                  : vacancy.map((item, index) => {
+                      return (
+                        <tr>
+                          <th>{index + 1}</th>
+                          <td style={{ width: "15%" }}>{item.company}</td>
+                          <td>{item.jobTitle}</td>
+                          <td>{item.jobType}</td>
+                          <td>{item.noOfVacancy}</td>
+                          <td>{item.closingDate}</td>
+                          <td
+                            style={{ marginLeft: "20%", marginTop: "10%" }}
+                            className={
+                              item.adminStatus == "Pending"
+                                ? "badge bg-warning text-dark"
+                                : item.adminStatus == "Approve"
+                                ? "badge bg-success text-white"
+                                : item.adminStatus == "Decline"
+                                ? "badge bg-danger text-white"
+                                : ""
+                            }
+                          >
+                            {item.adminStatus}
+                          </td>
+                          <td className="text-center">
+                            <a className="btn btn-outline-primary" href={""}>
+                              <i className="fa fa-eye"></i>&nbsp;View
+                            </a>
+                          </td>
+                        </tr>
+                      );
+                    })}
+              </tbody>
             </table>
-            
           </div>
         </div>
       </div>

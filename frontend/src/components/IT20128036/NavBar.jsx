@@ -176,6 +176,10 @@ class NavBar extends Component {
           </li>
 
           <li className='nav-item'>
+            <a className="nav-link" aria-current="page" href="/user/inq" style={{ textDecoration: 'none', color: 'black' }}>Contact Us</a>
+          </li>
+
+          <li className='nav-item'>
             <a className="nav-link" aria-current="page" href="#" style={{ textDecoration: 'none', color: 'black' }}>Profile</a>
           </li>
           

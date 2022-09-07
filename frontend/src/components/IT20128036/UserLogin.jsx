@@ -75,7 +75,7 @@ export default class UserLogin extends Component {
                 console.log(err);
                 swal({
                     title: "",
-                    text: "Please check your user name and password",
+                    text: "Please check your username and password",
                     icon: "warning",
                 });
             })
@@ -152,6 +152,7 @@ export default class UserLogin extends Component {
 
 
             <div className={styles.login_container}>
+                <div className='mt-4'>
 			<div className={styles.login_form_container}>
 				<div className={styles.left}>
 					<form className={styles.form_container} >
@@ -165,7 +166,7 @@ export default class UserLogin extends Component {
                         
                         <input
 							type="name"
-							placeholder="User Name"
+							placeholder="Username"
 							name="name"
 							onChange={this.onChange}
 							value={this.state.name}
@@ -205,7 +206,9 @@ export default class UserLogin extends Component {
 					</Link>
 				</div>
 			</div>
+            </div>
 		</div>
+        
         )
     }
 }
