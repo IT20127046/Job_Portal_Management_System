@@ -5,7 +5,7 @@ const interview = new mongoose.Schema({
     applicantName: { type: String, required: true },
     jobTitle: { type: String, required: true },
     description: { type: String },
-    interviewDate: { type: Date, required: true },
+    interviewDate: { type: String, required: true },
     interviewTime: { type: String, required: true },
     interviewMode: { type: String, required: true },
     status: { type: String, required: true },
