@@ -35,20 +35,20 @@ const vacancy = new mongoose.Schema({
   },
   image: {
     type: String,
-    required: true,
+    required: false,
   },
   closingDate: {
     type: String,
     required: true,
-  },  
+  },
   adminStatus: {
     type: String,
     required: true,
   },
-  companyId: {        //added - kalani
-    type: String,     //added - kalani
-    required: true    //added - kalani
-  }                   //added - kalani
+  companyId: {
+    type: String,
+    required: true,
+  },
 });
 
 module.exports = mongoose.model("Vacancy", vacancy);

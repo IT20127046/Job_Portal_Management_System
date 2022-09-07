@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import swal from "sweetalert";
 import axios from "axios";
+import NavBar from "../../IT20128036/NavBar";
 
 export default function UpdateVacancy() {
   const { id } = useParams();
@@ -17,7 +18,7 @@ export default function UpdateVacancy() {
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
   const [closingDate, setClosingDate] = useState("");
-  const [companyId, setCompanyId] = useState("");                                   //added - kalani
+  const [companyId, setCompanyId] = useState(""); //added - kalani
 
   useEffect(() => {
     axios.get(`http://localhost:5000/vacancy/get/${id}`).then((response) => {
@@ -32,7 +33,7 @@ export default function UpdateVacancy() {
       setDescription(response.data.exsitingVacancy.description);
       setImage(response.data.exsitingVacancy.image);
       setClosingDate(response.data.exsitingVacancy.closingDate);
-      setCompanyId(response.data.exsitingVacancy.companyId);                        //added - kalani
+      setCompanyId(response.data.exsitingVacancy.companyId); //added - kalani
     });
   }, []);
 
@@ -50,7 +51,7 @@ export default function UpdateVacancy() {
       description: description,
       image: image,
       closingDate: closingDate,
-      companyId: companyId,                                                         //added - kalani
+      companyId: companyId, //added - kalani
     };
 
     axios
@@ -67,6 +68,7 @@ export default function UpdateVacancy() {
 
   return (
     <div>
+      <NavBar />
       <div className="container px-5 my-3">
         <div className="row">
           <div className="float-left col-lg-9 mt-2 mb-2">
@@ -89,7 +91,7 @@ export default function UpdateVacancy() {
                   name="jobId"
                   placeholder="Enter job id"
                   value={jobId}
-                  readOnly
+                  disabled
                 />
               </div>
             </div>
@@ -102,7 +104,7 @@ export default function UpdateVacancy() {
                   name="company"
                   placeholder="Enter company name"
                   value={company}
-                  readOnly
+                  disabled
                 />
               </div>
             </div>
@@ -252,10 +254,7 @@ export default function UpdateVacancy() {
           &nbsp;
           <div className=" my-3">
             <div className="form-group ">
-              <a
-                className="btn btn-primary col-md-2"
-                href={"/view/vacancy"}
-              >
+              <a className="btn btn-primary col-md-2" href={"/view/vacancy"}>
                 <i class="fa fa-arrow-left"></i>&nbsp;Back
               </a>{" "}
               &nbsp;

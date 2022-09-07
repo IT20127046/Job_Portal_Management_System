@@ -4,9 +4,9 @@ import axios from "axios";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import NavBar from "../../IT20128036/NavBar";
 
 export default function ViewVacancy() {
-
   const navigate = useNavigate();
 
   const [vacancy, setVacancy] = useState([]);
@@ -38,6 +38,7 @@ export default function ViewVacancy() {
 
   return (
     <div>
+      <NavBar />
       <div className="container px-5">
         <div className="row">
           <div className="float-left col-lg-9 mt-2 mb-2">
@@ -69,7 +70,7 @@ export default function ViewVacancy() {
                         style={{ height: "45vh", width: "100%" }}
                         src={require(`../../../images/vacancy/${item.image}`)}
                         className="CardImg"
-                        />
+                      />
                       <Card.Body>
                         <h4>{item.jobTitle} </h4>
                         <h5>{item.company} </h5>
@@ -88,19 +89,22 @@ export default function ViewVacancy() {
             : vacancy.map((item, index) => {
                 return (
                   <Col key={index}>
-                    <Card className="col-md-10 my-3 mx-5 shadow ">                   
+                    <Card className="col-md-10 my-3 mx-5 shadow ">
                       <Card.Img
                         style={{ height: "45vh", width: "100%" }}
                         src={require(`../../../images/vacancy/${item.image}`)}
                         className=" p-2"
-                      />             
+                      />
                       <Card.Body>
                         <h4>{item.jobTitle} </h4>
                         <h5>{item.company} </h5>
                         <h6>No of Vacancy: {item.noOfVacancy}</h6>
                         <h6>Closing Date: {item.closingDate}</h6>
                         <div className="text-center ">
-                          <button className="btn btn-primary col-md-6 my-3" onClick={() => navigate(`/application/${item._id}`)}>
+                          <button
+                            className="btn btn-primary col-md-6 my-3"
+                            onClick={() => navigate(`/application/${item._id}`)}
+                          >
                             Apply
                           </button>
                         </div>
