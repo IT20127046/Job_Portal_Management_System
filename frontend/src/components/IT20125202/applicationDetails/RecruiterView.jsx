@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
+import swal from 'sweetalert';
 
 const RecruiterView = () => {
     const { id } = useParams();
@@ -89,7 +90,8 @@ const RecruiterView = () => {
                 );
         }
         else {
-            alert('Application already ' + applicationDet.status + '. Cannot be changed again.');
+            swal("Application already " + applicationDet.status + ". Cannot be changed again.");
+            // alert('Application already ' + applicationDet.status + '. Cannot be changed again.');
         }
 
     }
@@ -113,7 +115,8 @@ const RecruiterView = () => {
                 );
         }
         else {
-            alert('Application already ' + applicationDet.status + '. Cannot be changed again.');
+            swal("Application already " + applicationDet.status + ". Cannot be changed again.");
+            // alert('Application already ' + applicationDet.status + '. Cannot be changed again.');
         }
     }
 
