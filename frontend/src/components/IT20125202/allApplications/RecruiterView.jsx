@@ -26,7 +26,7 @@ export default function RecruiterView() {
             .catch((error) => {
                 if (error.response) {
                     console.log(error.response);
-                } else if (error.request){
+                } else if (error.request) {
                     console.log(error.request);
                 } else if (error.message) {
                     console.log(error.message);
@@ -39,7 +39,7 @@ export default function RecruiterView() {
             <br />
             <h1 style={{ textAlign: "center" }}> All Received Applications </h1>
             <hr />
-            <table className="table">
+            <table className="table table-hover" style={{ border: '1px solid lightgray' }}>
                 <thead className="thead-light">
                     <tr>
                         <th scope="col">#</th>
@@ -62,8 +62,13 @@ export default function RecruiterView() {
                                 <td>{application.applicantFirstName}</td>
                                 <td>{application.applicantLastName}</td>
                                 <td>{application.appliedDate}</td>
-                                <td>{application.status}</td>
-                                <td> <button type="button" className="btn btn-outline-info" onClick={() => navigate(`/application_details/${application._id}`)}>View</button> </td>
+                                <td>
+                                    {application.status === "Pending" && <span style={{ color: 'black' }}>{application.status}</span>}
+                                    {application.status === "Accepted" && <span style={{ color: 'green' }}>{application.status}</span>}
+                                    {application.status === "Rejected" && <span style={{ color: 'red' }}>{application.status}</span>}
+                                    {/* {application.status} */}
+                                </td>
+                                <td> <button type="button" className="btn btn-outline-primary" onClick={() => navigate(`/application_details/${application._id}`)}><i className="fa fa-eye" />&nbsp;View</button> </td>
                             </tr>
                         ))}
 

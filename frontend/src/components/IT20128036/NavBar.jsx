@@ -108,7 +108,7 @@ class NavBar extends Component {
 
     let userLink;
 
-    // NavBar Links for students
+    // NavBar Links for job seeker
     if (this.state.type === 'Job Seeker') {
       userLink = (
         <ul className='nav nav-tabs'>

@@ -48,8 +48,9 @@ export default function ContactUs() {
   return (
     <div>
       <NavBar/>
-    <div className="inq_container" style={{ minWidth: '100%', minHeight: '100vh', opacity: '1' }}>
-      <div className="container ">
+    
+    <div className="inq_container" style={{ minWidth: '100%', minHeight: '100vh', opacity: '1', borderTop: '1px solid white' }}>
+      <div className="container bg-white mt-4">
         <div className="row">
           <div className="col-sm-3">
             <div>
