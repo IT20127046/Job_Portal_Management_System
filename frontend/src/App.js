@@ -9,7 +9,6 @@ import ScheduleInterview from "./components/IT20127046/Interview/Recruiter/Sched
 import CreateUser from "./components/IT20128036/UserRegistration";
 import UserLogin from "./components/IT20128036/UserLogin";
 import LandingPage from "./components/IT20128036/LandingPage";
-import NavBar from "./components/IT20128036/NavBar";
 import AdminHome from "./components/IT20128036/admin/AdminHome";
 import AdminLogin from "./components/IT20128036/admin/AdminLogin";
 import UserRoles from "./components/IT20128036/userManagement/userRoles";
@@ -34,7 +33,9 @@ import ViewInterview from "./components/IT20127046/Interview/Recruiter/ViewInter
 
 // import Demo from "./components/IT20128036/userManagement/barChartSample";
 
+
 function App() {
+  
   return (
     <BrowserRouter>
 
@@ -54,16 +55,13 @@ function App() {
         <Route path="/admin/inquiries" element={<UserInquiries />} />
         <Route path="/admin/inquiries/reply/:id" element={<ReplyToUser />} />
         <Route path="/view/vacancy/admin" element={<ViewVacancyAdmin />} />
-   <Route path="/admin/barchart/view" element={<Example/>} />
-    <Route path="/admin/bchart" element={<BChart/>} />
-      </Routes>
+        <Route path="/admin/barchart/view" element={<Example/>} />
+        <Route path="/admin/bchart" element={<BChart/>} />
 
-      
 
-      <Routes>
         {/* ---------------Job Recruters / Job Seekers --------------- */}
         <Route path="/" element={<LandingPage />} />
-        <Route path="/application" element={<ApplicationPage />} />
+        <Route path="/application/:id" element={<ApplicationPage />} />
         <Route path="/all_applications" element={<AllApplications />} />
         <Route path="/application_details/:id" element={<ApplicationDetails />}/>     
         <Route path="/interview" element={<ViewInterviews />} />

@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import swal from 'sweetalert';
 
-const RecruiterView = (params) => {
+const RecruiterView = () => {
+    const { id } = useParams();
     const navigate = useNavigate();
 
     const [applicationDet, setApplicationDet] = React.useState({
@@ -31,8 +33,8 @@ const RecruiterView = (params) => {
 
     useEffect(() => {
 
-        // console.log(params);
-        axios.get(`http://localhost:5000/applications/${params}`)
+        // console.log(id);
+        axios.get(`http://localhost:5000/applications/${id}`)
             .then(response => {
 
                 if (response.data.success) {
@@ -68,12 +70,12 @@ const RecruiterView = (params) => {
                 console.log(error);
             })
 
-    }, [params]);
+    }, [id]);
 
     const acceptHandler = () => {
         //should get an confirmation alert
         if (applicationDet.status === 'Pending') {
-            axios.patch(`http://localhost:5000/applications/update/${params}`, {
+            axios.patch(`http://localhost:5000/applications/update/${id}`, {
                 status: 'Accepted',
                 comments: comments
             })
@@ -88,7 +90,8 @@ const RecruiterView = (params) => {
                 );
         }
         else {
-            alert('Application already ' + applicationDet.status + '. Cannot be changed again.');
+            swal("Application already " + applicationDet.status + ". Cannot be changed again.");
+            // alert('Application already ' + applicationDet.status + '. Cannot be changed again.');
         }
 
     }
@@ -96,7 +99,7 @@ const RecruiterView = (params) => {
     const rejectHandler = () => {
         //should get an confirmation alert
         if (applicationDet.status === 'Pending') {
-            axios.patch(`http://localhost:5000/applications/update/${params}`, {
+            axios.patch(`http://localhost:5000/applications/update/${id}`, {
                 status: 'Rejected',
                 comments: comments
             })
@@ -112,7 +115,8 @@ const RecruiterView = (params) => {
                 );
         }
         else {
-            alert('Application already ' + applicationDet.status + '. Cannot be changed again.');
+            swal("Application already " + applicationDet.status + ". Cannot be changed again.");
+            // alert('Application already ' + applicationDet.status + '. Cannot be changed again.');
         }
     }
 

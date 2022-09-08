@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import swal from "sweetalert";
+import jwt_decode from "jwt-decode";
 
 export default function CreateVacancy() {
-  // const [user, setUser] = useState([]);
   const [jobId, setJobId] = useState("");
   const [jobTitle, setJobTitle] = useState("");
   const [company, setCompany] = useState("");
@@ -15,6 +15,7 @@ export default function CreateVacancy() {
   const [image, setImage] = useState("");
   const [closingDate, setClosingDate] = useState("");
   const [adminStatus, setAdminStatus] = useState("Pending");
+  const [companyId, setCompanyId] = useState("");                     
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -31,6 +32,7 @@ export default function CreateVacancy() {
       image: image,
       closingDate: closingDate,
       adminStatus: adminStatus,
+      companyId: companyId,                                        
     };
 
     axios.post(`http://localhost:5000/vacancy/add`, data).then((res) => {
@@ -55,14 +57,12 @@ export default function CreateVacancy() {
       }
     });
   };
-  // useEffect(() => {
-  //   axios.get(`http://localhost:5000/users`).then((response) => {
-  //     setUser(response.data.existingUsers);
-  //     console.log(response.data.existingUsers)
-  //   });
-  // }, []);
-
   useEffect(() => {
+    const userToken = localStorage.userToken;                
+    const decoded = jwt_decode(userToken);                      
+    setCompanyId(decoded._id);   
+    setCompany (decoded.name);                               
+
     axios.get(`http://localhost:5000/vacancy/getAll`).then((response) => {
       setJobId("J" + String(response.data.exsitingVacancy.length + 1));
     });
@@ -126,8 +126,9 @@ export default function CreateVacancy() {
                         className="form-control"
                         name="company"
                         placeholder="Enter company name"
+                        value={company}
                         onChange={(e) => setCompany(e.target.value)}
-                        required
+                        disabled
                       />
                     </div>
                   </div>

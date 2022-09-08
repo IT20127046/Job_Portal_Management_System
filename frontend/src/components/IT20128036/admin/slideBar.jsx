@@ -28,7 +28,7 @@ export default class RightSidePanel extends Component {
           <div>
             <a href="/student/group/view">
               <div className="p-2 mb-2 text-white" style={{ background: '#212F3C', textDecoration: 'none' }}>
-                <a className="btn text-white">
+                <a className="btn text-white" href="/view/vacancy/admin">
                   <i class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp;Vacancies
                 </a>
               </div>

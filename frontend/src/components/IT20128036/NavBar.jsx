@@ -126,7 +126,7 @@ class NavBar extends Component {
           </li>
 
           <li className='nav-item'>
-            <a className="nav-link" aria-current="page" href="#" style={{ textDecoration: 'none', color: 'black' }}>My Applications</a>
+            <a className="nav-link" aria-current="page" href="/all_applications" style={{ textDecoration: 'none', color: 'black' }}>My Applications</a>
           </li>
 
           <li className='nav-item'>
@@ -164,7 +164,7 @@ class NavBar extends Component {
             <a className="nav-link" aria-current="page" href="/" style={{ textDecoration: 'none', color: 'black' }}>Home</a>
           </li>
           <li className='nav-item'>
-            <a className="nav-link" aria-current="page" href="#" style={{ textDecoration: 'none', color: 'black' }}>Applications </a>
+            <a className="nav-link" aria-current="page" href="/all_applications" style={{ textDecoration: 'none', color: 'black' }}>Applications </a>
           </li>
 
           <li className='nav-item'>
@@ -172,7 +172,7 @@ class NavBar extends Component {
           </li>
 
           <li className='nav-item'>
-            <a className="nav-link" aria-current="page" href="view/vacancy" style={{ textDecoration: 'none', color: 'black' }}>Vacancies</a>
+            <a className="nav-link" aria-current="page" href="/view/vacancy" style={{ textDecoration: 'none', color: 'black' }}>Vacancies</a>
           </li>
 
           <li className='nav-item'>

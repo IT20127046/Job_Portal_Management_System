@@ -4,6 +4,7 @@ import { userRegister } from './UserFunctions';
 import swal from 'sweetalert';
 import styles from "./userStyle/styles.module.css";
 import { Link } from "react-router-dom";
+import NavBar from './NavBar';
 
 // email pattern ->  /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
 // mobile pattern ->  /^(\+\d{1,3}[- ]?)?\d{10}$/
@@ -251,6 +252,8 @@ export default class CreateUser extends Component {
       //     </div>
       //   </div>
       // </div>
+      <div>
+        <NavBar/>
 
 <div className={styles.signup_container}>
 			<div className={styles.signup_form_container}>
@@ -391,7 +394,7 @@ export default class CreateUser extends Component {
 			</div>
 		</div>
 
-      
+    </div> 
     )
   }
 }
