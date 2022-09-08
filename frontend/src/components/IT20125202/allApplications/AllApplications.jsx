@@ -22,7 +22,7 @@ export default function AllApplications() {
         <div>
             <NavBar />
             <div className='jumbotron' style={{ paddingLeft: '50px', paddingRight: '50px', paddingBottom: '50px', paddingTop: '10px', backgroundImage: `url(${image})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover', margin: '0px 0px 0px 0px', overflowY: 'scroll', height: '100vh', borderTop: '5px solid black' }}>
-                <div className='jumbotron' style={{ background: 'white', minHeight: '100vh' }}>
+                <div className='jumbotron' style={{ background: 'white', minHeight: '100vh', padding: '30px 30px 30px 30px' }}>
                     <br />
                     {userType === 'Job Recruiter' && (
                         <RecruiterView />
