@@ -19,7 +19,7 @@ export default function EditInterview() {
     axios.get(`http://localhost:5000/interview/get/${id}`).then((res) => {
       if (res.data.success) {
         setDescription(res.data.exsitingInterview.description);
-        setInterviewDate(res.data.exsitingInterview.interviewDate.toUTCString());
+        setInterviewDate(res.data.exsitingInterview.interviewDate);
         setInterviewTime(res.data.exsitingInterview.interviewTime);
         setInterviewMode(res.data.exsitingInterview.interviewMode);
       }
@@ -36,8 +36,16 @@ export default function EditInterview() {
       interviewMode: interviewMode,
     };
 
-    //saveInterview(data);
+    updateInterview(data);
   };
+
+   const updateInterview = (data) => {
+    axios.put(`http://localhost:5000/interview/update/${id}`, data).then((res) => {
+      if (res.data.success) {
+        window.location = '/interview/recruiter';
+      }
+    });
+   }
 
   return (
     <div>
