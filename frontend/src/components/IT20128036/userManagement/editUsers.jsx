@@ -102,6 +102,12 @@ export default function EditUsers() {
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
+
+
+<div className="row">
+  <div className="col-sm-6">
+
+
           <div className="form-group" style={{ marginBottom: "15px" }}>
             {" "}
             <label for="mobile" style={{ marginBottom: "1px" }}>
@@ -115,6 +121,11 @@ export default function EditUsers() {
               onChange={(e) => setMobile(e.target.value)}
             />
           </div>
+
+          </div>
+
+
+          <div className="col-sm-6">
 
           <div className="form-group" style={{ marginBottom: "15px" }}>
             {" "}
@@ -130,13 +141,18 @@ export default function EditUsers() {
             />
           </div>
 
+          </div>
+
+
+          </div>
+
           <div className="form-group" style={{ marginBottom: "15px" }}>
             {" "}
             <label for="address" style={{ marginBottom: "1px" }}>
               Address
             </label>
-            <input
-              type="text"
+            <textarea
+              
               class="form-control"
               id="address"
               value={address}
