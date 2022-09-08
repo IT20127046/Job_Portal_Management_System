@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
+import "../../Main.css";
+import NavBar from "../../../IT20128036/NavBar";
 
-import UserImg from '../../../../images/user.png';
+import UserImg from "../../../../images/user.png";
 
 export default function ViewInterview() {
   const { id } = useParams();
@@ -40,55 +42,99 @@ export default function ViewInterview() {
 
   return (
     <div>
-      <div className="container">
-        <br />
+      <NavBar />
 
-        <h4>
-              <i className="fa fa-info-circle"></i> Interview Details
-            </h4>
-        <hr />
+      <div className="backgroudImage">
+        <div className="container mainBody">
+          <br />
 
-        <div>
-          <div className="container bg-light shadow p-3 mb-5  rounded mt-3 col-lg-10 ">
+          <h4>
+            <i className="fa fa-info-circle"></i> Interview Details
+          </h4>
+          <hr />
 
-            <center><h4>{jobTitle} - IFS</h4></center>
-            <br/>
+          <div>
+            <div className="container bg-light shadow p-3 mb-5  rounded mt-3 col-lg-10 ">
+              <center>
+                <h4>{jobTitle} - IFS</h4>
+              </center>
 
-            <div className="row">
+              <div className="row">
                 <div className="col-3">
-                    <center>
-                      <div >
-                        <img src={UserImg} style={{ width: "200px", height: "200px" }}/>
-                      </div> 
-                    </center>
+                  <center>
+                    <div>
+                      <img
+                        src={UserImg}
+                        style={{ width: "200px", height: "200px" }}
+                      />
+                    </div>
+                  </center>
                 </div>
                 <div className="col-9">
-                    <div className="container">
-                      <div>
-                        <div className="row">
-                          <div className="col">
-                            <p><strong>Interview ID - </strong>{interviewID}</p>
-                            <p><strong>Applicant ID - </strong>{applicantId}</p>
-                            <p><strong>Applicant Name - </strong>{applicantName}</p>
-                            <p><strong>Job Title - </strong>{jobTitle}</p>
-                          </div>
-                          <div className="col">
-                            <p><strong>Interview Date - </strong>{interviewDate}</p>
-                            <p><strong>Interview Time - </strong>{interviewTime}</p>
-                            <p><strong>Interview Mode - </strong>{interviewMode}</p>
-                          </div>
+                  <div className="container">
+                    <hr/>
+                    <div>
+                      <div className="row">
+                        <div className="col">
+                          <p>
+                            <strong>Interview ID - </strong>
+                            {interviewID}
+                          </p>
+                          <p>
+                            <strong>Applicant ID - </strong>
+                            {applicantId}
+                          </p>
+                          <p>
+                            <strong>Applicant Name - </strong>
+                            {applicantName}
+                          </p>
+                          <p>
+                            <strong>Job Title - </strong>
+                            {jobTitle}
+                          </p>
                         </div>
-                        <strong>Description </strong><p>{description}</p>
-
-                        <strong>Status -</strong><p style={{ margin: "10px" }} className="badge bg-warning text-dark">{status}</p>
-
-                        <strong>Candidate Availability -</strong><p style={{ margin: "10px" }} className="badge bg-success text-white">Yes</p>
-
+                        <div className="col">
+                          <p>
+                            <strong>Interview Date - </strong>
+                            {interviewDate}
+                          </p>
+                          <p>
+                            <strong>Interview Time - </strong>
+                            {interviewTime}
+                          </p>
+                          <p>
+                            <strong>Interview Mode - </strong>
+                            {interviewMode}
+                          </p>
+                        </div>
                       </div>
+                      <strong>Description </strong>
+                      <p>{description}</p>
+
+                      <strong>Status -</strong>
+                      <p
+                        style={{ margin: "10px" }}
+                        className="badge bg-warning text-dark"
+                      >
+                        {status}
+                      </p>
+
+                      <strong>Candidate Availability -</strong>
+                      <p
+                        style={{ margin: "10px" }}
+                        className="badge bg-success text-white"
+                      >
+                        Yes
+                      </p>
                     </div>
+                    <hr/>
+                    <div>
+                      <strong>Send Notice</strong>
+                    </div>
+                  </div>
                 </div>
+              </div>
             </div>
-            
           </div>
         </div>
       </div>
