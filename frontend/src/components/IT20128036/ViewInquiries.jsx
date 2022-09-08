@@ -125,8 +125,8 @@ export default class ViewInquiries extends Component {
     return (
       <div>
         <NavBar/>
-      <div className='inq_container' style={{ minWidth: '100%', minHeight: '100vh', opacity: '1' }}>
-      <div className='container'>
+      <div className='inq_container' style={{ minWidth: '100%', minHeight: '100vh', opacity: '1', borderTop: '1px solid white' }}>
+      <div className='container bg-white mt-4'>
        
 
         <div className="">
