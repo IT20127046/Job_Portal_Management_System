@@ -16,7 +16,7 @@ export default function RecruiterView() {
         const decoded = jwt_decode(usertoken);
 
         setCompanyId(decoded._id);
-
+        // console.log(companyId);
         axios.get(`http://localhost:5000/applications/received/${companyId}`).then(res => {
             if (res.data.success) {
                 setApplications(res.data.exsitingApplications);
@@ -24,9 +24,15 @@ export default function RecruiterView() {
             // console.log(applications);
         })
             .catch((error) => {
-                console.log(error);
+                if (error.response) {
+                    console.log(error.response);
+                } else if (error.request){
+                    console.log(error.request);
+                } else if (error.message) {
+                    console.log(error.message);
+                }
             })
-    }, []);
+    }, [companyId]);
 
     return (
         <div>

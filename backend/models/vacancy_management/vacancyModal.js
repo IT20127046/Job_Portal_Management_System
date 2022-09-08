@@ -35,13 +35,17 @@ const vacancy = new mongoose.Schema({
   },
   image: {
     type: String,
-    required: true,
+    required: false,
   },
   closingDate: {
     type: String,
     required: true,
-  },  
+  },
   adminStatus: {
+    type: String,
+    required: true,
+  },
+  companyId: {
     type: String,
     required: true,
   },

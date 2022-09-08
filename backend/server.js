@@ -12,24 +12,24 @@ app.use(bodyparser.json());
 app.use(cors());
 
 // Routes
-const sampleRoutes = require('./routes/sampleRoutes');
+const sampleRoutes = require("./routes/sampleRoutes");
 app.use(sampleRoutes);
-const applicationRoutes = require('./routes/applicationRoutes');
+const applicationRoutes = require("./routes/applicationRoutes");
 app.use(applicationRoutes);
 
-const interviewRoutes = require('./routes/interviewRoutes');
+const interviewRoutes = require("./routes/interviewRoutes");
 app.use(interviewRoutes);
 
-const userRoutes = require('./routes/userRoutes');
+const userRoutes = require("./routes/userRoutes");
 app.use(userRoutes);
 
-const adminRoutes = require('./routes/adminRoutes');
+const adminRoutes = require("./routes/adminRoutes");
 app.use(adminRoutes);
 
-const InquiriesRoutes = require('./routes/InquiriesRoutes');
+const InquiriesRoutes = require("./routes/InquiriesRoutes");
 app.use(InquiriesRoutes);
 
-const vacancyRoutes = require('../backend/routes/vacancy_management/vacancyRoutes');
+const vacancyRoutes = require("../backend/routes/vacancy_management/vacancyRoutes");
 app.use(vacancyRoutes);
 
 const port = process.env.PORT || 5000;

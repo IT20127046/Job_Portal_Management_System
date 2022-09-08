@@ -1,20 +1,23 @@
-const express = require('express');
+const express = require("express");
 const VacancyRouter = express.Router();
-const VacancyController = require('../../controllers/vacancy_management/vacancyControllers');
+const VacancyController = require("../../controllers/vacancy_management/vacancyControllers");
 
 // Save Vacancy
-VacancyRouter.post('/vacancy/add', VacancyController.save_vacancy);
+VacancyRouter.post("/vacancy/add", VacancyController.save_vacancy);
 
 // GetAll Vacancy
-VacancyRouter.get('/vacancy/getAll', VacancyController.getAll_vacancy);
+VacancyRouter.get("/vacancy/getAll", VacancyController.getAll_vacancy);
 
 // Get Vacancy By ID
-VacancyRouter.get('/vacancy/get/:id', VacancyController.get_vacancy);
+VacancyRouter.get("/vacancy/get/:id", VacancyController.get_vacancy);
 
 // Update Vacancy
-VacancyRouter.put('/vacancy/update/:id', VacancyController.update_vacancy);
+VacancyRouter.put("/vacancy/update/:id", VacancyController.update_vacancy);
 
 // Delete Vacancy
-VacancyRouter.delete('/vacancy/delete/:id', VacancyController.delete_vacancy);
+VacancyRouter.delete("/vacancy/delete/:id", VacancyController.delete_vacancy);
+
+// Get Vacancy By Name
+VacancyRouter.get("/vacancy/get/name/:name", VacancyController.getVacancyByName);
 
 module.exports = VacancyRouter;

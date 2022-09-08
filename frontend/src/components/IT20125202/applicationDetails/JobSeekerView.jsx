@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
-const JobSeekerView = (params) => {
-
+const JobSeekerView = () => {
+    const { id } = useParams();
     const navigate = useNavigate();
 
     const [applicationDet, setApplicationDet] = React.useState({
@@ -31,7 +31,7 @@ const JobSeekerView = (params) => {
     useEffect(() => {
 
         // console.log(params);
-        axios.get(`http://localhost:5000/applications/${params}`)
+        axios.get(`http://localhost:5000/applications/${id}`)
             .then(response => {
 
                 if (response.data.success) {
@@ -66,7 +66,7 @@ const JobSeekerView = (params) => {
                 console.log(error);
             })
 
-    }, [params]);
+    }, [id]);
 
     return (
         <div className="container-fluid" style={{ maxWidth: 800 }}>
