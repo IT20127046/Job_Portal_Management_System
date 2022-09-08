@@ -33,9 +33,7 @@ export default function RecruiterView() {
           .delete(`http://localhost:5000/interview/delete/${id}`)
           .then((res) => {
             if (res.data.success) {
-              swal("Canceld Successfull!", {
-                icon: "success",
-              });
+              
               window.location.reload();
             }
 
@@ -105,6 +103,7 @@ export default function RecruiterView() {
                   <th scope="col">Time</th>
                   <th scope="col">Mode</th>
                   <th scope="col">Status</th>
+                  <th scope="col">View</th>
                   <th scope="col">Update</th>
                   <th scope="col">Delete</th>
                 </tr>
@@ -124,14 +123,19 @@ export default function RecruiterView() {
                     >
                       {interview.status}
                     </td>
-                    <td>
-                      <a className="btn btn-success " href={`/interview/update/${interview._id}`}>
-                        <i className="fa fa-edit"></i>&nbsp;Edit
+                    <td className="text-center">
+                      <a className="btn btn-success " href={`/interview/view/${interview._id}`}>
+                          <i className="fa fa-info-circle"></i> View
                       </a>
                     </td>
-                    <td>
+                    <td className="text-center">
+                      <a className="btn btn-success " href={`/interview/update/${interview._id}`}>
+                        <i className="fa fa-edit"></i> Edit
+                      </a>
+                    </td>
+                    <td className="text-center">
                       <button className="btn btn-danger" type="submit" onClick={() => onDelete(interview._id)}>
-                        <i className="fa fa-trash"></i>&nbsp;Cancel
+                        <i className="fa fa-trash"></i> Cancel
                       </button>
                     </td>
                   </tr>

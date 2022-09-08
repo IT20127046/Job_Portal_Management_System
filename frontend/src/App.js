@@ -29,6 +29,7 @@ import BChart from "./components/IT20128036/userManagement/bChart";
 import ViewVacancyAdmin from "./components/IT20131456/Admin/ViewVacancyAdmin";
 import ViewPostedVacancies from "./components/IT20131456/Jobseeker/ViewPostedVacancies";
 import EditInterview from "./components/IT20127046/Interview/Recruiter/EditInterview";
+import ViewInterview from "./components/IT20127046/Interview/Recruiter/ViewInterview";
 
 
 // import Demo from "./components/IT20128036/userManagement/barChartSample";
@@ -70,6 +71,7 @@ function App() {
         <Route path="/interview/jobseeker" element={<JobSeekerView />} />
         <Route path="/interview/schdule" element={<ScheduleInterview />} />
         <Route path="/interview/update/:id" element={<EditInterview />} />
+        <Route path="/interview/view/:id" element={<ViewInterview />} />
         <Route path="/user/registration" element={<CreateUser />} />
         <Route path="/user/login" element={<UserLogin />} />
         <Route path="/user/login" element={<UserLogin />} />
