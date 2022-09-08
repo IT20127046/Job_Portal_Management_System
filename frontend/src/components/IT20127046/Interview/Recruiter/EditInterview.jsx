@@ -46,7 +46,10 @@ export default function EditInterview() {
       .put(`http://localhost:5000/interview/update/${id}`, data)
       .then((res) => {
         if (res.data.success) {
-          window.location = "/interview/recruiter";
+          swal("Success!", "Details Updated Successfull", "success")
+          .then((value) => {
+            window.location = "/interview/recruiter";
+          });
         }
       });
   };
@@ -60,7 +63,7 @@ export default function EditInterview() {
           <br />
 
           <h4>
-            <i className="fa fa-plus"></i> Schedule a Interview
+            <i className="fa fa-edit"></i> Edit Interview Details
           </h4>
           <hr />
 

@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../../Main.css";
+import swal from "sweetalert";
 import NavBar from "../../../IT20128036/NavBar";
+import jwt_decode from 'jwt-decode';
 
 export default function ScheduleInterview() {
+  const [recruiterId, setRecruiterId] = useState("");
   const [applicantId, setApplicantId] = useState("");
   const [applicantName, setApplicantName] = useState("");
   const [jobTitle, setJobTitle] = useState("");
@@ -15,12 +18,21 @@ export default function ScheduleInterview() {
 
   useEffect(() => {
     document.title = "SchduleInterview";
+
+    const usertoken = localStorage.userToken;
+    const decoded = jwt_decode(usertoken);
+
+    setRecruiterId(decoded._id);
+    setApplicantId("6319a632722ce57a043ffe86");
+    setApplicantName("Oliver");
+
   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const data = {
+      recruiterId: recruiterId,
       applicantId: applicantId,
       applicantName: applicantName,
       jobTitle: jobTitle,
@@ -38,7 +50,10 @@ export default function ScheduleInterview() {
     console.log(data);
     axios.post(`http://localhost:5000/interview/add`, data).then((res) => {
       if (res.data.success) {
-        window.location = "/interview/recruiter";
+        swal("Success!", "Details Addedd Successfull", "success")
+          .then((value) => {
+            window.location = "/interview/recruiter";
+          });
       }
     });
   };

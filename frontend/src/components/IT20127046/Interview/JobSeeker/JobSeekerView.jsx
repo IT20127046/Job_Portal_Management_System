@@ -151,15 +151,14 @@ export default function JobSeekerView() {
                                 <p>
                                   <b>Mode</b> - {userInterview.interviewMode}
                                 </p>
-                                <p>
-                                  <b>Meeting Link</b> -{" "}
-                                  {userInterview.interviewMode}
-                                </p>
+
                               </div>
                               <div>
                                 <p>{userInterview.description}</p>
                               </div>
                             </div>
+
+                            <b>Send Response &nbsp;</b>
                             <div className="btn-group">
                               <button className="btn btn-outline-primary">
                                 Yes
