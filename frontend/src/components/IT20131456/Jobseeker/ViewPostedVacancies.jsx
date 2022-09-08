@@ -5,6 +5,7 @@ import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import NavBar from "../../IT20128036/NavBar";
+import image from "../../../images/back1.jpg";
 
 export default function ViewVacancy() {
   const navigate = useNavigate();
@@ -39,81 +40,106 @@ export default function ViewVacancy() {
   return (
     <div>
       <NavBar />
-      <div className="container px-5">
-        <div className="row">
-          <div className="float-left col-lg-9 mt-2 mb-2">
-            &nbsp;
-            <h2>
-              Hot Jobs <span className="fs-4">, Find your dream job here</span>
-            </h2>
+      <div
+        className="jumbotron"
+        style={{
+          paddingLeft: "50px",
+          paddingRight: "50px",
+          paddingBottom: "50px",
+          paddingTop: "10px",
+          backgroundImage: `url(${image})`,          
+          backgroundSize: "cover",
+          margin: "0px 0px 0px 0px",
+          overflowY: "scroll",
+          height: "100vh",
+          borderTop: "5px solid black",       
+        }}
+      >
+        <div
+          className="jumbotron"
+          style={{ background: "white", minHeight: "100vh"}}
+          
+        >
+          <div className="container px-5">
+            <div className="row">
+              <div className="float-left col-lg-9 mt-2 mb-2">
+                &nbsp;
+                <h2>
+                  Hot Jobs{" "}
+                  <span className="fs-4">, Find your dream job here</span>
+                </h2>
+              </div>
+              <div className="col-lg-3 mt-2 mb-2">
+                &nbsp;
+                <input
+                  className="form-control border border-dark"
+                  type="search"
+                  placeholder="Search"
+                  onChange={(e) => searchItems(e.target.value)}
+                ></input>
+              </div>
+              <hr />
+            </div>
           </div>
-          <div className="col-lg-3 mt-2 mb-2">
-            &nbsp;
-            <input
-              className="form-control border border-dark"
-              type="search"
-              placeholder="Search"
-              onChange={(e) => searchItems(e.target.value)}
-            ></input>
+          <div className="cardContainer mx-2 ">
+            <Row xs={1} md={4} className="g-4 mt-2 mx-2">
+              {searchInput.length > 1
+                ? filteredResults.map((item, index) => {
+                    return (
+                      <Col key="index">
+                        <Card className="col-md-10 my-3 mx-5 shadow">
+                          <Card.Img
+                            style={{ height: "45vh", width: "100%" }}
+                            src={require(`../../../images/vacancy/${item.image}`)}
+                            className="CardImg"
+                          />
+                          <Card.Body>
+                            <h4>{item.jobTitle} </h4>
+                            <h5>{item.company} </h5>
+                            <h6>No of Vacancy: {item.noOfVacancy}</h6>
+                            <h6>Closing Date: {item.closingDate}</h6>
+                            <div className="text-center ">
+                              <button className="btn btn-primary col-md-6 my-3">
+                                Apply
+                              </button>
+                            </div>
+                          </Card.Body>
+                        </Card>
+                      </Col>
+                    );
+                  })
+                : vacancy.map((item, index) => {
+                    return (
+                      <Col key={index}>
+                        <Card className="col-md-10 my-3 mx-5 shadow ">
+                          <Card.Img
+                            style={{ height: "45vh", width: "100%" }}
+                            src={require(`../../../images/vacancy/${item.image}`)}
+                            className=" p-2"
+                          />
+                          <Card.Body>
+                            <h4>{item.jobTitle} </h4>
+                            <h5>{item.company} </h5>
+                            <h6>No of Vacancy: {item.noOfVacancy}</h6>
+                            <h6>Closing Date: {item.closingDate}</h6>
+                            <div className="text-center ">
+                              <button
+                                className="btn btn-primary col-md-6 my-3"
+                                onClick={() =>
+                                  navigate(`/application/${item._id}`)
+                                }
+                              >
+                                Apply
+                              </button>
+                            </div>
+                          </Card.Body>
+                        </Card>
+                      </Col>
+                    );
+                  })}
+            </Row>
           </div>
-          <hr />
         </div>
-      </div>
-      <div className="cardContainer mx-2 ">
-        <Row xs={1} md={4} className="g-4 mt-2 mx-2">
-          {searchInput.length > 1
-            ? filteredResults.map((item, index) => {
-                return (
-                  <Col key="index">
-                    <Card className="col-md-10 my-3 mx-5 shadow">
-                      <Card.Img
-                        style={{ height: "45vh", width: "100%" }}
-                        src={require(`../../../images/vacancy/${item.image}`)}
-                        className="CardImg"
-                      />
-                      <Card.Body>
-                        <h4>{item.jobTitle} </h4>
-                        <h5>{item.company} </h5>
-                        <h6>No of Vacancy: {item.noOfVacancy}</h6>
-                        <h6>Closing Date: {item.closingDate}</h6>
-                        <div className="text-center ">
-                          <button className="btn btn-primary col-md-6 my-3">
-                            Apply
-                          </button>
-                        </div>
-                      </Card.Body>
-                    </Card>
-                  </Col>
-                );
-              })
-            : vacancy.map((item, index) => {
-                return (
-                  <Col key={index}>
-                    <Card className="col-md-10 my-3 mx-5 shadow ">
-                      <Card.Img
-                        style={{ height: "45vh", width: "100%" }}
-                        src={require(`../../../images/vacancy/${item.image}`)}
-                        className=" p-2"
-                      />
-                      <Card.Body>
-                        <h4>{item.jobTitle} </h4>
-                        <h5>{item.company} </h5>
-                        <h6>No of Vacancy: {item.noOfVacancy}</h6>
-                        <h6>Closing Date: {item.closingDate}</h6>
-                        <div className="text-center ">
-                          <button
-                            className="btn btn-primary col-md-6 my-3"
-                            onClick={() => navigate(`/application/${item._id}`)}
-                          >
-                            Apply
-                          </button>
-                        </div>
-                      </Card.Body>
-                    </Card>
-                  </Col>
-                );
-              })}
-        </Row>
       </div>
     </div>
   );

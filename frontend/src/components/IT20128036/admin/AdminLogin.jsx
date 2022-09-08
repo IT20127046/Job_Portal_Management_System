@@ -66,7 +66,7 @@ function AdminLogin() {
 
                     <form className="needs-validation" noValidate>
                         <div className="form-group" style={{ marginBottom: '15px' }}>
-                            <label style={{ marginBottom: '5px' }}>User name</label>
+                            <label style={{ marginBottom: '5px' }}>Username</label>
                             <input
                                 type="text"
                                 className="form-control"

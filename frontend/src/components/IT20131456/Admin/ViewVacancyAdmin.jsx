@@ -78,10 +78,10 @@ export default function ViewVacancy() {
                       return (
                         <tr>
                           <th>{index + 1}</th>
-                          <td>{item.company}</td>
-                          <td>{item.jobTitle}</td>
+                          <td style={{ width: "15%" }}>{item.company}</td>
+                          <td style={{ width: "15%" }}>{item.jobTitle}</td>
                           <td>{item.jobType}</td>
-                          <td>{item.noOfVacancy}</td>
+                          <td >{item.noOfVacancy}</td>
                           <td>{item.closingDate}</td>
                           <td
                             style={{ marginLeft: "20%", marginTop: "10%" }}
@@ -110,9 +110,9 @@ export default function ViewVacancy() {
                         <tr>
                           <th>{index + 1}</th>
                           <td style={{ width: "15%" }}>{item.company}</td>
-                          <td>{item.jobTitle}</td>
+                          <td style={{ width: "15%" }}>{item.jobTitle}</td>
                           <td>{item.jobType}</td>
-                          <td>{item.noOfVacancy}</td>
+                          <td >{item.noOfVacancy}</td>
                           <td>{item.closingDate}</td>
                           <td
                             style={{ marginLeft: "20%", marginTop: "10%" }}

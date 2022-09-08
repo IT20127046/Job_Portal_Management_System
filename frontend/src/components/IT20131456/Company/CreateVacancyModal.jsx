@@ -103,7 +103,7 @@ export default function CreateVacancy() {
                 <form onSubmit={onSubmit}>
                   <div className="col-md-12">
                     <div className="form-group">
-                      <strong>Job Title :</strong>
+                      <strong>Job Title <span className="required_label" /></strong>
                       <input
                         type="text"
                         className="form-control"
@@ -120,7 +120,7 @@ export default function CreateVacancy() {
                   &nbsp;
                   <div className="col-md-12">
                     <div className="form-group">
-                      <strong>Company Name :</strong>
+                      <strong>Company Name <span className="required_label" /></strong>
                       <input
                         type="text"
                         className="form-control"
@@ -135,7 +135,7 @@ export default function CreateVacancy() {
                   &nbsp;
                   <div className="col-md-12">
                     <div className="form-group">
-                      <strong>Work Place Type :</strong>
+                      <strong>Work Place Type <span className="required_label" /></strong>
                       <select
                         className="form-select"
                         name="workPlaceType"
@@ -152,7 +152,7 @@ export default function CreateVacancy() {
                   &nbsp;
                   <div className="col-md-12">
                     <div className="form-group">
-                      <strong>Location :</strong>
+                      <strong>Location (Optional)</strong>
                       <input
                         type="text"
                         className="form-control"
@@ -166,7 +166,7 @@ export default function CreateVacancy() {
                   &nbsp;
                   <div className="col-md-12">
                     <div className="form-group">
-                      <strong>No of Vacancy :</strong>
+                      <strong>No of Vacancy <span className="required_label" /></strong>
                       <input
                         type="number"
                         className="form-control"
@@ -182,7 +182,7 @@ export default function CreateVacancy() {
                   &nbsp;
                   <div className="col-md-12">
                     <div className="form-group ">
-                      <strong>Job Type :</strong>
+                      <strong>Job Type :<span className="required_label" /></strong>
                       <div className="mt-2 fs-6">
                         <input
                           type="radio"
@@ -214,7 +214,7 @@ export default function CreateVacancy() {
                   &nbsp;
                   <div className="col-md-12">
                     <div className="form-group">
-                      <strong>Job Description (Maximum word 1000) :</strong>
+                      <strong>Job Description (Maximum word 1000) <span className="required_label" /></strong>
                       <textarea
                         class="form-control"
                         name="description"
@@ -229,7 +229,7 @@ export default function CreateVacancy() {
                   &nbsp;
                   <div className="col-md-12">
                     <div className="form-group">
-                      <strong>Choose a photo :</strong>
+                      <strong>Choose a photo <span className="required_label" /></strong>
                       <input
                         type="file"
                         name="image"
@@ -245,7 +245,7 @@ export default function CreateVacancy() {
                   &nbsp;
                   <div className="col-md-12">
                     <div className="form-group">
-                      <strong>Application Closing Date :</strong>
+                      <strong>Application Closing Date <span className="required_label" /></strong>
                       <input
                         type="date"
                         className="form-control"

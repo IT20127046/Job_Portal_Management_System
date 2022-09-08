@@ -19,7 +19,7 @@ const vacancy = new mongoose.Schema({
   },
   location: {
     type: String,
-    required: true,
+    required: false,
   },
   noOfVacancy: {
     type: Number,
