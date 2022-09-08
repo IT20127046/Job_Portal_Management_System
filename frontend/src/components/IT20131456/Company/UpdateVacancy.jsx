@@ -163,7 +163,7 @@ export default function UpdateVacancy() {
               <div className="form-group">
                 <strong>No of Vacancy :</strong>
                 <input
-                  type="text"
+                  type="number"
                   className="form-control"
                   placeholder="Enter number"
                   name="noofvacancy"
