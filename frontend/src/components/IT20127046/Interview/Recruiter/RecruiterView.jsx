@@ -71,7 +71,7 @@ export default function RecruiterView() {
           <div className="row">
             <div className="float-left col-lg-9 mt-2 mb-2">
               &nbsp;
-              <h2>Scheduled Interviews</h2>
+              <h3><i className="fa fa-handshake-o"></i> Scheduled Interviews</h3>
             </div>
             <div className="col-lg-3 mt-2 mb-2">
               &nbsp;
@@ -108,8 +108,8 @@ export default function RecruiterView() {
                     <th scope="col">Mode</th>
                     <th scope="col">Status</th>
                     <th scope="col">View</th>
-                    <th scope="col">Update</th>
-                    <th scope="col">Delete</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Cancel</th>
                   </tr>
                 </thead>
                 <tbody>
