@@ -20,6 +20,9 @@ export default function ViewInterview() {
   const [interviewMode, setInterviewMode] = useState("");
   const [status, setStatus] = useState("");
 
+  const [mesgTitle, setMsgTitle] = useState("");
+  const [message, setMessage] = useState("");
+
   useEffect(() => {
     retriveInterview();
   }, []);
@@ -39,6 +42,23 @@ export default function ViewInterview() {
       }
     });
   };
+
+  const handelMsgSend = (e) => {
+    e.preventDefault();
+
+    const data = {
+      notice:{
+        mesgTitle: mesgTitle,
+        message: message
+      }
+    }
+
+    axios.put(`http://localhost:5000/interview/update/${id}`, data).then((res) => {
+        if (res.data.success) {
+          swal("Success!", "Message Sent to Job Seeker", "success");
+        }
+      });
+  }
 
   return (
     <div>
@@ -72,7 +92,7 @@ export default function ViewInterview() {
                 </div>
                 <div className="col-9">
                   <div className="container">
-                    <hr/>
+                    <hr />
                     <div>
                       <div className="row">
                         <div className="col">
@@ -127,9 +147,48 @@ export default function ViewInterview() {
                         Yes
                       </p>
                     </div>
-                    <hr/>
+                    <hr />
                     <div>
                       <strong>Send Notice</strong>
+
+                      <div className="container bg-light shadow p-3 mb-5  rounded mt-3">
+                        <form>
+                          <div className="row">
+                            <div className="col-md-6">
+                              <div className="form-group">
+                                <strong>Title</strong>
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  name="msgTitle"
+                                  value={mesgTitle}
+                                  onChange={(e) => setMsgTitle(e.target.value)}
+                                />
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="form-group">
+                            <strong>Message</strong>
+                            <textarea
+                              type="text"
+                              rows="4"
+                              className="form-control"
+                              name="message"
+                              value={message}
+                              onChange={(e) => setMessage(e.target.value)}
+                            />
+                          </div>
+
+                          <button
+                            className="btn btn-outline-success mt-2"
+                            onClick={handelMsgSend}
+                            type="submit"
+                          >
+                            Send
+                          </button>
+                        </form>
+                      </div>
                     </div>
                   </div>
                 </div>
