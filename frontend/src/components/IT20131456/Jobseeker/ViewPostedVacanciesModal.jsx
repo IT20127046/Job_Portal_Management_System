@@ -59,6 +59,10 @@ export default function ViewPostedVacanciesModal(props) {
                   <span className="fs-5 font-normal"> {props.description}</span>
                 </div>
                 <div className="my-2">
+                  <span className="fs-5 fw-bold">Work Place Type : </span>
+                  <span className="fs-5 font-normal"> {props.workPlaceType}</span>
+                </div>
+                <div className="my-2">
                   <span className="fs-5 fw-bold">Location : </span>
                   <span className="fs-5 font-normal"> {props.location}</span>
                 </div>

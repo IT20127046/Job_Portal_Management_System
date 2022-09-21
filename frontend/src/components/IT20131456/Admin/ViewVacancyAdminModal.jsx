@@ -80,10 +80,7 @@ export default function ViewPostedVacanciesModal(props) {
                   <div className="col-md-6">
                     <div className="my-2">
                       <span className="fs-5 fw-bold">Position : </span>
-                      <span className="fs-5 font-normal">
-                        {" "}
-                        {props.jobTitle}
-                      </span>
+                      <span className="fs-5 font-normal">{props.jobTitle}</span>
                     </div>
                     <div className="my-2">
                       <span className="fs-5 fw-bold">Company : </span>
@@ -92,7 +89,6 @@ export default function ViewPostedVacanciesModal(props) {
                     <div className="my-2">
                       <span className="fs-5 fw-bold">No of Vacancy : </span>
                       <span className="fs-5 font-normal">
-                        {" "}
                         {props.noOfVacancy}
                       </span>
                     </div>
@@ -103,23 +99,24 @@ export default function ViewPostedVacanciesModal(props) {
                     <div className="my-2">
                       <span className="fs-5 fw-bold">Description : </span>
                       <span className="fs-5 font-normal">
-                        {" "}
                         {props.description}
                       </span>
                     </div>
                     <div className="my-2">
-                      <span className="fs-5 fw-bold">Location : </span>
+                      <span className="fs-5 fw-bold">Work Place Type : </span>
                       <span className="fs-5 font-normal">
-                        {" "}
-                        {props.location}
+                        {props.workPlaceType}
                       </span>
+                    </div>
+                    <div className="my-2">
+                      <span className="fs-5 fw-bold">Location : </span>
+                      <span className="fs-5 font-normal">{props.location}</span>
                     </div>
                     <div className="my-2 mb-5">
                       <span className="fs-5 fw-bold">
                         Application Closing Date :
                       </span>
                       <span className="fs-5 font-normal">
-                        {" "}
                         {props.closingDate}
                       </span>
                     </div>

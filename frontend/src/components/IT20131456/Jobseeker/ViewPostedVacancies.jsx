@@ -26,8 +26,15 @@ export default function ViewVacancy() {
   useEffect(() => {
     axios.get(`http://localhost:5000/vacancy/getAll`).then((response) => {
       setVacancy(response.data.exsitingVacancy);
+
+      // for (var i = 0; i <= response.data.exsitingVacancy.length; i++) {
+      //   if (response.data.exsitingVacancy[i].adminStatus === "Approve") {
+
+      //   }
+
+      // }
     });
-  }, []);
+  }, [0]);
   //search record
 
   const searchItems = (searchValue) => {
@@ -46,7 +53,7 @@ export default function ViewVacancy() {
   };
 
   const onDisplay = (
-    jobId=id,
+    jobId = id,
     jobTitle,
     company,
     workPlaceType,
@@ -57,7 +64,7 @@ export default function ViewVacancy() {
     image,
     closingDate
   ) => {
-    setJobId(jobId);   
+    setJobId(jobId);
     setJobTitle(jobTitle);
     setCompany(company);
     setWorkPlaceType(workPlaceType);
@@ -67,7 +74,7 @@ export default function ViewVacancy() {
     setDescription(description);
     setImage(image);
     setClosingDate(closingDate);
-  }; 
+  };
 
   var imageBasePath =
     window.location.protocol + "//" + window.location.host + "/images/vacancy/";
@@ -131,95 +138,94 @@ export default function ViewVacancy() {
             <Row xs={1} md={4} className="g-4 mt-2 mx-2">
               {searchInput.length > 1
                 ? filteredResults.map((item, index) => {
-                    return (
-                      <Col key="index">
-                        <Card className="col-md-10 my-3 mx-5 shadow">
-                          <Card.Img
-                            style={{ height: "45vh", width: "100%" }}
-                            src={imageBasePath + item.image}
-                            className="CardImg"
-                          />
-                          <Card.Body>
-                            <h4>{item.jobTitle} </h4>
-                            <h5>{item.company} </h5>
-                            <h6>No of Vacancy: {item.noOfVacancy}</h6>
-                            <h6>Closing Date: {item.closingDate}</h6>
-                            <div className="text-center ">
-                              <button
-                                className="btn btn-primary col-md-6 my-3"
-                                type="button"
-                                data-bs-toggle="modal"
-                                data-bs-target="#exampleModal"
-                                onClick={() =>
-                                  onDisplay(
-                                    item._id,
-                                    item.jobTitle,
-                                    item.company,
-                                    item.workPlaceType,
-                                    item.location,
-                                    item.noOfVacancy,
-                                    item.jobType,
-                                    item.description,
-                                    item.image,
-                                    item.closingDate
-                                  )
-                                }
-                              >
-                                More info
-                              </button>
-                            </div>
-                          </Card.Body>
-                        </Card>
-                      </Col>
-                    );
+                    if (item.adminStatus === "Approve")
+                      return (
+                        <Col key="index">
+                          <Card className="col-md-10 my-3 mx-5 shadow">
+                            <Card.Img
+                              style={{ height: "45vh", width: "100%" }}
+                              src={imageBasePath + item.image}
+                              className="CardImg"
+                            />
+                            <Card.Body>
+                              <h4>{item.jobTitle}</h4>
+                              <h5>({item.company}) </h5>
+                              <div className="text-center ">
+                                <button
+                                  className="btn btn-primary col-md-6 my-3"
+                                  type="button"
+                                  data-bs-toggle="modal"
+                                  data-bs-target="#exampleModal"
+                                  onClick={() =>
+                                    onDisplay(
+                                      item._id,
+                                      item.jobTitle,
+                                      item.company,
+                                      item.workPlaceType,
+                                      item.location,
+                                      item.noOfVacancy,
+                                      item.jobType,
+                                      item.description,
+                                      item.image,
+                                      item.closingDate
+                                    )
+                                  }
+                                >
+                                  More info
+                                </button>
+                              </div>
+                            </Card.Body>
+                          </Card>
+                        </Col>
+                      );
                   })
                 : vacancy.map((item, index) => {
-                    return (
-                      <Col key={index}>
-                        <Card className="col-md-10 my-3 mx-5 shadow ">
-                          <Card.Img
-                            style={{ height: "45vh", width: "100%" }}
-                            src={imageBasePath + item.image}
-                            className=" p-2"
-                          />
-                          <Card.Body>
-                            <h4>{item.jobTitle}</h4>
-                            <h5>{item.company} </h5>
-                            <h6>No of Vacancy: {item.noOfVacancy}</h6>
-                            <h6>Closing Date: {item.closingDate}</h6>
-                            <div className="text-center ">
-                              <button
-                                className="btn btn-primary col-md-6 my-3"
-                                type="button"
-                                data-bs-toggle="modal"
-                                data-bs-target="#exampleModal"
-                                onClick={() =>
-                                  onDisplay(
-                                    item._id,
-                                    item.jobTitle,
-                                    item.company,
-                                    item.workPlaceType,
-                                    item.location,
-                                    item.noOfVacancy,
-                                    item.jobType,
-                                    item.description,
-                                    item.image,
-                                    item.closingDate
-                                  )
-                                }
-                              >
-                                More info
-                              </button>
-                            </div>
-                          </Card.Body>
-                        </Card>
-                      </Col>
-                    );
+                    if (item.adminStatus === "Approve")
+                      return (
+                        <Col key={index}>
+                          <Card className="col-md-10 my-3 mx-5 shadow ">
+                            <Card.Img
+                              style={{ height: "45vh", width: "100%" }}
+                              src={imageBasePath + item.image}
+                              className=" p-2"
+                            />
+                            <Card.Body>
+                              <h4>{item.jobTitle}</h4>
+                              <h5>({item.company}) </h5>
+
+                              <div className="text-center ">
+                                <button
+                                  className="btn btn-primary col-md-6 my-3"
+                                  type="button"
+                                  data-bs-toggle="modal"
+                                  data-bs-target="#exampleModal"
+                                  onClick={() =>
+                                    onDisplay(
+                                      item._id,
+                                      item.jobTitle,
+                                      item.company,
+                                      item.workPlaceType,
+                                      item.location,
+                                      item.noOfVacancy,
+                                      item.jobType,
+                                      item.description,
+                                      item.image,
+                                      item.closingDate
+                                    )
+                                  }
+                                >
+                                  More info
+                                </button>
+                              </div>
+                            </Card.Body>
+                          </Card>
+                        </Col>
+                      );
                   })}
             </Row>
           </div>
         </div>
-      </div>      
+      </div>
     </div>
   );
 }
