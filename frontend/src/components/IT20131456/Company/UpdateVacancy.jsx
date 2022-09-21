@@ -18,6 +18,7 @@ export default function UpdateVacancy() {
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
   const [closingDate, setClosingDate] = useState("");
+  const [adminStatus, setAdminStatus] = useState("Modified");
   const [companyId, setCompanyId] = useState(""); //added - kalani
 
   useEffect(() => {
@@ -51,6 +52,7 @@ export default function UpdateVacancy() {
       description: description,
       image: image,
       closingDate: closingDate,
+      adminStatus:adminStatus,
       companyId: companyId, //added - kalani
     };
 

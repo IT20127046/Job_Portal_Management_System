@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
@@ -9,7 +8,6 @@ import NavBar from "../../IT20128036/NavBar";
 import ViewPostedVacanciesModal from "./ViewPostedVacanciesModal";
 
 export default function ViewVacancy() {
-  const navigate = useNavigate();
   const [vacancy, setVacancy] = useState([]);
   const { id } = useParams();
   const [jobId, setJobId] = useState("");
@@ -149,9 +147,6 @@ export default function ViewVacancy() {
                             <div className="text-center ">
                               <button
                                 className="btn btn-primary col-md-6 my-3"
-                                // onClick={() =>
-                                //   navigate(`/application/${item._id}`)
-                                // }
                                 type="button"
                                 data-bs-toggle="modal"
                                 data-bs-target="#exampleModal"
@@ -195,9 +190,6 @@ export default function ViewVacancy() {
                             <div className="text-center ">
                               <button
                                 className="btn btn-primary col-md-6 my-3"
-                                // onClick={() =>
-                                //   navigate(`/application/${item._id}`)
-                                // }
                                 type="button"
                                 data-bs-toggle="modal"
                                 data-bs-target="#exampleModal"
