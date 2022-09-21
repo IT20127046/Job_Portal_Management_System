@@ -1,16 +1,27 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import NavBar from "../../IT20128036/NavBar";
-import image from "../../../images/back1.jpg";
+import ViewPostedVacanciesModal from "./ViewPostedVacanciesModal";
 
 export default function ViewVacancy() {
   const navigate = useNavigate();
-
   const [vacancy, setVacancy] = useState([]);
+  const { id } = useParams();
+  const [jobId, setJobId] = useState("");
+  const [jobTitle, setJobTitle] = useState("");
+  const [company, setCompany] = useState("");
+  const [workPlaceType, setWorkPlaceType] = useState("");
+  const [location, setLocation] = useState("");
+  const [noOfVacancy, setNoOfVacancy] = useState("");
+  const [jobType, setJobType] = useState("");
+  const [description, setDescription] = useState("");
+  const [image, setImage] = useState();
+  const [closingDate, setClosingDate] = useState("");
   const [filteredResults, setFilteredResults] = useState([]);
   const [searchInput, setSearchInput] = useState("");
 
@@ -19,7 +30,6 @@ export default function ViewVacancy() {
       setVacancy(response.data.exsitingVacancy);
     });
   }, []);
-
   //search record
 
   const searchItems = (searchValue) => {
@@ -37,9 +47,48 @@ export default function ViewVacancy() {
     }
   };
 
+  const onDisplay = (
+    jobId=id,
+    jobTitle,
+    company,
+    workPlaceType,
+    location,
+    noOfVacancy,
+    jobType,
+    description,
+    image,
+    closingDate
+  ) => {
+    setJobId(jobId);   
+    setJobTitle(jobTitle);
+    setCompany(company);
+    setWorkPlaceType(workPlaceType);
+    setLocation(location);
+    setNoOfVacancy(noOfVacancy);
+    setJobType(jobType);
+    setDescription(description);
+    setImage(image);
+    setClosingDate(closingDate);
+  }; 
+
+  var imageBasePath =
+    window.location.protocol + "//" + window.location.host + "/images/vacancy/";
+
   return (
     <div>
       <NavBar />
+      <ViewPostedVacanciesModal
+        jobId={jobId}
+        jobTitle={jobTitle}
+        company={company}
+        workPlaceType={workPlaceType}
+        location={location}
+        noOfVacancy={noOfVacancy}
+        jobType={jobType}
+        description={description}
+        image={image}
+        closingDate={closingDate}
+      />
       <div
         className="jumbotron"
         style={{
@@ -47,18 +96,17 @@ export default function ViewVacancy() {
           paddingRight: "50px",
           paddingBottom: "50px",
           paddingTop: "10px",
-          backgroundImage: `url(${image})`,          
+          backgroundImage: `url(${image})`,
           backgroundSize: "cover",
           margin: "0px 0px 0px 0px",
           overflowY: "scroll",
           height: "100vh",
-          borderTop: "5px solid black",       
+          borderTop: "5px solid black",
         }}
       >
         <div
           className="jumbotron"
-          style={{ background: "white", minHeight: "100vh"}}
-          
+          style={{ background: "white", minHeight: "100vh" }}
         >
           <div className="container px-5">
             <div className="row">
@@ -90,7 +138,7 @@ export default function ViewVacancy() {
                         <Card className="col-md-10 my-3 mx-5 shadow">
                           <Card.Img
                             style={{ height: "45vh", width: "100%" }}
-                            src={require(`../../../images/vacancy/${item.image}`)}
+                            src={imageBasePath + item.image}
                             className="CardImg"
                           />
                           <Card.Body>
@@ -99,8 +147,30 @@ export default function ViewVacancy() {
                             <h6>No of Vacancy: {item.noOfVacancy}</h6>
                             <h6>Closing Date: {item.closingDate}</h6>
                             <div className="text-center ">
-                              <button className="btn btn-primary col-md-6 my-3">
-                                Apply
+                              <button
+                                className="btn btn-primary col-md-6 my-3"
+                                // onClick={() =>
+                                //   navigate(`/application/${item._id}`)
+                                // }
+                                type="button"
+                                data-bs-toggle="modal"
+                                data-bs-target="#exampleModal"
+                                onClick={() =>
+                                  onDisplay(
+                                    item._id,
+                                    item.jobTitle,
+                                    item.company,
+                                    item.workPlaceType,
+                                    item.location,
+                                    item.noOfVacancy,
+                                    item.jobType,
+                                    item.description,
+                                    item.image,
+                                    item.closingDate
+                                  )
+                                }
+                              >
+                                More info
                               </button>
                             </div>
                           </Card.Body>
@@ -114,22 +184,39 @@ export default function ViewVacancy() {
                         <Card className="col-md-10 my-3 mx-5 shadow ">
                           <Card.Img
                             style={{ height: "45vh", width: "100%" }}
-                            src={require(`../../../images/vacancy/${item.image}`)}
+                            src={imageBasePath + item.image}
                             className=" p-2"
                           />
                           <Card.Body>
-                            <h4>{item.jobTitle} </h4>
+                            <h4>{item.jobTitle}</h4>
                             <h5>{item.company} </h5>
                             <h6>No of Vacancy: {item.noOfVacancy}</h6>
                             <h6>Closing Date: {item.closingDate}</h6>
                             <div className="text-center ">
                               <button
                                 className="btn btn-primary col-md-6 my-3"
+                                // onClick={() =>
+                                //   navigate(`/application/${item._id}`)
+                                // }
+                                type="button"
+                                data-bs-toggle="modal"
+                                data-bs-target="#exampleModal"
                                 onClick={() =>
-                                  navigate(`/application/${item._id}`)
+                                  onDisplay(
+                                    item._id,
+                                    item.jobTitle,
+                                    item.company,
+                                    item.workPlaceType,
+                                    item.location,
+                                    item.noOfVacancy,
+                                    item.jobType,
+                                    item.description,
+                                    item.image,
+                                    item.closingDate
+                                  )
                                 }
                               >
-                                Apply
+                                More info
                               </button>
                             </div>
                           </Card.Body>
@@ -140,7 +227,7 @@ export default function ViewVacancy() {
             </Row>
           </div>
         </div>
-      </div>
+      </div>      
     </div>
   );
 }

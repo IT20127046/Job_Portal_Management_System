@@ -100,7 +100,7 @@ export default function ViewVacancy() {
               <CreateVacancy />
             </div>
             &nbsp;
-            <table className="table table-striped table-bordered ">
+            <table className="table table-striped shadow table-bordered ">
               <thead>
                 <tr>
                   <th scope="col">#</th>
