@@ -4,19 +4,19 @@ const userSchema = new mongoose.Schema({
 
     uid: {
         type: String,
-        required: true,
+       required: true,
     },
     name: {
         type: String,
-        required: true
+       required: true
     },
     email: {
         type: String,
-        required: true
+       required: true
     },
     mobile: {
         type: String,
-        required: true
+       required: true
     },
     field: {
         type: String
@@ -27,16 +27,38 @@ const userSchema = new mongoose.Schema({
 
     type: {
         type: String,
-        required: true
+       required: true
     },
     password: {
         type: String,
         required: true
     },
+    file: {
+        type: String
+    },
+    website: {
+        type: String
+    },
+    csize: {
+        type: String
+    },
+    founded: {
+        type: String
+    },
+    dob: {
+        type: String
+    },
+    sex: {
+        type: String
+    },
+    about: {
+        type: String
+    },
     dateRegistered: {
         type: Date,
         default: Date.now
     }
+   
 });
 
 module.exports = mongoose.model('users', userSchema);

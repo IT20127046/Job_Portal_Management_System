@@ -30,8 +30,11 @@ import ViewPostedVacancies from "./components/IT20131456/Jobseeker/ViewPostedVac
 import EditInterview from "./components/IT20127046/Interview/Recruiter/EditInterview";
 import ViewInterview from "./components/IT20127046/Interview/Recruiter/ViewInterview";
 
+import UpdateProfile from "./components/IT20128036/userProfile";
+import ViewUserProfile from "./components/IT20128036/ViewUserProfile";
 
-// import Demo from "./components/IT20128036/userManagement/barChartSample";
+
+
 
 
 function App() {
@@ -78,6 +81,9 @@ function App() {
         <Route path="/view/vacancy" element={<ViewVacancy />} />
         <Route path="/update/vacancy/:id" element={<UpdateVacancy />} />
         <Route path="/view/vacancy/jobseeker" element={<ViewPostedVacancies/>} />
+
+        <Route path="/userprofile" element={<UpdateProfile/>} />
+        <Route path="/userprofile/view" element={<ViewUserProfile/>} />
       </Routes>
     </BrowserRouter>
   );

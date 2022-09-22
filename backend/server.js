@@ -20,6 +20,9 @@ app.use(applicationRoutes);
 const interviewRoutes = require("./routes/interviewRoutes");
 app.use(interviewRoutes);
 
+const assessmentRoutes = require("./routes/assessmentRoutes");
+app.use(assessmentRoutes);
+
 const userRoutes = require("./routes/userRoutes");
 app.use(userRoutes);
 
