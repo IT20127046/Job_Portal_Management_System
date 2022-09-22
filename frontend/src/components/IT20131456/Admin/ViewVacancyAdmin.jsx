@@ -1,10 +1,23 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 import AdminNavBar from "../../IT20128036/admin/AdminNavBar";
 import RightSidePanel from "../../IT20128036/admin/slideBar";
+import ViewVacancyAdminModal from "../Admin/ViewVacancyAdminModal";
 
 export default function ViewVacancy() {
   const [vacancy, setVacancy] = useState([]);
+  const { id } = useParams();
+  const [jobId, setJobId] = useState("");
+  const [jobTitle, setJobTitle] = useState("");
+  const [company, setCompany] = useState("");
+  const [workPlaceType, setWorkPlaceType] = useState("");
+  const [location, setLocation] = useState("");
+  const [noOfVacancy, setNoOfVacancy] = useState("");
+  const [jobType, setJobType] = useState("");
+  const [description, setDescription] = useState("");
+  const [image, setImage] = useState();
+  const [closingDate, setClosingDate] = useState("");
   const [filteredResults, setFilteredResults] = useState([]);
   const [searchInput, setSearchInput] = useState("");
 
@@ -31,10 +44,49 @@ export default function ViewVacancy() {
     }
   };
 
+  const onDisplay = (
+    jobId = id,
+    jobTitle,
+    company,
+    workPlaceType,
+    location,
+    noOfVacancy,
+    jobType,
+    description,
+    image,
+    closingDate
+  ) => {
+    setJobId(jobId);
+    setJobTitle(jobTitle);
+    setCompany(company);
+    setWorkPlaceType(workPlaceType);
+    setLocation(location);
+    setNoOfVacancy(noOfVacancy);
+    setJobType(jobType);
+    setDescription(description);
+    setImage(image);
+    setClosingDate(closingDate);
+  };
+
+  var imageBasePath =
+    window.location.protocol + "//" + window.location.host + "/images/vacancy/";
+
   return (
     <div className="container">
       <br />
       <AdminNavBar />
+      <ViewVacancyAdminModal
+        jobId={jobId}
+        jobTitle={jobTitle}
+        company={company}
+        workPlaceType={workPlaceType}
+        location={location}
+        noOfVacancy={noOfVacancy}
+        jobType={jobType}
+        description={description}
+        image={image}
+        closingDate={closingDate}
+      />
       <br />
 
       <div className="container">
@@ -81,7 +133,7 @@ export default function ViewVacancy() {
                           <td style={{ width: "15%" }}>{item.company}</td>
                           <td style={{ width: "15%" }}>{item.jobTitle}</td>
                           <td>{item.jobType}</td>
-                          <td >{item.noOfVacancy}</td>
+                          <td>{item.noOfVacancy}</td>
                           <td>{item.closingDate}</td>
                           <td
                             style={{ marginLeft: "20%", marginTop: "10%" }}
@@ -92,15 +144,36 @@ export default function ViewVacancy() {
                                 ? "badge bg-success text-white"
                                 : item.adminStatus == "Decline"
                                 ? "badge bg-danger text-white"
+                                : item.adminStatus == "Modified"
+                                ? "badge bg-secondary text-white"
                                 : ""
                             }
                           >
                             {item.adminStatus}
                           </td>
                           <td className="text-center">
-                            <a className="btn btn-outline-primary" href={""}>
+                            <button
+                              className="btn btn-outline-primary"
+                              type="button"
+                              data-bs-toggle="modal"
+                              data-bs-target="#exampleModal"
+                              onClick={() =>
+                                onDisplay(
+                                  item._id,
+                                  item.jobTitle,
+                                  item.company,
+                                  item.workPlaceType,
+                                  item.location,
+                                  item.noOfVacancy,
+                                  item.jobType,
+                                  item.description,
+                                  item.image,
+                                  item.closingDate
+                                )
+                              }
+                            >
                               <i className="fa fa-eye"></i>&nbsp;View
-                            </a>
+                            </button>
                           </td>
                         </tr>
                       );
@@ -112,7 +185,7 @@ export default function ViewVacancy() {
                           <td style={{ width: "15%" }}>{item.company}</td>
                           <td style={{ width: "15%" }}>{item.jobTitle}</td>
                           <td>{item.jobType}</td>
-                          <td >{item.noOfVacancy}</td>
+                          <td className="text-center">{item.noOfVacancy}</td>
                           <td>{item.closingDate}</td>
                           <td
                             style={{ marginLeft: "20%", marginTop: "10%" }}
@@ -123,15 +196,36 @@ export default function ViewVacancy() {
                                 ? "badge bg-success text-white"
                                 : item.adminStatus == "Decline"
                                 ? "badge bg-danger text-white"
+                                : item.adminStatus == "Modified"
+                                ? "badge bg-secondary text-white"
                                 : ""
                             }
                           >
                             {item.adminStatus}
                           </td>
                           <td className="text-center">
-                            <a className="btn btn-outline-primary" href={""}>
+                            <button
+                              className="btn btn-outline-primary"
+                              type="button"
+                              data-bs-toggle="modal"
+                              data-bs-target="#exampleModal"
+                              onClick={() =>
+                                onDisplay(
+                                  item._id,
+                                  item.jobTitle,
+                                  item.company,
+                                  item.workPlaceType,
+                                  item.location,
+                                  item.noOfVacancy,
+                                  item.jobType,
+                                  item.description,
+                                  item.image,
+                                  item.closingDate
+                                )
+                              }
+                            >
                               <i className="fa fa-eye"></i>&nbsp;View
-                            </a>
+                            </button>
                           </td>
                         </tr>
                       );

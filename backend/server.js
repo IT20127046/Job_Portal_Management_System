@@ -20,6 +20,9 @@ app.use(applicationRoutes);
 const interviewRoutes = require("./routes/interviewRoutes");
 app.use(interviewRoutes);
 
+const assessmentRoutes = require("./routes/assessmentRoutes");
+app.use(assessmentRoutes);
+
 const userRoutes = require("./routes/userRoutes");
 app.use(userRoutes);
 
@@ -31,6 +34,9 @@ app.use(InquiriesRoutes);
 
 const vacancyRoutes = require("../backend/routes/vacancy_management/vacancyRoutes");
 app.use(vacancyRoutes);
+
+const resumeRoutes = require("./routes/resumeRoutes");
+app.use(resumeRoutes);
 
 const port = process.env.PORT || 5000;
 const uri = process.env.MONGO_URI;
