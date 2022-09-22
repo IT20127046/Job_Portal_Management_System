@@ -25,6 +25,8 @@ export default function ScheduleInterview() {
     setRecruiterId(decoded._id);
     setApplicantId("6319a632722ce57a043ffe86");
     setApplicantName("Oliver");
+    setJobTitle("Software Engineer");
+    setDescription("Dear Candidate, Software engineering is a systematic engineering approach to software development. A software engineer is a person who applies the principles of software engineering to design, develop, maintain, test, and evaluate computer software. Software engineering is a systematic engineering approach to software development. A software engineer is a person who applies the principles of software engineering to design, develop, maintain, test, and evaluate computer software. Meeting Link - https://zoom.us/24842 Thank You!")
 
   }, []);
 
@@ -73,7 +75,7 @@ export default function ScheduleInterview() {
 
           <div>
             <div className="container bg-light shadow p-3 mb-5  rounded mt-3 col-lg-10 ">
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div className="row mt-3">
                   <div className="col-md-6">
                     <div className="form-group">
@@ -188,7 +190,7 @@ export default function ScheduleInterview() {
                     &nbsp;
                     <button
                       className="btn btn-success col-md-2"
-                      onClick={handleSubmit}
+                      
                       type="submit"
                     >
                       Save
