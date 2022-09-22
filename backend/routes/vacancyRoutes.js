@@ -1,12 +1,12 @@
 const express = require("express");
 const VacancyRouter = express.Router();
 const multer = require("multer");
-const VacancyController = require("../../controllers/vacancy_management/vacancyControllers");
+const VacancyController = require("../controllers/vacancyControllers");
 
 //Save image uisng multer
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {
-    callback(null, "./uploads");
+    callback(null, "../frontend/public/images");
   },
   filename: (req, file, callback) => {
     callback(null, file.originalname);

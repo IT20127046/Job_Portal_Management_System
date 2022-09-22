@@ -68,8 +68,6 @@ export default function ViewVacancy() {
     setClosingDate(closingDate);
   };
 
-  var imageBasePath =
-    window.location.protocol + "//" + window.location.host + "/images/vacancy/";
 
   return (
     <div className="container">

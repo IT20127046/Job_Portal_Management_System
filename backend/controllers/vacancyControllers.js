@@ -1,5 +1,4 @@
-const VacancyModel = require("../../models/vacancy_management/vacancyModal");
-
+const VacancyModel = require("../models/vacancyModal")
 // Save Vacancy Details
 const save_vacancy = async (req, res)=>{
   const newVacancy = new VacancyModel({
