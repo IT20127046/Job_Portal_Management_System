@@ -100,7 +100,7 @@ export default function ViewVacancy() {
               <CreateVacancy />
             </div>
             &nbsp;
-            <table className="table table-striped table-bordered ">
+            <table className="table table-striped shadow table-bordered ">
               <thead>
                 <tr>
                   <th scope="col">#</th>
@@ -140,6 +140,8 @@ export default function ViewVacancy() {
                                 ? "badge bg-success text-white"
                                 : item.adminStatus == "Decline"
                                 ? "badge bg-danger text-white"
+                                : item.adminStatus == "Modified"
+                                ? "badge bg-secondary text-white"
                                 : ""
                             }
                           >
@@ -182,6 +184,8 @@ export default function ViewVacancy() {
                                 ? "badge bg-success text-white"
                                 : item.adminStatus == "Decline"
                                 ? "badge bg-danger text-white"
+                                : item.adminStatus == "Modified"
+                                ? "badge bg-secondary text-white"
                                 : ""
                             }
                           >
