@@ -37,9 +37,8 @@ const Form = () => {
         setapplicantId(decoded._id);
 
         axios.get(`http://localhost:5000/vacancy/get/${id}`)
-            .then(response => {
-
-                if (response.data.success) {
+            .then(response => {                
+                if (response.data.success) {                  
                     let data = response.data.exsitingVacancy;
                     setVacancyNo(data.jobId);
                     setJobTitle(data.jobTitle);
