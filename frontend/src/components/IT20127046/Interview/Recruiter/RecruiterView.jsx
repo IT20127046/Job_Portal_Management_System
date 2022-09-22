@@ -113,7 +113,7 @@ export default function RecruiterView() {
                   </tr>
                 </thead>
                 <tbody>
-                  {interviews.map((interview, index) => (
+                  {interviews.slice(0).reverse().map((interview, index) => (
                     <tr key={index}>
                       <th scope="row">{index + 1}</th>
                       <td>{interview.applicantName}</td>
@@ -121,12 +121,21 @@ export default function RecruiterView() {
                       <td>{interview.interviewDate}</td>
                       <td>{interview.interviewTime}</td>
                       <td>{interview.interviewMode}</td>
-                      <td
+                      
+                      {interview.status == "Not Completed" ? <p
                         style={{ margin: "10px" }}
                         className="badge bg-warning text-dark"
                       >
                         {interview.status}
-                      </td>
+                      </p>
+                      : <p
+                      style={{ margin: "10px" }}
+                      className="badge bg-success text-dark"
+                    >
+                      {interview.status}
+                    </p>
+                    }
+                      
                       <td className="text-center">
                         <a
                           className="btn btn-success "
