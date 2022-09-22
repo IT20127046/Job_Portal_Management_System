@@ -1,18 +1,36 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const Users = require('../models/userModel');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const { type } = require('express/lib/response');
-const { v4: uuidv4 } = require('uuid');
+const express = require("express");
+const mongoose = require("mongoose");
+const Users = require("../models/userModel");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const { type } = require("express/lib/response");
+const { v4: uuidv4 } = require("uuid");
 
+const updateProfile = async (req, res) => {
+  Users.findById(req.params.id)
+    .then((user) => {
+      user.file = req.file.originalname;
+      user.website = req.body.website;
+      user.csize = req.body.csize;
+      user.founded = req.body.founded;
+      user.dob = req.body.dob;
+      user.sex = req.body.sex;
+      user.about = req.body.about;
+
+      user
+        .save()
+        .then(() => res.json("User Updated"))
+        .catch((err) => res.status(400).json(`Error: ${err}`));
+    })
+    .catch((err) => res.status(400).json(`Error: ${err}`));
+};
 
 // const router = express.Router();
 
 process.env.SECRET_KEY = "secret2022";
 
 //user registration with password encryption - user
-const userRegistration = (req, res)=>{
+const userRegistration = (req, res) => {
   const current = new Date();
   let userData = {
     uid: uuidv4(),
@@ -22,75 +40,74 @@ const userRegistration = (req, res)=>{
     field: req.body.field,
     address: req.body.address,
     type: req.body.type,
+    file: "empty.png",
+    about:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industrys standard dummy text ever since the 1500s when an unknown printer took a galley of type and scrambled it to make a type specimen book It has survived not only five centuries but also the leap into electronic typesetting remaining essentially unchanged It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem IpsumIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout The point of using Lorem Ipsum is that it has a moreorless normal distribution of letters as opposed to using Content here content here making it look like readable English Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text and a search for lorem ipsum will uncover many web sites still in their infancy",
+    website: "update your website",
+    dob: "update your date of birth",
+    sex: "update your sex",
+    csize: "update your company size",
+    founded: "update founded details",
     password: req.body.password,
-    dateRegistered: current
-  }
+    dateRegistered: current,
+  };
 
   Users.findOne({
-    name: req.body.name
+    name: req.body.name,
   })
-    .then(user => {
+    .then((user) => {
       if (!user) {
         bcrypt.hash(req.body.password, 10, (err, hash) => {
-          userData.password = hash
+          userData.password = hash;
           // console.log("bcrypt")
           Users.create(userData)
-            .then(respond => {
-            //   console.log(res)
+            .then((respond) => {
+              //   console.log(res)
 
-              res.status(200).json({
-                success: "Registered successfully"
-              }).end()
-
-          
-           
-
+              res
+                .status(200)
+                .json({
+                  success: "Registered successfully",
+                })
+                .end();
             })
-            .catch(err => {
+            .catch((err) => {
               // console.log("catch")
               // res.status(400).send("error" + err).end();
               res.status(400).json({
-                errorMessage: 'Something went wrong!',
-                status: false
+                errorMessage: "Something went wrong!",
+                status: false,
               });
               console.log("error: " + err);
             });
-        })
-
-      }
-      else {
+        });
+      } else {
         // res.status(400).json({
         //     error: "Your ID number is already registered"
         // }).end()
         return res.status(401).json({
-          errorMessage: "Your user name is already registered. Use another user name",
-          status: false
+          errorMessage:
+            "Your user name is already registered. Use another user name",
+          status: false,
         });
       }
     })
-    .catch(err => {
+    .catch((err) => {
       // res.send("error" + err)
       res.status(400).json({
-        errorMessage: 'Something went wrong!',
-        status: false
+        errorMessage: "Something went wrong!",
+        status: false,
       });
-      console.log("error: " + err)
-    })
-}
-
-
-
-
-
-
-
+      console.log("error: " + err);
+    });
+};
 
 //user login with jsonwebtoken - user
-const userLogin = function(req, res) {
+const userLogin = function (req, res) {
   Users.findOne({
     name: req.body.name,
   })
-    .then(user => {
+    .then((user) => {
       if (user) {
         if (bcrypt.compareSync(req.body.password, user.password)) {
           const payload = {
@@ -102,48 +119,39 @@ const userLogin = function(req, res) {
             field: user.field,
             address: user.address,
             type: user.type,
-            dateRegistered: user.dateRegistered
-          }
+            dateRegistered: user.dateRegistered,
+          };
           const userToken = jwt.sign(payload, process.env.SECRET_KEY, {
-            expiresIn: 1440
-          })
-          res.send(userToken)
-        }
-        else {
+            expiresIn: 1440,
+          });
+          res.send(userToken);
+        } else {
           // res.json({ error: "Please check your password and try again" })
           return res.status(401).json({
-            errorMessage: 'User unauthorized!',
-            status: false
+            errorMessage: "User unauthorized!",
+            status: false,
           });
         }
-      }
-      else {
+      } else {
         // res.json({ error: "ID number is not registered in the system" })
         return res.status(401).json({
           errorMessage: "Your user name cannot be recognized",
-          status: false
+          status: false,
         });
       }
     })
-    .catch(err => {
+    .catch((err) => {
       // res.send("error" + err);
       res.status(400).json({
-        errorMessage: 'Something went wrong!',
-        status: false
+        errorMessage: "Something went wrong!",
+        status: false,
       });
       console.log("error: " + err);
-    })
+    });
 };
 
-
-
-
-
-
-
-
 //get a specific user
-const getUser = function(req, res) {
+const getUser = function (req, res) {
   let userId = req.params.id;
 
   Users.findById(userId, (err, user) => {
@@ -161,11 +169,8 @@ const getUser = function(req, res) {
   });
 };
 
-
-
-
 //get users - admin
-const getUsers = function(req, res) {
+const getUsers = function (req, res) {
   Users.find().exec((err, users) => {
     if (err) {
       return res.status(400).json({
@@ -181,23 +186,23 @@ const getUsers = function(req, res) {
 
 //get users by type - admin
 
-const getUserByType = function(req, res) {
+const getUserByType = function (req, res) {
   let usertype = req.params.type;
   Users.find({ type: usertype }).exec((err, users) => {
     if (err) {
       return res.status(400).json({
-        error: err
-      })
+        error: err,
+      });
     }
     return res.status(200).json({
       success: true,
-      existingUsers: users
-    })
-  })
+      existingUsers: users,
+    });
+  });
 };
 
 //update user - admin
-const updateUser = function(req, res) {
+const updateUser = function (req, res) {
   Users.findByIdAndUpdate(
     req.params.id,
     {
@@ -216,10 +221,8 @@ const updateUser = function(req, res) {
   );
 };
 
-
-
 //delete user
-const removeUser =  (req, res) => {
+const removeUser = (req, res) => {
   Users.findByIdAndDelete(req.params.id).exec((err, deletedUser) => {
     if (err) {
       return res.status(400).json({
@@ -234,5 +237,13 @@ const removeUser =  (req, res) => {
   });
 };
 
-
-module.exports = {userRegistration, userLogin, getUser, getUsers, getUserByType,updateUser,removeUser};
+module.exports = {
+  userRegistration,
+  userLogin,
+  getUser,
+  getUsers,
+  getUserByType,
+  updateUser,
+  removeUser,
+  updateProfile,
+};
