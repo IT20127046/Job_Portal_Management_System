@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import swal from "sweetalert";
 
+
 export default function ViewPostedVacanciesModal(props) {
   var imageBasePath =
-    window.location.protocol + "//" + window.location.host + "/images/vacancy/";
+    window.location.protocol + "//" + window.location.host + "/images/";
 
   const [adminStatusAccept] = useState("Approve");
   const [adminStatusDecline] = useState("Decline");

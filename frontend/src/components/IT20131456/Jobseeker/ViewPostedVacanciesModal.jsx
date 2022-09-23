@@ -10,7 +10,7 @@ export default function ViewPostedVacanciesModal(props) {
  
 
   var imageBasePath =
-    window.location.protocol + "//" + window.location.host + "/images/vacancy/";
+    window.location.protocol + "//" + window.location.host + "/images/";
 
   return (
     <div>

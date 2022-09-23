@@ -1,26 +1,44 @@
-const express = require('express');
+const express = require("express");
 const UserRouter = express.Router();
-const UserController = require('../controllers/userController');
+const UserController = require("../controllers/userController");
+const multer = require("multer");
 
 // userRegistration
-UserRouter.post('/user/registration', UserController.userRegistration);
+UserRouter.post("/user/registration", UserController.userRegistration);
 
 // userLogin
-UserRouter.post('/user/login', UserController.userLogin);
+UserRouter.post("/user/login", UserController.userLogin);
 
-// GetAll 
-UserRouter.get('/users', UserController.getUsers);
+// GetAll
+UserRouter.get("/users", UserController.getUsers);
 
 // Get By ID
-UserRouter.get('/user/:id', UserController.getUser);
+UserRouter.get("/user/:id", UserController.getUser);
 
 //get users by type - admin
-UserRouter.get('/users/:type', UserController.getUserByType);
+UserRouter.get("/users/:type", UserController.getUserByType);
 
-// Update Sample 
-UserRouter.put('/user/update/:id', UserController.updateUser);
+// Update User
+UserRouter.put("/user/update/:id", UserController.updateUser);
 
-// Delete Sample
-UserRouter.delete('/user/delete/:id', UserController.removeUser);
+// Delete User
+UserRouter.delete("/user/delete/:id", UserController.removeUser);
+
+const storage = multer.diskStorage({
+  destination: (req, file, callback) => {
+    callback(null, "./uploads");
+  },
+  filename: (req, file, callback) => {
+    callback(null, file.originalname);
+  },
+});
+
+const upload = multer({ storage: storage });
+
+UserRouter.put(
+  "/profile/:id",
+  upload.single("file"),
+  UserController.updateProfile
+);
 
 module.exports = UserRouter;

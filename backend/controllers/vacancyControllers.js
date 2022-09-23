@@ -1,18 +1,24 @@
-const VacancyModel = require("../../models/vacancy_management/vacancyModal");
-
+const VacancyModel = require("../models/vacancyModal")
 // Save Vacancy Details
-const save_vacancy = function (req, res) {
-  let newVacancy = new VacancyModel(req.body);
-  newVacancy.save((err) => {
-    if (err) {
-      return res.status(400).json({
-        error: err,
-      });
-    }
-    return res.status(200).json({
-      success: true,
-    });
+const save_vacancy = async (req, res)=>{
+  const newVacancy = new VacancyModel({
+    jobId: req.body.jobId,
+    jobTitle: req.body.jobTitle,
+    company: req.body.company,
+    workPlaceType: req.body.workPlaceType,
+    location: req.body.location,
+    noOfVacancy: req.body.noOfVacancy,
+    jobType: req.body.jobType,
+    description: req.body.description,
+    image: req.file.originalname,
+    closingDate: req.body.closingDate,
+    adminStatus: req.body.adminStatus,
+    companyId: req.body.companyId
   });
+  await newVacancy
+    .save()
+    .then(() => res.json("New vacancy created!"))
+    .catch((err) => res.status(400).json(`Error:${err}`));
 };
 
 // GetAll Vacancy Details
@@ -76,17 +82,17 @@ const delete_vacancy = function (req, res) {
 };
 
 //get Vacancy By Name
-const getVacancyByName =function(req,res){
+const getVacancyByName = function (req, res) {
   let name = req.params.name;
 
-  VacancyModel.find({company:name},(err,vacancies)=>{
-      if(err){
-          return res.status(400).json({success:false, err});
-      }
-      return res.status(200).json({
-          success:true,
-          exsitingVacancies:vacancies
-      });
+  VacancyModel.find({ company: name }, (err, vacancies) => {
+    if (err) {
+      return res.status(400).json({ success: false, err });
+    }
+    return res.status(200).json({
+      success: true,
+      exsitingVacancies: vacancies,
+    });
   });
 };
 
@@ -96,5 +102,5 @@ module.exports = {
   get_vacancy,
   update_vacancy,
   delete_vacancy,
-  getVacancyByName,
+  getVacancyByName, 
 };

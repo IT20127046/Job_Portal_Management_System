@@ -32,7 +32,7 @@ app.use(adminRoutes);
 const InquiriesRoutes = require("./routes/InquiriesRoutes");
 app.use(InquiriesRoutes);
 
-const vacancyRoutes = require("../backend/routes/vacancy_management/vacancyRoutes");
+const vacancyRoutes = require("../backend/routes/vacancyRoutes");
 app.use(vacancyRoutes);
 
 const resumeRoutes = require("./routes/resumeRoutes");
