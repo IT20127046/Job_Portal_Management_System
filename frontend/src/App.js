@@ -23,7 +23,7 @@ import UpdateVacancy from "./components/IT20131456/Company/UpdateVacancy";
 import ViewVacancy from "./components/IT20131456/Company/ViewVacancy";
 import Example from "./components/IT20128036/userManagement/barChart";
 import BChart from "./components/IT20128036/userManagement/bChart";
-
+import Resume from "./components/IT20125202/resume/Resume";
 
 import ViewVacancyAdmin from "./components/IT20131456/Admin/ViewVacancyAdmin";
 import ViewPostedVacancies from "./components/IT20131456/Jobseeker/ViewPostedVacancies";
@@ -78,6 +78,7 @@ function App() {
         <Route path="/view/vacancy" element={<ViewVacancy />} />
         <Route path="/update/vacancy/:id" element={<UpdateVacancy />} />
         <Route path="/view/vacancy/jobseeker" element={<ViewPostedVacancies/>} />
+        <Route path="/resume" element={<Resume/>} />
       </Routes>
     </BrowserRouter>
   );
