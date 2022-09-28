@@ -25,6 +25,9 @@ export default function ViewInterview() {
 
   useEffect(() => {
     retriveInterview();
+
+    setMsgTitle("You Got Selected");
+    setMessage("You selected for the this role");
   }, []);
 
   const retriveInterview = () => {
@@ -132,13 +135,21 @@ export default function ViewInterview() {
                       <p>{description}</p>
 
                       <strong>Status -</strong>
-                      <p
+                      {status == "Not Completed" ? <p
                         style={{ margin: "10px" }}
                         className="badge bg-warning text-dark"
+                        onClick={()=>{setStatus("Completed")}}
                       >
                         {status}
                       </p>
-
+                      : <p
+                      style={{ margin: "10px" }}
+                      className="badge bg-success text-dark"
+                    >
+                      {status}
+                    </p>
+}
+                      
                       <strong>Candidate Availability -</strong>
                       <p
                         style={{ margin: "10px" }}

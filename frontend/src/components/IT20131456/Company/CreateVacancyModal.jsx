@@ -3,6 +3,7 @@ import axios from "axios";
 import swal from "sweetalert";
 import jwt_decode from "jwt-decode";
 
+
 export default function CreateVacancy() {
   const [jobId, setJobId] = useState("");
   const [jobTitle, setJobTitle] = useState("");
@@ -12,37 +13,41 @@ export default function CreateVacancy() {
   const [noOfVacancy, setNoOfVacancy] = useState("");
   const [jobType, setJobType] = useState("");
   const [description, setDescription] = useState("");
-  const [image, setImage] = useState("");
   const [closingDate, setClosingDate] = useState("");
   const [adminStatus, setAdminStatus] = useState("Pending");
-  const [companyId, setCompanyId] = useState("");                     
+  const [companyId, setCompanyId] = useState("");
+  const [fileName, setFileName] = useState("");
+
+  const onChangeFile = (e) => {
+    setFileName(e.target.files[0]);
+  };
 
   const onSubmit = (e) => {
     e.preventDefault();
 
-    const data = {
-      jobId: jobId,
-      jobTitle: jobTitle,
-      company: company,
-      workPlaceType: workPlaceType,
-      location: location,
-      noOfVacancy: noOfVacancy,
-      jobType: jobType,
-      description: description,
-      image: image,
-      closingDate: closingDate,
-      adminStatus: adminStatus,
-      companyId: companyId,                                        
-    };
-
-    axios.post(`http://localhost:5000/vacancy/add`, data).then((res) => {
-      if (res.data.success) {
+    const formData = new FormData();  
+    formData.append("jobId", jobId);
+    formData.append("jobTitle", jobTitle);
+    formData.append("company", company);
+    formData.append("workPlaceType", workPlaceType);
+    formData.append("location", location);
+    formData.append("noOfVacancy", noOfVacancy);
+    formData.append("jobType", jobType);
+    formData.append("description", description);
+    formData.append("image", fileName);
+    formData.append("closingDate", closingDate);
+    formData.append("adminStatus", adminStatus);
+    formData.append("companyId", companyId);    
+   
+    console.log(fileName)
+    axios.post(`http://localhost:5000/vacancy/add`, formData).then((res) => {    
+      if (res.formData.success) {
         swal("Vacancy created successfully", "", "success");
 
         setTimeout(() => {
           window.location = "/view/vacancy";
         }, "3000");
-
+        
         setJobId("");
         setJobTitle("");
         setCompany("");
@@ -51,17 +56,17 @@ export default function CreateVacancy() {
         setNoOfVacancy("");
         setJobType("");
         setDescription("");
-        setImage("");
         setClosingDate("");
         setAdminStatus("");
+        setFileName("");
       }
     });
   };
   useEffect(() => {
-    const userToken = localStorage.userToken;                
-    const decoded = jwt_decode(userToken);                      
-    setCompanyId(decoded._id);   
-    setCompany (decoded.name);                               
+    const userToken = localStorage.userToken;
+    const decoded = jwt_decode(userToken);
+    setCompanyId(decoded._id);
+    setCompany(decoded.name);
 
     axios.get(`http://localhost:5000/vacancy/getAll`).then((response) => {
       setJobId("J" + String(response.data.exsitingVacancy.length + 1));
@@ -80,7 +85,7 @@ export default function CreateVacancy() {
           <i className="fa fa-plus"></i>&nbsp; Add New Vacancy
         </button>
         &nbsp;&nbsp;
-        <a className="btn btn-warning" href={""}>
+        <a className="btn btn-warning" href={"/genarate/vacancy/report"}>
           <i class="fa fa-bar-chart"></i>&nbsp;Genarate Report
         </a>
         <div className="modal" id="exampleModal">
@@ -100,10 +105,12 @@ export default function CreateVacancy() {
                 ></button>
               </div>
               <div className="modal-body">
-                <form onSubmit={onSubmit}>
+                <form onSubmit={onSubmit} encType="multipart/form-data">
                   <div className="col-md-12">
                     <div className="form-group">
-                      <strong>Job Title <span className="required_label" /></strong>
+                      <strong>
+                        Job Title <span className="required_label" />
+                      </strong>
                       <input
                         type="text"
                         className="form-control"
@@ -120,7 +127,9 @@ export default function CreateVacancy() {
                   &nbsp;
                   <div className="col-md-12">
                     <div className="form-group">
-                      <strong>Company Name <span className="required_label" /></strong>
+                      <strong>
+                        Company Name <span className="required_label" />
+                      </strong>
                       <input
                         type="text"
                         className="form-control"
@@ -135,7 +144,9 @@ export default function CreateVacancy() {
                   &nbsp;
                   <div className="col-md-12">
                     <div className="form-group">
-                      <strong>Work Place Type <span className="required_label" /></strong>
+                      <strong>
+                        Work Place Type <span className="required_label" />
+                      </strong>
                       <select
                         className="form-select"
                         name="workPlaceType"
@@ -166,7 +177,9 @@ export default function CreateVacancy() {
                   &nbsp;
                   <div className="col-md-12">
                     <div className="form-group">
-                      <strong>No of Vacancy <span className="required_label" /></strong>
+                      <strong>
+                        No of Vacancy <span className="required_label" />
+                      </strong>
                       <input
                         type="number"
                         className="form-control"
@@ -182,7 +195,9 @@ export default function CreateVacancy() {
                   &nbsp;
                   <div className="col-md-12">
                     <div className="form-group ">
-                      <strong>Job Type :<span className="required_label" /></strong>
+                      <strong>
+                        Job Type :<span className="required_label" />
+                      </strong>
                       <div className="mt-2 fs-6">
                         <input
                           type="radio"
@@ -214,7 +229,10 @@ export default function CreateVacancy() {
                   &nbsp;
                   <div className="col-md-12">
                     <div className="form-group">
-                      <strong>Job Description (Maximum word 1000) <span className="required_label" /></strong>
+                      <strong>
+                        Job Description (Maximum word 1000){" "}
+                        <span className="required_label" />
+                      </strong>
                       <textarea
                         class="form-control"
                         name="description"
@@ -229,23 +247,24 @@ export default function CreateVacancy() {
                   &nbsp;
                   <div className="col-md-12">
                     <div className="form-group">
-                      <strong>Choose a photo <span className="required_label" /></strong>
+                      <strong>
+                        Choose a photo <span className="required_label" />
+                      </strong>
                       <input
-                        type="file"
-                        name="image"
-                        className="form-control"
-                        multiple={true}
-                        onChange={(e) => {
-                          setImage(e.target.files[0].name);
-                        }}
-                        required
+                        type="file"                      
+                        filename="image"
+                        className="form-control"                      
+                        onChange={onChangeFile}                  
                       />
                     </div>
                   </div>
                   &nbsp;
                   <div className="col-md-12">
                     <div className="form-group">
-                      <strong>Application Closing Date <span className="required_label" /></strong>
+                      <strong>
+                        Application Closing Date
+                        <span className="required_label" />
+                      </strong>
                       <input
                         type="date"
                         className="form-control"
@@ -259,7 +278,7 @@ export default function CreateVacancy() {
                   &nbsp;
                   <div className="col-md-12 mt-4">
                     <div className="form-group">
-            <strong>Agree term and conditions&nbsp;&nbsp;</strong>
+                      <strong>Agree term and conditions&nbsp;&nbsp;</strong>
                       <input
                         className="form-check-input"
                         type="checkbox"

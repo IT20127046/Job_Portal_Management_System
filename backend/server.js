@@ -20,6 +20,9 @@ app.use(applicationRoutes);
 const interviewRoutes = require("./routes/interviewRoutes");
 app.use(interviewRoutes);
 
+const assessmentRoutes = require("./routes/assessmentRoutes");
+app.use(assessmentRoutes);
+
 const userRoutes = require("./routes/userRoutes");
 app.use(userRoutes);
 
@@ -29,7 +32,7 @@ app.use(adminRoutes);
 const InquiriesRoutes = require("./routes/InquiriesRoutes");
 app.use(InquiriesRoutes);
 
-const vacancyRoutes = require("../backend/routes/vacancy_management/vacancyRoutes");
+const vacancyRoutes = require("../backend/routes/vacancyRoutes");
 app.use(vacancyRoutes);
 
 const resumeRoutes = require("./routes/resumeRoutes");

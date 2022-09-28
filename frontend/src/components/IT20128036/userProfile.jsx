@@ -1,390 +1,249 @@
-// user- view user profile
-import React, { Component } from 'react';
-import jwt_decode from 'jwt-decode';
-import axios from 'axios';
-import swal from 'sweetalert';
+import React, { useState, useEffect, set } from "react";
+import axios from "axios";
+import swal from "sweetalert";
+import jwt_decode from "jwt-decode";
+import "./contactUs.css";
+import NavBar from "./NavBar";
 
-export default class UserProfile extends Component {
+function UpdateProfile() {
+  const [uid, setUid] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [file, setfile] = useState("");
+  const [type, setType] = useState("");
+  const [website, setWebsite] = useState("");
+  const [csize, setCsize] = useState("");
+  const [founded, setFounded] = useState("");
+  const [dob, setDob] = useState("");
+  const [sex, setSex] = useState("");
+  const [about, setAbout] = useState("");
 
-    constructor() {
-        super();
-        this.state = {
-            _id: '',
-            name: '',
-            email: '',
-            mobile: '',
-            field: '',
-            address: '',
-            type: '',
-            dateRegistered: '',
-        
-        }
-    }
+  useEffect(() => {
+    const usertoken = localStorage.userToken;
+    const decoded = jwt_decode(usertoken);
 
-    componentDidMount() {
-        document.title = "User Profile"
+    setUid(decoded._id);
+    setName(decoded.name);
+    setEmail(decoded.email);
+    setType(decoded.type);
 
-        // redirect to the login page if the user is not logged in
-        if (!localStorage.userToken) {
-            swal("Please login first", "", "warning")
-                .then((value) => {
-                    if (value) {
-                        this.props.history.push(`/user/login`)
-                        window.location.reload();
-                    }
+    axios.get(`http://localhost:5000/user/${uid}`).then((res) => {
+      setWebsite(res.data.user.website);
+      setCsize(res.data.user.csize);
+      setFounded(res.data.user.founded);
+      setDob(res.data.user.dob);
+      setSex(res.data.user.sex);
+      setAbout(res.data.user.about);
+    });
+  }, [uid]);
 
-                });
+  const onChangeFile = (e) => {
+    setfile(e.target.files[0]);
+  };
 
-        }
+  const onChangeClick = (e) => {
+    e.preventDefault();
 
-        const usertoken = localStorage.userToken;
-        const decoded = jwt_decode(usertoken);
+    const formdata = new FormData();
 
-        this.setState({
-            _id: decoded._id,
-        })
-        const id = decoded._id
-        this.retrieveProfile(id);
+    formdata.append("file", file);
+    formdata.append("website", website);
+    formdata.append("csize", csize);
+    formdata.append("founded", founded);
+    formdata.append("dob", dob);
+    formdata.append("sex", sex);
+    formdata.append("about", about);
 
-        // if(this.state.type === 'Supervisor' && this.state.researchfield === ''){
-        //     alert('Please update your profile with your research interest')
-        // }
-    }
+    axios
+      .put(`http://localhost:5000/profile/${uid}`, formdata)
+      .then((res) => {
+        swal("Updated successfully!", "", "success").then((value) => {
+          if (value) {
+            window.location = "/userprofile/view";
+          }
+        });
+      })
 
-    retrieveProfile(id) {
-        axios.get(`http//localhost:5000/user/${id}`).then((res) => {
-            if (res.data.success) {
-                this.setState({
-                  
-                    name: res.data.user.name,
-                    email: res.data.user.email,
-                    mobile: res.data.user.mobile,
-                    field: res.data.user.field,
-                    address: res.data.user.address,
-                    type: res.data.user.type,
-                    dateRegistered: res.data.user.dateRegistered,
-                    password: res.data.user.password
-                })
-                // console.log(this.state.user);
-            }
-        })
-    }
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-    handleInputChange = (e) => {
+  return (
+    <div className="inq_container">
+      <NavBar />
+      <div className="container bg-light border border-light rounded shadow mt-4 ">
+        <div className="mt-4 mb-4 mx-4 my-4">
+          <div
+          // style={{
+          //   margin: "20px 50px 50px 0px",
+          //   padding: "50px",
+          //   backgroundColor: "",
+          //   border: "2px solid gray",
+          //   borderRadius: "10px",
+          // }}
+          >
+            {/* <center>
+          <h4 style={set}>Update Profile</h4>
+        </center> */}
+            <br />
+            <form onSubmit={onChangeClick} encType="multipart/form-data">
+              <div class="mb-3">
+                <label for="formFile" class="form-label">
+                  {" "}
+                  <strong> Profile Picture</strong>{" "}
+                </label>
+                <input
+                  class="form-control"
+                  type="file"
+                  id="file"
+                  filename="file"
+                  onChange={onChangeFile}
+                  required
+                />
+              </div>
 
-        const { name, value } = e.target;
+              <div class="mb-3">
+                <label for="exampleInputText1" class="form-label">
+                  <strong> About Me</strong>
+                </label>
+                <textarea
+                  rows="10"
+                  cols="50"
+                  class="form-control"
+                  id="about"
+                  name="about"
+                  value={about}
+                  onChange={(e) => {
+                    setAbout(e.target.value);
+                  }}
+                  required
+                />
+              </div>
 
-        this.setState({
-            ...this.state,
-            [name]: value
-        })
-    }
-
-    onSubmit = (e) => {
-        e.preventDefault();
-
-        const { _id, idNumber, name, email, mobile, groupId, researchfield, panel, type, password } = this.state;
-
-        let data = {
-            idNumber: idNumber,
-            name: name,
-            email: email,
-            mobile: mobile,
-            groupId: groupId,
-            researchfield: researchfield,
-            panel: panel,
-            type: type,
-            password: password,
-        }
-        // console.log(data)
-
-        // validations----------------------------------------------------------
-        let validated = true;
-        if (data.name === '' || data.name.length < 5) {
-            validated = false;
-            swal({
-                title: "",
-                text: "Name cannot be empty",
-                icon: "warning",
-            });
-        }
-        else if (!data.email.match(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i)) {
-            validated = false;
-            swal({
-                title: "",
-                text: "Please enter a valid email",
-                icon: "warning",
-            });
-        }
-        else if (!data.mobile.match(/^(\+\d{1,3}[- ]?)?\d{10}$/)) {
-            validated = false;
-            swal({
-                title: "",
-                text: "Please enter a valid mobile number",
-                icon: "warning",
-            });
-        }
-        else if (this.state.type === 'Supervisor' && data.researchfield === '') {
-            validated = false;
-            swal({
-                title: "",
-                text: "Please add your research field",
-                icon: "warning",
-            });
-        }
-        else if (this.state.confirmNewPassword != this.state.newPassword) {
-            validated = false;
-            swal({
-                title: "",
-                text: "Please check the new password and repeated new password",
-                icon: "warning",
-            });
-        }
-        else if (this.state.enteredPassword != '' && this.state.newPassword === '') {
-            validated = false;
-            swal({
-                title: "",
-                text: "Please enter a new password",
-                icon: "warning",
-            });
-        }
-        else if (this.state.enteredPassword === '' && this.state.newPassword != '') {
-            validated = false;
-            swal({
-                title: "",
-                text: "Please enter your existing password",
-                icon: "warning",
-            });
-        }
-        else if (this.state.enteredPassword != '' && this.state.newPassword.length < 8) {
-            validated = false;
-            swal({
-                title: "",
-                text: "Password should have at least 8 characters",
-                icon: "warning",
-            });
-        }
-
-        // console.log(data)
-
-        if (validated) {
-            if (this.state.enteredPassword === '' || this.state.newPassword === '') {
-                axios.put(`https://rpmt-server.herokuapp.com/user/update/${_id}`, data).then((res) => {
-                    if (res.data.success) {
-                        swal("Profile updated successfully!", "", "success")
-                            .then((value) => {
-                                if (value) {
-                                    this.props.history.push(`/user/profile`)
-                                    window.location.reload();
-                                }
-
-                            });
-                    }
-                })
-                    .catch(err => {
-                        console.log(err);
-                        swal({
-                            title: "",
-                            text: "Something went wrong! Please check the entered passwords",
-                            icon: "warning",
-                        });
-                    })
-            }
-            else {
-                data.enteredPassword = this.state.enteredPassword;
-                data.newPassword = this.state.newPassword;
-
-                axios.put(`https://rpmt-server.herokuapp.com/user/updateprofile/${_id}`, data).then((res) => {
-                    if (res.data.success) {
-                        swal("Profile updated successfully!", "", "success")
-                            .then((value) => {
-                                if (value) {
-                                    this.props.history.push(`/user/profile`)
-                                    window.location.reload();
-                                }
-
-                            });
-                    }
-                })
-                    .catch(err => {
-                        console.log(err);
-                        swal({
-                            title: "",
-                            text: "Something went wrong! Please check the entered passwords",
-                            icon: "warning",
-                        });
-                    })
-            }
-        }
-    }
-
-    render() {
-        return (
-            <div className="container" style={{ padding: '50px 50px 50px 50px', background: 'white', minHeight: '100vh' }}>
-                <div className='col-lg-9 mt-2 mb-2'>
-                    <h1>Profile</h1>
+              <div className="row">
+                <div className="col-sm-4">
+                  <div class="mb-3">
+                    <label for="exampleInputText1" class="form-label">
+                      <strong> Website</strong>
+                    </label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="website"
+                      name="website"
+                      value={website}
+                      onChange={(e) => {
+                        setWebsite(e.target.value);
+                      }}
+                      required
+                    />
+                  </div>
                 </div>
-                <hr />
-                <div className='col-md-8 mt-4 mx-auto'>
-                    {/* <h1 className='h3 mb-3 font-weight-normal'>Research Topic Registration</h1> */}
-                    <br />
-                    <form className='needs-validation' noValidate>
-                        <div className='form-group' style={{ marginBottom: '15px' }}>
-                            <label style={{ marginBottom: '5px' }}><b>Registration Number</b></label>
-                            <input
-                                type="text"
-                                className='form-control'
-                                name="idNumber"
-                                value={this.state.idNumber}
-                                onChange={this.handleInputChange}
-                                readOnly
-                            />
-                        </div>
 
-                        <div className='form-group' style={{ marginBottom: '15px' }}>
-                            <label style={{ marginBottom: '5px' }}><b>Name</b></label>
-                            <input
-                                type="text"
-                                className='form-control'
-                                name="name"
-                                value={this.state.name}
-                                onChange={this.handleInputChange}
+                <div className="col-sm-4">
+                  {type === "Job Recruiter" && (
+                    <span>
+                      <div class="mb-3">
+                        <label for="exampleInputText1" class="form-label">
+                          <strong> Company Size</strong>
+                        </label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="csize"
+                          name="csize"
+                          value={csize}
+                          onChange={(e) => {
+                            setCsize(e.target.value);
+                          }}
+                          required
+                        />
+                      </div>
+                    </span>
+                  )}
 
-                            />
-                        </div>
-
-                        <div className='form-group' style={{ marginBottom: '15px' }}>
-                            <label style={{ marginBottom: '5px' }}><b>Email</b></label>
-                            <input
-                                type="email"
-                                className='form-control'
-                                name="email"
-                                value={this.state.email}
-                                onChange={this.handleInputChange}
-
-                            />
-                        </div>
-
-                        <div className='form-group' style={{ marginBottom: '15px' }}>
-                            <label style={{ marginBottom: '5px' }}><b>Mobile Number</b></label>
-                            <input
-                                type="phone"
-                                className='form-control'
-                                name="mobile"
-                                value={this.state.mobile}
-                                onChange={this.handleInputChange}
-
-                            />
-                        </div>
-
-                        <div className='form-group' style={{ marginBottom: '15px' }}>
-                            <label style={{ marginBottom: '5px' }}><b>Registered Date</b></label>
-                            <input
-                                type="text"
-                                className='form-control'
-                                name="dateRegistered"
-                                value={this.state.dateRegistered}
-                                onChange={this.handleInputChange}
-                                readOnly
-                            />
-                        </div>
-
-                        {/* Visible to students */}
-                        {this.state.type === 'Student' &&
-                            <span>
-                                <div className='form-group' style={{ marginBottom: '15px' }}>
-                                    <label style={{ marginBottom: '5px' }}><b>Group ID</b></label>
-                                    <input
-                                        type="text"
-                                        className='form-control'
-                                        name="groupId"
-                                        value={this.state.groupId}
-                                        onChange={this.handleInputChange}
-                                        readOnly
-                                    />
-                                </div>
-                            </span>}
-
-                        {/* Visible to Supervisors */}
-                        {this.state.type === 'Supervisor' &&
-                            <span>
-                                <div className='form-group' style={{ marginBottom: '15px' }}>
-                                    <label style={{ marginBottom: '5px' }}><b>Research Field</b></label>
-                                    <input
-                                        type="text"
-                                        className='form-control'
-                                        name="researchfield"
-                                        value={this.state.researchfield}
-                                        onChange={this.handleInputChange}
-
-                                    />
-                                </div>
-                            </span>}
-
-                        {/* Visible to panel members */}
-                        {this.state.type === 'Panel Member' &&
-                            <span>
-                                <div className='form-group' style={{ marginBottom: '15px' }}>
-                                    <label style={{ marginBottom: '5px' }}><b>Panel</b></label>
-                                    <input
-                                        type="text"
-                                        className='form-control'
-                                        name="panel"
-                                        value={this.state.panel}
-                                        onChange={this.handleInputChange}
-                                        readOnly
-                                    />
-                                </div>
-                            </span>}
-                        {/* Optional fields */}
-                        <br /><br />
-                        <h5><b>Change Password</b></h5>
-                        <div className='form-group' style={{ marginBottom: '15px' }}>
-                            <label style={{ marginBottom: '5px' }}><b>Existing password</b></label>
-                            <input
-                                type="password"
-                                className='form-control'
-                                name="enteredPassword"
-                                value={this.state.enteredPassword}
-                                placeholder="Fill only if you need to change the password"
-                                onChange={this.handleInputChange}
-
-                            />
-                        </div>
-                        <div className='form-group' style={{ marginBottom: '15px' }}>
-                            <label style={{ marginBottom: '5px' }}><b>New password</b></label>
-                            <input
-                                type="password"
-                                className='form-control'
-                                name="newPassword" 
-                                value={this.state.newPassword}
-                                placeholder="Fill only if you need to change the password"
-                                onChange={this.handleInputChange}
-
-                            />
-                        </div>
-                        <div className='form-group' style={{ marginBottom: '15px' }}>
-                            <label style={{ marginBottom: '5px' }}><b>Confirm New password</b></label>
-                            <input
-                                type="password"
-                                className='form-control'
-                                name="confirmNewPassword"
-                                value={this.state.confirmNewPassword}
-                                placeholder="Fill only if you need to change the password"
-                                onChange={this.handleInputChange}
-
-                            />
-                        </div>
-
-                        <button className='btn btn-success' type="submit" style={{ maeginTop: '15px' }} onClick={this.onSubmit}>
-                            <i className='far fa-check-square'></i>
-                            &nbsp; <b>Update</b>
-                        </button>
-
-                    </form>
-
+                  {type === "Job Seeker" && (
+                    <span>
+                      <div class="mb-3">
+                        <label for="exampleInputText1" class="form-label">
+                          <strong> Date Of Birth</strong>
+                        </label>
+                        <input
+                          type="date"
+                          class="form-control"
+                          id="dob"
+                          name="dob"
+                          value={dob}
+                          onChange={(e) => {
+                            setDob(e.target.value);
+                          }}
+                          required
+                        />
+                      </div>
+                    </span>
+                  )}
                 </div>
-            </div>
-        )
-    }
+
+                <div className="col-sm-4">
+                  {type === "Job Recruiter" && (
+                    <span>
+                      <div class="mb-3">
+                        <label for="exampleInputText1" class="form-label">
+                          <strong> Founded</strong>
+                        </label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="founded"
+                          name="founded"
+                          value={founded}
+                          onChange={(e) => {
+                            setFounded(e.target.value);
+                          }}
+                          required
+                        />
+                      </div>
+                    </span>
+                  )}
+
+                  {type === "Job Seeker" && (
+                    <span>
+                      <div class="mb-3">
+                        <label for="exampleInputText1" class="form-label">
+                          <strong> Sex</strong>
+                        </label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="sex"
+                          name="sex"
+                          value={sex}
+                          onChange={(e) => {
+                            setSex(e.target.value);
+                          }}
+                          required
+                        />
+                      </div>
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              <center>
+                <button type="submit" class="btn btn-primary">
+                  {" "}
+                  <i class="fa fa-edit" aria-hidden="true">
+                    {" "}
+                    &nbsp;<strong>Update</strong>
+                  </i>
+                </button>
+              </center>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
+export default UpdateProfile;
