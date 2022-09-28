@@ -19,7 +19,7 @@ const getAll_resumes = function (req, res) {
 // view resume of a given user
 const get_resume = function (req, res) {
 
-    ResumeModel.find({ userId: req.params.id }).exec((err, exsitingResume) => {
+    ResumeModel.findOne({ userId: req.params.id }).exec((err, exsitingResume) => {
         if (err) {
             return res.status(400).json({
                 error: err,
