@@ -37,8 +37,8 @@ const Form = () => {
         setapplicantId(decoded._id);
 
         axios.get(`http://localhost:5000/vacancy/get/${id}`)
-            .then(response => {                
-                if (response.data.success) {                  
+            .then(response => {
+                if (response.data.success) {
                     let data = response.data.exsitingVacancy;
                     setVacancyNo(data.jobId);
                     setJobTitle(data.jobTitle);
@@ -49,7 +49,30 @@ const Form = () => {
             .catch(error => {
                 console.log(error);
             })
-    }, [id]);
+
+        axios.get(`http://localhost:5000/resumes/${applicantId}`)
+            .then(response => {
+                // console.log(response.data.exsitingResume);
+                if (response.data.exsitingResume) {
+                    setFirstName(response.data.exsitingResume.firstName);
+                    setLastName(response.data.exsitingResume.lastName);
+                    setEmail(response.data.exsitingResume.email);
+                    setPhone(response.data.exsitingResume.phone);
+                    setEducationalQualifications(response.data.exsitingResume.educationalQualifications);
+                    setExperience(response.data.exsitingResume.experience);
+                    setSkills(response.data.exsitingResume.skills);
+                    setLanguages(response.data.exsitingResume.languages);
+                    setReferees(response.data.exsitingResume.referees);
+                }
+
+                // console.log(response.data.exsitingApplication);
+                // console.log(applicationDet);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+
+    }, [id, applicantId]);
 
 
     // handleArrayAdd, handleArrayRemove, handleArrayChange methods are used to add, remove and change elements in arrays
