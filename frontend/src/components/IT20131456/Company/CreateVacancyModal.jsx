@@ -3,6 +3,7 @@ import axios from "axios";
 import swal from "sweetalert";
 import jwt_decode from "jwt-decode";
 
+
 export default function CreateVacancy() {
   const [jobId, setJobId] = useState("");
   const [jobTitle, setJobTitle] = useState("");
@@ -84,7 +85,7 @@ export default function CreateVacancy() {
           <i className="fa fa-plus"></i>&nbsp; Add New Vacancy
         </button>
         &nbsp;&nbsp;
-        <a className="btn btn-warning" href={""}>
+        <a className="btn btn-warning" href={"/genarate/vacancy/report"}>
           <i class="fa fa-bar-chart"></i>&nbsp;Genarate Report
         </a>
         <div className="modal" id="exampleModal">
