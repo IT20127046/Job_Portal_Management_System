@@ -1,13 +1,9 @@
 import React from "react";
 
-
 export default function ViewPostedVacanciesModal(props) {
- 
-
-  const onNavigate =() =>{
+  const onNavigate = () => {
     window.location = `/application/${props.jobId}`;
-  }
- 
+  };
 
   var imageBasePath =
     window.location.protocol + "//" + window.location.host + "/images/";
@@ -60,7 +56,10 @@ export default function ViewPostedVacanciesModal(props) {
                 </div>
                 <div className="my-2">
                   <span className="fs-5 fw-bold">Work Place Type : </span>
-                  <span className="fs-5 font-normal"> {props.workPlaceType}</span>
+                  <span className="fs-5 font-normal">
+                    {" "}
+                    {props.workPlaceType}
+                  </span>
                 </div>
                 <div className="my-2">
                   <span className="fs-5 fw-bold">Location : </span>
@@ -75,8 +74,7 @@ export default function ViewPostedVacanciesModal(props) {
                 <div className="text-center ">
                   <button
                     className="btn btn-primary col-md-5 my-3"
-                    onClick={() => onNavigate(           
-                    )}
+                    onClick={() => onNavigate()}
                   >
                     Apply
                   </button>

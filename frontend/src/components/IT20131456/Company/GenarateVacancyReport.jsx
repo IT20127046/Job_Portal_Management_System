@@ -31,17 +31,6 @@ export default function GenarateVacancyReport() {
   //search record
 
   const searchItems = (searchValue) => {
-    console.log(searchValue);
-
-    // if(searchValue=="On-Site"){
-    //   var a="Human Resources Manager"
-    // }
-    // else if(searchValue=="Remote"){
-    //   var a="Senior Software Engineering"
-    // }
-    // else{
-    //   console.log("no")    // }
-
     setSearchInput(searchValue);
     if (searchInput !== "") {
       const filteredData = vacancy.filter((item) => {

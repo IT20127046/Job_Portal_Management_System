@@ -5,8 +5,7 @@ import axios from "axios";
 import NavBar from "../../IT20128036/NavBar";
 
 export default function UpdateVacancy() {
-  const { id } = useParams();
-  console.log(id);
+  const { id } = useParams();  
   const [vacancy, setVacancy] = useState([]);
   const [jobId, setJobId] = useState("");
   const [jobTitle, setJobTitle] = useState("");
@@ -52,7 +51,7 @@ export default function UpdateVacancy() {
       description: description,
       image: image,
       closingDate: closingDate,
-      adminStatus:adminStatus,
+      adminStatus: adminStatus,
       companyId: companyId, //added - kalani
     };
 

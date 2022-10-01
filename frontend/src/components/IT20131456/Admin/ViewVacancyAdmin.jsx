@@ -68,7 +68,6 @@ export default function ViewVacancy() {
     setClosingDate(closingDate);
   };
 
-
   return (
     <div className="container">
       <br />
@@ -85,6 +84,7 @@ export default function ViewVacancy() {
         image={image}
         closingDate={closingDate}
       />
+
       <br />
 
       <div className="container">
@@ -106,7 +106,9 @@ export default function ViewVacancy() {
                   onChange={(e) => searchItems(e.target.value)}
                 ></input>
               </div>
+
               <hr />
+
               <br />
             </div>
             <table className="table">

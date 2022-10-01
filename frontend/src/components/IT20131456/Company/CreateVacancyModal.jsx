@@ -3,7 +3,6 @@ import axios from "axios";
 import swal from "sweetalert";
 import jwt_decode from "jwt-decode";
 
-
 export default function CreateVacancy() {
   const [jobId, setJobId] = useState("");
   const [jobTitle, setJobTitle] = useState("");
@@ -25,7 +24,7 @@ export default function CreateVacancy() {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    const formData = new FormData();  
+    const formData = new FormData();
     formData.append("jobId", jobId);
     formData.append("jobTitle", jobTitle);
     formData.append("company", company);
@@ -37,17 +36,17 @@ export default function CreateVacancy() {
     formData.append("image", fileName);
     formData.append("closingDate", closingDate);
     formData.append("adminStatus", adminStatus);
-    formData.append("companyId", companyId);    
-   
-    console.log(fileName)
-    axios.post(`http://localhost:5000/vacancy/add`, formData).then((res) => {    
+    formData.append("companyId", companyId);
+
+    console.log(fileName);
+    axios.post(`http://localhost:5000/vacancy/add`, formData).then((res) => {
       if (res.formData.success) {
         swal("Vacancy created successfully", "", "success");
 
         setTimeout(() => {
           window.location = "/view/vacancy";
         }, "3000");
-        
+
         setJobId("");
         setJobTitle("");
         setCompany("");
@@ -251,10 +250,10 @@ export default function CreateVacancy() {
                         Choose a photo <span className="required_label" />
                       </strong>
                       <input
-                        type="file"                      
+                        type="file"
                         filename="image"
-                        className="form-control"                      
-                        onChange={onChangeFile}                  
+                        className="form-control"
+                        onChange={onChangeFile}
                       />
                     </div>
                   </div>
