@@ -3,6 +3,7 @@ import axios from "axios";
 import jwt_decode from "jwt-decode";
 import { useReactToPrint } from "react-to-print";
 import image from "../../../images/back1.jpg";
+import { VictoryPie } from "victory-pie";
 
 export default function GenarateVacancyReport() {
   const componentRef = useRef();
@@ -14,13 +15,14 @@ export default function GenarateVacancyReport() {
   const [filteredResults, setFilteredResults] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [companyName, setCompanyName] = useState("");
+  const [total, setTotal] = useState(0);
+  const [myData, setMyData] = useState([]);
 
   useEffect(() => {
     const userToken = localStorage.userToken;
     const decoded = jwt_decode(userToken);
     setCompanyName(decoded.name);
     let name = companyName;
-    console.log(name);
     axios
       .get(`http://localhost:5000/vacancy/get/name/${name}`)
       .then((response) => {
@@ -45,6 +47,40 @@ export default function GenarateVacancyReport() {
     }
   };
 
+  useEffect(() => {
+    let sumVacancies = 0;
+    for (let i = 0; i < vacancy.length; i++) {
+      sumVacancies += +vacancy[i].noOfVacancy;
+      setTotal(sumVacancies);
+    }
+  }, [vacancy]);
+
+  // no of vacancy as the string
+
+  //const [total, setTotal] = useState(0);
+  // useEffect(() => {
+  // let sum = vacancy.reduce((prev,curr) => +prev.noOfVacancy +
+  // +curr.noOfVacancy)
+  // setTotal(sum);
+  // }, [vacancy])
+
+  useEffect(() => {
+    const data = myData.slice();
+    for (let i = 0; i < vacancy.length; i++) {
+      var jobTitle = vacancy[i].jobTitle;
+      var noOfVacancy = vacancy[i].noOfVacancy;
+      data.push({
+        x: jobTitle
+          // .split(" ")
+          // .map((x) => x[0])
+          // .join("")
+          ,
+        y: noOfVacancy,
+      });
+    }
+    setMyData(data);
+  }, [vacancy]);
+
   return (
     <div>
       <div
@@ -64,7 +100,7 @@ export default function GenarateVacancyReport() {
       >
         <div
           className="jumbotron"
-          style={{ background: "white", minHeight: "100vh" }}
+          style={{ background: "white", minHeight: "150vh" }}
         >
           <br />
 
@@ -73,12 +109,6 @@ export default function GenarateVacancyReport() {
               <div className="float-left col-lg-9  mb-2">&nbsp;</div>
               <div className="col-lg-3  mb-2">
                 &nbsp;
-                {/* <input
-                  className="form-control border border-dark"
-                  type="date"
-                  placeholder="Search"                 
-                  onChange={(e) => searchItems(e.target.value)}
-                ></input> */}
                 <select
                   className="form-select"
                   name="workPlaceType"
@@ -98,15 +128,29 @@ export default function GenarateVacancyReport() {
                 Print
               </button>
             </div>
-            <div ref={componentRef} className="mt-5 mx-5">
+            <div ref={componentRef} className="mt-3 mx-5">
               <h2 className="text-center">
                 Vacancy Report Of {companyName.toUpperCase()}
-                {/* {parseInt(searchInput)-1}             */}
               </h2>
               &nbsp;
-              <div className="mb-4 mx-3">
-                <h4> Total Number of Vacancies - {vacancy.noOfVacancy}</h4>
+              <div
+                style={{ height: "450px", width: "750px" }}
+                className="rounded mx-auto d-block"
+              >
+                <VictoryPie
+                  data={myData}
+                  colorScale={[
+                    "#1cd0bb",
+                    "#dfdfdf",
+                    "#ffa400",
+                    "red",
+                    "yellow",
+                  ]}
+                  radius={100}
+                />
               </div>
+              <h4> Total Number of Vacancies - {total}</h4>
+              <br />
               <table className="table table-striped shadow table-bordered ">
                 <thead>
                   <tr>

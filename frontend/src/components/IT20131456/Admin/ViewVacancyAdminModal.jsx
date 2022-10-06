@@ -15,7 +15,7 @@ export default function ViewPostedVacanciesModal(props) {
     const data = {
       adminStatus: adminStatusAccept,
     };
-    
+
     axios
       .put(`http://localhost:5000/vacancy/update/${props.jobId}`, data)
       .then((res) => {

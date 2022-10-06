@@ -26,13 +26,6 @@ export default function ViewVacancy() {
   useEffect(() => {
     axios.get(`http://localhost:5000/vacancy/getAll`).then((response) => {
       setVacancy(response.data.exsitingVacancy);
-
-      // for (var i = 0; i <= response.data.exsitingVacancy.length; i++) {
-      //   if (response.data.exsitingVacancy[i].adminStatus === "Approve") {
-
-      //   }
-
-      // }
     });
   }, [0]);
   //search record

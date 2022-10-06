@@ -5,7 +5,7 @@ import axios from "axios";
 import NavBar from "../../IT20128036/NavBar";
 
 export default function UpdateVacancy() {
-  const { id } = useParams();  
+  const { id } = useParams();
   const [vacancy, setVacancy] = useState([]);
   const [jobId, setJobId] = useState("");
   const [jobTitle, setJobTitle] = useState("");
@@ -18,7 +18,7 @@ export default function UpdateVacancy() {
   const [image, setImage] = useState("");
   const [closingDate, setClosingDate] = useState("");
   const [adminStatus, setAdminStatus] = useState("Modified");
-  const [companyId, setCompanyId] = useState(""); //added - kalani
+  const [companyId, setCompanyId] = useState("");
 
   useEffect(() => {
     axios.get(`http://localhost:5000/vacancy/get/${id}`).then((response) => {
@@ -33,7 +33,7 @@ export default function UpdateVacancy() {
       setDescription(response.data.exsitingVacancy.description);
       setImage(response.data.exsitingVacancy.image);
       setClosingDate(response.data.exsitingVacancy.closingDate);
-      setCompanyId(response.data.exsitingVacancy.companyId); //added - kalani
+      setCompanyId(response.data.exsitingVacancy.companyId);
     });
   }, []);
 
@@ -52,7 +52,7 @@ export default function UpdateVacancy() {
       image: image,
       closingDate: closingDate,
       adminStatus: adminStatus,
-      companyId: companyId, //added - kalani
+      companyId: companyId,
     };
 
     axios
