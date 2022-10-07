@@ -36,7 +36,7 @@ export default class RightSidePanel extends Component {
           </div>
 
           <div>
-            <a href=''>
+            <a href='/admin/applicationreports'>
               <div className="p-2 mb-2 text-white" style={{ background: '#212F3C', textDecoration: 'none' }}>
                 <a className="btn text-white">
                   <i class="fa fa-book" aria-hidden="true"></i>&nbsp;&nbsp;Applications

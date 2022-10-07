@@ -39,30 +39,19 @@ export default function RecruiterView() {
 
     // for searching
     const handleSearchArea = (e) => {
-        //console.log(e)
-        setSearch(e)
+        // console.log(e.currentTarget.value)
+        setSearch(e.target.value)
+        setApplications(allApplications);
 
-        if (search.length > 0) {
-            if (applications.length > 0) {
-                setApplications(allApplications);
-                filterData(applications, search);
-            }
-        }
-        else {
-            //window.location.reload();
+        if (search !== '') {
             setApplications(allApplications);
+            filterData(search);
         }
-
-        //if (applications.length > 0) {
-        //    filterData(applications, search);
-        //}
-        //if (search == '') {
-        //    setApplications(allApplications);
-        //}
     }
 
-    const filterData = (records, searchKey) => {
-        const searchResult = records.filter((application) =>
+    const filterData = (searchKey) => {
+
+        const searchResult = applications.filter((application) =>
             application.applicantFirstName.toLowerCase().includes(searchKey) ||
             application.jobTitle.toLowerCase().includes(searchKey) ||
             application.status.toLowerCase().includes(searchKey) ||
@@ -88,26 +77,32 @@ export default function RecruiterView() {
                     className='form-control'
                     type="search"
                     value={search}
-                    placeholder="Search..."
                     name="searchQuery"
-                    onChange={(e) => handleSearchArea(e.target.value)}>
+                    placeholder='Search...'
+                    onChange={handleSearchArea}>
                 </input>
             </div>
             <hr />
+
+            {allApplications.length === 0 &&
+                <div style={{ textAlign: 'center' }}><h3> No Results Found </h3></div>
+            }
             <table className="table table-hover" style={{ border: '1px solid lightgray' }}>
-                <thead className="thead-light">
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Vacancy No.</th>
-                        <th scope="col">Job Title</th>
-                        <th scope="col">First Name</th>
-                        <th scope="col">Last Name</th>
-                        <th scope="col">Received Date</th>
-                        <th scope="col">Status</th>
-                        <th scope="col"></th>
-                    </tr>
-                </thead>
-                {applications.length > 0 &&
+                {allApplications.length > 0 &&
+                    <thead className="thead-light">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Vacancy No.</th>
+                            <th scope="col">Job Title</th>
+                            <th scope="col">First Name</th>
+                            <th scope="col">Last Name</th>
+                            <th scope="col">Received Date</th>
+                            <th scope="col">Status</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                }
+                {search.length > 0 && applications.length > 0 &&
                     <tbody>
                         {applications.map((application, index) => (
                             <tr key={index}>
@@ -127,6 +122,30 @@ export default function RecruiterView() {
                             </tr>
                         ))}
 
+                    </tbody>
+                }
+                {search.length > 0 && applications.length === 0 &&
+                    <tbody> <tr> <td colSpan="7" style={{ textAlign: "center" }}> <h3> No Results Found </h3> </td> </tr> </tbody>
+                }
+                {search.length === 0 && allApplications.length > 0 &&
+                    <tbody>
+                        {allApplications.map((application, index) => (
+                            <tr key={index}>
+                                <th scope="row">{index + 1}</th>
+                                <td>{application.vacancyNo}</td>
+                                <td>{application.jobTitle}</td>
+                                <td>{application.applicantFirstName}</td>
+                                <td>{application.applicantLastName}</td>
+                                <td>{application.appliedDate}</td>
+                                <td>
+                                    {application.status === "Pending" && <span style={{ color: 'black' }}>{application.status}</span>}
+                                    {application.status === "Accepted" && <span style={{ color: 'green' }}>{application.status}</span>}
+                                    {application.status === "Rejected" && <span style={{ color: 'red' }}>{application.status}</span>}
+                                    {/* {application.status} */}
+                                </td>
+                                <td> <button type="button" className="btn btn-outline-primary" onClick={() => navigate(`/application_details/${application._id}`)}><i className="fa fa-eye" />&nbsp;View</button> </td>
+                            </tr>
+                        ))}
                     </tbody>
                 }
             </table>

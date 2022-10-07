@@ -35,6 +35,7 @@ import UpdateProfile from "./components/IT20128036/userProfile";
 import ViewUserProfile from "./components/IT20128036/ViewUserProfile";
 import Resume from "./components/IT20125202/resume/Resume";
 import Report from "./components/IT20125202/reportGeneration/report";
+import { Home } from "./components/IT20125202/Home";
 
 
 
@@ -89,7 +90,8 @@ function App() {
         <Route path="/assessment/recruiter" element={<ViewAssessment />} />
         <Route path="/assessment/update/:id" element={<EditAssessment />} />
         <Route path="/resume" element={<Resume/>} />
-        <Route path="/applicationreports" element={<Report/>} />
+        <Route path="/admin/applicationreports" element={<Report/>} />
+        <Route path="/home" element={<Home/>} />
       </Routes>
     </BrowserRouter>
   );
