@@ -27,6 +27,7 @@ export default function ViewVacancy() {
     axios.get(`http://localhost:5000/vacancy/getAll`).then((response) => {
       setVacancy(response.data.exsitingVacancy);
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [0]);
   //search record
 
@@ -130,6 +131,7 @@ export default function ViewVacancy() {
           <div className="cardContainer mx-2 ">
             <Row xs={1} md={4} className="g-4 mt-2 mx-2">
               {searchInput.length > 1
+                // eslint-disable-next-line array-callback-return
                 ? filteredResults.map((item, index) => {
                     if (item.adminStatus === "Approve")
                       return (
@@ -172,6 +174,7 @@ export default function ViewVacancy() {
                         </Col>
                       );
                   })
+                // eslint-disable-next-line array-callback-return
                 : vacancy.map((item, index) => {
                     if (item.adminStatus === "Approve")
                       return (

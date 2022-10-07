@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import swal from "sweetalert";
@@ -35,6 +36,7 @@ export default function UpdateVacancy() {
       setClosingDate(response.data.exsitingVacancy.closingDate);
       setCompanyId(response.data.exsitingVacancy.companyId);
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onSubmit = (e) => {
