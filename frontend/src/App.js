@@ -34,7 +34,7 @@ import EditAssessment from "./components/IT20127046/Assessment/Recruiter/EditAss
 import UpdateProfile from "./components/IT20128036/userProfile";
 import ViewUserProfile from "./components/IT20128036/ViewUserProfile";
 import Resume from "./components/IT20125202/resume/Resume";
-
+import Report from "./components/IT20125202/reportGeneration/report";
 
 
 
@@ -89,7 +89,7 @@ function App() {
         <Route path="/assessment/recruiter" element={<ViewAssessment />} />
         <Route path="/assessment/update/:id" element={<EditAssessment />} />
         <Route path="/resume" element={<Resume/>} />
-
+        <Route path="/applicationreports" element={<Report/>} />
       </Routes>
     </BrowserRouter>
   );

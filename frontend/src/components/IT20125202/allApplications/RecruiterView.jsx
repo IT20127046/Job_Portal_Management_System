@@ -9,6 +9,8 @@ export default function RecruiterView() {
 
     const [companyId, setCompanyId] = React.useState('');
     const [applications, setApplications] = React.useState([]);
+    const [allApplications, setAllApplications] = React.useState([]);
+    const [search, setSearch] = React.useState('');
 
     useEffect(() => {
         document.title = "All Application";
@@ -20,6 +22,7 @@ export default function RecruiterView() {
         axios.get(`http://localhost:5000/applications/received/${companyId}`).then(res => {
             if (res.data.success) {
                 setApplications(res.data.exsitingApplications);
+                setAllApplications(res.data.exsitingApplications);
             }
             // console.log(applications);
         })
@@ -34,10 +37,62 @@ export default function RecruiterView() {
             })
     }, [companyId]);
 
+    // for searching
+    const handleSearchArea = (e) => {
+        //console.log(e)
+        setSearch(e)
+
+        if (search.length > 0) {
+            if (applications.length > 0) {
+                setApplications(allApplications);
+                filterData(applications, search);
+            }
+        }
+        else {
+            //window.location.reload();
+            setApplications(allApplications);
+        }
+
+        //if (applications.length > 0) {
+        //    filterData(applications, search);
+        //}
+        //if (search == '') {
+        //    setApplications(allApplications);
+        //}
+    }
+
+    const filterData = (records, searchKey) => {
+        const searchResult = records.filter((application) =>
+            application.applicantFirstName.toLowerCase().includes(searchKey) ||
+            application.jobTitle.toLowerCase().includes(searchKey) ||
+            application.status.toLowerCase().includes(searchKey) ||
+
+            application.applicantFirstName.toUpperCase().includes(searchKey) ||
+            application.jobTitle.toUpperCase().includes(searchKey) ||
+            application.status.toUpperCase().includes(searchKey) ||
+
+            application.applicantFirstName.includes(searchKey) ||
+            application.jobTitle.includes(searchKey) ||
+            application.status.includes(searchKey)
+        )
+
+        setApplications(searchResult);
+    }
+
     return (
         <div>
             <br />
             <h1 style={{ textAlign: "center" }}> All Received Applications </h1>
+            <div className='col-lg-3 mt-2 mb-2'>
+                <input
+                    className='form-control'
+                    type="search"
+                    value={search}
+                    placeholder="Search..."
+                    name="searchQuery"
+                    onChange={(e) => handleSearchArea(e.target.value)}>
+                </input>
+            </div>
             <hr />
             <table className="table table-hover" style={{ border: '1px solid lightgray' }}>
                 <thead className="thead-light">
