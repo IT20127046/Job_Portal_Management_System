@@ -32,9 +32,6 @@ VacancyRouter.put("/vacancy/update/:id", VacancyController.update_vacancy);
 VacancyRouter.delete("/vacancy/delete/:id", VacancyController.delete_vacancy);
 
 // Get Vacancy By Name
-VacancyRouter.get(
-  "/vacancy/get/name/:name",
-  VacancyController.getVacancyByName
-);
+VacancyRouter.get( "/vacancy/get/name/:name", VacancyController.getVacancyByName);
 
 module.exports = VacancyRouter;

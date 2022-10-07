@@ -1,6 +1,6 @@
-const VacancyModel = require("../models/vacancyModal")
+const VacancyModel = require("../models/vacancyModal");
 // Save Vacancy Details
-const save_vacancy = async (req, res)=>{
+const save_vacancy = async (req, res) => {
   const newVacancy = new VacancyModel({
     jobId: req.body.jobId,
     jobTitle: req.body.jobTitle,
@@ -13,7 +13,7 @@ const save_vacancy = async (req, res)=>{
     image: req.file.originalname,
     closingDate: req.body.closingDate,
     adminStatus: req.body.adminStatus,
-    companyId: req.body.companyId
+    companyId: req.body.companyId,
   });
   await newVacancy
     .save()
@@ -102,5 +102,5 @@ module.exports = {
   get_vacancy,
   update_vacancy,
   delete_vacancy,
-  getVacancyByName, 
+  getVacancyByName,
 };

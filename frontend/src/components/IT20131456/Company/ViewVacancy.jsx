@@ -17,7 +17,7 @@ export default function ViewVacancy() {
     const decoded = jwt_decode(userToken);
     setCompanyName(decoded.name);
     let name = companyName;
-    console.log(name);
+
     axios
       .get(`http://localhost:5000/vacancy/get/name/${name}`)
       .then((response) => {
@@ -26,7 +26,6 @@ export default function ViewVacancy() {
   }, [companyName]);
 
   const onDelete = (id) => {
-    console.log(id);
     axios.delete(`http://localhost:5000/vacancy/delete/${id}`).then((res) => {
       if (res.data.success) {
         swal("Are you sure to delete the vacancy?", "", "warning");
@@ -63,18 +62,17 @@ export default function ViewVacancy() {
           paddingRight: "50px",
           paddingBottom: "50px",
           paddingTop: "10px",
-          backgroundImage: `url(${image})`,          
+          backgroundImage: `url(${image})`,
           backgroundSize: "cover",
           margin: "0px 0px 0px 0px",
           overflowY: "scroll",
           height: "100vh",
-          borderTop: "5px solid black",       
+          borderTop: "5px solid black",
         }}
       >
         <div
           className="jumbotron"
-          style={{ background: "white", minHeight: "100vh"}}
-          
+          style={{ background: "white", minHeight: "100vh" }}
         >
           <br />
 

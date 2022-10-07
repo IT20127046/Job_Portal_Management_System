@@ -23,19 +23,17 @@ import UpdateVacancy from "./components/IT20131456/Company/UpdateVacancy";
 import ViewVacancy from "./components/IT20131456/Company/ViewVacancy";
 import Example from "./components/IT20128036/userManagement/barChart";
 import BChart from "./components/IT20128036/userManagement/bChart";
-
-
 import ViewVacancyAdmin from "./components/IT20131456/Admin/ViewVacancyAdmin";
 import ViewPostedVacancies from "./components/IT20131456/Jobseeker/ViewPostedVacancies";
+import GenarateVacancyReport from "./components/IT20131456/Company/GenarateVacancyReport";
 import EditInterview from "./components/IT20127046/Interview/Recruiter/EditInterview";
 import ViewInterview from "./components/IT20127046/Interview/Recruiter/ViewInterview";
 import AddAssessment from "./components/IT20127046/Interview/Recruiter/AddAssessment";
 import ViewAssessment from "./components/IT20127046/Interview/Recruiter/ViewAssessment";
 import EditAssessment from "./components/IT20127046/Interview/Recruiter/EditAssessment";
-
 import UpdateProfile from "./components/IT20128036/userProfile";
 import ViewUserProfile from "./components/IT20128036/ViewUserProfile";
-
+import Resume from "./components/IT20125202/resume/Resume";
 
 
 
@@ -84,14 +82,13 @@ function App() {
         <Route path="/view/vacancy" element={<ViewVacancy />} />
         <Route path="/update/vacancy/:id" element={<UpdateVacancy />} />
         <Route path="/view/vacancy/jobseeker" element={<ViewPostedVacancies/>} />
-
-
+        <Route path="/genarate/vacancy/report" element={<GenarateVacancyReport/>} />
         <Route path="/userprofile" element={<UpdateProfile/>} />
         <Route path="/userprofile/view" element={<ViewUserProfile/>} />
-
         <Route path="/assessment/add" element={<AddAssessment />} />
         <Route path="/assessment/recruiter" element={<ViewAssessment />} />
         <Route path="/assessment/update/:id" element={<EditAssessment />} />
+        <Route path="/resume" element={<Resume/>} />
 
       </Routes>
     </BrowserRouter>
