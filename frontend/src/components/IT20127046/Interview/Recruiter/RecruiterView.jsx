@@ -87,7 +87,11 @@ export default function RecruiterView() {
 
           <div className="container">
             <div>
-              <a className="btn btn-primary" href="/interview/schdule">
+              <a className="btn btn-dark" href="/assessment/recruiter">
+                <i className="fa fa-file"></i>&nbsp; Manage Assessment
+              </a>
+
+              <a className="btn btn-primary" style={{ marginLeft: "10px" }} href="/interview/schdule">
                 <i className="fa fa-plus"></i>&nbsp; Schedule New Interview
               </a>
             </div>

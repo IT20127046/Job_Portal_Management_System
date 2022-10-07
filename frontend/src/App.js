@@ -28,9 +28,9 @@ import ViewPostedVacancies from "./components/IT20131456/Jobseeker/ViewPostedVac
 import GenarateVacancyReport from "./components/IT20131456/Company/GenarateVacancyReport";
 import EditInterview from "./components/IT20127046/Interview/Recruiter/EditInterview";
 import ViewInterview from "./components/IT20127046/Interview/Recruiter/ViewInterview";
-import AddAssessment from "./components/IT20127046/Interview/Recruiter/AddAssessment";
-import ViewAssessment from "./components/IT20127046/Interview/Recruiter/ViewAssessment";
-import EditAssessment from "./components/IT20127046/Interview/Recruiter/EditAssessment";
+import AddAssessment from "./components/IT20127046/Assessment/Recruiter/AddAssessment";
+import ViewAssessment from "./components/IT20127046/Assessment/Recruiter/ViewAssessment";
+import EditAssessment from "./components/IT20127046/Assessment/Recruiter/EditAssessment";
 import UpdateProfile from "./components/IT20128036/userProfile";
 import ViewUserProfile from "./components/IT20128036/ViewUserProfile";
 import Resume from "./components/IT20125202/resume/Resume";

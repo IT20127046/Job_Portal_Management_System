@@ -67,7 +67,11 @@ export default function ViewAssessment() {
 
           <div className="container">
             <div>
-              <a className="btn btn-primary" href="/assessment/add">
+              <a className="btn btn-dark" href="/interview/recruiter">
+                <i className="fa fa-file"></i>&nbsp; Manage Interviews
+              </a>
+
+              <a className="btn btn-primary" style={{ marginLeft: "10px" }} href="/assessment/add">
                 <i className="fa fa-plus"></i>&nbsp; Add New Assessment
               </a>
             </div>
