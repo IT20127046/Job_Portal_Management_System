@@ -91,6 +91,7 @@ export default function ViewAssessment() {
                     <th scope="col">Drive Link</th>
                     <th scope="col">Edit</th>
                     <th scope="col">Delete</th>
+                    <th scope="col">Send</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -118,6 +119,14 @@ export default function ViewAssessment() {
                         >
                           <i className="fa fa-trash"></i> Delete
                         </button>
+                      </td>
+                      <td className="text-center">
+                        <a
+                          className="btn btn-success "
+                          href={`/assessment/send/${assessment._id}`}
+                        >
+                          <i className="fa fa-arrow"></i> Send
+                        </a>
                       </td>
                     </tr>
                   ))}

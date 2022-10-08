@@ -50,6 +50,7 @@ import MyNotifications from "./components/IT20127046/Interview/JobSeeker/MyNotif
 
 import Report from "./components/IT20125202/reportGeneration/report";
 import { Home } from "./components/IT20125202/Home";
+import SendAssessment from "./components/IT20127046/Assessment/Recruiter/SendAssessment";
 
 
 
@@ -122,6 +123,7 @@ function App() {
         <Route path="/resume" element={<Resume/>} />
 
         <Route path="/interview/jobseeker/notification" element={<MyNotifications />} />
+        <Route path="/assessment/send/:id" element={<SendAssessment />} />
 
 
         <Route path="/home" element={<Home/>} />
