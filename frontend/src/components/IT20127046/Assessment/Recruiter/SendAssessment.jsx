@@ -62,15 +62,14 @@ export default function SendAssessment() {
       answer: answer,
     };
 
-    //sendAssessment(data);
-    console.log(data);
+    sendAssessment(data);
   };
 
   const sendAssessment = (data) => {
     console.log(data);
-    axios.post(`http://localhost:5000/assessment/add`, data).then((res) => {
+    axios.post(`http://localhost:5000/sendAssessment/add`, data).then((res) => {
       if (res.data.success) {
-        swal("Success!", "Assessment Addedd Successfull", "success").then(
+        swal("Success!", "Assessment Send Successfull", "success").then(
           (value) => {
             window.location = "/assessment/recruiter";
           }

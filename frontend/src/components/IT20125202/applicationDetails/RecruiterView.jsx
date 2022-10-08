@@ -123,6 +123,10 @@ const RecruiterView = () => {
 
     const onclickNext = () => {
         // to navigate to the interview and assigment page
+        console.log(applicationDet.applicantId);
+        console.log(applicationDet.jobTitle);
+
+        window.location = `/interview/schdule/${applicationDet.applicantId}/${applicationDet.jobTitle}/${applicationDet.applicantFirstName}`;
     }
 
     return (
@@ -298,7 +302,7 @@ const RecruiterView = () => {
                     {applicationDet.status === 'Accepted' &&
                         <div className='col'>
                             <div style={{ textAlign: 'center' }}>
-                                <button type="button" className="btn btn-outline-dark" onClick={() => onclickNext()}> <h5>Next</h5></button>
+                                <button type="button" className="btn btn-outline-dark" onClick={() => onclickNext()}> <h5>Interview</h5></button>
                             </div>
                         </div>
                     }
