@@ -97,4 +97,16 @@ const update_application = function (req, res){
   );
 }
 
-module.exports = { save_application, getAll_applications, getAll_receivedApplications, getAll_submittedApplications, get_application, update_application }
+const get_submittedApplication = function (req, res){
+  ApplicationModel.findOne( { applicantId: req.params.applicant,  vacancyNo: req.params.vacancy }, (err,exsitingApplication)=>{
+      if(err){
+          return res.status(400).json({success:false, err});
+      }
+      return res.status(200).json({
+          success:true,
+          exsitingApplication
+      });
+  });
+}
+
+module.exports = { save_application, getAll_applications, getAll_receivedApplications, getAll_submittedApplications, get_application, update_application, get_submittedApplication };
