@@ -1,9 +1,13 @@
 import swal from 'sweetalert';
 
+/**
+ * @param {object} obj
+ * @returns {boolean}
+ * @description validate the application form
+ */
+
 const validateApplication = (obj) => {
 
-    // console.log(obj);
-    
     if (obj.vacancyNo === '' || obj.companyId === '' || obj.campanyName === '' || obj.applicantId === '' || obj.jobTitle === '') {
         swal("Error!", "Something wend wrong.. Please try again", "error");
         return false;

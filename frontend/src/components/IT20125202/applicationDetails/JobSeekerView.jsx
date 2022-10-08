@@ -2,10 +2,14 @@ import React, { useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 
+/**
+ * @description This component is used to display the details of a selected submitted application to the logged in job seeker
+ */
+
 const JobSeekerView = () => {
     const { id } = useParams();
     const navigate = useNavigate();
-
+    const [isLoading, setIsLoading] = React.useState(true);
     const [applicationDet, setApplicationDet] = React.useState({
         vacancyNo: '',
         companyId: '',
@@ -29,11 +33,8 @@ const JobSeekerView = () => {
     });
 
     useEffect(() => {
-
-        // console.log(params);
         axios.get(`http://localhost:5000/applications/${id}`)
             .then(response => {
-
                 if (response.data.success) {
                     let data = response.data.exsitingApplication;
                     setApplicationDet({
@@ -57,16 +58,18 @@ const JobSeekerView = () => {
                         status: data.status,
                         comments: data.comments
                     });
+                    setIsLoading(false);
                 }
-
-                // console.log(response.data.exsitingApplication);
-                // console.log(applicationDet);
             })
             .catch(error => {
                 console.log(error);
             })
-
     }, [id]);
+
+    // notify the user when the fetching records from the database is not completed
+    if (isLoading) {
+        return <div style={{ textAlign: 'çenter' }}> <h3>Loading...</h3></div>;
+    }
 
     return (
         <div className="container-fluid" style={{ maxWidth: 800 }}>
@@ -95,7 +98,6 @@ const JobSeekerView = () => {
                     <small id="jobTitleHelp" className="form-text text-muted"></small>
                 </div>
                 <br />
-
                 <div className="row">
                     <div className="col">
                         <div className="form-group">

@@ -3,10 +3,14 @@ import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
 
+/**
+ * @description This component is used to display all the received applications of a logged in recruiter.
+ */
+
 export default function RecruiterView() {
 
     let navigate = useNavigate();
-
+    const [isLoading, setLoading] = React.useState(true);
     const [companyId, setCompanyId] = React.useState('');
     const [applications, setApplications] = React.useState([]);
     const [allApplications, setAllApplications] = React.useState([]);
@@ -16,33 +20,28 @@ export default function RecruiterView() {
         document.title = "All Application";
         const usertoken = localStorage.userToken;
         const decoded = jwt_decode(usertoken);
-
         setCompanyId(decoded._id);
-        // console.log(companyId);
         axios.get(`http://localhost:5000/applications/received/${companyId}`).then(res => {
             if (res.data.success) {
                 setApplications(res.data.exsitingApplications);
                 setAllApplications(res.data.exsitingApplications);
+                setLoading(false);
             }
-            // console.log(applications);
+        }).catch((error) => {
+            if (error.response) {
+                console.log(error.response);
+            } else if (error.request) {
+                console.log(error.request);
+            } else if (error.message) {
+                console.log(error.message);
+            }
         })
-            .catch((error) => {
-                if (error.response) {
-                    console.log(error.response);
-                } else if (error.request) {
-                    console.log(error.request);
-                } else if (error.message) {
-                    console.log(error.message);
-                }
-            })
     }, [companyId]);
 
     // for searching
     const handleSearchArea = (e) => {
-        // console.log(e.currentTarget.value)
         setSearch(e.target.value)
         setApplications(allApplications);
-
         if (search !== '') {
             setApplications(allApplications);
             filterData(search);
@@ -50,7 +49,6 @@ export default function RecruiterView() {
     }
 
     const filterData = (searchKey) => {
-
         const searchResult = applications.filter((application) =>
             application.applicantFirstName.toLowerCase().includes(searchKey) ||
             application.jobTitle.toLowerCase().includes(searchKey) ||
@@ -64,8 +62,12 @@ export default function RecruiterView() {
             application.jobTitle.includes(searchKey) ||
             application.status.includes(searchKey)
         )
-
         setApplications(searchResult);
+    }
+
+    // notify the user when the fetching records from the database is not completed
+    if (isLoading) {
+        return <div style={{ textAlign: 'çenter' }}> <h3>Loading...</h3></div>;
     }
 
     return (
@@ -83,7 +85,6 @@ export default function RecruiterView() {
                 </input>
             </div>
             <hr />
-
             {allApplications.length === 0 &&
                 <div style={{ textAlign: 'center' }}><h3> No Results Found </h3></div>
             }
@@ -121,7 +122,6 @@ export default function RecruiterView() {
                                 <td> <button type="button" className="btn btn-outline-primary" onClick={() => navigate(`/application_details/${application._id}`)}><i className="fa fa-eye" />&nbsp;View</button> </td>
                             </tr>
                         ))}
-
                     </tbody>
                 }
                 {search.length > 0 && applications.length === 0 &&
