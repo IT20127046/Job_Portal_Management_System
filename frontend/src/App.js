@@ -33,6 +33,12 @@ import ViewInterview from "./components/IT20127046/Interview/Recruiter/ViewInter
 import UpdateProfile from "./components/IT20128036/userProfile";
 import ViewUserProfile from "./components/IT20128036/ViewUserProfile";
 
+import { ExportPDF } from "./components/IT20128036/userManagement/exportPDF";
+
+
+import ChangePassword from "./components/IT20128036/ChangePassword";
+
+import UpdateProfilePhoto from "./components/IT20128036/EditProfilePhoto";
 
 
 
@@ -62,6 +68,13 @@ function App() {
         <Route path="/admin/bchart" element={<BChart/>} />
 
 
+        <Route path="/admin/user/report" element={<ExportPDF/>} />
+
+        
+        
+
+
+
         {/* ---------------Job Recruters / Job Seekers --------------- */}
         <Route path="/" element={<LandingPage />} />
         <Route path="/application/:id" element={<ApplicationPage />} />
@@ -84,6 +97,12 @@ function App() {
 
         <Route path="/userprofile" element={<UpdateProfile/>} />
         <Route path="/userprofile/view" element={<ViewUserProfile/>} />
+        <Route path="/userprofile/update/photo" element={<UpdateProfilePhoto/>} />
+
+        <Route path="/user/change/password" element={<ChangePassword/>} />
+
+
+
       </Routes>
     </BrowserRouter>
   );
