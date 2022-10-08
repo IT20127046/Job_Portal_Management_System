@@ -60,7 +60,7 @@ const Form = () => {
                 }
             })
             .catch(error => {
-                console.log(error);
+                console.log('Error while fetching the vacancy details from DB. Error: ', error);
             });
 
         // retrieve application if the job seeker has already applied for the vacancy and redirect to all applications page
@@ -79,7 +79,7 @@ const Form = () => {
                 }
             })
             .catch(err => {
-                console.log(err);
+                console.log('Error while checking the submitted applications for the vacancy. Error: ', err);
             })
 
         // retrieve resume if the job seeker has already maintained a resume in the system
@@ -99,7 +99,7 @@ const Form = () => {
                 }
             })
             .catch(error => {
-                console.log(error);
+                console.log('Error while fetching the resume details from DB. Error: ', error);
             })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id, applicantId, req, message]);

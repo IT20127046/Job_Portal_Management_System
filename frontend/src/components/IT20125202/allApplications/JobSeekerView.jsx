@@ -28,13 +28,7 @@ export default function JobSeekerView() {
                 setLoading(false);
             }
         }).catch((error) => {
-            if (error.response) {
-                console.log(error.response);
-            } else if (error.request) {
-                console.log(error.request);
-            } else if (error.message) {
-                console.log(error.message);
-            }
+            console.log('Error while fetching the records from db. Error: ', error);
         })
     }, [applicantId]);
 

@@ -40,13 +40,7 @@ function Report() {
             }
         })
             .catch((error) => {
-                if (error.response) {
-                    console.log(error.response);
-                } else if (error.request) {
-                    console.log(error.request);
-                } else if (error.message) {
-                    console.log(error.message);
-                }
+                console.log('Error while fetching all the applications. Error: ', error);
             })
 
         setPending(Applications.filter((application) => application.status === "Pending"));
