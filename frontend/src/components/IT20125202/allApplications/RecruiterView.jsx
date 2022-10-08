@@ -106,7 +106,7 @@ export default function RecruiterView() {
                                 <td>{application.jobTitle}</td>
                                 <td>{application.applicantFirstName}</td>
                                 <td>{application.applicantLastName}</td>
-                                <td>{application.appliedDate}</td>
+                                <td>{new Date(application.appliedDate).toString()}</td>
                                 <td>
                                     {application.status === "Pending" && <span style={{ color: 'black' }}>{application.status}</span>}
                                     {application.status === "Accepted" && <span style={{ color: 'green' }}>{application.status}</span>}
