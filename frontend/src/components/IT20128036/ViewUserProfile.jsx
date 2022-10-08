@@ -22,7 +22,7 @@ export default function ViewUserProfile() {
   const [address, setAddress] = useState("");
   const [type, setType] = useState("");
   // const [file, setFile] = useState("Cell-Row-0-Col-0.png");
-  const [file, setFile] = useState("1234.jpg");
+  const [file, setFile] = useState("1234.png");
 
   const [website, setWebsite] = useState("update your website");
   const [csize, setCsize] = useState("update company size");
