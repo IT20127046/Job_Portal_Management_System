@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import swal from 'sweetalert';
 import image from '../../../images/back.jpg';
 import bgimg from '../../../images/back1.jpg'
@@ -6,6 +6,11 @@ import bgimg from '../../../images/back1.jpg'
 function AdminLogin() {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+
+    React.useEffect(() => {
+        document.title = "Admin Login";
+        localStorage.removeItem('token');
+    }, []);
 
     async function loginAdmin(e) {
         e.preventDefault()

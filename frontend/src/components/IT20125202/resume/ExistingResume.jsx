@@ -1,81 +1,28 @@
 import React, { useEffect } from 'react';
-import './form.css';
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
-import validateApplication from './validations';
-import { useParams, useNavigate } from 'react-router-dom';
 import swal from 'sweetalert';
+import validate from './validate';
 
 /**
- * @description This component is used to display the job application form to a logged in job seeker.
- *          - The company and vacancy details will be get from the url.
- *          - The job seeker's contact details will be get from the userToken.
- *          - If the job seeker has already applied for the vacancy, the form will be disabled. -------------------------------------------
- *          - If the job seeker maintains a resume in the system, the application form will be pre-filled with the resume details.
- * 
- *          - Email and mobile number will be validated using validateApplication function.
+ * @description This component is to display the resume details for the user if the user has already created a resume with update and delete options
  */
 
-const Form = () => {
+const ExistingResume = () => {
 
-    const navigate = useNavigate();
-    const { id } = useParams();
-    const [isLoading, setLoading] = React.useState(true);
-    const [vacancyNo, setVacancyNo] = React.useState(''); //should get from the selected vacancy 
-    const [companyId, setCompanyId] = React.useState(''); //should get from the selected vacancy 
-    const [companyName, setCompanyName] = React.useState(''); //should get from the selected vacancy 
-    const [applicantId, setapplicantId] = React.useState(''); //should get from the current session
-    const [jobTitle, setJobTitle] = React.useState('title 2'); //should get from the selected vacancy 
+    const [isLoading, setIsLoading] = React.useState(true);
+    const [id, setId] = React.useState('');
+    const [userId, setUserId] = React.useState('');
     const [firstName, setFirstName] = React.useState('');
     const [lastName, setLastName] = React.useState('');
     const [email, setEmail] = React.useState('');
-    const [phone, setPhone] = React.useState('');
-    const [educationalQualifications, setEducationalQualifications] = React.useState([{}]);
-    const [experience, setExperience] = React.useState([{}]);
-    const [skills, setSkills] = React.useState([{}]);
-    const [languages, setLanguages] = React.useState([{}]);
-    const [referees, setReferees] = React.useState([{}]);
-    const [coverLetter, setCoverLetter] = React.useState('');
-    const [additionalInformation, setAdditionalInformation] = React.useState('');
-
-    useEffect(() => {
-        document.title = "Application";
-        const usertoken = localStorage.userToken;
-        const decoded = jwt_decode(usertoken);
-        setapplicantId(decoded._id);
-        axios.get(`http://localhost:5000/vacancy/get/${id}`)
-            .then(response => {
-                if (response.data.success) {
-                    let data = response.data.exsitingVacancy;
-                    setVacancyNo(data.jobId);
-                    setJobTitle(data.jobTitle);
-                    setCompanyName(data.company);
-                    setCompanyId(data.companyId);
-                }
-            })
-            .catch(error => {
-                console.log(error);
-            });
-
-        axios.get(`http://localhost:5000/resumes/${applicantId}`)
-            .then(response => {
-                if (response.data.exsitingResume) {
-                    setFirstName(response.data.exsitingResume.firstName);
-                    setLastName(response.data.exsitingResume.lastName);
-                    setEmail(response.data.exsitingResume.email);
-                    setPhone(response.data.exsitingResume.phone);
-                    setEducationalQualifications(response.data.exsitingResume.educationalQualifications);
-                    setExperience(response.data.exsitingResume.experience);
-                    setSkills(response.data.exsitingResume.skills);
-                    setLanguages(response.data.exsitingResume.languages);
-                    setReferees(response.data.exsitingResume.referees);
-                    setLoading(false);
-                }
-            })
-            .catch(error => {
-                console.log(error);
-            })
-    }, [id, applicantId]);
+    const [mobile, setMobile] = React.useState('');
+    const [updatedDate, setUpdatedDate] = React.useState('');
+    const [educationalQualifications, setEducationalQualifications] = React.useState([]);
+    const [experience, setExperience] = React.useState([]);
+    const [skills, setSkills] = React.useState([]);
+    const [languages, setLanguages] = React.useState([]);
+    const [referees, setReferees] = React.useState([]);
 
     // handleArrayAdd, handleArrayRemove, handleArrayChange methods are used to add, remove and change elements in arrays
     const handleArrayAdd = (array, setArray) => {
@@ -95,67 +42,94 @@ const Form = () => {
         setArray(list);
     }
 
+    useEffect(() => {
+        const usertoken = localStorage.userToken;
+        const decoded = jwt_decode(usertoken);
+        setUserId(decoded._id);
+        axios.get(`http://localhost:5000/resumes/${userId}`)
+            .then(response => {
+                if (response.data.success) {
+                    let data = response.data.exsitingResume;
 
-    const saveData = async (e) => {
-        e.preventDefault();
-        let application = {
-            vacancyNo: vacancyNo,
-            companyId: companyId,
-            companyName: companyName,
-            applicantId: applicantId,
-            jobTitle: jobTitle,
-            applicantFirstName: firstName,
-            applicantLastName: lastName,
-            applicantEmail: email,
-            applicantPhone: phone,
-            appliedDate: new Date(),
-            educationalQualifications: educationalQualifications,
-            experience: experience,
-            skills: skills,
-            languages: languages,
-            referees: referees,
-            coverLetter: coverLetter,
-            additionalInformation: additionalInformation,
-            status: 'Pending',
-            comments: ''
-        }
-
-        //validate and save the application
-        if (validateApplication(application)) {
-            await axios.post('http://localhost:5000/applications/apply', application).then(res => {
-                swal("Application submitted successfully!", "", "success")
-                    .then((value) => {
-                        if (value) {
-                            navigate('/all_applications');
-                        }
-                    });
-                setVacancyNo('');
-                setCompanyId('');
-                setCompanyName('');
-                setapplicantId('');
-                setJobTitle('');
-                setFirstName('');
-                setLastName('');
-                setEmail('');
-                setPhone('');
-                setEducationalQualifications([{}]);
-                setExperience([{}]);
-                setSkills([{}]);
-                setLanguages([{}]);
-                setReferees([{}]);
-                setCoverLetter('');
-                setAdditionalInformation('');
-            }).catch(error => {
-                if (error.response.status === 400) {
-                    swal('Please fill all the marked fields')
+                    setId(data._id);
+                    setFirstName(data.firstName);
+                    setLastName(data.lastName);
+                    setEmail(data.email);
+                    setMobile(data.mobile);
+                    setUpdatedDate(data.updatedDate);
+                    setEducationalQualifications(data.educationalQualifications);
+                    setExperience(data.experience);
+                    setSkills(data.skills);
+                    setLanguages(data.languages);
+                    setReferees(data.referees);
+                    setIsLoading(false);
                 }
-            }).finally(() => {
-            }
-            );
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }, [id, userId]);
+
+    const updateData = (e) => {
+        const resume = {
+            email: email,
+            mobile: mobile,
+        }
+        if (validate(resume)) {
+            axios.patch(`http://localhost:5000/resumes/update/${id}`, {
+                userId: userId,
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                mobile: mobile,
+                updatedDate: updatedDate,
+                educationalQualifications: educationalQualifications,
+                experience: experience,
+                skills: skills,
+                languages: languages,
+                referees: referees,
+            })
+                .then(response => {
+                    if (response.data.success) {
+                        swal("Resume updated successfully!", "", "success")
+                            .then((value) => {
+                                if (value) {
+                                    window.location.reload(false);
+                                }
+                            });
+                    }
+                })
+                .catch(error => {
+                    console.log(error);
+                }
+                );
         }
     }
 
-    // notify the user when the fetching records from the database is not completed
+    const deleteResume = (e) => {
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this resume!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    axios.delete(`http://localhost:5000/resumes/delete/${id}`).then((res) => {
+                        swal("Resume Deleted Permanently!", "", "success")
+                            .then((value) => {
+                                if (value) {
+                                    window.location.reload(false);
+                                }
+                            });
+                    })
+                } else {
+                    swal("Cancelled. Your resume is safe!");
+                }
+            });
+    }
+
     if (isLoading) {
         return <div style={{ textAlign: 'çenter' }}> <h3>Loading...</h3></div>;
     }
@@ -164,36 +138,15 @@ const Form = () => {
         <div className="container-fluid" style={{ maxWidth: 800 }}>
             <form>
                 <br />
+                <h6 style={{ textAlign: 'center' }}> Details in the resume will be automatically filled in the application forms. </h6>
                 <hr />
-                <h6> All the fields marked with the (<span className="required_label" /> ) should be filled. </h6>
-                <br />
-                {/* First three fields should be filled automatically when click the apply button in vacancy */}
-                <div className="form-group">
-                    {/* vacancy no */}
-                    <label htmlFor="vacancyNo"><h6>Vacancy No.</h6></label>
-                    <input type="text" className="form-control" id="vacancyNo" aria-describedby="vacancyNoHelp" placeholder={vacancyNo} readOnly />
-                    <small id="vacancyNoHelp" className="form-text text-muted"></small>
-                </div>
-                <br />
-                <div className="form-group">
-                    {/* company  */}
-                    <label htmlFor="company"><h6>Company</h6></label>
-                    <input type="text" className="form-control" id="company" aria-describedby="companyHelp" placeholder={companyName} readOnly />
-                    <small id="companyHelp" className="form-text text-muted"></small>
-                </div>
-                <br />
-                <div className="form-group">
-                    {/* job title */}
-                    <label htmlFor="jobTitle"><h6>Job title</h6></label>
-                    <input type="text" className="form-control" id="jobTitle" aria-describedby="jobTitleHelp" placeholder={jobTitle} readOnly />
-                    <small id="jobTitleHelp" className="form-text text-muted"></small>
-                </div>
+                <span className="required_label" /> Required
                 <br />
                 <div className="row">
                     <div className="col">
                         <div className="form-group">
                             {/* applict's first name */}
-                            <label htmlFor="firstNameInput"><h6>First name <span className="required_label" /></h6> </label>
+                            <label htmlFor="firstNameInput"><h6>First name </h6> </label>
                             <input type="text" name='firstName' value={firstName} onChange={(e) => setFirstName(e.target.value)} className="form-control" id="firstNameInput" aria-describedby="firstNameHelp" placeholder="Enter first name" required />
                             <small id="firstNameHelp" className="form-text text-muted"></small>
                         </div>
@@ -201,7 +154,7 @@ const Form = () => {
                     <div className="col">
                         <div className="form-group">
                             {/* applicant's last name */}
-                            <label htmlFor="lastNameInput"><h6>Last name <span className="required_label" /></h6> </label>
+                            <label htmlFor="lastNameInput"><h6>Last name </h6> </label>
                             <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} className="form-control" id="lastNameInput" aria-describedby="lastNameHelp" placeholder="Enter last name" required />
                             <small id="lastNameHelp" className="form-text text-muted"></small>
                         </div>
@@ -210,20 +163,20 @@ const Form = () => {
                 <br />
                 <div className="form-group">
                     {/* applicant's email */}
-                    <label htmlFor="EmailInput"><h6>Email address <span className="required_label" /></h6> </label>
+                    <label htmlFor="EmailInput"><h6>Email address </h6> </label>
                     <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="form-control" id="EmailInput" aria-describedby="emailHelp" placeholder="Enter email" required />
                     <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
                 </div>
                 <br />
                 <div className="form-group">
                     {/* applicant's phone number */}
-                    <label htmlFor="mobileNumber"><h6>Mobile number <span className="required_label" /></h6> </label>
-                    <input type="text" value={phone} onChange={(e) => setPhone(e.target.value)} className="form-control" id="mobileNumber" aria-describedby="mobileHelp" placeholder="Enter mobile number" required />
+                    <label htmlFor="mobileNumber"><h6>Mobile number </h6> </label>
+                    <input type="text" value={mobile} onChange={(e) => setMobile(e.target.value)} className="form-control" id="mobileNumber" aria-describedby="mobileHelp" placeholder="Enter mobile number" required />
                     <small id="mobileHelp" className="form-text text-muted">We'll never share your mobile number with anyone else.</small>
                 </div>
                 <br />
                 <div className="form-group">
-                    <label htmlFor="educationalQualifications"><h6>Education <span className="required_label" /></h6> </label>
+                    <label htmlFor="educationalQualifications"><h6>Education </h6> </label>
                     {educationalQualifications.map((oneQualification, index) => (
                         <div key={index}>
                             <div className="form-group">
@@ -283,7 +236,7 @@ const Form = () => {
                 </div>
                 <br />
                 <div className="form-group">
-                    <label htmlFor="skills"><h6>Skills <span className="required_label" /></h6></label>
+                    <label htmlFor="skills"><h6>Skills </h6></label>
                     {skills.map((oneSkill, index) => (
                         <div key={index}>
                             <div className="form-group">
@@ -313,7 +266,7 @@ const Form = () => {
                 </div>
                 <br />
                 <div className="form-group">
-                    <label htmlFor="languages"><h6>Languages <span className="required_label" /></h6></label>
+                    <label htmlFor="languages"><h6>Languages </h6></label>
                     {languages.map((oneLanguage, index) => (
                         <div key={index}>
                             <div className="form-group">
@@ -371,28 +324,18 @@ const Form = () => {
                         </div>
                     ))}
                 </div>
-                <br />
-                <div className="form-group">
-                    {/* cover letter */}
-                    <label htmlFor="coverLetter"><h6>Cover Letter <span className="required_label" /></h6> </label>
-                    <textarea value={coverLetter} onChange={(e) => setCoverLetter(e.target.value)} className="form-control" id="coverLetter" rows="5" required ></textarea>
-                </div>
-                <br />
-                <div className="form-group">
-                    {/* additional information */}
-                    <label htmlFor="additionalInfo"><h6>Additional information</h6></label>
-                    <textarea value={additionalInformation} onChange={(e) => setAdditionalInformation(e.target.value)} className="form-control" id="additionalInfo" rows="3"></textarea>
-                </div>
-                <br />
-                <br />
+                <br /><br />
                 <div style={{ textAlign: 'center' }}>
-                    <button type="button" className="btn btn-outline-success" onClick={(e) => saveData(e)}> <h5>Submit</h5></button>
+                    <button type="button" className="btn btn-outline-success" onClick={(e) => updateData(e)}> <h5>Update</h5></button>
                 </div>
-                <br />
-                <br />
+                &nbsp;
+                <div style={{ textAlign: 'center' }}>
+                    <button type="button" className="btn btn-outline-danger" onClick={(e) => deleteResume(e)}> <h5>Delete Resume</h5></button>
+                </div>
+                <br /><br />
             </form>
         </div>
     )
 }
 
-export default Form;
+export default ExistingResume;

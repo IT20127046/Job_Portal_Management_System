@@ -4,7 +4,7 @@ import swal from "sweetalert";
 
 export default function ViewPostedVacanciesModal(props) {
   var imageBasePath =
-    window.location.protocol + "//" + window.location.host + "/images/vacancy/";
+    window.location.protocol + "//" + window.location.host + "/images/";
 
   const [adminStatusAccept] = useState("Approve");
   const [adminStatusDecline] = useState("Decline");
@@ -16,7 +16,6 @@ export default function ViewPostedVacanciesModal(props) {
       adminStatus: adminStatusAccept,
     };
 
-    console.log(data);
     axios
       .put(`http://localhost:5000/vacancy/update/${props.jobId}`, data)
       .then((res) => {

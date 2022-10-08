@@ -1,31 +1,18 @@
 import React, { useEffect } from 'react';
-import './form.css';
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
-import validateApplication from './validations';
-import { useParams, useNavigate } from 'react-router-dom';
+import validate from './validate';
+import { useParams } from 'react-router-dom';
 import swal from 'sweetalert';
 
 /**
- * @description This component is used to display the job application form to a logged in job seeker.
- *          - The company and vacancy details will be get from the url.
- *          - The job seeker's contact details will be get from the userToken.
- *          - If the job seeker has already applied for the vacancy, the form will be disabled. -------------------------------------------
- *          - If the job seeker maintains a resume in the system, the application form will be pre-filled with the resume details.
- * 
- *          - Email and mobile number will be validated using validateApplication function.
+ * @description This component is used to display the form to create a new resume if the user does not have a resume
  */
 
 const Form = () => {
 
-    const navigate = useNavigate();
     const { id } = useParams();
-    const [isLoading, setLoading] = React.useState(true);
-    const [vacancyNo, setVacancyNo] = React.useState(''); //should get from the selected vacancy 
-    const [companyId, setCompanyId] = React.useState(''); //should get from the selected vacancy 
-    const [companyName, setCompanyName] = React.useState(''); //should get from the selected vacancy 
-    const [applicantId, setapplicantId] = React.useState(''); //should get from the current session
-    const [jobTitle, setJobTitle] = React.useState('title 2'); //should get from the selected vacancy 
+    const [userId, setUserId] = React.useState('');
     const [firstName, setFirstName] = React.useState('');
     const [lastName, setLastName] = React.useState('');
     const [email, setEmail] = React.useState('');
@@ -35,47 +22,15 @@ const Form = () => {
     const [skills, setSkills] = React.useState([{}]);
     const [languages, setLanguages] = React.useState([{}]);
     const [referees, setReferees] = React.useState([{}]);
-    const [coverLetter, setCoverLetter] = React.useState('');
-    const [additionalInformation, setAdditionalInformation] = React.useState('');
 
     useEffect(() => {
-        document.title = "Application";
+        document.title = "Resume";
         const usertoken = localStorage.userToken;
         const decoded = jwt_decode(usertoken);
-        setapplicantId(decoded._id);
-        axios.get(`http://localhost:5000/vacancy/get/${id}`)
-            .then(response => {
-                if (response.data.success) {
-                    let data = response.data.exsitingVacancy;
-                    setVacancyNo(data.jobId);
-                    setJobTitle(data.jobTitle);
-                    setCompanyName(data.company);
-                    setCompanyId(data.companyId);
-                }
-            })
-            .catch(error => {
-                console.log(error);
-            });
-
-        axios.get(`http://localhost:5000/resumes/${applicantId}`)
-            .then(response => {
-                if (response.data.exsitingResume) {
-                    setFirstName(response.data.exsitingResume.firstName);
-                    setLastName(response.data.exsitingResume.lastName);
-                    setEmail(response.data.exsitingResume.email);
-                    setPhone(response.data.exsitingResume.phone);
-                    setEducationalQualifications(response.data.exsitingResume.educationalQualifications);
-                    setExperience(response.data.exsitingResume.experience);
-                    setSkills(response.data.exsitingResume.skills);
-                    setLanguages(response.data.exsitingResume.languages);
-                    setReferees(response.data.exsitingResume.referees);
-                    setLoading(false);
-                }
-            })
-            .catch(error => {
-                console.log(error);
-            })
-    }, [id, applicantId]);
+        setUserId(decoded._id);
+        setEmail(decoded.email);
+        setPhone(decoded.mobile);
+    }, [id]);
 
     // handleArrayAdd, handleArrayRemove, handleArrayChange methods are used to add, remove and change elements in arrays
     const handleArrayAdd = (array, setArray) => {
@@ -98,97 +53,48 @@ const Form = () => {
 
     const saveData = async (e) => {
         e.preventDefault();
-        let application = {
-            vacancyNo: vacancyNo,
-            companyId: companyId,
-            companyName: companyName,
-            applicantId: applicantId,
-            jobTitle: jobTitle,
-            applicantFirstName: firstName,
-            applicantLastName: lastName,
-            applicantEmail: email,
-            applicantPhone: phone,
-            appliedDate: new Date(),
+
+        let resume = {
+            userId: userId,
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            mobile: phone,
+            createdDate: new Date(),
+            updatedDate: new Date(),
             educationalQualifications: educationalQualifications,
             experience: experience,
             skills: skills,
             languages: languages,
-            referees: referees,
-            coverLetter: coverLetter,
-            additionalInformation: additionalInformation,
-            status: 'Pending',
-            comments: ''
+            referees: referees
         }
 
-        //validate and save the application
-        if (validateApplication(application)) {
-            await axios.post('http://localhost:5000/applications/apply', application).then(res => {
-                swal("Application submitted successfully!", "", "success")
+        //validate and save data
+        if (validate(resume)) {
+            await axios.post('http://localhost:5000/resumes/save', resume).then(res => {
+                swal("Resume saved successfully!", "", "success")
                     .then((value) => {
                         if (value) {
-                            navigate('/all_applications');
+                            window.location.reload(false);
                         }
                     });
-                setVacancyNo('');
-                setCompanyId('');
-                setCompanyName('');
-                setapplicantId('');
-                setJobTitle('');
-                setFirstName('');
-                setLastName('');
-                setEmail('');
-                setPhone('');
-                setEducationalQualifications([{}]);
-                setExperience([{}]);
-                setSkills([{}]);
-                setLanguages([{}]);
-                setReferees([{}]);
-                setCoverLetter('');
-                setAdditionalInformation('');
             }).catch(error => {
                 if (error.response.status === 400) {
                     swal('Please fill all the marked fields')
                 }
             }).finally(() => {
-            }
-            );
+            });
         }
-    }
-
-    // notify the user when the fetching records from the database is not completed
-    if (isLoading) {
-        return <div style={{ textAlign: 'çenter' }}> <h3>Loading...</h3></div>;
     }
 
     return (
         <div className="container-fluid" style={{ maxWidth: 800 }}>
             <form>
                 <br />
+                <h6 style={{ textAlign: 'center' }}> Details in the resume will be automatically filled in the application forms. </h6>
                 <hr />
-                <h6> All the fields marked with the (<span className="required_label" /> ) should be filled. </h6>
-                <br />
-                {/* First three fields should be filled automatically when click the apply button in vacancy */}
-                <div className="form-group">
-                    {/* vacancy no */}
-                    <label htmlFor="vacancyNo"><h6>Vacancy No.</h6></label>
-                    <input type="text" className="form-control" id="vacancyNo" aria-describedby="vacancyNoHelp" placeholder={vacancyNo} readOnly />
-                    <small id="vacancyNoHelp" className="form-text text-muted"></small>
-                </div>
-                <br />
-                <div className="form-group">
-                    {/* company  */}
-                    <label htmlFor="company"><h6>Company</h6></label>
-                    <input type="text" className="form-control" id="company" aria-describedby="companyHelp" placeholder={companyName} readOnly />
-                    <small id="companyHelp" className="form-text text-muted"></small>
-                </div>
-                <br />
-                <div className="form-group">
-                    {/* job title */}
-                    <label htmlFor="jobTitle"><h6>Job title</h6></label>
-                    <input type="text" className="form-control" id="jobTitle" aria-describedby="jobTitleHelp" placeholder={jobTitle} readOnly />
-                    <small id="jobTitleHelp" className="form-text text-muted"></small>
-                </div>
-                <br />
+                <span className="required_label" /> Required
+                <br /><br />
                 <div className="row">
                     <div className="col">
                         <div className="form-group">
@@ -223,7 +129,7 @@ const Form = () => {
                 </div>
                 <br />
                 <div className="form-group">
-                    <label htmlFor="educationalQualifications"><h6>Education <span className="required_label" /></h6> </label>
+                    <label htmlFor="educationalQualifications"><h6>Education </h6> </label>
                     {educationalQualifications.map((oneQualification, index) => (
                         <div key={index}>
                             <div className="form-group">
@@ -283,7 +189,7 @@ const Form = () => {
                 </div>
                 <br />
                 <div className="form-group">
-                    <label htmlFor="skills"><h6>Skills <span className="required_label" /></h6></label>
+                    <label htmlFor="skills"><h6>Skills </h6></label>
                     {skills.map((oneSkill, index) => (
                         <div key={index}>
                             <div className="form-group">
@@ -313,7 +219,7 @@ const Form = () => {
                 </div>
                 <br />
                 <div className="form-group">
-                    <label htmlFor="languages"><h6>Languages <span className="required_label" /></h6></label>
+                    <label htmlFor="languages"><h6>Languages </h6></label>
                     {languages.map((oneLanguage, index) => (
                         <div key={index}>
                             <div className="form-group">
@@ -371,25 +277,11 @@ const Form = () => {
                         </div>
                     ))}
                 </div>
-                <br />
-                <div className="form-group">
-                    {/* cover letter */}
-                    <label htmlFor="coverLetter"><h6>Cover Letter <span className="required_label" /></h6> </label>
-                    <textarea value={coverLetter} onChange={(e) => setCoverLetter(e.target.value)} className="form-control" id="coverLetter" rows="5" required ></textarea>
-                </div>
-                <br />
-                <div className="form-group">
-                    {/* additional information */}
-                    <label htmlFor="additionalInfo"><h6>Additional information</h6></label>
-                    <textarea value={additionalInformation} onChange={(e) => setAdditionalInformation(e.target.value)} className="form-control" id="additionalInfo" rows="3"></textarea>
-                </div>
-                <br />
-                <br />
+                <br /><br />
                 <div style={{ textAlign: 'center' }}>
-                    <button type="button" className="btn btn-outline-success" onClick={(e) => saveData(e)}> <h5>Submit</h5></button>
+                    <button type="button" className="btn btn-outline-success" onClick={(e) => saveData(e)}> <h5>Save</h5></button>
                 </div>
-                <br />
-                <br />
+                <br /><br />
             </form>
         </div>
     )

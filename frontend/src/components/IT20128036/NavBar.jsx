@@ -112,7 +112,7 @@ class NavBar extends Component {
             <a
               className="nav-link"
               aria-current="page"
-              href="#"
+              href="/home"
               style={{ textDecoration: "none", color: "black" }}
             >
               Home
@@ -157,6 +157,17 @@ class NavBar extends Component {
               style={{ textDecoration: "none", color: "black" }}
             >
               My Applications
+            </a>
+          </li>
+
+          <li className="nav-item">
+            <a
+              className="nav-link"
+              aria-current="page"
+              href="/resume"
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              My Resume
             </a>
           </li>
 

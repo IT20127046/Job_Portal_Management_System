@@ -25,6 +25,7 @@
     "react-to-print": "^2.14.7",
     "recharts": "^2.1.14",
     "sweetalert": "^2.1.2",
+    "victory": "^36.6.8",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

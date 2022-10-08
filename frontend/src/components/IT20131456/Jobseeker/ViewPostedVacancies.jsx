@@ -26,13 +26,6 @@ export default function ViewVacancy() {
   useEffect(() => {
     axios.get(`http://localhost:5000/vacancy/getAll`).then((response) => {
       setVacancy(response.data.exsitingVacancy);
-
-      // for (var i = 0; i <= response.data.exsitingVacancy.length; i++) {
-      //   if (response.data.exsitingVacancy[i].adminStatus === "Approve") {
-
-      //   }
-
-      // }
     });
   }, [0]);
   //search record
@@ -77,7 +70,7 @@ export default function ViewVacancy() {
   };
 
   var imageBasePath =
-    window.location.protocol + "//" + window.location.host + "/images/vacancy/";
+    window.location.protocol + "//" + window.location.host + "/images/";
 
   return (
     <div>
