@@ -44,6 +44,10 @@ import UpdateProfilePhoto from "./components/IT20128036/EditProfilePhoto";
 
 
 import Resume from "./components/IT20125202/resume/Resume";
+
+import MyNotifications from "./components/IT20127046/Interview/JobSeeker/MyNotifications";
+
+
 import Report from "./components/IT20125202/reportGeneration/report";
 import { Home } from "./components/IT20125202/Home";
 
@@ -116,6 +120,10 @@ function App() {
         <Route path="/assessment/recruiter" element={<ViewAssessment />} />
         <Route path="/assessment/update/:id" element={<EditAssessment />} />
         <Route path="/resume" element={<Resume/>} />
+
+        <Route path="/interview/jobseeker/notification" element={<MyNotifications />} />
+
+
         <Route path="/home" element={<Home/>} />
 
       </Routes>

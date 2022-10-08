@@ -85,9 +85,17 @@ export default function JobSeekerView() {
             className="container bg-light shadow p-3 mb-5 rounded mt-3"
             style={{ borderRadius: "8px" }}
           >
+
             <div className="row">
               <div className="col-3">
+                <center>
+                  <a className="btn btn-outline-success" style={{ margin: "0 10px 10px 10px" }} href="/interview/jobseeker/notification">
+                    <i className="fa fa-bell"></i>&nbsp; My Messages
+                  </a>
+                </center>
+              
                 <div className="container" style={searchPanel}>
+
                   <center>
                     <h5>Serach by Your Job</h5>
                   </center>
