@@ -17,7 +17,10 @@ ApplicationRouter.get('/applications/submitted/:id', ApplicationController.getAl
 // get details of the selected application
 ApplicationRouter.get('/applications/:id', ApplicationController.get_application);
 
-// Update record    
+// update record    
 ApplicationRouter.patch('/applications/update/:id', ApplicationController.update_application);
+
+// get the submitted application according to the user and the vacancy
+ApplicationRouter.get('/applications/submittedfor/:applicant/:vacancy', ApplicationController.get_submittedApplication);
 
 module.exports = ApplicationRouter;
