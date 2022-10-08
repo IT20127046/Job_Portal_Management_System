@@ -306,9 +306,9 @@ export default function ViewUserProfile() {
                         <span>
                           <div className="">
                             {" "}
-                            <button className="btn btn-primary rounded-sm btn-lg">
+                            <a href="/resume" className="btn btn-primary rounded-sm btn-lg">
                               My Resume
-                            </button>
+                            </a>
                           </div>
                         </span>
                       )}
