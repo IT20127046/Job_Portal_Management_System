@@ -71,6 +71,10 @@ export default function ViewAssessment() {
                 <i className="fa fa-file"></i>&nbsp; Manage Interviews
               </a>
 
+              <a className="btn btn-success" style={{ marginLeft: "10px" }} href="/sendAssessment/recruiter/view">
+                <i className="fa fa-plus"></i>&nbsp; View Send Assessments
+              </a>
+
               <a className="btn btn-primary" style={{ marginLeft: "10px" }} href="/assessment/add">
                 <i className="fa fa-plus"></i>&nbsp; Add New Assessment
               </a>
@@ -91,6 +95,7 @@ export default function ViewAssessment() {
                     <th scope="col">Drive Link</th>
                     <th scope="col">Edit</th>
                     <th scope="col">Delete</th>
+                    <th scope="col">Send</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -118,6 +123,14 @@ export default function ViewAssessment() {
                         >
                           <i className="fa fa-trash"></i> Delete
                         </button>
+                      </td>
+                      <td className="text-center">
+                        <a
+                          className="btn btn-success "
+                          href={`/assessment/send/${assessment._id}`}
+                        >
+                          <i className="fa fa-arrow"></i> Send
+                        </a>
                       </td>
                     </tr>
                   ))}

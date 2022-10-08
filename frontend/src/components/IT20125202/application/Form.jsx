@@ -25,7 +25,7 @@ const Form = () => {
     const [companyId, setCompanyId] = React.useState(''); //should get from the selected vacancy 
     const [companyName, setCompanyName] = React.useState(''); //should get from the selected vacancy 
     const [applicantId, setapplicantId] = React.useState(''); //should get from the current session
-    const [jobTitle, setJobTitle] = React.useState('title 2'); //should get from the selected vacancy 
+    const [jobTitle, setJobTitle] = React.useState(''); //should get from the selected vacancy 
     const [firstName, setFirstName] = React.useState('');
     const [lastName, setLastName] = React.useState('');
     const [email, setEmail] = React.useState('');
@@ -60,26 +60,27 @@ const Form = () => {
                 }
             })
             .catch(error => {
-                console.log(error);
+                console.log('Error while fetching the vacancy details from DB. Error: ', error);
             });
 
         // retrieve application if the job seeker has already applied for the vacancy and redirect to all applications page
         axios.get(`http://localhost:5000/applications/submittedfor/${req}`)
             .then(res => {
-                if (res.data.success) {
-                    if (res.data.exsitingApplication !== null) {
-                        setMessage("You have already applied for this vacancy on " + new Date(res.data.exsitingApplication.appliedDate).toLocaleDateString().toString());
-                        swal(message, "", "info")
-                            .then((value) => {
-                                if (value) {
-                                    navigate('/all_applications');
-                                }
-                            });
-                    }
+                if (res.data.success && res.data.exsitingApplication !== null) {
+                    setMessage("You have already applied for this vacancy on " + new Date(res.data.exsitingApplication.appliedDate).toLocaleDateString().toString());
+                    swal(message, "", "info")
+                        .then((value) => {
+                            if (value) {
+                                navigate('/all_applications');
+                            }
+                        });
+                }
+                else {
+                    setLoading(false);
                 }
             })
             .catch(err => {
-                console.log(err);
+                console.log('Error while checking the submitted applications for the vacancy. Error: ', err);
             })
 
         // retrieve resume if the job seeker has already maintained a resume in the system
@@ -99,10 +100,10 @@ const Form = () => {
                 }
             })
             .catch(error => {
-                console.log(error);
+                console.log('Error while fetching the resume details from DB. Error: ', error);
             })
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [id, applicantId, req, message]);
+    }, [applicantId, id, message, req, vacancyNo]);
 
     // handleArrayAdd, handleArrayRemove, handleArrayChange methods are used to add, remove and change elements in arrays
     const handleArrayAdd = (array, setArray) => {
@@ -135,7 +136,7 @@ const Form = () => {
             applicantLastName: lastName,
             applicantEmail: email,
             applicantPhone: phone,
-            appliedDate: new Date(),
+            appliedDate: new Date().toString(),
             educationalQualifications: educationalQualifications,
             experience: experience,
             skills: skills,
@@ -156,22 +157,6 @@ const Form = () => {
                             navigate('/all_applications');
                         }
                     });
-                setVacancyNo('');
-                setCompanyId('');
-                setCompanyName('');
-                setapplicantId('');
-                setJobTitle('');
-                setFirstName('');
-                setLastName('');
-                setEmail('');
-                setPhone('');
-                setEducationalQualifications([{}]);
-                setExperience([{}]);
-                setSkills([{}]);
-                setLanguages([{}]);
-                setReferees([{}]);
-                setCoverLetter('');
-                setAdditionalInformation('');
             }).catch(error => {
                 if (error.response.status === 400) {
                     swal('Please fill all the marked fields')

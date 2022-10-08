@@ -37,7 +37,7 @@ export default function Resume() {
         }
       })
       .catch(error => {
-        console.log(error);
+        console.log('Error while retrieving the resume details. Error: ', error);
       })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [resumeExists]);

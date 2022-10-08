@@ -3,6 +3,7 @@ import axios from "axios";
 import jwt_decode from "jwt-decode";
 import { useReactToPrint } from "react-to-print";
 import image from "../../../images/back1.jpg";
+import NavBar from "../../IT20128036/NavBar";
 import { VictoryPie } from "victory-pie";
 
 export default function GenarateVacancyReport() {
@@ -83,6 +84,7 @@ export default function GenarateVacancyReport() {
 
   return (
     <div>
+      <NavBar />
       <div
         className="jumbotron"
         style={{
@@ -92,9 +94,8 @@ export default function GenarateVacancyReport() {
           paddingTop: "10px",
           backgroundImage: `url(${image})`,
           backgroundSize: "cover",
-          margin: "0px 0px 0px 0px",
-          overflowY: "scroll",
-          height: "100vh",
+          margin: "0px 0px 0px 0px",        
+          height: "170vh",
           borderTop: "5px solid black",
         }}
       >

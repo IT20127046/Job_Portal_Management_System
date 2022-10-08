@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import "../../Main.css";
 import swal from "sweetalert";
@@ -6,6 +7,11 @@ import NavBar from "../../../IT20128036/NavBar";
 import jwt_decode from 'jwt-decode';
 
 export default function ScheduleInterview() {
+  
+  const { id } = useParams();
+  const { role } = useParams();
+  const { name } = useParams();
+
   const [recruiterId, setRecruiterId] = useState("");
   const [applicantId, setApplicantId] = useState("");
   const [applicantName, setApplicantName] = useState("");
@@ -23,11 +29,12 @@ export default function ScheduleInterview() {
     const decoded = jwt_decode(usertoken);
 
     setRecruiterId(decoded._id);
-    setApplicantId("6319a632722ce57a043ffe86");
-    setApplicantName("Oliver");
-    setJobTitle("Software Engineer");
+    setApplicantId(id);
+    setApplicantName(name);
+    setJobTitle(role);
     setDescription("Dear Candidate, Software engineering is a systematic engineering approach to software development. A software engineer is a person who applies the principles of software engineering to design, develop, maintain, test, and evaluate computer software. Software engineering is a systematic engineering approach to software development. A software engineer is a person who applies the principles of software engineering to design, develop, maintain, test, and evaluate computer software. Meeting Link - https://zoom.us/24842 Thank You!")
 
+    console.log(id + role + name);
   }, []);
 
   const handleSubmit = (e) => {

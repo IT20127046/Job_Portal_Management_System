@@ -28,13 +28,7 @@ export default function JobSeekerView() {
                 setLoading(false);
             }
         }).catch((error) => {
-            if (error.response) {
-                console.log(error.response);
-            } else if (error.request) {
-                console.log(error.request);
-            } else if (error.message) {
-                console.log(error.message);
-            }
+            console.log('Error while fetching the records from db. Error: ', error);
         })
     }, [applicantId]);
 
@@ -133,7 +127,7 @@ export default function JobSeekerView() {
                                 <td>{application.vacancyNo}</td>
                                 <td>{application.companyName}</td>
                                 <td>{application.jobTitle}</td>
-                                <td>{application.appliedDate}</td>
+                                <td>{new Date(application.appliedDate).toString()}</td>
                                 <td>
                                     {application.status === "Pending" && <span style={{ color: 'black' }}>{application.status}</span>}
                                     {application.status === "Accepted" && <span style={{ color: 'green' }}>{application.status}</span>}

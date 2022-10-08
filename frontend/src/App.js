@@ -50,6 +50,8 @@ import MyNotifications from "./components/IT20127046/Interview/JobSeeker/MyNotif
 
 import Report from "./components/IT20125202/reportGeneration/report";
 import { Home } from "./components/IT20125202/Home";
+import SendAssessment from "./components/IT20127046/Assessment/Recruiter/SendAssessment";
+import ViewSentAssessment from "./components/IT20127046/Assessment/Recruiter/ViewSentAssessment";
 
 
 
@@ -95,6 +97,7 @@ function App() {
         <Route path="/interview/recruiter" element={<RecruiterView />} />
         <Route path="/interview/jobseeker" element={<JobSeekerView />} />
         <Route path="/interview/schdule" element={<ScheduleInterview />} />
+        <Route path="/interview/schdule/:id/:role/:name" element={<ScheduleInterview />} />
         <Route path="/interview/update/:id" element={<EditInterview />} />
         <Route path="/interview/view/:id" element={<ViewInterview />} />
         <Route path="/user/registration" element={<CreateUser />} />
@@ -122,6 +125,8 @@ function App() {
         <Route path="/resume" element={<Resume/>} />
 
         <Route path="/interview/jobseeker/notification" element={<MyNotifications />} />
+        <Route path="/assessment/send/:id" element={<SendAssessment />} />
+        <Route path="/sendAssessment/recruiter/view" element={<ViewSentAssessment />} />
 
 
         <Route path="/home" element={<Home/>} />

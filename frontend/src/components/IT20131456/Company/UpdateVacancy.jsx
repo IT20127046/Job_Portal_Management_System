@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import swal from "sweetalert";
 import axios from "axios";
+import images from "../../../images/back1.jpg";
 import NavBar from "../../IT20128036/NavBar";
+
 
 export default function UpdateVacancy() {
   const { id } = useParams();
@@ -70,6 +72,25 @@ export default function UpdateVacancy() {
   return (
     <div>
       <NavBar />
+      <div
+        className="jumbotron"
+        style={{
+          paddingLeft: "50px",
+          paddingRight: "50px",
+          paddingBottom: "50px",
+          paddingTop: "10px",
+          backgroundImage: `url(${images})`,
+          backgroundSize: "cover",
+          margin: "0px 0px 0px 0px",        
+          height: "130vh",
+          borderTop: "5px solid black",
+        }}
+      >
+        <div
+          className="jumbotron"
+          style={{ background: "white", minHeight: "110vh" }}
+        >
+          <br />
       <div className="container px-5 my-3">
         <div className="row">
           <div className="float-left col-lg-9 mt-2 mb-2">
@@ -270,6 +291,8 @@ export default function UpdateVacancy() {
           </div>
         </form>
       </div>
+    </div>
+    </div>
     </div>
   );
 }

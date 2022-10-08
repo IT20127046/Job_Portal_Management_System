@@ -66,7 +66,7 @@ const ExistingResume = () => {
                 }
             })
             .catch(error => {
-                console.log(error);
+                console.log('Error while fetching the resume details. Error: ', error)
             })
     }, [id, userId]);
 
@@ -100,7 +100,7 @@ const ExistingResume = () => {
                     }
                 })
                 .catch(error => {
-                    console.log(error);
+                    console.log('Error while updating the resume details. Error: ', error)
                 }
                 );
         }
@@ -123,6 +123,8 @@ const ExistingResume = () => {
                                     window.location.reload(false);
                                 }
                             });
+                    }).catch((err) => {
+                        console.log('Error while deleting the resume details. Error: ', err);
                     })
                 } else {
                     swal("Cancelled. Your resume is safe!");

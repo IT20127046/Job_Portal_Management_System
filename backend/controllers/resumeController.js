@@ -2,7 +2,6 @@ const ResumeModel = require('../models/resumeModel');
 
 // view all resumes - will not need fot this application
 const getAll_resumes = function (req, res) {
-
     ResumeModel.find().exec((err, exsitingResumes) => {
         if (err) {
             return res.status(400).json({
@@ -18,7 +17,6 @@ const getAll_resumes = function (req, res) {
 
 // view resume of a given user
 const get_resume = function (req, res) {
-
     ResumeModel.findOne({ userId: req.params.id }).exec((err, exsitingResume) => {
         if (err) {
             return res.status(400).json({
@@ -34,16 +32,13 @@ const get_resume = function (req, res) {
 
 // save resume
 const save_resume = function (req, res) {
-
     const newResume = new ResumeModel(req.body);
-
     newResume.save((err) => {
         if (err) {
             return res.status(400).json({
                 error: err
             });
         }
-
         return res.status(200).json({
             success: true
         });
@@ -75,7 +70,6 @@ const delete_resume = function (req, res) {
         if (err) return res.status(400).json({
             message: "Delete Unsuccessful", err
         });
-
         return res.json({
             message: "Delete Successful", deletedResume
         });

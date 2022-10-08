@@ -62,7 +62,7 @@ const JobSeekerView = () => {
                 }
             })
             .catch(error => {
-                console.log(error);
+                console.log('Error white retrieving submitted applications from DB. Error: ', error);
             })
     }, [id]);
 
@@ -132,7 +132,7 @@ const JobSeekerView = () => {
                 <div className="form-group">
                     {/* applied date */}
                     <label htmlFor="coverLetter"><h6> Applied Date </h6> </label>
-                    <input type='text' value={applicationDet.appliedDate} className="form-control" id="coverLetter" readOnly />
+                    <input type='text' value={new Date(applicationDet.appliedDate).toString()} className="form-control" id="coverLetter" readOnly />
                 </div>
                 <br />
                 <div>
