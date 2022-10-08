@@ -25,7 +25,7 @@ const Form = () => {
     const [companyId, setCompanyId] = React.useState(''); //should get from the selected vacancy 
     const [companyName, setCompanyName] = React.useState(''); //should get from the selected vacancy 
     const [applicantId, setapplicantId] = React.useState(''); //should get from the current session
-    const [jobTitle, setJobTitle] = React.useState('title 2'); //should get from the selected vacancy 
+    const [jobTitle, setJobTitle] = React.useState(''); //should get from the selected vacancy 
     const [firstName, setFirstName] = React.useState('');
     const [lastName, setLastName] = React.useState('');
     const [email, setEmail] = React.useState('');
