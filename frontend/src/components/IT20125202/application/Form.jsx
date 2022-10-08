@@ -6,11 +6,21 @@ import validateApplication from './validations';
 import { useParams, useNavigate } from 'react-router-dom';
 import swal from 'sweetalert';
 
+/**
+ * @description This component is used to display the job application form to a logged in job seeker.
+ *          - The company and vacancy details will be get from the url.
+ *          - The job seeker's contact details will be get from the userToken.
+ *          - If the job seeker has already applied for the vacancy, the form will be disabled. -------------------------------------------
+ *          - If the job seeker maintains a resume in the system, the application form will be pre-filled with the resume details.
+ * 
+ *          - Email and mobile number will be validated using validateApplication function.
+ */
+
 const Form = () => {
+
     const navigate = useNavigate();
     const { id } = useParams();
-    // console.log(id)
-
+    const [isLoading, setLoading] = React.useState(true);
     const [vacancyNo, setVacancyNo] = React.useState(''); //should get from the selected vacancy 
     const [companyId, setCompanyId] = React.useState(''); //should get from the selected vacancy 
     const [companyName, setCompanyName] = React.useState(''); //should get from the selected vacancy 
@@ -30,12 +40,9 @@ const Form = () => {
 
     useEffect(() => {
         document.title = "Application";
-
         const usertoken = localStorage.userToken;
         const decoded = jwt_decode(usertoken);
-
         setapplicantId(decoded._id);
-
         axios.get(`http://localhost:5000/vacancy/get/${id}`)
             .then(response => {
                 if (response.data.success) {
@@ -48,11 +55,10 @@ const Form = () => {
             })
             .catch(error => {
                 console.log(error);
-            })
+            });
 
         axios.get(`http://localhost:5000/resumes/${applicantId}`)
             .then(response => {
-                // console.log(response.data.exsitingResume);
                 if (response.data.exsitingResume) {
                     setFirstName(response.data.exsitingResume.firstName);
                     setLastName(response.data.exsitingResume.lastName);
@@ -63,36 +69,27 @@ const Form = () => {
                     setSkills(response.data.exsitingResume.skills);
                     setLanguages(response.data.exsitingResume.languages);
                     setReferees(response.data.exsitingResume.referees);
+                    setLoading(false);
                 }
-
-                // console.log(response.data.exsitingApplication);
-                // console.log(applicationDet);
             })
             .catch(error => {
                 console.log(error);
             })
-
     }, [id, applicantId]);
-
 
     // handleArrayAdd, handleArrayRemove, handleArrayChange methods are used to add, remove and change elements in arrays
     const handleArrayAdd = (array, setArray) => {
-
         setArray([...array, {}]);
-
     }
 
     const handleArrayRemove = (array, setArray, index) => {
-
         const list = [...array];
-
         list.splice(index, 1);
         setArray(list);
     }
 
     const handleArrayChange = (array, setArray, e, index) => {
         const { name, value } = e.target;
-
         const list = [...array];
         list[index][name] = value;
         setArray(list);
@@ -101,7 +98,6 @@ const Form = () => {
 
     const saveData = async (e) => {
         e.preventDefault();
-
         let application = {
             vacancyNo: vacancyNo,
             companyId: companyId,
@@ -124,19 +120,15 @@ const Form = () => {
             comments: ''
         }
 
-        // console.log(application);
-        if (validateApplication(application)) {  //validate the application before saving it
+        //validate and save the application
+        if (validateApplication(application)) {
             await axios.post('http://localhost:5000/applications/apply', application).then(res => {
-
                 swal("Application submitted successfully!", "", "success")
                     .then((value) => {
                         if (value) {
                             navigate('/all_applications');
                         }
-
                     });
-                // alert('Application submitted successfully');
-
                 setVacancyNo('');
                 setCompanyId('');
                 setCompanyName('');
@@ -153,19 +145,19 @@ const Form = () => {
                 setReferees([{}]);
                 setCoverLetter('');
                 setAdditionalInformation('');
-
-
-
             }).catch(error => {
                 if (error.response.status === 400) {
                     swal('Please fill all the marked fields')
                 }
-                // console.log(error);
             }).finally(() => {
-
             }
             );
         }
+    }
+
+    // notify the user when the fetching records from the database is not completed
+    if (isLoading) {
+        return <div style={{ textAlign: 'çenter' }}> <h3>Loading...</h3></div>;
     }
 
     return (
@@ -197,7 +189,6 @@ const Form = () => {
                     <small id="jobTitleHelp" className="form-text text-muted"></small>
                 </div>
                 <br />
-
                 <div className="row">
                     <div className="col">
                         <div className="form-group">

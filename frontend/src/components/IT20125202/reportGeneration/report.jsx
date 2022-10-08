@@ -5,9 +5,17 @@ import jsPDF from 'jspdf';
 import logo from '../../../images/reportLogo.PNG';
 import { PieChart } from 'react-minimal-pie-chart';
 import RightSidePanel from '../../IT20128036/admin/slideBar';
+import swal from 'sweetalert';
+import { useNavigate } from 'react-router-dom';
+
+/**
+ * @description This component is used to generate the report related to applications and download it as a pdf file
+ *                          - This component is used by the admin
+ *                          - Admin can view a pie chart which shows the overall status of the submitted applications
+ */
 
 function Report() {
-
+    let navigate = useNavigate();
     const [isLoading, setLoading] = React.useState(true);
     const [Applications, setApplications] = React.useState([]);
     const [Pending, setPending] = React.useState([{}]);
@@ -15,8 +23,16 @@ function Report() {
     const [Rejected, setRejected] = React.useState([{}]);
 
     useEffect(() => {
+        // redirect to the login page if the user is not logged in
+        if (!localStorage.token) {
+            swal("Please login first", "", "warning")
+                .then((value) => {
+                    if (value) {
+                        navigate(`/admin/login`);
+                    }
+                });
+        }
         document.title = "Application Reports";
-
         axios.get('http://localhost:5000/applications').then(res => {
             if (res.data.success) {
                 setApplications(res.data.exsitingApplications);
@@ -37,6 +53,7 @@ function Report() {
         setAccepted(Applications.filter((application) => application.status === "Accepted"));
         setRejected(Applications.filter((application) => application.status === "Rejected"));
 
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [Applications]);
 
     const pdfGenerate = () => {
@@ -72,7 +89,7 @@ function Report() {
     }
 
     if (isLoading) {
-        return <div className="App">Loading...</div>;
+        return <div style={{ textAlign: 'çenter' }}> <h3>Loading...</h3></div>;
     }
 
     return (
@@ -87,18 +104,18 @@ function Report() {
                     <div className='col-sm-9'>
                         <div className='row'>
                             <div>
-                                <h1>Applciation Reports</h1>
-                                <br />
-                                <br />
-                                <br />
+                                <br /><h1>Applciation Reports</h1>
+                                <br /><br /><br />
                                 <button
                                     className='btn btn-dark'
                                     onClick={pdfGenerate}>
                                     Generate Report
                                 </button>
-                                <br />
-                                <br />
+                                <br /><br />
                                 <div className='container' style={{ backgroundColor: '#F5F5F5', width: '1000px', textAlign: 'left' }}>
+                                    <div style={{ textAlign: 'center', opacity: '0.3' }}>
+                                        <br /><h3><i>Overall status of submitted applications</i></h3>
+                                    </div>
                                     <PieChart
                                         radius={PieChart.defaultProps.radius - 20}
                                         viewBoxSize={[100, 100]}
@@ -123,9 +140,7 @@ function Report() {
                     </div>
                 </div>
             </div>
-            <br />
-            <br />
-            <br />
+            <br /><br /><br />
         </div>
     )
 }

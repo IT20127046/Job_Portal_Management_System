@@ -62,7 +62,7 @@ function App() {
         <Route path="/view/vacancy/admin" element={<ViewVacancyAdmin />} />
         <Route path="/admin/barchart/view" element={<Example/>} />
         <Route path="/admin/bchart" element={<BChart/>} />
-
+        <Route path="/admin/applicationreports" element={<Report/>} />
 
         {/* ---------------Job Recruters / Job Seekers --------------- */}
         <Route path="/" element={<LandingPage />} />
@@ -90,7 +90,6 @@ function App() {
         <Route path="/assessment/recruiter" element={<ViewAssessment />} />
         <Route path="/assessment/update/:id" element={<EditAssessment />} />
         <Route path="/resume" element={<Resume/>} />
-        <Route path="/admin/applicationreports" element={<Report/>} />
         <Route path="/home" element={<Home/>} />
       </Routes>
     </BrowserRouter>

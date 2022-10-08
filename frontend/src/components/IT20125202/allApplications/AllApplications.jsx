@@ -5,17 +5,33 @@ import JobSeekerView from './JobSeekerView';
 import RecruiterView from './RecruiterView';
 import NavBar from '../../IT20128036/NavBar';
 import image from "../../../images/back1.jpg";
+import swal from 'sweetalert';
+import { useNavigate } from 'react-router-dom';
+
+/**
+ * @description This component is used to display all the applications of a job seeker or recruiter based on the currently logged in user.
+ */
 
 export default function AllApplications() {
+    let navigate = useNavigate();
     const [userType, setUserType] = React.useState('');
 
     useEffect(() => {
-        document.title = "All Application";
-
-        const usertoken = localStorage.userToken;
-        const decoded = jwt_decode(usertoken);
-
-        setUserType(decoded.type);
+        // redirect to the login page if the user is not logged in
+        if (!localStorage.userToken) {
+            swal("Please login first", "", "warning")
+                .then((value) => {
+                    if (value) {
+                        navigate(`/user/login`);
+                        window.location.reload(false);
+                    }
+                });
+        }
+        document.title = "All Application";             // set the title of the page
+        const usertoken = localStorage.userToken;       // get the user token from the local storage
+        const decoded = jwt_decode(usertoken);          // decode the user token
+        setUserType(decoded.type);                      // set the user type
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
@@ -30,7 +46,6 @@ export default function AllApplications() {
                     {userType === 'Job Seeker' && (
                         <JobSeekerView />
                     )}
-
                 </div>
             </div>
         </div>
