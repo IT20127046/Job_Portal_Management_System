@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
+import jwt_decode from 'jwt-decode';
 import "../../Main.css";
 import NavBar from "../../../IT20128036/NavBar";
 
@@ -19,11 +20,20 @@ export default function ViewInterview() {
   const [interviewTime, setInterviewTime] = useState("");
   const [interviewMode, setInterviewMode] = useState("");
   const [status, setStatus] = useState("");
+  const [recruiterId, setRecruiterId] = useState("");
 
   const [mesgTitle, setMsgTitle] = useState("");
   const [message, setMessage] = useState("");
 
   useEffect(() => {
+
+    document.title = "MyMessages";
+
+    const usertoken = localStorage.userToken;
+    const decoded = jwt_decode(usertoken);
+
+    setRecruiterId(decoded._id);
+
     retriveInterview();
 
     setMsgTitle("You Got Selected");
@@ -50,13 +60,13 @@ export default function ViewInterview() {
     e.preventDefault();
 
     const data = {
-      notice:{
+        recruiterId: recruiterId,
+        jobSeekerId: applicantId,
         mesgTitle: mesgTitle,
         message: message
-      }
     }
 
-    axios.put(`http://localhost:5000/interview/update/${id}`, data).then((res) => {
+    axios.post(`http://localhost:5000/interviewMsg/add`, data).then((res) => {
         if (res.data.success) {
           swal("Success!", "Message Sent to Job Seeker", "success");
         }
