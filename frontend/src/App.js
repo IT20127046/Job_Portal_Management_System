@@ -34,7 +34,8 @@ import EditAssessment from "./components/IT20127046/Assessment/Recruiter/EditAss
 import UpdateProfile from "./components/IT20128036/userProfile";
 import ViewUserProfile from "./components/IT20128036/ViewUserProfile";
 import Resume from "./components/IT20125202/resume/Resume";
-
+import Report from "./components/IT20125202/reportGeneration/report";
+import { Home } from "./components/IT20125202/Home";
 
 
 
@@ -61,7 +62,7 @@ function App() {
         <Route path="/view/vacancy/admin" element={<ViewVacancyAdmin />} />
         <Route path="/admin/barchart/view" element={<Example/>} />
         <Route path="/admin/bchart" element={<BChart/>} />
-
+        <Route path="/admin/applicationreports" element={<Report/>} />
 
         {/* ---------------Job Recruters / Job Seekers --------------- */}
         <Route path="/" element={<LandingPage />} />
@@ -89,7 +90,7 @@ function App() {
         <Route path="/assessment/recruiter" element={<ViewAssessment />} />
         <Route path="/assessment/update/:id" element={<EditAssessment />} />
         <Route path="/resume" element={<Resume/>} />
-
+        <Route path="/home" element={<Home/>} />
       </Routes>
     </BrowserRouter>
   );
