@@ -185,7 +185,7 @@ const RecruiterView = () => {
                 <div className="form-group">
                     {/* applied date */}
                     <label htmlFor="coverLetter"><h6> Received Date </h6> </label>
-                    <input type='text' value={applicationDet.appliedDate} className="form-control" id="coverLetter" readOnly />
+                    <input type='text' value={new Date(applicationDet.appliedDate).toString()} className="form-control" id="coverLetter" readOnly />
                 </div>
                 <br />
                 <div>
