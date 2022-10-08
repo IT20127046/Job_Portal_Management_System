@@ -22,7 +22,7 @@ export default function ViewUserProfile() {
   const [address, setAddress] = useState("");
   const [type, setType] = useState("");
   // const [file, setFile] = useState("Cell-Row-0-Col-0.png");
-  const [file, setFile] = useState("1234.jpg");
+  const [file, setFile] = useState("1234.png");
 
   const [website, setWebsite] = useState("update your website");
   const [csize, setCsize] = useState("update company size");
@@ -67,7 +67,7 @@ export default function ViewUserProfile() {
   }, [uid]);
 
   return (
-    <div className="inq_container">
+    <div className="inq_container" style={{ minHeight: '140vh' }}>
       <NavBar />
       <div className="">
         <div className="container">
@@ -102,6 +102,9 @@ export default function ViewUserProfile() {
                         </h6>
                       </div>
                     )}
+                    <div className="text-center">
+                    <a href="/userprofile/update/photo" className="btn btn-outline-dark ">Update Photo</a>
+                    </div>
                     <hr />
 
                     <div>
@@ -156,7 +159,7 @@ export default function ViewUserProfile() {
                     </div>
 
                     <div>
-                      <a href="/student/group/view">
+                      <a href="#">
                         <div
                           className="p-2 mb-2 text-white"
                           style={{
@@ -195,10 +198,10 @@ export default function ViewUserProfile() {
                     <div></div>
 
                     <div className="p-3 mb-2 bg-light text-dark">
-                      <a href="#" style={{ textDecoration: "none" }}>
+                      <a href="/user/change/password" style={{ textDecoration: "none" }}>
                         <p className="h6">
-                          <i class="fa fa-comments" aria-hidden="true"></i>
-                          &nbsp;&nbsp;feedback
+                          <i class="fa fa-key" aria-hidden="true"></i>
+                          &nbsp;&nbsp;change password
                         </p>
                       </a>
                       <div></div>
@@ -303,9 +306,9 @@ export default function ViewUserProfile() {
                         <span>
                           <div className="">
                             {" "}
-                            <button className="btn btn-primary rounded-sm btn-lg">
+                            <a href="/resume" className="btn btn-primary rounded-sm btn-lg">
                               My Resume
-                            </button>
+                            </a>
                           </div>
                         </span>
                       )}

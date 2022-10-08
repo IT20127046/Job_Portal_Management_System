@@ -67,12 +67,11 @@ const RecruiterView = () => {
                 }
             })
             .catch(error => {
-                console.log(error);
+                console.log('Error white retrieving received applications from DB. Error: ', error);
             })
     }, [id]);
 
     const acceptHandler = () => {
-        //should get an confirmation alert
         if (applicationDet.status === 'Pending') {
             axios.patch(`http://localhost:5000/applications/update/${id}`, {
                 status: 'Accepted',
@@ -80,11 +79,12 @@ const RecruiterView = () => {
             })
                 .then(response => {
                     if (response.data.success) {
-                        navigate('/all_applications');
+                        swal("Application is accepted");
+                        window.location.reload(false);
                     }
                 })
                 .catch(error => {
-                    console.log(error);
+                    console.log('Error while accepting the application. Error: ', error);
                 }
                 );
         }
@@ -102,12 +102,12 @@ const RecruiterView = () => {
             })
                 .then(response => {
                     if (response.data.success) {
-                        navigate('/all_applications');
+                        swal("Application is rejected");
                     }
                 }
                 )
                 .catch(error => {
-                    console.log(error);
+                    console.log('Error while rejecting the application. Error: ', error);
                 }
                 );
         }
@@ -119,6 +119,10 @@ const RecruiterView = () => {
     // notify the user when the fetching records from the database is not completed
     if (isLoading) {
         return <div style={{ textAlign: 'çenter' }}> <h3>Loading...</h3></div>;
+    }
+
+    const onclickNext = () => {
+        // to navigate to the interview and assigment page
     }
 
     return (
@@ -291,6 +295,13 @@ const RecruiterView = () => {
                             <button type="button" className="btn btn-outline-dark" onClick={() => rejectHandler('')}> <h5>Reject</h5></button>
                         </div>
                     </div>
+                    {applicationDet.status === 'Accepted' &&
+                        <div className='col'>
+                            <div style={{ textAlign: 'center' }}>
+                                <button type="button" className="btn btn-outline-dark" onClick={() => onclickNext()}> <h5>Next</h5></button>
+                            </div>
+                        </div>
+                    }
                 </div>
                 <br />
                 <br />

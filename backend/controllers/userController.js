@@ -7,22 +7,40 @@ const { type } = require("express/lib/response");
 const { v4: uuidv4 } = require("uuid");
 
 const updateProfile = async (req, res) => {
-  Users.findById(req.params.id)
-    .then((user) => {
-      user.file = req.file.originalname;
-      user.website = req.body.website;
-      user.csize = req.body.csize;
-      user.founded = req.body.founded;
-      user.dob = req.body.dob;
-      user.sex = req.body.sex;
-      user.about = req.body.about;
+  // Users.findById(req.params.id)
+  //   .then((user) => {
+    
+  //     user.website = req.body.website;
+  //     user.csize = req.body.csize;
+  //     user.founded = req.body.founded;
+  //     user.dob = req.body.dob;
+  //     user.sex = req.body.sex;
+  //     user.about = req.body.about;
 
-      user
-        .save()
-        .then(() => res.json("User Updated"))
-        .catch((err) => res.status(400).json(`Error: ${err}`));
-    })
-    .catch((err) => res.status(400).json(`Error: ${err}`));
+  //     user
+  //       .save()
+  //       .then(() => res.json("User Updated"))
+  //       .catch((err) => res.status(400).json(`Error: ${err}`));
+  //   })
+  //   .catch((err) => res.status(400).json(`Error: ${err}`));
+
+
+  Users.findByIdAndUpdate(
+    req.params.id,
+    {
+      $set: req.body,
+    },
+    (err, user) => {
+      if (err) {
+        return res.status(400).json({
+          error: err,
+        });
+      }
+      return res.status(200).json({
+        success: "Updated successfully",
+      });
+    }
+  );
 };
 
 // const router = express.Router();
@@ -237,6 +255,79 @@ const removeUser = (req, res) => {
   });
 };
 
+// router.put("/user/updateprofile/:id",
+//update user - user
+const updatepassword = (req, res) => {
+  Users.findOne({
+    _id: req.body.uid,
+  })
+    .then((user) => {
+      if (user) {
+        if (bcrypt.compareSync(req.body.enteredPassword, user.password)) {
+          bcrypt.hash(req.body.newPassword, 10, (err, hash) => {
+            const newData = {
+              password: hash,
+            };
+
+            Users.findByIdAndUpdate(
+              req.params.id,
+              {
+                $set: newData,
+              },
+              (err, user) => {
+                if (err) {
+                  return res.status(400).json({
+                    error: err,
+                  });
+                }
+                return res.status(200).json({
+                  success: "Updated successfully",
+                });
+              }
+            );
+          });
+        } else {
+          return res.status(401).json({
+            errorMessage: "Password not matched!",
+            status: false,
+          });
+        }
+      } else {
+        return res.status(401).json({
+          errorMessage: "Cannot find the user",
+          status: false,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(400).json({
+        errorMessage: "Something went wrong!",
+        status: false,
+      });
+      console.log("error: " + err);
+    });
+};
+
+//update photo
+const updatePhoto = async (req, res) => {
+  Users.findById(req.params.id)
+    .then((user) => {
+      user.file = req.file.originalname;
+      
+
+      user
+        .save()
+        .then(() => res.json("Photo Updated"))
+        .catch((err) => res.status(400).json(`Error: ${err}`));
+    })
+    .catch((err) => res.status(400).json(`Error: ${err}`));
+};
+
+
+
+
+
+
 module.exports = {
   userRegistration,
   userLogin,
@@ -246,4 +337,6 @@ module.exports = {
   updateUser,
   removeUser,
   updateProfile,
+  updatepassword,
+  updatePhoto,
 };

@@ -79,6 +79,7 @@ const Form = () => {
                         }
                     });
             }).catch(error => {
+                console.log('Error while saving the resume details. Error: ', error);
                 if (error.response.status === 400) {
                     swal('Please fill all the marked fields')
                 }

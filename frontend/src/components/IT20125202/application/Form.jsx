@@ -37,12 +37,16 @@ const Form = () => {
     const [referees, setReferees] = React.useState([{}]);
     const [coverLetter, setCoverLetter] = React.useState('');
     const [additionalInformation, setAdditionalInformation] = React.useState('');
+    const [message, setMessage] = React.useState('');
+    const [req, setReq] = React.useState('');
 
     useEffect(() => {
         document.title = "Application";
         const usertoken = localStorage.userToken;
         const decoded = jwt_decode(usertoken);
         setapplicantId(decoded._id);
+
+        // get vacancy details
         axios.get(`http://localhost:5000/vacancy/get/${id}`)
             .then(response => {
                 if (response.data.success) {
@@ -51,12 +55,34 @@ const Form = () => {
                     setJobTitle(data.jobTitle);
                     setCompanyName(data.company);
                     setCompanyId(data.companyId);
+
+                    setReq(applicantId + '/' + vacancyNo);
                 }
             })
             .catch(error => {
-                console.log(error);
+                console.log('Error while fetching the vacancy details from DB. Error: ', error);
             });
 
+        // retrieve application if the job seeker has already applied for the vacancy and redirect to all applications page
+        axios.get(`http://localhost:5000/applications/submittedfor/${req}`)
+            .then(res => {
+                if (res.data.success) {
+                    if (res.data.exsitingApplication !== null) {
+                        setMessage("You have already applied for this vacancy on " + new Date(res.data.exsitingApplication.appliedDate).toLocaleDateString().toString());
+                        swal(message, "", "info")
+                            .then((value) => {
+                                if (value) {
+                                    navigate('/all_applications');
+                                }
+                            });
+                    }
+                }
+            })
+            .catch(err => {
+                console.log('Error while checking the submitted applications for the vacancy. Error: ', err);
+            })
+
+        // retrieve resume if the job seeker has already maintained a resume in the system
         axios.get(`http://localhost:5000/resumes/${applicantId}`)
             .then(response => {
                 if (response.data.exsitingResume) {
@@ -73,9 +99,10 @@ const Form = () => {
                 }
             })
             .catch(error => {
-                console.log(error);
+                console.log('Error while fetching the resume details from DB. Error: ', error);
             })
-    }, [id, applicantId]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [id, applicantId, req, message]);
 
     // handleArrayAdd, handleArrayRemove, handleArrayChange methods are used to add, remove and change elements in arrays
     const handleArrayAdd = (array, setArray) => {
