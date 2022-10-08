@@ -4,10 +4,6 @@ import AdminNavBar from "./AdminNavBar";
 import swal from "sweetalert";
 import RightSidePanel from "./slideBar";
 
-
-
-
-
 import {
   PieChart,
   Pie,
@@ -37,7 +33,6 @@ export default function AdminHome() {
   const [jno, setJno] = useState(0);
   const [jde, setJde] = useState(0);
 
-
   useEffect(() => {
     document.title = "Admin Home";
 
@@ -56,25 +51,6 @@ export default function AdminHome() {
     setUsers(res.data.existingUsers);
     console.log(users);
 
-
-    
-
-
-
-
-
-
-
-
-    // user.name.includes(searchKey)
-
-
-
-
-
-    
-   
-
     let all = 0;
     let recruiters = 0;
     let jobseekers = 0;
@@ -88,43 +64,53 @@ export default function AdminHome() {
     let jde = 0;
 
     users.forEach((user) => {
-      // if (user.type === "Job Recruiter") {
-      //   recruiters = recruiters + 1;
-      // } 
-      
-      
-      if (user.type === "Job Recruiter" && user.dateRegistered.includes("2022-09") ) {
+      if (
+        user.type === "Job Recruiter" &&
+        user.dateRegistered.includes("2022-09")
+      ) {
         rse = rse + 1;
-      }else if (user.type === "Job Recruiter" && user.dateRegistered.includes("2022-10") ) {
+      } else if (
+        user.type === "Job Recruiter" &&
+        user.dateRegistered.includes("2022-10")
+      ) {
         ro = ro + 1;
-      }else if (user.type === "Job Recruiter" && user.dateRegistered.includes("2022-11") ) {
+      } else if (
+        user.type === "Job Recruiter" &&
+        user.dateRegistered.includes("2022-11")
+      ) {
         rno = rno + 1;
-      }else if (user.type === "Job Recruiter" && user.dateRegistered.includes("2022-12") ) {
+      } else if (
+        user.type === "Job Recruiter" &&
+        user.dateRegistered.includes("2022-12")
+      ) {
         rde = rde + 1;
-      }
-      
-      
-      // else if (user.type === "Job Seeker") {
-      //   jobseekers = jobseekers + 1;
-      // }
-      
-      
-      
-      else if (user.type === "Job Seeker" && user.dateRegistered.includes("2022-09") ) {
+      } else if (
+        user.type === "Job Seeker" &&
+        user.dateRegistered.includes("2022-09")
+      ) {
         jse = jse + 1;
-      }else if (user.type === "Job Seeker" && user.dateRegistered.includes("2022-10") ) {
+      } else if (
+        user.type === "Job Seeker" &&
+        user.dateRegistered.includes("2022-10")
+      ) {
         jo = jo + 1;
-      }else if (user.type === "Job Seeker" && user.dateRegistered.includes("2022-11") ) {
+      } else if (
+        user.type === "Job Seeker" &&
+        user.dateRegistered.includes("2022-11")
+      ) {
         jno = jno + 1;
-      }else if (user.type === "Job Seeker" && user.dateRegistered.includes("2022-12") ) {
+      } else if (
+        user.type === "Job Seeker" &&
+        user.dateRegistered.includes("2022-12")
+      ) {
         jde = jde + 1;
       }
 
       // all = all + 1;
-      jobseekers = jse+jo+jno+jde;
-      recruiters = rse+ro+rno+rde;
-      
-      all = jobseekers+recruiters ; 
+      jobseekers = jse + jo + jno + jde;
+      recruiters = rse + ro + rno + rde;
+
+      all = jobseekers + recruiters;
     });
 
     setAll(all);
@@ -143,7 +129,6 @@ export default function AdminHome() {
   });
 
   const data = [
-    
     {
       name: "September",
       JobRecruiters: rse,
@@ -194,7 +179,6 @@ export default function AdminHome() {
             <div className="row">
               <div className="col-sm-8 ">
                 <div>
-                  
                   <h5>Analysis</h5>
 
                   <BarChart
@@ -234,17 +218,16 @@ export default function AdminHome() {
                 </a>
 
                 <br />
-                <a href="/admin/user/report" class="btn btn-outline-dark btn-lg btn-block mt-2 mb-2">
+                <a
+                  href="/admin/user/report"
+                  class="btn btn-outline-dark btn-lg btn-block mt-2 mb-2"
+                >
                   Generate Report
                 </a>
               </div>
             </div>
           </div>
 
-
-
-
-          {/* Functions */}
           <div className="mt-3">
             <div className="row" style={{ height: "150px" }}>
               <div className="col p-3 mb-2 m-2 bg-light text-dark rounded">

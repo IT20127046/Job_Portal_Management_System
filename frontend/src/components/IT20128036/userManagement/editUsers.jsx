@@ -23,14 +23,6 @@ export default function EditUsers() {
       setField(res.data.user.field);
       setAddress(res.data.user.address);
       setType(res.data.user.type);
-
-      //   name: res.data.user.name,
-      //   email: res.data.user.email,
-      //   mobile: res.data.user.mobile,
-      //   field: res.data.user.field,
-      //   address: res.data.user.address,
-      //   type: res.data.user.type,
-      //   password: res.data.user.password
     });
   }, []);
 
@@ -51,9 +43,7 @@ export default function EditUsers() {
         swal("User details updated successfully!", "", "success").then(
           (value) => {
             if (value) {
-            //   this.props.history.push(`/admin/users`);
-            //   window.location.reload();
-            window.location = '/admin/userroles'
+              window.location = "/admin/userroles";
             }
           }
         );
@@ -67,119 +57,112 @@ export default function EditUsers() {
       <AdminNavBar />
       <br />
       <div className="row">
-<div className="col-sm-3">
-<RightSidePanel/>
-</div>
-      <div className="col-md-8 mt-4 mx-auto">
-        <h4>Edit User</h4>
+        <div className="col-sm-3">
+          <RightSidePanel />
+        </div>
+        <div className="col-md-8 mt-4 mx-auto">
+          <h4>Edit User</h4>
 
-<div className="col-sm-9">
+          <div className="col-sm-9">
+            <form>
+              <div className="form-group" style={{ marginBottom: "15px" }}>
+                <label for="name" style={{ marginBottom: "1px" }}>
+                  Name
+                </label>{" "}
+                <input
+                  type="text"
+                  class="form-control"
+                  id="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
 
-        <form>
-          <div className="form-group" style={{ marginBottom: "15px" }}>
-            <label for="name" style={{ marginBottom: "1px" }}>
-              Name
-            </label>{" "}
-            <input
-              type="text"
-              class="form-control"
-              id="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
+              <div className="form-group" style={{ marginBottom: "15px" }}>
+                {" "}
+                <label for="email" style={{ marginBottom: "1px" }}>
+                  Email
+                </label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+
+              <div className="row">
+                <div className="col-sm-6">
+                  <div className="form-group" style={{ marginBottom: "15px" }}>
+                    {" "}
+                    <label for="mobile" style={{ marginBottom: "1px" }}>
+                      Mobile
+                    </label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="mobile"
+                      value={mobile}
+                      onChange={(e) => setMobile(e.target.value)}
+                    />
+                  </div>
+                </div>
+
+                <div className="col-sm-6">
+                  <div className="form-group" style={{ marginBottom: "15px" }}>
+                    {" "}
+                    <label for="field" style={{ marginBottom: "1px" }}>
+                      Field
+                    </label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="field"
+                      value={field}
+                      onChange={(e) => setField(e.target.value)}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="form-group" style={{ marginBottom: "15px" }}>
+                {" "}
+                <label for="address" style={{ marginBottom: "1px" }}>
+                  Address
+                </label>
+                <textarea
+                  class="form-control"
+                  id="address"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                />
+              </div>
+
+              <div className="form-group" style={{ marginBottom: "15px" }}>
+                {" "}
+                <label for="type" style={{ marginBottom: "1px" }}>
+                  Type
+                </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="type"
+                  value={type}
+                  onChange={(e) => setType(e.target.value)}
+                />
+              </div>
+
+              <button
+                type="submit"
+                onClick={onSubmit}
+                class="btn btn-outline-primary"
+              >
+                Update
+              </button>
+            </form>
           </div>
-
-          <div className="form-group" style={{ marginBottom: "15px" }}>
-            {" "}
-            <label for="email" style={{ marginBottom: "1px" }}>
-              Email
-            </label>
-            <input
-              type="email"
-              class="form-control"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-
-
-<div className="row">
-  <div className="col-sm-6">
-
-
-          <div className="form-group" style={{ marginBottom: "15px" }}>
-            {" "}
-            <label for="mobile" style={{ marginBottom: "1px" }}>
-              Mobile
-            </label>
-            <input
-              type="text"
-              class="form-control"
-              id="mobile"
-              value={mobile}
-              onChange={(e) => setMobile(e.target.value)}
-            />
-          </div>
-
-          </div>
-
-
-          <div className="col-sm-6">
-
-          <div className="form-group" style={{ marginBottom: "15px" }}>
-            {" "}
-            <label for="field" style={{ marginBottom: "1px" }}>
-              Field
-            </label>
-            <input
-              type="text"
-              class="form-control"
-              id="field"
-              value={field}
-              onChange={(e) => setField(e.target.value)}
-            />
-          </div>
-
-          </div>
-
-
-          </div>
-
-          <div className="form-group" style={{ marginBottom: "15px" }}>
-            {" "}
-            <label for="address" style={{ marginBottom: "1px" }}>
-              Address
-            </label>
-            <textarea
-              
-              class="form-control"
-              id="address"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-            />
-          </div>
-
-          <div className="form-group" style={{ marginBottom: "15px" }}>
-            {" "}
-            <label for="type" style={{ marginBottom: "1px" }}>
-              Type
-            </label>
-            <input
-              type="text"
-              class="form-control"
-              id="type"
-              value={type}
-              onChange={(e) => setType(e.target.value)}
-            />
-          </div>
-
-          <button type="submit" onClick={onSubmit} class="btn btn-outline-primary">
-            Update
-          </button>
-        </form>
-      </div>
-      </div>
+        </div>
       </div>
     </div>
   );

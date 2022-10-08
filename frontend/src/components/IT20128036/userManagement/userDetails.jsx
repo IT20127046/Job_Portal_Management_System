@@ -1,5 +1,3 @@
-//admin - view specific user details
-// user- view user profile
 import React, { Component } from "react";
 import axios from "axios";
 import AdminNavBar from "../admin/AdminNavBar";
