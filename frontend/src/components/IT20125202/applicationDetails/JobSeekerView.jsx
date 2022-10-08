@@ -62,7 +62,7 @@ const JobSeekerView = () => {
                 }
             })
             .catch(error => {
-                console.log(error);
+                console.log('Error white retrieving submitted applications from DB. Error: ', error);
             })
     }, [id]);
 
