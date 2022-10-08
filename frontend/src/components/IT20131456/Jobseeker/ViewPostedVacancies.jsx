@@ -93,11 +93,9 @@ export default function ViewVacancy() {
           paddingLeft: "50px",
           paddingRight: "50px",
           paddingBottom: "50px",
-          paddingTop: "10px",
-          backgroundImage: `url(${image})`,
+          paddingTop: "10px",        
           backgroundSize: "cover",
-          margin: "0px 0px 0px 0px",
-          overflowY: "scroll",
+          margin: "0px 0px 0px 0px",        
           height: "100vh",
           borderTop: "5px solid black",
         }}
