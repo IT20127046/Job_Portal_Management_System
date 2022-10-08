@@ -112,7 +112,7 @@ class NavBar extends Component {
             <a
               className="nav-link"
               aria-current="page"
-              href="#"
+              href="/home"
               style={{ textDecoration: "none", color: "black" }}
             >
               Home

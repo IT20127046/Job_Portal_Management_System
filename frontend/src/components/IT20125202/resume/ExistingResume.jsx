@@ -4,9 +4,13 @@ import jwt_decode from 'jwt-decode';
 import swal from 'sweetalert';
 import validate from './validate';
 
-const ExistingResume = () => {
-    // const navigate = useNavigate();
+/**
+ * @description This component is to display the resume details for the user if the user has already created a resume with update and delete options
+ */
 
+const ExistingResume = () => {
+
+    const [isLoading, setIsLoading] = React.useState(true);
     const [id, setId] = React.useState('');
     const [userId, setUserId] = React.useState('');
     const [firstName, setFirstName] = React.useState('');
@@ -22,40 +26,30 @@ const ExistingResume = () => {
 
     // handleArrayAdd, handleArrayRemove, handleArrayChange methods are used to add, remove and change elements in arrays
     const handleArrayAdd = (array, setArray) => {
-
         setArray([...array, {}]);
-
     }
 
     const handleArrayRemove = (array, setArray, index) => {
-
         const list = [...array];
-
         list.splice(index, 1);
         setArray(list);
     }
 
     const handleArrayChange = (array, setArray, e, index) => {
         const { name, value } = e.target;
-
         const list = [...array];
         list[index][name] = value;
         setArray(list);
     }
 
     useEffect(() => {
-
         const usertoken = localStorage.userToken;
         const decoded = jwt_decode(usertoken);
-
         setUserId(decoded._id);
-
         axios.get(`http://localhost:5000/resumes/${userId}`)
             .then(response => {
                 if (response.data.success) {
-
                     let data = response.data.exsitingResume;
-                    // console.log(data);
 
                     setId(data._id);
                     setFirstName(data.firstName);
@@ -68,24 +62,19 @@ const ExistingResume = () => {
                     setSkills(data.skills);
                     setLanguages(data.languages);
                     setReferees(data.referees);
+                    setIsLoading(false);
                 }
-
-                // console.log(response.data.exsitingResume);
-                // console.log(id);
             })
             .catch(error => {
                 console.log(error);
             })
-
     }, [id, userId]);
 
     const updateData = (e) => {
-
         const resume = {
             email: email,
             mobile: mobile,
         }
-
         if (validate(resume)) {
             axios.patch(`http://localhost:5000/resumes/update/${id}`, {
                 userId: userId,
@@ -107,9 +96,7 @@ const ExistingResume = () => {
                                 if (value) {
                                     window.location.reload(false);
                                 }
-
                             });
-
                     }
                 })
                 .catch(error => {
@@ -120,7 +107,6 @@ const ExistingResume = () => {
     }
 
     const deleteResume = (e) => {
-
         swal({
             title: "Are you sure?",
             text: "Once deleted, you will not be able to recover this resume!",
@@ -136,20 +122,19 @@ const ExistingResume = () => {
                                 if (value) {
                                     window.location.reload(false);
                                 }
-
                             });
                     })
-
                 } else {
                     swal("Cancelled. Your resume is safe!");
                 }
             });
-
     }
 
+    if (isLoading) {
+        return <div style={{ textAlign: 'çenter' }}> <h3>Loading...</h3></div>;
+    }
 
     return (
-
         <div className="container-fluid" style={{ maxWidth: 800 }}>
             <form>
                 <br />
@@ -157,7 +142,6 @@ const ExistingResume = () => {
                 <hr />
                 <span className="required_label" /> Required
                 <br />
-
                 <div className="row">
                     <div className="col">
                         <div className="form-group">
@@ -340,8 +324,7 @@ const ExistingResume = () => {
                         </div>
                     ))}
                 </div>
-                <br />
-                <br />
+                <br /><br />
                 <div style={{ textAlign: 'center' }}>
                     <button type="button" className="btn btn-outline-success" onClick={(e) => updateData(e)}> <h5>Update</h5></button>
                 </div>
@@ -349,160 +332,9 @@ const ExistingResume = () => {
                 <div style={{ textAlign: 'center' }}>
                     <button type="button" className="btn btn-outline-danger" onClick={(e) => deleteResume(e)}> <h5>Delete Resume</h5></button>
                 </div>
-                <br />
-                <br />
+                <br /><br />
             </form>
         </div>
-
-        // <div className="container-fluid" style={{ maxWidth: 800 }}>
-        //     <form>
-        //         <br />
-        //         <hr />
-        //         <br />
-
-        //         <div className="row">
-        //             <div className="col">
-        //                 <div className="form-group">
-        //                     {/* applict's first name */}
-        //                     <label htmlFor="firstNameInput"><h6>First name </h6> </label>
-        //                     <input type="text" name='firstName' value={applicantFirstName} className="form-control" id="firstNameInput" aria-describedby="firstNameHelp" placeholder="Enter first name" readOnly />
-        //                     <small id="firstNameHelp" className="form-text text-muted"></small>
-        //                 </div>
-        //             </div>
-        //             <div className="col">
-        //                 <div className="form-group">
-        //                     {/* applicant's last name */}
-        //                     <label htmlFor="lastNameInput"><h6>Last name </h6> </label>
-        //                     <input type="text" value={applicantLastName} className="form-control" id="lastNameInput" aria-describedby="lastNameHelp" placeholder="Enter last name" readOnly />
-        //                     <small id="lastNameHelp" className="form-text text-muted"></small>
-        //                 </div>
-        //             </div>
-        //         </div>
-        //         <br />
-        //         <div className="form-group">
-        //             {/* applicant's email */}
-        //             <label htmlFor="EmailInput"><h6>Email address </h6> </label>
-        //             <input type="email" value={applicantEmail} className="form-control" id="EmailInput" aria-describedby="emailHelp" placeholder="Enter email" readOnly />
-        //         </div>
-        //         <br />
-        //         <div className="form-group">
-        //             {/* applicant's phone number */}
-        //             <label htmlFor="mobileNumber"><h6>Mobile number </h6> </label>
-        //             <input type="text" value={applicantPhone} className="form-control" id="mobileNumber" aria-describedby="mobileHelp" placeholder="Enter mobile number" readOnly />
-        //         </div>
-        //         <br />
-        //         <div className="form-group">
-        //             {/* applied date */}
-        //             <label htmlFor="coverLetter"><h6> Applied Date </h6> </label>
-        //             <input type='text' value={appliedDate} className="form-control" id="coverLetter" readOnly />
-        //         </div>
-        //         <br />
-        //         <div>
-        //             <div className="form-group">
-        //                 {/* educational qualifications */}
-        //                 <label htmlFor="educationalQualifications"><h6> Educational Qualifications </h6> </label>
-        //                 {educationalQualifications.map((item, index) => (
-        //                     <div key={index}>
-
-        //                         <textarea value={item.qualification} className="form-control" id="educationalQualifications" rows="3" readOnly />
-        //                         <br />
-        //                     </div>
-        //                 ))}
-        //             </div>
-        //         </div>
-        //         <br />
-        //         <div>
-        //             <div className="form-group">
-        //                 {/* experience */}
-        //                 <label htmlFor="experience"><h6> Experience </h6> </label>
-        //                 {experience.map((item, index) => (
-        //                     <div key={index}>
-
-        //                         <textarea value={item.experience} className="form-control" id="experience" rows="3" readOnly />
-        //                         <br />
-        //                     </div>
-        //                 ))}
-        //             </div>
-        //         </div>
-        //         <br />
-        //         <div>
-        //             <div className="form-group">
-        //                 {/* skills */}
-        //                 <label htmlFor="skills"><h6> Skills </h6> </label>
-        //                 {skills.map((item, index) => (
-        //                     <div key={index}>
-
-        //                         <textarea value={item.skill} className="form-control" id="skills" rows="3" readOnly />
-        //                         <br />
-        //                     </div>
-        //                 ))}
-        //             </div>
-        //         </div>
-        //         <br />
-        //         <div>
-        //             <div className="form-group">
-        //                 {/* languages */}
-        //                 <label htmlFor="languages"><h6> Languages </h6> </label>
-        //                 {languages.map((item, index) => (
-        //                     <div key={index}>
-
-        //                         <textarea value={item.language} className="form-control" id="languages" rows="3" readOnly />
-        //                         <br />
-        //                     </div>
-        //                 ))}
-        //             </div>
-        //         </div>
-        //         <br />
-        //         <div>
-        //             <div className="form-group">
-        //                 {/* referees */}
-        //                 <label htmlFor="referees"><h6> Referees </h6> </label>
-        //                 {referees.map((item, index) => (
-        //                     <div key={index}>
-
-        //                         <textarea value={item.referee} className="form-control" id="referees" rows="3" readOnly />
-        //                         <br />
-        //                     </div>
-        //                 ))}
-        //             </div>
-        //         </div>
-        //         <br />
-        //         <div className="form-group">
-        //             {/* cover letter */}
-        //             <label htmlFor="coverLetter"><h6>Cover Letter </h6> </label>
-        //             <textarea value={coverLetter} className="form-control" id="coverLetter" rows="5" readOnly ></textarea>
-        //         </div>
-        //         <br />
-        //         <div className="form-group">
-        //             {/* additional information */}
-        //             <label htmlFor="additionalInfo"><h6>Additional information</h6></label>
-        //             <textarea value={additionalInformation} className="form-control" id="additionalInfo" rows="3" readOnly></textarea>
-        //         </div>
-        //         <br />
-        //         <div className="form-group">
-        //             {/* status */}
-        //             <label htmlFor="additionalInfo"><h6>Status</h6></label>
-        //             <input value={status} className="form-control" id="additionalInfo" rows="3" readOnly />
-        //         </div>
-        //         <br />
-        //         <div className="form-group">
-        //             {/* comments */}
-        //             <label htmlFor="additionalInfo"><h6>Comments</h6></label>
-        //             <textarea value={comments} className="form-control" id="additionalInfo" rows="3" readOnly></textarea>
-        //         </div>
-        //         <br />
-        //         <br />
-        //         <div className='row'>
-        //             <div className='col'>
-        //                 <div style={{ textAlign: 'center' }}>
-        //                     <button type="button" className="btn btn-outline-dark" onClick={() => navigate('/all_applications')}> <h5>Back</h5></button>
-        //                 </div>
-        //             </div>
-        //         </div>
-        //         <br />
-        //         <br />
-        //     </form>
-        // </div>
     )
 }
 
