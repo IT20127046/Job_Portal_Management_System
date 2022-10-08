@@ -51,7 +51,7 @@ export default class AdminNavBar extends Component {
               <div className="btn-group dropstart">
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                   <li className="nav-item">
-                    <a
+                    <a href="#"
                       className="btn btn-outline-dark btn-sm"
                       aria-current="page"
                       onClick={this.onlogout}

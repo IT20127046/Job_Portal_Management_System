@@ -76,7 +76,7 @@ export default function ContactUs() {
                           textDecoration: "none",
                         }}
                       >
-                        <a className="btn text-dark">
+                        <a className="btn text-dark" href="#">
                           <i class="fa fa-phone" aria-hidden="true"></i>
                           &nbsp;&nbsp;+94 117654323
                         </a>

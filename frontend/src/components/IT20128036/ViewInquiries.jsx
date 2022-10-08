@@ -118,7 +118,7 @@ export default class ViewInquiries extends Component {
                               textDecoration: "none",
                             }}
                           >
-                            <a className="btn text-dark">
+                            <a className="btn text-dark" href="#">
                               <i class="fa fa-phone" aria-hidden="true"></i>
                               &nbsp;&nbsp;+94 117654323
                             </a>
@@ -127,7 +127,7 @@ export default class ViewInquiries extends Component {
                       </div>
 
                       <div>
-                        <a href="">
+                        <a href="#">
                           <div
                             className="p-2 mb-2 text-white"
                             style={{
