@@ -41,6 +41,9 @@ app.use(resumeRoutes);
 const interviewMsgRoutes = require("./routes/interviewMsgRoutes");
 app.use(interviewMsgRoutes);
 
+const sendAssessmentRoutes = require("./routes/sendAssessmentRoutes");
+app.use(sendAssessmentRoutes);
+
 const port = process.env.PORT || 5000;
 const uri = process.env.MONGO_URI;
 
