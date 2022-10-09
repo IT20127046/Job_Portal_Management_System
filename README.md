@@ -5,13 +5,13 @@ This system is designed as a solution for the issues related to finding jobs, st
 
 ### Group Members (Contribution) -:
 
-## IT20127046 - Samararathna L.H
+### IT20127046 - Samararathna L.H
 
-## IT20128036 - Kumarasinghe K.M.K.D
+### IT20128036 - Kumarasinghe K.M.K.D
 
-## IT20131456 - Mendis T.C.U
+### IT20131456 - Mendis T.C.U
 
-## IT20125202 - Herath G.G.T.K
+### IT20125202 - Herath G.G.T.K
 
 # Our Technologies 
 
