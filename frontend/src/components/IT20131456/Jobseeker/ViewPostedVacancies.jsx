@@ -7,6 +7,7 @@ import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import NavBar from "../../IT20128036/NavBar";
+import images from "../../../images/back1.jpg";
 import ViewPostedVacanciesModal from "./ViewPostedVacanciesModal";
 
 export default function ViewVacancy() {
@@ -97,15 +98,16 @@ export default function ViewVacancy() {
           paddingRight: "50px",
           paddingBottom: "50px",
           paddingTop: "10px",
+          backgroundImage: `url(${images})`,
           backgroundSize: "cover",
           margin: "0px 0px 0px 0px",
-          height: "100vh",
+          height: "200vh",
           borderTop: "5px solid black",
         }}
       >
         <div
           className="jumbotron"
-          style={{ background: "white", minHeight: "100vh" }}
+          style={{ background: "white", minHeight: "180vh" }}
         >
           <div className="container px-5">
             <div className="row">
