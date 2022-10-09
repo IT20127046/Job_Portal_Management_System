@@ -51,7 +51,7 @@ function Report() {
     }, [Applications]);
 
     const pdfGenerate = () => {
-        var doc = new jsPDF('portrait', 'px', 'a4', false);
+        let doc = new jsPDF('portrait', 'px', 'a4', false);
 
         doc.addImage(logo, 'PNG', 20, 10, 70, 70);
         doc.setFont("times");

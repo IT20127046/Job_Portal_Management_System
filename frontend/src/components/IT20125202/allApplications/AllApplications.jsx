@@ -1,5 +1,4 @@
-import React from 'react'
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import jwt_decode from 'jwt-decode';
 import JobSeekerView from './JobSeekerView';
 import RecruiterView from './RecruiterView';
