@@ -100,7 +100,7 @@ export default function ViewUserProfile() {
                     <div className="text-center">
                       <a
                         href="/userprofile/update/photo"
-                        className="btn btn-outline-dark "
+                        className="btn btn-outline-light "
                       >
                         Update Photo
                       </a>

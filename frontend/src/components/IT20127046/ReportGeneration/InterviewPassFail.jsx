@@ -13,11 +13,11 @@ export default function InterviewPassFail() {
   const [noOfInterviews, setNoOfInterviews] = useState();
   const [passCount, setPassCount] = useState();
   const [failCount, setFailCount] = useState();
-  const [myData, setMyData] = useState([10, 12, 24, 20, 18]);
+  const [myData, setMyData] = useState([{x: "Pass", y: 0}, {x: "Fail", y: 0}]);
 
   useEffect(() => {
     retriveInterviews();
-    getNoOfInterviews();
+    
   }, []);
 
   const retriveInterviews = () => {
@@ -28,27 +28,45 @@ export default function InterviewPassFail() {
     });
   };
 
+  const handleReport = () => {
+    getNoOfInterviews();
+  }
+
   const getNoOfInterviews = () => {
     let count = 0;
     let pass = 0;
     let fail = 0;
 
     interviews.map((interview) => {
-      if (interview.status === "Pass") pass++;
-      else if (interview.status === "Fail") fail++;
+      if (interview.status === "Pass"){
+        pass++;
+      } 
+      else if (interview.status === "Fail"){
+        fail++;
+      } 
       count++;
     });
 
     setNoOfInterviews(count);
     setPassCount(pass);
     setFailCount(fail);
+
+    setMyData([{x: "Pass", y: pass}, {x: "Fail", y: fail}]);
   };
 
   return (
     <div>
-      <button onClick={handlePrint} className="btn btn-danger col-md-1">
+      <div>
+      <button onClick={handleReport} className="btn btn-danger" style={{ marginLeft: "10px" }}>
+        Generate Report
+      </button>
+
+      <button onClick={handlePrint} className="btn btn-dark" style={{ marginLeft: "10px" }}>
         Print
       </button>
+      
+      </div>
+      
       <br />
       <br />
       <div ref={componentRef}>
@@ -63,7 +81,7 @@ export default function InterviewPassFail() {
             <div className="col">
               <center>
                 <div
-                  style={{ height: "450px", width: "750px" }}
+                  style={{ height: "450px", width: "500px" }}
                   className="rounded mx-auto d-block"
                 >
                   <VictoryPie
@@ -71,9 +89,6 @@ export default function InterviewPassFail() {
                     colorScale={[
                       "#1cd0bb",
                       "#dfdfdf",
-                      "#ffa400",
-                      "red",
-                      "yellow",
                     ]}
                     radius={100}
                   />
@@ -82,8 +97,14 @@ export default function InterviewPassFail() {
             </div>
             <div className="col">
               <br />
+              <div class="alert alert-primary" role="alert" style={{ maxWidth: "300px" }}>
               <h6>Pass Count - {passCount}</h6>
+              </div>
+              <div class="alert alert-primary" role="alert" style={{ maxWidth: "300px" }}>
               <h6>Fail Count - {failCount}</h6>
+              </div>
+              
+              
             </div>
           </div>
 

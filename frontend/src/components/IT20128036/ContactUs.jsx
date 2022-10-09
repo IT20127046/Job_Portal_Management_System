@@ -30,6 +30,32 @@ export default function ContactUs() {
       reply: "pending",
     };
 
+
+
+
+    let validated = true;
+    if (title === ""){
+      validated = false;
+      swal({
+        title: "",
+        text: "Please select subject",
+        icon: "warning",
+      });
+    } else if(msg === ""){
+      validated = false;
+      swal({
+        title: "",
+        text: "Please enter your message",
+        icon: "warning",
+      });
+
+    } 
+
+
+
+
+
+if(validated === true ){
     axios.post("http://localhost:5000/inquiries/add", data).then((res) => {
       if (res.data.success) {
         swal("Send successfully!", "", "success").then((value) => {
@@ -41,6 +67,7 @@ export default function ContactUs() {
         });
       }
     });
+  }
   };
 
   return (
@@ -243,7 +270,7 @@ export default function ContactUs() {
                     name="msg"
                     placeholder="Enter Message Here"
                     onChange={(e) => setMsg(e.target.value)}
-                    required
+                    
                   />
                   <div className="row">
                     <div className="col-sm-1 mt-2">

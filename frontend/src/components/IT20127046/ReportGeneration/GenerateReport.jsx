@@ -11,6 +11,8 @@ export default function GenerateReport() {
     const [interviews, setInterviews] = useState([]);
     const [search, setSearch] = useState("");
     const [filteredResults, setFilteredResults] = useState([]);
+
+    const [interviewPassFailComponent, setInterviewPassFailComponent] = useState(false);
   
     useEffect(() => {
       retriveInterviews();
@@ -25,6 +27,10 @@ export default function GenerateReport() {
         }
       });
     };
+
+    const handleInterviewReport = () => {
+      setInterviewPassFailComponent(true);
+    }
 
     return (
       <div>
@@ -49,13 +55,10 @@ export default function GenerateReport() {
                   <i className="fa fa-arrow-left"></i>&nbsp; Back
                 </a>
   
-                <a className="btn btn-primary" style={{ marginLeft: "10px" }} href="/interview/schdule">
-                  <i className="fa fa-plus"></i>&nbsp; Schedule New Interview
+                <a className="btn btn-primary" style={{ marginLeft: "10px" }} onClick={handleInterviewReport}>
+                  <i className="fa fa-"></i>&nbsp; Get Interview Pass Fail Count Report
                 </a>
   
-                <a className="btn btn-warning" style={{ marginLeft: "10px" }} href="/generateReport/interview">
-                  <i className="fa fa-bar-chart"></i>&nbsp; Genarate Reports
-                </a>
               </div>
               <br />
   
@@ -63,7 +66,8 @@ export default function GenerateReport() {
                 className="container bg-light shadow p-3 mb-5 rounded mt-3"
                 style={{ borderRadius: "8px" }}
               >
-                <InterviewPassFail />
+                {interviewPassFailComponent ? <InterviewPassFail /> : <div></div>}
+                
               </div>
             </div>
           </div>

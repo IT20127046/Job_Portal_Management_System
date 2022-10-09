@@ -12,6 +12,9 @@ export default function AddAssessment() {
   const [description, setDescription] = useState("");
   const [driveLink, setDriveLink] = useState("");
 
+  const [fromValidate, setFromValidate] = useState("");
+  const [validateAlert, setValidateAlert] = useState(false);
+
   useEffect(() => {
     document.title = "AddAssessment";
 
@@ -27,16 +30,25 @@ export default function AddAssessment() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    if( title === '' || 
+        jobTitle === ''
+    ){
+      setValidateAlert(true);
+      setFromValidate("Please Input Required Fields");
+    }
+    else {
+      const data = {
+        recruiterId: recruiterId,
+        title: title,
+        jobTitle: jobTitle,
+        description: description,
+        driveLink: driveLink,
+      };
+  
+      saveAssessment(data);
+    }
 
-    const data = {
-      recruiterId: recruiterId,
-      title: title,
-      jobTitle: jobTitle,
-      description: description,
-      driveLink: driveLink,
-    };
-
-    saveAssessment(data);
   };
 
   const saveAssessment = (data) => {
@@ -67,10 +79,13 @@ export default function AddAssessment() {
 
           <div>
             <div className="container bg-light shadow p-3 mb-5  rounded mt-3 col-lg-10 ">
+            {validateAlert ? <p>
+                <div class="alert alert-danger" role="alert">{fromValidate}</div>
+              </p> : <p></p>}
               <form onSubmit={handleSubmit}>
                 <div className="col-md-6">
                   <div className="form-group">
-                    <strong>Title </strong>
+                    <strong>Title*</strong>
                     <input
                       type="text"
                       className="form-control"
@@ -84,7 +99,7 @@ export default function AddAssessment() {
 
                 <div className="col-md-6">
                   <div className="form-group">
-                    <strong>Job Title</strong>
+                    <strong>Job Title*</strong>
                     <input
                       type="text"
                       className="form-control"
@@ -97,7 +112,7 @@ export default function AddAssessment() {
                 &nbsp;
 
                 <div className="form-group">
-                  <strong>Description :</strong>
+                  <strong>Description</strong>
                   <textarea
                     class="form-control"
                     id="description"

@@ -70,9 +70,13 @@ export default class UserRoles_JobSeeker extends Component {
 
     const searchKey = e.currentTarget.value;
 
-    axios.get("http://localhost:5000/users").then((res) => {
+      const type = "Job Seeker";
+    axios.get(`http://localhost:5000/users/${type}`).then((res) => {
       if (res.data.success) {
         this.filterData(res.data.existingUsers, searchKey);
+        
+
+       
       }
     });
   };
