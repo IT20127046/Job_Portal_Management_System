@@ -228,9 +228,12 @@ export default function AdminHome() {
             </div>
           </div>
 
+
+          <hr></hr>
+
           <div className="mt-3">
             <div className="row" style={{ height: "150px" }}>
-              <div className="col p-3 mb-2 m-2 bg-light text-dark rounded">
+              <div className="col p-3 mb-2 m-2 bg-light text-dark rounded border border-dark">
                 <center>
                   <i class="fa fa-user" aria-hidden="true"></i>
                   <h6>User Management</h6>
@@ -247,7 +250,7 @@ export default function AdminHome() {
                   </a>
                 </center>
               </div>
-              <div className="col p-3 mb-2 m-2 bg-light text-dark rounded">
+              <div className="col p-3 mb-2 m-2 bg-light text-dark rounded border border-dark">
                 <center>
                   <i class="fa fa-users" aria-hidden="true"></i>
                   <h6>Vacancies Management</h6>
@@ -264,7 +267,7 @@ export default function AdminHome() {
                   </a>
                 </center>
               </div>
-              <div className="col p-3 mb-2 m-2 bg-light text-dark rounded">
+              <div className="col p-3 mb-2 m-2 bg-light text-dark rounded border border-dark">
                 <center>
                   <i class="fa fa-book" aria-hidden="true"></i>
                   <h6>Application Management</h6>
@@ -284,7 +287,7 @@ export default function AdminHome() {
             </div>
 
             <div className="row" style={{ height: "150px" }}>
-              <div className="col p-3 mb-2 m-2 bg-light text-dark rounded">
+              <div className="col p-3 mb-2 m-2 bg-light text-dark rounded border border-dark">
                 <center>
                   <i class="fa fa-arrow-up" aria-hidden="true"></i>
                   <h6>Assesment Management</h6>
@@ -301,7 +304,7 @@ export default function AdminHome() {
                   </a>
                 </center>
               </div>
-              <div className="col p-3 mb-2 m-2 bg-light text-dark rounded">
+              <div className="col p-3 mb-2 m-2 bg-light text-dark rounded border border-dark">
                 <center>
                   <i class="fa fa-file-text" aria-hidden="true"></i>
                   <h6>Interview Management</h6>
@@ -318,7 +321,7 @@ export default function AdminHome() {
                   </a>
                 </center>
               </div>
-              <div className="col p-3 mb-2 m-2 bg-light text-dark rounded">
+              <div className="col p-3 mb-2 m-2 bg-light text-dark rounded border border-dark">
                 <center>
                   <i class="fa fa-table" aria-hidden="true"></i>
                   <h6>Generate Report</h6>
