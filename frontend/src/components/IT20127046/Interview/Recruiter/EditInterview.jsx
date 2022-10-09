@@ -14,6 +14,9 @@ export default function EditInterview() {
   const [interviewMode, setInterviewMode] = useState("");
   const [status, setStatus] = useState("");
 
+  const [fromValidate, setFromValidate] = useState("");
+  const [validateAlert, setValidateAlert] = useState(false);
+
   useEffect(() => {
     retriveInterview();
   }, []);
@@ -33,16 +36,48 @@ export default function EditInterview() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const data = {
-      description: description,
-      interviewDate: interviewDate,
-      interviewTime: interviewTime,
-      interviewMode: interviewMode,
-      status: status,
-    };
+    if( interviewDate === '' || 
+        interviewTime === '' ||
+        interviewMode === ''
+    ){
+      setValidateAlert(true);
+      setFromValidate("Please Input Required Fields");
+    }
+    else if(validateInterviewDate(interviewDate)){
+      setValidateAlert(true);
+      setFromValidate("Plase Input Valid Interview Date");
+    }
+    else {
+      const data = {
+        description: description,
+        interviewDate: interviewDate,
+        interviewTime: interviewTime,
+        interviewMode: interviewMode,
+        status: status,
+      };
 
-    updateInterview(data);
+      updateInterview(data);
+    }
+
   };
+
+  // Validate interview date
+  const validateInterviewDate = (interviewDate) => {
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+
+    today = yyyy + '-' + mm + '-' + dd;
+
+    let date1 = new Date(interviewDate).getTime();
+    let date2 = new Date(today).getTime();
+
+    if (date1 < date2){
+      return true;
+    }
+    return false;
+  }
 
   const updateInterview = (data) => {
     axios
@@ -72,6 +107,9 @@ export default function EditInterview() {
 
           <div>
             <div className="container bg-light shadow p-3 mb-5  rounded mt-3 col-lg-10 ">
+            {validateAlert ? <p>
+                <div class="alert alert-danger" role="alert">{fromValidate}</div>
+              </p> : <p></p>}
               <form>
                 <div className="row">
                   <div className="col-md-6">
