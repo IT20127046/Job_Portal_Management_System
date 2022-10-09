@@ -94,6 +94,10 @@ export default function RecruiterView() {
               <a className="btn btn-primary" style={{ marginLeft: "10px" }} href="/interview/schdule">
                 <i className="fa fa-plus"></i>&nbsp; Schedule New Interview
               </a>
+
+              <a className="btn btn-warning" style={{ marginLeft: "10px" }} href="/generateReport/interview">
+                <i className="fa fa-bar-chart"></i>&nbsp; Genarate Reports
+              </a>
             </div>
             <br />
 
@@ -126,7 +130,7 @@ export default function RecruiterView() {
                       <td>{interview.interviewTime}</td>
                       <td>{interview.interviewMode}</td>
                       
-                      {interview.status == "Not Completed" ? <p
+                      {interview.status == "Fail" ? <p
                         style={{ margin: "10px" }}
                         className="badge bg-warning text-dark"
                       >
@@ -134,7 +138,7 @@ export default function RecruiterView() {
                       </p>
                       : <p
                       style={{ margin: "10px" }}
-                      className="badge bg-success text-dark"
+                      className="badge bg-success text-white"
                     >
                       {interview.status}
                     </p>
