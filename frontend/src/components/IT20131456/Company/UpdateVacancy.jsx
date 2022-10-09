@@ -38,6 +38,7 @@ export default function UpdateVacancy() {
       setClosingDate(response.data.exsitingVacancy.closingDate);
       setCompanyId(response.data.exsitingVacancy.companyId);
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onSubmit = (e) => {
