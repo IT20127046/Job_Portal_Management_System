@@ -45,19 +45,19 @@ This system is designed as a solution for the issues related to finding jobs, st
 
 * Designing and implementation for Application and Resume Management functionalities.
 
- -	Application to apply for a vacancy.
+ -Application to apply for a vacancy.
 
- -	Displaying all applications (According to the logged-in user).
+ -Displaying all applications (According to the logged-in user).
 
- -	Displaying detailed submitted application (Access rights will differ according to the user type).
+ -Displaying detailed submitted application (Access rights will differ according to the user type).
 
- -	Creating a Resume.
+ -Creating a Resume.
 
- -	Updating the created resume.
+ -Updating the created resume.
 
- -	Deleting the created resume.
+ -Deleting the created resume.
 
- -	Finding created resume using logged-in job seeker’s details.
+ -Finding created resume using logged-in job seeker’s details.
 
 *	Report generation related to Application Management.
 
