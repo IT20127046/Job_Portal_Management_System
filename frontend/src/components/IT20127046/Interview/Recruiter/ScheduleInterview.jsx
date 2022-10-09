@@ -50,7 +50,7 @@ export default function ScheduleInterview() {
         interviewMode === ''
       ){
         setValidateAlert(true);
-        setFromValidate("Plase Input Required Fileds");
+        setFromValidate("Please Input Required Fields");
     }
     else if(validateInterviewDate(interviewDate)){
       setValidateAlert(true);
