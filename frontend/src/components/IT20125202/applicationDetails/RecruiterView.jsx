@@ -296,7 +296,7 @@ const RecruiterView = () => {
                     </div>
                     <div className='col'>
                         <div style={{ textAlign: 'center' }}>
-                            <button type="button" className="btn btn-outline-dark" onClick={() => rejectHandler('')}> <h5>Reject</h5></button>
+                            <button type="button" className="btn btn-outline-dark" onClick={() => rejectHandler()}> <h5>Reject</h5></button>
                         </div>
                     </div>
                     {applicationDet.status === 'Accepted' &&

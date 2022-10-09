@@ -66,8 +66,7 @@ export default class UserLogin extends Component {
                     .then((value) => {
                         if (value) {
                             localStorage.setItem('userToken', res.data)
-                            // this.props.history.push(`/`)
-                            // window.location.reload();
+                           
                             window.location = '/'
                         }
 
@@ -86,68 +85,7 @@ export default class UserLogin extends Component {
 
     render() {
         return (
-            //  <div>
-            //     <div className="container" style={{ marginTop: '10px', marginBottom: '10px', backgroundColor: 'white', paddingBottom: '100px', paddingTop: '50px', paddingLeft: '200px', paddingRight: '200px', height: '800px' }}>
-               
-
-    
-
-
-            //         <div className="col-md-8 mt-4 mx-auto">
-                        
-            //             <h3 className="h3 mb-3 font-weight-normal" style={{ textAlign: 'center' }}>User Login</h3>
-            //             <br />
-            //             <form className="needs-validation" noValidate>
-            //                 <div className="form-group" style={{ marginBottom: '15px' }}>
-            //                     <label style={{ marginBottom: '5px' }}><b>User Name</b></label>
-            //                     <input
-            //                         type="text"
-            //                         className="form-control"
-            //                         name="name"
-            //                         placeholder="Please enter your user name"
-            //                         required
-            //                         value={this.state.name}
-            //                         onChange={this.onChange}
-            //                     />
-
-            //                 </div>
-            //                 <div className="form-group" style={{ marginBottom: '15px' }}>
-            //                     <label style={{ marginBottom: '5px' }}><b>Password</b></label>
-            //                     <input
-            //                         type="password"
-            //                         className="form-control"
-            //                         name="password"
-            //                         placeholder="Please enter the password"
-            //                         required
-            //                         value={this.state.password}
-            //                         onChange={this.onChange}
-            //                     />
-
-            //                 </div>
-
-
-            //                 <div className="d-grid gap-2">
-            //                     <button
-            //                         className="btn btn-outline-dark"
-            //                         type="submit"
-            //                         style={{ marginTop: '15px', width: 'cover'}}
-            //                         onClick={this.onSubmit}
-            //                     ><b>
-            //                         Login
-            //                     </b>
-            //                     </button>
-            //                 </div>
-            //             </form>
-            //         </div>
-
-
-
-
-
-
-      
-            //     </div>
-            //  </div>
+          
 <div>
     <NavBar/>
 
