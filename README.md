@@ -5,9 +5,9 @@ This system is designed as a solution for the issues related to finding jobs, st
 
 ### Group Members -:
 
-IT20127046 - Samararathna L.H
+## IT20127046 - Samararathna L.H
 
-IT20128036 - Kumarasinghe K.M.K.D
+## IT20128036 - Kumarasinghe K.M.K.D
 
 ## IT20131456 - Mendis T.C.U
 
@@ -40,7 +40,35 @@ IT20128036 - Kumarasinghe K.M.K.D
 -	Apply for posted job vacancies.
 
 
-IT20125202 - Herath G.G.T.K
+## IT20125202 - Herath G.G.T.K
+
+
+* Designing and implementation for Application and Resume Management functionalities.
+
+-	Application to apply for a vacancy.
+
+-	Displaying all applications (According to the logged-in user).
+
+-	Displaying detailed submitted application (Access rights will differ according to the user type).
+
+-	Creating a Resume.
+
+-	Updating the created resume.
+
+-	Deleting the created resume.
+
+-	Finding created resume using logged-in job seeker’s details.
+
+*	Report generation related to Application Management.
+
+*	Form validations related to implemented functionalities.
+
+*	Manual developer testing for implemented functionalities.
+
+*	Automated testing for validations using Selenium.
+
+*	Code quality checking and fixing the bugs and code smells related to the implemented functionalities.
+
 
 # Our Technologies 
 
