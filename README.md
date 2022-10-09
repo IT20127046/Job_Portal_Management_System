@@ -21,9 +21,9 @@ Contribution
 
 *	admin 
 
--View all company-created job vacancies. 
--	Accept or reject company-created job vacancies.
--	Search the required data using the company name or position. 
+ - View all company-created job vacancies. 
+ -	Accept or reject company-created job vacancies.
+ -	Search the required data using the company name or position. 
 
 *	Recruiter (Company) 
 
