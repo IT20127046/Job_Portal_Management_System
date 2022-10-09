@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
@@ -56,30 +57,18 @@ export default function GenarateVacancyReport() {
     }
   }, [vacancy]);
 
-  // no of vacancy as the string
-
-  //const [total, setTotal] = useState(0);
-  // useEffect(() => {
-  // let sum = vacancy.reduce((prev,curr) => +prev.noOfVacancy +
-  // +curr.noOfVacancy)
-  // setTotal(sum);
-  // }, [vacancy])
-
   useEffect(() => {
     const data = myData.slice();
     for (let i = 0; i < vacancy.length; i++) {
       var jobTitle = vacancy[i].jobTitle;
       var noOfVacancy = vacancy[i].noOfVacancy;
       data.push({
-        x: jobTitle
-          // .split(" ")
-          // .map((x) => x[0])
-          // .join("")
-          ,
+        x: jobTitle,
         y: noOfVacancy,
       });
     }
     setMyData(data);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [vacancy]);
 
   return (
@@ -94,7 +83,7 @@ export default function GenarateVacancyReport() {
           paddingTop: "10px",
           backgroundImage: `url(${image})`,
           backgroundSize: "cover",
-          margin: "0px 0px 0px 0px",        
+          margin: "0px 0px 0px 0px",
           height: "170vh",
           borderTop: "5px solid black",
         }}

@@ -33,36 +33,22 @@ import ViewAssessment from "./components/IT20127046/Assessment/Recruiter/ViewAss
 import EditAssessment from "./components/IT20127046/Assessment/Recruiter/EditAssessment";
 import UpdateProfile from "./components/IT20128036/userProfile";
 import ViewUserProfile from "./components/IT20128036/ViewUserProfile";
-
-
 import { ExportPDF } from "./components/IT20128036/userManagement/exportPDF";
-
-
 import ChangePassword from "./components/IT20128036/ChangePassword";
-
 import UpdateProfilePhoto from "./components/IT20128036/EditProfilePhoto";
-
-
 import Resume from "./components/IT20125202/resume/Resume";
-
 import MyNotifications from "./components/IT20127046/Interview/JobSeeker/MyNotifications";
-
-
 import Report from "./components/IT20125202/reportGeneration/report";
 import { Home } from "./components/IT20125202/Home";
 import SendAssessment from "./components/IT20127046/Assessment/Recruiter/SendAssessment";
 import ViewSentAssessment from "./components/IT20127046/Assessment/Recruiter/ViewSentAssessment";
-
-
-
+import ViewAssessmentJobSeeker from "./components/IT20127046/Assessment/JobSeeker/ViewAssessmentJobSeeker";
+import GenerateReportIT46 from "./components/IT20127046/ReportGeneration/GenerateReport";
 
 function App() {
   
   return (
     <BrowserRouter>
-
-
-
  
     {/* <NavBar/> */}
 
@@ -80,14 +66,9 @@ function App() {
         <Route path="/admin/barchart/view" element={<Example/>} />
         <Route path="/admin/bchart" element={<BChart/>} />
         <Route path="/admin/applicationreports" element={<Report/>} />
-
         <Route path="/admin/user/report" element={<ExportPDF/>} />
-
         
         
-
-
-
         {/* ---------------Job Recruters / Job Seekers --------------- */}
         <Route path="/" element={<LandingPage />} />
         <Route path="/application/:id" element={<ApplicationPage />} />
@@ -111,22 +92,18 @@ function App() {
         <Route path="/genarate/vacancy/report" element={<GenarateVacancyReport/>} />
         <Route path="/userprofile" element={<UpdateProfile/>} />
         <Route path="/userprofile/view" element={<ViewUserProfile/>} />
-
         <Route path="/userprofile/update/photo" element={<UpdateProfilePhoto/>} />
-
         <Route path="/user/change/password" element={<ChangePassword/>} />
-
-
-
-
         <Route path="/assessment/add" element={<AddAssessment />} />
         <Route path="/assessment/recruiter" element={<ViewAssessment />} />
         <Route path="/assessment/update/:id" element={<EditAssessment />} />
         <Route path="/resume" element={<Resume/>} />
-
         <Route path="/interview/jobseeker/notification" element={<MyNotifications />} />
         <Route path="/assessment/send/:id" element={<SendAssessment />} />
         <Route path="/sendAssessment/recruiter/view" element={<ViewSentAssessment />} />
+
+        <Route path="/sendAssessment/jobseeker" element={<ViewAssessmentJobSeeker />} />
+        <Route path="/generateReport/interview" element={<GenerateReportIT46 />} />
 
 
         <Route path="/home" element={<Home/>} />

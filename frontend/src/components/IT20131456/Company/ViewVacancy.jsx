@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import swal from "sweetalert";
@@ -64,7 +65,7 @@ export default function ViewVacancy() {
           paddingTop: "10px",
           backgroundImage: `url(${image})`,
           backgroundSize: "cover",
-          margin: "0px 0px 0px 0px",        
+          margin: "0px 0px 0px 0px",
           height: "120vh",
           borderTop: "5px solid black",
         }}

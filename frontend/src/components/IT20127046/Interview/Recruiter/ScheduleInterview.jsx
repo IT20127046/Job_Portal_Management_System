@@ -20,7 +20,7 @@ export default function ScheduleInterview() {
   const [interviewDate, setInterviewDate] = useState("");
   const [interviewTime, setInterviewTime] = useState("");
   const [interviewMode, setInterviewMode] = useState("");
-  const [status, setStatus] = useState("Not Completed");
+  const [status, setStatus] = useState("Pending");
 
   useEffect(() => {
     document.title = "SchduleInterview";
