@@ -8,32 +8,22 @@ import "./userprofile.css";
 
 function UpdateProfilePhoto() {
   const [uid, setUid] = useState("");
- 
+
   const [file, setfile] = useState("");
   const [type, setType] = useState("");
- 
 
-  //check1
   const [preview, setPreview] = useState();
-
-  //check2
 
   useEffect(() => {
     const usertoken = localStorage.userToken;
     const decoded = jwt_decode(usertoken);
 
     setUid(decoded._id);
-   
+
     setType(decoded.type);
 
-    // fetchData();
-
-    
-
     setTimeout(() => {
-
-        //checck1
-       if (!file) {
+      if (!file) {
         setPreview(undefined);
         return;
       }
@@ -43,46 +33,16 @@ function UpdateProfilePhoto() {
 
       // free memory when ever this component is unmounted
       return () => URL.revokeObjectURL(objectUrl);
-
-      //check2
-    
     }, 0);
   }, [file]);
 
-
-  // const fetchData = function(){
-    // axios.get(`http://localhost:5000/user/${uid}`).then((res) => {
-    //   if (res.data.success){
-      
-    //   }
-
-       
-
-
-    // });
-  // }
-  
-
   const onChangeFile = (e) => {
-    // setfile(e.target.files[0]);
-
-    // const [file] = e.target.files;
-    // setfile(URL.createObjectURL(file));
-
-    // if (e.target.files && e.target.files[0]) {
-    //   setfile(URL.createObjectURL(e.target.files[0]));
-    //   setfile(e.target.files[0]);
-    // }
-
-    //check1
     if (!e.target.files || e.target.files.length === 0) {
       setfile(undefined);
       return;
     }
 
-    // I've kept this example simple by using the first image instead of multiple
     setfile(e.target.files[0]);
-    //check2
   };
 
   const onChangeClick = (e) => {
@@ -91,7 +51,6 @@ function UpdateProfilePhoto() {
     const formdata = new FormData();
 
     formdata.append("file", file);
-   
 
     axios
       .put(`http://localhost:5000/photo/${uid}`, formdata)
@@ -109,22 +68,11 @@ function UpdateProfilePhoto() {
   };
 
   return (
-    <div className="inq_container" style={{ minHeight: '100vh' }}>
+    <div className="inq_container" style={{ minHeight: "100vh" }}>
       <NavBar />
       <div className="container bg-light border border-light rounded shadow mt-4 ">
         <div className="mt-4 mb-4 mx-4 my-4">
-          <div
-          // style={{
-          //   margin: "20px 50px 50px 0px",
-          //   padding: "50px",
-          //   backgroundColor: "",
-          //   border: "2px solid gray",
-          //   borderRadius: "10px",
-          // }}
-          >
-            {/* <center>
-          <h4 style={set}>Update Profile</h4>
-        </center> */}
+          <div>
             <br />
             <form onSubmit={onChangeClick} encType="multipart/form-data">
               <div class="mb-3">
@@ -156,9 +104,6 @@ function UpdateProfilePhoto() {
                   </div>
                 </div>
               </div>
-
-              
-
 
               <center>
                 <button type="submit" class="btn btn-primary">

@@ -37,19 +37,9 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-
-
-
-
 //update photo
 
-UserRouter.put(
-  "/photo/:id",
-  upload.single("file"),
-  UserController.updatePhoto
-);
-
-
+UserRouter.put("/photo/:id", upload.single("file"), UserController.updatePhoto);
 
 // update password
 UserRouter.put("/user/updateprofile/:id", UserController.updatepassword);

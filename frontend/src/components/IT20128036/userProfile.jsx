@@ -62,15 +62,7 @@ function UpdateProfile() {
   const onChangeClick = (e) => {
     e.preventDefault();
 
-    // const formdata = new FormData();
-
-   
-    // formdata.append("website", website);
-    // formdata.append("csize", csize);
-    // formdata.append("founded", founded);
-    // formdata.append("dob", dob);
-    // formdata.append("sex", sex);
-    // formdata.append("about", about);
+    
     const data = {
       website:website,
       csize:csize,
@@ -97,22 +89,14 @@ function UpdateProfile() {
   };
 
   return (
-    <div className="inq_container">
+    <div className="inq_container" style={{ minHeight: '100vh' }}>
       <NavBar />
       <div className="container bg-light border border-light rounded shadow mt-4 ">
         <div className="mt-4 mb-4 mx-4 my-4">
           <div
-          // style={{
-          //   margin: "20px 50px 50px 0px",
-          //   padding: "50px",
-          //   backgroundColor: "",
-          //   border: "2px solid gray",
-          //   borderRadius: "10px",
-          // }}
+          
           >
-            {/* <center>
-          <h4 style={set}>Update Profile</h4>
-        </center> */}
+            
             <br />
             <form onSubmit={onChangeClick} encType="multipart/form-data">
          

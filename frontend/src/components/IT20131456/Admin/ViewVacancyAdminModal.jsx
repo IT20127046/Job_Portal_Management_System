@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import swal from "sweetalert";
 
@@ -73,6 +73,7 @@ export default function ViewPostedVacanciesModal(props) {
                         style={{ height: "100%", width: "100%" }}
                         name="photo"
                         src={imageBasePath + props.image}
+                        alt="Not loaded"
                       />
                     </div>
                   </div>
