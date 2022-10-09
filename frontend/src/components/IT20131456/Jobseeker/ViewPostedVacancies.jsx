@@ -1,3 +1,5 @@
+/* eslint-disable array-callback-return */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -95,10 +97,8 @@ export default function ViewVacancy() {
           paddingRight: "50px",
           paddingBottom: "50px",
           paddingTop: "10px",
-          backgroundImage: `url(${image})`,
           backgroundSize: "cover",
           margin: "0px 0px 0px 0px",
-          overflowY: "scroll",
           height: "100vh",
           borderTop: "5px solid black",
         }}

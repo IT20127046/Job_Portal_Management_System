@@ -3,10 +3,15 @@ import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import swal from 'sweetalert';
 
+/**
+ * @description This component is used to display the details of a selected received application to the recruiter.
+ */
+
 const RecruiterView = () => {
+
     const { id } = useParams();
     const navigate = useNavigate();
-
+    const [isLoading, setIsLoading] = React.useState(true);
     const [applicationDet, setApplicationDet] = React.useState({
         vacancyNo: '',
         companyId: '',
@@ -32,11 +37,8 @@ const RecruiterView = () => {
     let [comments, setComments] = React.useState('');
 
     useEffect(() => {
-
-        // console.log(id);
         axios.get(`http://localhost:5000/applications/${id}`)
             .then(response => {
-
                 if (response.data.success) {
                     let data = response.data.exsitingApplication;
                     setApplicationDet({
@@ -60,20 +62,16 @@ const RecruiterView = () => {
                         status: data.status,
                         comments: data.comments
                     });
-
                     setComments(data.comments);
+                    setIsLoading(false);
                 }
-                // console.log(response.data.exsitingApplication);
-                // console.log(applicationDet);
             })
             .catch(error => {
-                console.log(error);
+                console.log('Error white retrieving received applications from DB. Error: ', error);
             })
-
     }, [id]);
 
     const acceptHandler = () => {
-        //should get an confirmation alert
         if (applicationDet.status === 'Pending') {
             axios.patch(`http://localhost:5000/applications/update/${id}`, {
                 status: 'Accepted',
@@ -81,19 +79,18 @@ const RecruiterView = () => {
             })
                 .then(response => {
                     if (response.data.success) {
-                        navigate('/all_applications');
+                        swal("Application is accepted");
+                        window.location.reload(false);
                     }
                 })
                 .catch(error => {
-                    console.log(error);
+                    console.log('Error while accepting the application. Error: ', error);
                 }
                 );
         }
         else {
             swal("Application already " + applicationDet.status + ". Cannot be changed again.");
-            // alert('Application already ' + applicationDet.status + '. Cannot be changed again.');
         }
-
     }
 
     const rejectHandler = () => {
@@ -105,19 +102,31 @@ const RecruiterView = () => {
             })
                 .then(response => {
                     if (response.data.success) {
-                        navigate('/all_applications');
+                        swal("Application is rejected");
                     }
                 }
                 )
                 .catch(error => {
-                    console.log(error);
+                    console.log('Error while rejecting the application. Error: ', error);
                 }
                 );
         }
         else {
             swal("Application already " + applicationDet.status + ". Cannot be changed again.");
-            // alert('Application already ' + applicationDet.status + '. Cannot be changed again.');
         }
+    }
+
+    // notify the user when the fetching records from the database is not completed
+    if (isLoading) {
+        return <div style={{ textAlign: 'çenter' }}> <h3>Loading...</h3></div>;
+    }
+
+    const onclickNext = () => {
+        // to navigate to the interview and assigment page
+        console.log(applicationDet.applicantId);
+        console.log(applicationDet.jobTitle);
+
+        window.location = `/interview/schdule/${applicationDet.applicantId}/${applicationDet.jobTitle}/${applicationDet.applicantFirstName}`;
     }
 
     return (
@@ -141,7 +150,6 @@ const RecruiterView = () => {
                     <small id="jobTitleHelp" className="form-text text-muted"></small>
                 </div>
                 <br />
-
                 <div className="row">
                     <div className="col">
                         <div className="form-group">
@@ -177,7 +185,7 @@ const RecruiterView = () => {
                 <div className="form-group">
                     {/* applied date */}
                     <label htmlFor="coverLetter"><h6> Received Date </h6> </label>
-                    <input type='text' value={applicationDet.appliedDate} className="form-control" id="coverLetter" readOnly />
+                    <input type='text' value={new Date(applicationDet.appliedDate).toString()} className="form-control" id="coverLetter" readOnly />
                 </div>
                 <br />
                 <div>
@@ -186,7 +194,6 @@ const RecruiterView = () => {
                         <label htmlFor="educationalQualifications"><h6> Educational Qualifications </h6> </label>
                         {applicationDet.educationalQualifications.map((item, index) => (
                             <div key={index}>
-
                                 <textarea value={item.qualification} className="form-control" id="educationalQualifications" rows="3" readOnly />
                                 <br />
                             </div>
@@ -289,10 +296,16 @@ const RecruiterView = () => {
                     </div>
                     <div className='col'>
                         <div style={{ textAlign: 'center' }}>
-                            <button type="button" className="btn btn-outline-dark" onClick={() => rejectHandler('')}> <h5>Reject</h5></button>
+                            <button type="button" className="btn btn-outline-dark" onClick={() => rejectHandler()}> <h5>Reject</h5></button>
                         </div>
                     </div>
-
+                    {applicationDet.status === 'Accepted' &&
+                        <div className='col'>
+                            <div style={{ textAlign: 'center' }}>
+                                <button type="button" className="btn btn-outline-dark" onClick={() => onclickNext()}> <h5>Interview</h5></button>
+                            </div>
+                        </div>
+                    }
                 </div>
                 <br />
                 <br />

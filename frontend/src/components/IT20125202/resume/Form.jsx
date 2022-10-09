@@ -5,11 +5,13 @@ import validate from './validate';
 import { useParams } from 'react-router-dom';
 import swal from 'sweetalert';
 
-const Form = () => {
-    // const navigate = useNavigate();
-    const { id } = useParams();
-    // console.log(id)
+/**
+ * @description This component is used to display the form to create a new resume if the user does not have a resume
+ */
 
+const Form = () => {
+
+    const { id } = useParams();
     const [userId, setUserId] = React.useState('');
     const [firstName, setFirstName] = React.useState('');
     const [lastName, setLastName] = React.useState('');
@@ -21,38 +23,28 @@ const Form = () => {
     const [languages, setLanguages] = React.useState([{}]);
     const [referees, setReferees] = React.useState([{}]);
 
-
     useEffect(() => {
         document.title = "Resume";
-
         const usertoken = localStorage.userToken;
         const decoded = jwt_decode(usertoken);
-
         setUserId(decoded._id);
         setEmail(decoded.email);
         setPhone(decoded.mobile);
-
     }, [id]);
-
 
     // handleArrayAdd, handleArrayRemove, handleArrayChange methods are used to add, remove and change elements in arrays
     const handleArrayAdd = (array, setArray) => {
-
         setArray([...array, {}]);
-
     }
 
     const handleArrayRemove = (array, setArray, index) => {
-
         const list = [...array];
-
         list.splice(index, 1);
         setArray(list);
     }
 
     const handleArrayChange = (array, setArray, e, index) => {
         const { name, value } = e.target;
-
         const list = [...array];
         list[index][name] = value;
         setArray(list);
@@ -77,28 +69,22 @@ const Form = () => {
             referees: referees
         }
 
-        // console.log(resume);
-        if (validate(resume)) {  //validate the email and mobile before saving it
+        //validate and save data
+        if (validate(resume)) {
             await axios.post('http://localhost:5000/resumes/save', resume).then(res => {
-
                 swal("Resume saved successfully!", "", "success")
                     .then((value) => {
                         if (value) {
                             window.location.reload(false);
                         }
-
                     });
-
-
             }).catch(error => {
+                console.log('Error while saving the resume details. Error: ', error);
                 if (error.response.status === 400) {
                     swal('Please fill all the marked fields')
                 }
-                // console.log(error);
             }).finally(() => {
-
-            }
-            );
+            });
         }
     }
 
@@ -106,11 +92,10 @@ const Form = () => {
         <div className="container-fluid" style={{ maxWidth: 800 }}>
             <form>
                 <br />
-                <h6 style={{textAlign: 'center'}}> Details in the resume will be automatically filled in the application forms. </h6>
+                <h6 style={{ textAlign: 'center' }}> Details in the resume will be automatically filled in the application forms. </h6>
                 <hr />
                 <span className="required_label" /> Required
-                <br />
-                <br />
+                <br /><br />
                 <div className="row">
                     <div className="col">
                         <div className="form-group">
@@ -293,13 +278,11 @@ const Form = () => {
                         </div>
                     ))}
                 </div>
-                <br />
-                <br />
+                <br /><br />
                 <div style={{ textAlign: 'center' }}>
                     <button type="button" className="btn btn-outline-success" onClick={(e) => saveData(e)}> <h5>Save</h5></button>
                 </div>
-                <br />
-                <br />
+                <br /><br />
             </form>
         </div>
     )

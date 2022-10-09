@@ -32,7 +32,7 @@ export default function ViewPostedVacanciesModal(props) {
                     style={{ height: "100%", width: "100%" }}
                     name="photo"
                     src={imageBasePath + props.image}
-                    alt="Not loaded"
+                    alt=""
                   />
                 </div>
                 <div className="my-2">

@@ -4,12 +4,13 @@ import swal from "sweetalert";
 import jwt_decode from "jwt-decode";
 import "./contactUs.css";
 import NavBar from "./NavBar";
+import "./userprofile.css";
 
 function UpdateProfile() {
   const [uid, setUid] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [file, setfile] = useState("");
+  
   const [type, setType] = useState("");
   const [website, setWebsite] = useState("");
   const [csize, setCsize] = useState("");
@@ -17,6 +18,9 @@ function UpdateProfile() {
   const [dob, setDob] = useState("");
   const [sex, setSex] = useState("");
   const [about, setAbout] = useState("");
+
+ 
+
 
   useEffect(() => {
     const usertoken = localStorage.userToken;
@@ -28,34 +32,49 @@ function UpdateProfile() {
     setType(decoded.type);
 
     axios.get(`http://localhost:5000/user/${uid}`).then((res) => {
+      if (res.data.success){
       setWebsite(res.data.user.website);
       setCsize(res.data.user.csize);
       setFounded(res.data.user.founded);
       setDob(res.data.user.dob);
       setSex(res.data.user.sex);
       setAbout(res.data.user.about);
+      }
+
+       
+
+
     });
+
+   
+
+    
+
+    
   }, [uid]);
 
-  const onChangeFile = (e) => {
-    setfile(e.target.files[0]);
-  };
+
+ 
+  
+
+
 
   const onChangeClick = (e) => {
     e.preventDefault();
 
-    const formdata = new FormData();
+    
+    const data = {
+      website:website,
+      csize:csize,
+      founded:founded,
+      dob:dob,
+      sex:sex,
+      about:about,
 
-    formdata.append("file", file);
-    formdata.append("website", website);
-    formdata.append("csize", csize);
-    formdata.append("founded", founded);
-    formdata.append("dob", dob);
-    formdata.append("sex", sex);
-    formdata.append("about", about);
+    }
 
     axios
-      .put(`http://localhost:5000/profile/${uid}`, formdata)
+      .put(`http://localhost:5000/profile/${uid}`, data)
       .then((res) => {
         swal("Updated successfully!", "", "success").then((value) => {
           if (value) {
@@ -70,38 +89,17 @@ function UpdateProfile() {
   };
 
   return (
-    <div className="inq_container">
+    <div className="inq_container" style={{ minHeight: '100vh' }}>
       <NavBar />
       <div className="container bg-light border border-light rounded shadow mt-4 ">
         <div className="mt-4 mb-4 mx-4 my-4">
           <div
-          // style={{
-          //   margin: "20px 50px 50px 0px",
-          //   padding: "50px",
-          //   backgroundColor: "",
-          //   border: "2px solid gray",
-          //   borderRadius: "10px",
-          // }}
+          
           >
-            {/* <center>
-          <h4 style={set}>Update Profile</h4>
-        </center> */}
+            
             <br />
             <form onSubmit={onChangeClick} encType="multipart/form-data">
-              <div class="mb-3">
-                <label for="formFile" class="form-label">
-                  {" "}
-                  <strong> Profile Picture</strong>{" "}
-                </label>
-                <input
-                  class="form-control"
-                  type="file"
-                  id="file"
-                  filename="file"
-                  onChange={onChangeFile}
-                  required
-                />
-              </div>
+         
 
               <div class="mb-3">
                 <label for="exampleInputText1" class="form-label">

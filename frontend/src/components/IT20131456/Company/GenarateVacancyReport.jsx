@@ -1,8 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 import { useReactToPrint } from "react-to-print";
 import image from "../../../images/back1.jpg";
+import NavBar from "../../IT20128036/NavBar";
 import { VictoryPie } from "victory-pie";
 
 export default function GenarateVacancyReport() {
@@ -55,26 +57,13 @@ export default function GenarateVacancyReport() {
     }
   }, [vacancy]);
 
-  // no of vacancy as the string
-
-  //const [total, setTotal] = useState(0);
-  // useEffect(() => {
-  // let sum = vacancy.reduce((prev,curr) => +prev.noOfVacancy +
-  // +curr.noOfVacancy)
-  // setTotal(sum);
-  // }, [vacancy])
-
   useEffect(() => {
     const data = myData.slice();
     for (let i = 0; i < vacancy.length; i++) {
       var jobTitle = vacancy[i].jobTitle;
       var noOfVacancy = vacancy[i].noOfVacancy;
       data.push({
-        x: jobTitle
-          // .split(" ")
-          // .map((x) => x[0])
-          // .join("")
-          ,
+        x: jobTitle,
         y: noOfVacancy,
       });
     }
@@ -84,6 +73,7 @@ export default function GenarateVacancyReport() {
 
   return (
     <div>
+      <NavBar />
       <div
         className="jumbotron"
         style={{
@@ -94,8 +84,7 @@ export default function GenarateVacancyReport() {
           backgroundImage: `url(${image})`,
           backgroundSize: "cover",
           margin: "0px 0px 0px 0px",
-          overflowY: "scroll",
-          height: "100vh",
+          height: "170vh",
           borderTop: "5px solid black",
         }}
       >

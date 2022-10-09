@@ -1,23 +1,7 @@
 import React, { Component } from "react";
-// import { useLocation,useNavigate,useParams } from 'react-router-dom';
-// import { withRouter } from "react-router";
+
 import jwt_decode from "jwt-decode";
 import swal from "sweetalert";
-
-// function withRouter(Component){
-//   function ComponentWithRouterProp(props){
-//     let location= useLocation();
-//     let navigate = useNavigate();
-//     let params = useParams();
-//     return(
-//       <Component
-//       {...props}
-//       router ={{location, navigate,params}}
-//       />
-//     );
-//   }
-//   return ComponentWithRouterProp;
-// }
 
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
@@ -46,7 +30,6 @@ class NavBar extends Component {
       const usertoken = localStorage.userToken;
       const decoded = jwt_decode(usertoken);
       this.setState({
-        // type: decoded.type.toString(),
         type: decoded.type,
       });
     }
@@ -65,8 +48,7 @@ class NavBar extends Component {
         swal("Logout successfully!", "", "success").then((value) => {
           if (value) {
             localStorage.removeItem("userToken");
-            // this.props.history.push(`/user/login`)
-            // window.location.reload();
+
             window.location = "/user/login";
           }
         });
@@ -112,7 +94,7 @@ class NavBar extends Component {
             <a
               className="nav-link"
               aria-current="page"
-              href="#"
+              href="/home"
               style={{ textDecoration: "none", color: "black" }}
             >
               Home
@@ -192,16 +174,6 @@ class NavBar extends Component {
               Profile
             </a>
           </li>
-
-          {/* <li className="nav-item dropdown">
-            <a className="nav-link dropdown-toggle" aria-current="page" href="#" style={{ textDecoration: 'none', color: 'white' }} id="navbarDropdown" role="button" data-bs-toggle="dropdown" >
-            Item
-            </a>
-            <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a className="dropdown-item" href="#">drop1</a></li>
-                <li><a className="dropdown-item" href="#">drop2</a></li>
-            </ul>
-          </li>  */}
 
           <li className="nav-item">
             <a
@@ -286,16 +258,6 @@ class NavBar extends Component {
             </a>
           </li>
 
-          {/* <li className="nav-item dropdown">
-            <a className="nav-link dropdown-toggle" aria-current="page" href="#" style={{ textDecoration: 'none', color: 'white' }} id="navbarDropdown" role="button" data-bs-toggle="dropdown" >
-            Item
-            </a>
-            <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a className="dropdown-item" href="#">drop1</a></li>
-                <li><a className="dropdown-item" href="#">drop2</a></li>
-            </ul>
-          </li>  */}
-
           <li className="nav-item">
             <a
               href="/user/login"
@@ -337,7 +299,6 @@ class NavBar extends Component {
               className="collapse navbar-collapse justify-content-md-center"
               id="navbarSupportedContent"
             >
-              {/* <div className='navbar-nav ms-auto mb-2 mb-lg-0'></div> */}
               <ul className="navbar-nav ms-auto mb-2 mb-lg-0"></ul>
               {localStorage.userToken ? userLink : loginRegLink}
             </div>

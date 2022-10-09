@@ -22,7 +22,7 @@ export default function ViewUserProfile() {
   const [address, setAddress] = useState("");
   const [type, setType] = useState("");
   // const [file, setFile] = useState("Cell-Row-0-Col-0.png");
-  const [file, setFile] = useState("1234.jpg");
+  const [file, setFile] = useState("1234.png");
 
   const [website, setWebsite] = useState("update your website");
   const [csize, setCsize] = useState("update company size");
@@ -67,15 +67,10 @@ export default function ViewUserProfile() {
   }, [uid]);
 
   return (
-    <div className="inq_container">
+    <div className="inq_container" style={{ minHeight: "140vh" }}>
       <NavBar />
       <div className="">
         <div className="container">
-          {/* { valid ? <div><h1>true</h1></div> : <div><h1><img src={require(`../../../../backend/uploads/${file}`)} alt="userprofile"/> </h1></div>} */}
-          {/* <img src={require(`../../../../backend/uploads/${file}`)} alt="userprofile"/> */}
-
-          {/* <h4>User Profile</h4> */}
-
           <div className="col-sm-12 bg-light border border-light rounded shadow mt-4 ">
             <div className="row">
               <div className="col-sm-4">
@@ -102,6 +97,14 @@ export default function ViewUserProfile() {
                         </h6>
                       </div>
                     )}
+                    <div className="text-center">
+                      <a
+                        href="/userprofile/update/photo"
+                        className="btn btn-outline-dark "
+                      >
+                        Update Photo
+                      </a>
+                    </div>
                     <hr />
 
                     <div>
@@ -156,7 +159,7 @@ export default function ViewUserProfile() {
                     </div>
 
                     <div>
-                      <a href="/student/group/view">
+                      <a href="#">
                         <div
                           className="p-2 mb-2 text-white"
                           style={{
@@ -195,10 +198,13 @@ export default function ViewUserProfile() {
                     <div></div>
 
                     <div className="p-3 mb-2 bg-light text-dark">
-                      <a href="#" style={{ textDecoration: "none" }}>
+                      <a
+                        href="/user/change/password"
+                        style={{ textDecoration: "none" }}
+                      >
                         <p className="h6">
-                          <i class="fa fa-comments" aria-hidden="true"></i>
-                          &nbsp;&nbsp;feedback
+                          <i class="fa fa-key" aria-hidden="true"></i>
+                          &nbsp;&nbsp;change password
                         </p>
                       </a>
                       <div></div>
@@ -209,35 +215,10 @@ export default function ViewUserProfile() {
 
               <div className="col-sm-8">
                 <div className="mt-4 mb-4 mx-4 my-4">
-                  {/* 
-      <img src={require(`../../../../backend/uploads/${file}`)} alt="alt"/>  */}
-                  {/* <p>{name}</p>
-          <p>{file}</p> */}
-
                   <h5>
                     <strong>About Me</strong>
                   </h5>
-                  <p1>
-                    {/* Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s, when an unknown printer took a galley
-                of type and scrambled it to make a type specimen book. It has
-                survived not only five centuries, but also the leap into
-                electronic typesetting, remaining essentially unchanged. It was
-                popularised in the 1960s with the release of Letraset sheets
-                containing Lorem Ipsum passages, and more recently with desktop
-                publishing software like Aldus PageMaker including versions of
-                Lorem Ipsum.It is a long established fact that a reader will be
-                distracted by the readable content of a page when looking at its
-                layout. The point of using Lorem Ipsum is that it has a
-                more-or-less normal distribution of letters, as opposed to using
-                'Content here, content here', making it look like readable
-                English. Many desktop publishing packages and web page editors
-                now use Lorem Ipsum as their default model text, and a search
-                for 'lorem ipsum' will uncover many web sites still in their
-                infancy.{" "} */}
-                    {about}
-                  </p1>
+                  <p1>{about}</p1>
 
                   <div className="row">
                     <div className="col-sm-6 mt-5">
@@ -256,9 +237,6 @@ export default function ViewUserProfile() {
 
                   <div className="row">
                     <div className="col-sm-6 mt-5">
-                      {/* <h5><strong>Experience</strong></h5>
-    <p>{field} years</p> */}
-
                       {type === "Job Seeker" && (
                         <span>
                           <h5>
@@ -303,9 +281,12 @@ export default function ViewUserProfile() {
                         <span>
                           <div className="">
                             {" "}
-                            <button className="btn btn-primary rounded-sm btn-lg">
+                            <a
+                              href="/resume"
+                              className="btn btn-primary rounded-sm btn-lg"
+                            >
                               My Resume
-                            </button>
+                            </a>
                           </div>
                         </span>
                       )}

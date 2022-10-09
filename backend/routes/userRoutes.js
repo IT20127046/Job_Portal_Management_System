@@ -24,6 +24,8 @@ UserRouter.put("/user/update/:id", UserController.updateUser);
 // Delete User
 UserRouter.delete("/user/delete/:id", UserController.removeUser);
 
+UserRouter.put("/profile/:id", UserController.updateProfile);
+
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {
     callback(null, "./uploads");
@@ -35,10 +37,11 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-UserRouter.put(
-  "/profile/:id",
-  upload.single("file"),
-  UserController.updateProfile
-);
+//update photo
+
+UserRouter.put("/photo/:id", upload.single("file"), UserController.updatePhoto);
+
+// update password
+UserRouter.put("/user/updateprofile/:id", UserController.updatepassword);
 
 module.exports = UserRouter;
