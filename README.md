@@ -7,6 +7,37 @@ This system is designed as a solution for the issues related to finding jobs, st
 
 ## IT20127046 - Samararathna L.H
 
+*	Backend implementation for Interview Management (create, view, update, delete).
+*	Backend implementation for Assessment Management (create, view, update, delete).
+*	Frontend implementation for Interview Management.
+
+o	Recruiter (Company)
+
+-	Schedule a new interview (including the form validations).
+-	View all scheduled interviews.
+-	View specific interview details and change interview status.
+-	Edit and cancel scheduled interviews
+-	Send notice about interview to jobseekers.
+
+o	Job seeker
+
+-	View job seeker’s interviews.
+-	Send response about interview availability. 
+	Frontend implementation for Assessment Management
+
+o	Recruiter (Company)
+
+-	Add a new assessment (including the form validations).
+-	View all added assessment.
+-	Edit and delete added assessment
+-	Send assessment and details to jobseekers.
+
+o	Job seeker
+
+-	View job seeker’s assessments.
+-	Send solutions for the assessments. 
+	Report generation – based on interview pass fail information.
+
 ## IT20128036 - Kumarasinghe K.M.K.D
 
 ## IT20131456 - Mendis T.C.U
