@@ -68,9 +68,13 @@ export default class UserRoles_JonRecruiter extends Component {
   handleSearchArea = (e) => {
     const searchKey = e.currentTarget.value;
 
-    axios.get("http://localhost:5000/users").then((res) => {
+    const type = "Job Recruiter";
+    axios.get(`http://localhost:5000/users/${type}`).then((res) => {
       if (res.data.success) {
         this.filterData(res.data.existingUsers, searchKey);
+        
+
+       
       }
     });
   };

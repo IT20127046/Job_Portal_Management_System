@@ -103,11 +103,8 @@ export default class UserRoles extends Component {
     const searchResult = users.filter(
       (user) =>
         user.name.toLowerCase().includes(searchKey) ||
-        user.type.toLowerCase().includes(searchKey) ||
         user.name.toUpperCase().includes(searchKey) ||
-        user.type.toUpperCase().includes(searchKey) ||
-        user.name.includes(searchKey) ||
-        user.type.includes(searchKey)
+        user.name.includes(searchKey)
     );
 
     this.setState({
