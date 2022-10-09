@@ -111,7 +111,6 @@ export default function RecruiterView() {
                                     {application.status === "Pending" && <span style={{ color: 'black' }}>{application.status}</span>}
                                     {application.status === "Accepted" && <span style={{ color: 'green' }}>{application.status}</span>}
                                     {application.status === "Rejected" && <span style={{ color: 'red' }}>{application.status}</span>}
-                                    {/* {application.status} */}
                                 </td>
                                 <td> <button type="button" className="btn btn-outline-primary" onClick={() => navigate(`/application_details/${application._id}`)}><i className="fa fa-eye" />&nbsp;View</button> </td>
                             </tr>
@@ -135,7 +134,6 @@ export default function RecruiterView() {
                                     {application.status === "Pending" && <span style={{ color: 'black' }}>{application.status}</span>}
                                     {application.status === "Accepted" && <span style={{ color: 'green' }}>{application.status}</span>}
                                     {application.status === "Rejected" && <span style={{ color: 'red' }}>{application.status}</span>}
-                                    {/* {application.status} */}
                                 </td>
                                 <td> <button type="button" className="btn btn-outline-primary" onClick={() => navigate(`/application_details/${application._id}`)}><i className="fa fa-eye" />&nbsp;View</button> </td>
                             </tr>
