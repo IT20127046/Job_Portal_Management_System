@@ -3,7 +3,7 @@
 ### Job4me
 This system is designed as a solution for the issues related to finding jobs, starting from searching for jobs to rejection or acceptance. Since the whole process is considered, it is not only for job seekers but also for the companies/recruiters.
 
-### Group Members -:
+### Group Members (Contribution) -:
 
 ## IT20127046 - Samararathna L.H
 
@@ -41,8 +41,6 @@ o	Job seeker
 ## IT20128036 - Kumarasinghe K.M.K.D
 
 ## IT20131456 - Mendis T.C.U
-
-### Contribution
 
 * Backend implementation for job vacancy management (create, view, update, delete and search) 
 
