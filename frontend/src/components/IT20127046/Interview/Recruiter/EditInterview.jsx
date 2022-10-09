@@ -12,6 +12,7 @@ export default function EditInterview() {
   const [interviewDate, setInterviewDate] = useState("");
   const [interviewTime, setInterviewTime] = useState("");
   const [interviewMode, setInterviewMode] = useState("");
+  const [status, setStatus] = useState("");
 
   useEffect(() => {
     retriveInterview();
@@ -24,6 +25,7 @@ export default function EditInterview() {
         setInterviewDate(res.data.exsitingInterview.interviewDate);
         setInterviewTime(res.data.exsitingInterview.interviewTime);
         setInterviewMode(res.data.exsitingInterview.interviewMode);
+        setStatus(res.data.exsitingInterview.status);
       }
     });
   };
@@ -36,6 +38,7 @@ export default function EditInterview() {
       interviewDate: interviewDate,
       interviewTime: interviewTime,
       interviewMode: interviewMode,
+      status: status,
     };
 
     updateInterview(data);
@@ -115,6 +118,24 @@ export default function EditInterview() {
                         <option defaultValue>Select Mode</option>
                         <option value="Online">Online</option>
                         <option value="Physical">Physical</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className="form-group">
+                      <strong>Status</strong>
+                      <select
+                        className="form-select"
+                        aria-label="Default select example"
+                        name="status"
+                        value={status}
+                        onChange={(e) => {
+                          setStatus(e.target.value);
+                        }}
+                      >
+                        <option defaultValue>Pending</option>
+                        <option value="Pass">Pass</option>
+                        <option value="Fail">Fail</option>
                       </select>
                     </div>
                   </div>
