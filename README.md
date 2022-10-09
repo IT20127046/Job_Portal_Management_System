@@ -48,7 +48,7 @@ o	Job seeker
 
 * Include three user roles (admin, recruiter, job seeker) 
 
-#### admin 
+ o	 admin 
 
  - View all company-created job vacancies. 
  -	Accept or reject company-created job vacancies.
