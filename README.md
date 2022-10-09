@@ -19,13 +19,13 @@ IT20128036 - Kumarasinghe K.M.K.D
 
 * Include three user roles (admin, recruiter, job seeker) 
 
-*	admin 
+#### admin 
 
  - View all company-created job vacancies. 
  -	Accept or reject company-created job vacancies.
  -	Search the required data using the company name or position. 
 
-*	Recruiter (Company) 
+#### Recruiter (Company) 
 
 -	Create new job vacancies for their company (including the form validations). 
 -	View all company-created vacancies. 
@@ -33,7 +33,7 @@ IT20128036 - Kumarasinghe K.M.K.D
 -	Search the created job vacancies. 
 -	Generate vacancy reports for the year. (Download a Report as the PDF and view the pie-chart)
 
-*	Job seeker 
+#### Job seeker 
 
 -	View all company-posted job vacancies. 
 -	Search for job vacancies using company names or positions. 
