@@ -4,13 +4,29 @@ import swal from "sweetalert";
 import "../../Main.css";
 import NavBar from "../../../IT20128036/NavBar";
 import jwt_decode from 'jwt-decode';
+import { useNavigate } from 'react-router-dom';
 
 export default function RecruiterView() {
+  let navigate = useNavigate();
+  
   const [interviews, setInterviews] = useState([]);
   const [search, setSearch] = useState("");
   const [filteredResults, setFilteredResults] = useState([]);
 
   useEffect(() => {
+    document.title = "Interviews";
+
+    // redirect to the login page if the user is not logged in
+    if (!localStorage.userToken) {
+      swal("Please login first", "", "warning")
+          .then((value) => {
+              if (value) {
+                  navigate(`/user/login`);
+                  window.location.reload(false);
+              }
+          });
+  }
+
     retriveInterviews();
   }, []);
   
