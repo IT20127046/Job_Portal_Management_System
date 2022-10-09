@@ -42,6 +42,8 @@ import Report from "./components/IT20125202/reportGeneration/report";
 import { Home } from "./components/IT20125202/Home";
 import SendAssessment from "./components/IT20127046/Assessment/Recruiter/SendAssessment";
 import ViewSentAssessment from "./components/IT20127046/Assessment/Recruiter/ViewSentAssessment";
+import ViewAssessmentJobSeeker from "./components/IT20127046/Assessment/JobSeeker/ViewAssessmentJobSeeker";
+import GenerateReportIT46 from "./components/IT20127046/ReportGeneration/GenerateReport";
 
 function App() {
   
@@ -99,6 +101,11 @@ function App() {
         <Route path="/interview/jobseeker/notification" element={<MyNotifications />} />
         <Route path="/assessment/send/:id" element={<SendAssessment />} />
         <Route path="/sendAssessment/recruiter/view" element={<ViewSentAssessment />} />
+
+        <Route path="/sendAssessment/jobseeker" element={<ViewAssessmentJobSeeker />} />
+        <Route path="/generateReport/interview" element={<GenerateReportIT46 />} />
+
+
         <Route path="/home" element={<Home/>} />
 
       </Routes>
