@@ -339,7 +339,6 @@ export default function AdminHome() {
                 </center>
               </div>
             </div>
-
             <br />
           </div>
         </div>
