@@ -52,7 +52,7 @@ export default class UserRoles extends Component {
             jobseekers = jobseekers + 1;
           }
 
-          all = all + 1;
+          all = recruiters + jobseekers;
         });
 
         this.setState({
