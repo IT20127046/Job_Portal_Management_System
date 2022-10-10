@@ -123,10 +123,16 @@ export default class UserRoles extends Component {
         <br />
 
         <div className="container">
-          <div className="row">
-            <div className="col-sm-3">
+          <div className="row" >
+            {/* <div className="col-sm-3">
+              <RightSidePanel />
+            </div> */}
+
+            <div className="col-sm-3" style={{ backgroundColor: "#DCDCDC" }}>
+              <br />
               <RightSidePanel />
             </div>
+
             <div className="col-sm-9">
               <div className="row">
                 <div className="col-lg-9 mt-2 mb-2">
