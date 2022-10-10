@@ -190,6 +190,10 @@ export default function AdminHome() {
               <div className="col-sm-8 ">
                 <div>
                   <h5>Analysis</h5>
+                  <h5 className="text-danger"><ul>
+  <li>LIVE</li>
+
+</ul></h5>
 
                   <BarChart
                     width={500}
