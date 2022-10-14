@@ -87,48 +87,46 @@ function Report() {
     }
 
     return (
-        <div className='container' style={{ textAlign: 'center' }}>
+        <div className='jumbotron' style={{ textAlign: 'center', margin: '10px 80px 10px 80px' }}>
             <br />
             <AdminNavBar />
-            <div className="container">
-                <div className='row'>
-                    <div className='col-sm-3'>
-                        <RightSidePanel />
-                    </div>
-                    <div className='col-sm-9'>
-                        <div className='row'>
-                            <div>
-                                <br /><h1>Applciation Reports</h1>
-                                <br /><br /><br />
-                                <button
-                                    className='btn btn-dark'
-                                    onClick={pdfGenerate}>
-                                    Generate Report
-                                </button>
-                                <br /><br />
-                                <div className='container' style={{ backgroundColor: '#F5F5F5', width: '1000px', textAlign: 'left' }}>
-                                    <div style={{ textAlign: 'center', opacity: '0.3' }}>
-                                        <br /><h3><i>Overall status of submitted applications</i></h3>
-                                    </div>
-                                    <PieChart
-                                        radius={PieChart.defaultProps.radius - 20}
-                                        viewBoxSize={[100, 100]}
-                                        segmentsShift={(index) => (index === 0 ? 1 : 1.2)}
-                                        label={({ dataEntry }) => dataEntry.title}
-                                        labelPosition={60}
-                                        labelStyle={{ fontSize: '3px', fill: '#000', opacity: 0.75 }}
-                                        data={[
-                                            { title: 'Rejected', value: Rejected.length, color: '#E55451' },
-                                            { title: 'Pending', value: Pending.length, color: '#F3E5AB' },
-                                            { title: 'Accepted', value: Accepted.length, color: '#90EE90' },
-
-                                        ]}
-                                    />
-                                    <label style={{ background: '#90EE90', width: '100px', height: '15px' }} /> Accepted Applications<br />
-                                    <label style={{ background: '#F3E5AB', width: '100px', height: '15px' }} /> Pending Applications<br />
-                                    <label style={{ background: '#E55451', width: '100px', height: '15px' }} /> Rejected Applciations<br />
-
+            <hr />
+            <div className='row' style={{ marginLeft: '1px' }}>
+                <div className='col-sm-3' style={{ backgroundColor: '#DCDCDC' }}>
+                    <br />
+                    <RightSidePanel />
+                </div>
+                <div className='col-sm-9'>
+                    <div className='row'>
+                        <div>
+                            <br /><h1>Applciation Reports</h1>
+                            <br /><br /><br />
+                            <button
+                                className='btn btn-dark'
+                                onClick={pdfGenerate}>
+                                Generate Report
+                            </button>
+                            <br /><br />
+                            <div className='container' style={{ backgroundColor: '#F5F5F5', maxWidth: '1000px', textAlign: 'left' }}>
+                                <div style={{ textAlign: 'center', opacity: '0.3' }}>
+                                    <br /><h3><i>Overall status of submitted applications</i></h3>
                                 </div>
+                                <PieChart
+                                    radius={PieChart.defaultProps.radius - 20}
+                                    viewBoxSize={[100, 100]}
+                                    segmentsShift={(index) => (index === 0 ? 1 : 1.2)}
+                                    label={({ dataEntry }) => dataEntry.title}
+                                    labelPosition={60}
+                                    labelStyle={{ fontSize: '3px', fill: '#000', opacity: 0.75 }}
+                                    data={[
+                                        { title: 'Rejected', value: Rejected.length, color: '#E55451' },
+                                        { title: 'Pending', value: Pending.length, color: '#F3E5AB' },
+                                        { title: 'Accepted', value: Accepted.length, color: '#90EE90' },
+                                    ]}
+                                />
+                                <label style={{ background: '#90EE90', width: '100px', height: '15px' }} /> <b>Accepted Applications</b><br />
+                                <label style={{ background: '#F3E5AB', width: '100px', height: '15px' }} /> <b>Pending Applications</b><br />
+                                <label style={{ background: '#E55451', width: '100px', height: '15px' }} /> <b>Rejected Applciations</b><br />
                             </div>
                         </div>
                     </div>

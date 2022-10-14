@@ -52,10 +52,16 @@ export default function ReplyToUser() {
       <br />
       <AdminNavBar />
       <br />
-      <div className="row">
-        <div className="col-sm-3">
+      <div className="row" style={{ marginLeft: "1px" }}>
+        {/* <div className="col-sm-3">
+          <RightSidePanel />
+        </div> */}
+
+        <div className="col-sm-3" style={{ backgroundColor: "#DCDCDC" }}>
+          <br />
           <RightSidePanel />
         </div>
+
         <div className="col-md-8 mt-4 mx-auto">
           <h4>Reply</h4>
 
