@@ -97,6 +97,11 @@ export default function InterviewPassFail() {
             </div>
             <div className="col">
               <br />
+              <div style={{ border: "1px solid black", padding: "10px", maxWidth: "300px" }}>
+                    <p><b>Report :</b> Interview Pass Fail Count</p>
+                    <p><b>Month  :</b> October</p>
+              </div>
+              <br />
               <div class="alert alert-primary" role="alert" style={{ maxWidth: "300px" }}>
               <h6>Pass Count - {passCount}</h6>
               </div>

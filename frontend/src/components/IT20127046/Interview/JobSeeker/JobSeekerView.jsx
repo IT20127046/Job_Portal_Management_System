@@ -16,7 +16,6 @@ export default function JobSeekerView() {
     axios.get(`http://localhost:5000/interview/getAll`).then((res) => {
       if (res.data.success) {
         setInterviews(res.data.exsitingInterview);
-        console.log(res.data.exsitingInterview);
       }
     });
   };
@@ -109,7 +108,7 @@ export default function JobSeekerView() {
                 <div className="container" style={searchPanel}>
 
                   <center>
-                    <h5>Serach by Your Job</h5>
+                    <h5>Your Job Roles</h5>
                   </center>
 
                   <br />
@@ -130,16 +129,10 @@ export default function JobSeekerView() {
                   <div className="btn-group mb-2">
                     <a
                       href="#"
-                      className="btn btn-outline-dark active"
+                      className="btn btn-outline-dark"
                       aria-current="page"
                     >
                       All
-                    </a>
-                    <a href="#" className="btn btn-outline-dark">
-                      Upcoming
-                    </a>
-                    <a href="#" className="btn btn-outline-dark">
-                      Completed
                     </a>
                   </div>
                   <br />

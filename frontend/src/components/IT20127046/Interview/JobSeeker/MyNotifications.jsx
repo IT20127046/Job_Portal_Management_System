@@ -51,11 +51,11 @@ export default function MyNotifications() {
               <div className="col-3">
                 <center>
                   <a
-                    className="btn btn-outline-success"
+                    className="btn btn-outline-dark"
                     style={{ margin: "0 10px 10px 10px" }}
-                    href="/assessment/add"
+                    href="/interview/jobseeker"
                   >
-                    <i className="fa fa-bell"></i>&nbsp; My Messages
+                    <i className="fa fa-arrow-left"></i>&nbsp; Back
                   </a>
                 </center>
               </div>
@@ -65,16 +65,10 @@ export default function MyNotifications() {
                   <div className="btn-group mb-2">
                     <a
                       href="#"
-                      className="btn btn-outline-dark active"
+                      className="btn btn-outline-dark"
                       aria-current="page"
                     >
                       All
-                    </a>
-                    <a href="#" className="btn btn-outline-dark">
-                      Upcoming
-                    </a>
-                    <a href="#" className="btn btn-outline-dark">
-                      Completed
                     </a>
                   </div>
                   <br />
