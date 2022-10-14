@@ -163,17 +163,12 @@ export default function ViewAssessmentJobSeeker() {
                   <div className="btn-group mb-2">
                     <a
                       href="#"
-                      className="btn btn-outline-dark active"
+                      className="btn btn-outline-dark"
                       aria-current="page"
                     >
                       All
                     </a>
-                    <a href="#" className="btn btn-outline-dark">
-                      Upcoming
-                    </a>
-                    <a href="#" className="btn btn-outline-dark">
-                      Completed
-                    </a>
+                    
                   </div>
                   <br />
                 </div>

@@ -3,12 +3,12 @@ import axios from "axios";
 import swal from "sweetalert";
 import "../../Main.css";
 import NavBar from "../../../IT20128036/NavBar";
-import jwt_decode from 'jwt-decode';
-import { useNavigate } from 'react-router-dom';
+import jwt_decode from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 
 export default function RecruiterView() {
   let navigate = useNavigate();
-  
+
   const [interviews, setInterviews] = useState([]);
   const [search, setSearch] = useState("");
   const [filteredResults, setFilteredResults] = useState([]);
@@ -18,23 +18,22 @@ export default function RecruiterView() {
 
     // redirect to the login page if the user is not logged in
     if (!localStorage.userToken) {
-      swal("Please login first", "", "warning")
-          .then((value) => {
-              if (value) {
-                  navigate(`/user/login`);
-                  window.location.reload(false);
-              }
-          });
-  }
+      swal("Please login first", "", "warning").then((value) => {
+        if (value) {
+          navigate(`/user/login`);
+          window.location.reload(false);
+        }
+      });
+    }
 
     retriveInterviews();
   }, []);
-  
 
   const retriveInterviews = () => {
     axios.get(`http://localhost:5000/interview/getAll`).then((res) => {
       if (res.data.success) {
         setInterviews(res.data.exsitingInterview);
+        setFilteredResults(res.data.exsitingInterview);
         console.log(res.data.exsitingInterview);
       }
     });
@@ -76,6 +75,65 @@ export default function RecruiterView() {
     }
   };
 
+  const TableBody = (props) => {
+    return (
+      <tbody>
+        {props.mapArray.slice(0).reverse().map((interview, index) => (
+            <tr key={index}>
+              <th scope="row">{index + 1}</th>
+              <td>{interview.applicantName}</td>
+              <td>{interview.jobTitle}</td>
+              <td>{interview.interviewDate}</td>
+              <td>{interview.interviewTime}</td>
+              <td>{interview.interviewMode}</td>
+
+              {interview.status == "Fail" ? (
+                <p
+                  style={{ margin: "10px" }}
+                  className="badge bg-warning text-dark"
+                >
+                  {interview.status}
+                </p>
+              ) : (
+                <p
+                  style={{ margin: "10px" }}
+                  className="badge bg-success text-white"
+                >
+                  {interview.status}
+                </p>
+              )}
+
+              <td className="text-center">
+                <a
+                  className="btn btn-success "
+                  href={`/interview/view/${interview._id}`}
+                >
+                  <i className="fa fa-info-circle"></i> View
+                </a>
+              </td>
+              <td className="text-center">
+                <a
+                  className="btn btn-success "
+                  href={`/interview/update/${interview._id}`}
+                >
+                  <i className="fa fa-edit"></i> Edit
+                </a>
+              </td>
+              <td className="text-center">
+                <button
+                  className="btn btn-danger"
+                  type="submit"
+                  onClick={() => onDelete(interview._id)}
+                >
+                  <i className="fa fa-trash"></i> Cancel
+                </button>
+              </td>
+            </tr>
+          ))}
+      </tbody>
+    );
+  };
+
   return (
     <div>
       <NavBar />
@@ -87,7 +145,9 @@ export default function RecruiterView() {
           <div className="row">
             <div className="float-left col-lg-9 mt-2 mb-2">
               &nbsp;
-              <h3><i className="fa fa-handshake-o"></i> Scheduled Interviews</h3>
+              <h3>
+                <i className="fa fa-handshake-o"></i> Scheduled Interviews
+              </h3>
             </div>
             <div className="col-lg-3 mt-2 mb-2">
               &nbsp;
@@ -107,11 +167,19 @@ export default function RecruiterView() {
                 <i className="fa fa-file"></i>&nbsp; Manage Assessment
               </a>
 
-              <a className="btn btn-primary" style={{ marginLeft: "10px" }} href="/interview/schdule">
+              <a
+                className="btn btn-primary"
+                style={{ marginLeft: "10px" }}
+                href="/interview/schdule"
+              >
                 <i className="fa fa-plus"></i>&nbsp; Schedule New Interview
               </a>
 
-              <a className="btn btn-warning" style={{ marginLeft: "10px" }} href="/generateReport/interview">
+              <a
+                className="btn btn-warning"
+                style={{ marginLeft: "10px" }}
+                href="/generateReport/interview"
+              >
                 <i className="fa fa-bar-chart"></i>&nbsp; Genarate Reports
               </a>
             </div>
@@ -121,6 +189,7 @@ export default function RecruiterView() {
               className="container bg-light shadow p-3 mb-5 rounded mt-3"
               style={{ borderRadius: "8px" }}
             >
+
               <table className="table table-striped table-bordered">
                 <thead>
                   <tr>
@@ -136,58 +205,12 @@ export default function RecruiterView() {
                     <th scope="col">Cancel</th>
                   </tr>
                 </thead>
-                <tbody>
-                  {interviews.slice(0).reverse().map((interview, index) => (
-                    <tr key={index}>
-                      <th scope="row">{index + 1}</th>
-                      <td>{interview.applicantName}</td>
-                      <td>{interview.jobTitle}</td>
-                      <td>{interview.interviewDate}</td>
-                      <td>{interview.interviewTime}</td>
-                      <td>{interview.interviewMode}</td>
-                      
-                      {interview.status == "Fail" ? <p
-                        style={{ margin: "10px" }}
-                        className="badge bg-warning text-dark"
-                      >
-                        {interview.status}
-                      </p>
-                      : <p
-                      style={{ margin: "10px" }}
-                      className="badge bg-success text-white"
-                    >
-                      {interview.status}
-                    </p>
-                    }
-                      
-                      <td className="text-center">
-                        <a
-                          className="btn btn-success "
-                          href={`/interview/view/${interview._id}`}
-                        >
-                          <i className="fa fa-info-circle"></i> View
-                        </a>
-                      </td>
-                      <td className="text-center">
-                        <a
-                          className="btn btn-success "
-                          href={`/interview/update/${interview._id}`}
-                        >
-                          <i className="fa fa-edit"></i> Edit
-                        </a>
-                      </td>
-                      <td className="text-center">
-                        <button
-                          className="btn btn-danger"
-                          type="submit"
-                          onClick={() => onDelete(interview._id)}
-                        >
-                          <i className="fa fa-trash"></i> Cancel
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
+
+                {search.length > 1 ? (
+                  <TableBody mapArray={filteredResults} />
+                ) : (
+                  <TableBody mapArray={interviews} />
+                )}
               </table>
             </div>
           </div>
