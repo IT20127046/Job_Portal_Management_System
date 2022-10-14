@@ -43,10 +43,6 @@ export default function EditInterview() {
       setValidateAlert(true);
       setFromValidate("Please Input Required Fields");
     }
-    else if(validateInterviewDate(interviewDate)){
-      setValidateAlert(true);
-      setFromValidate("Plase Input Valid Interview Date");
-    }
     else {
       const data = {
         description: description,
