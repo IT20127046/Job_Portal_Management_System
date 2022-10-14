@@ -8,6 +8,8 @@ import jwt_decode from "jwt-decode";
 export default function ViewAssessment() {
 
   const [assessments, setAssessments] = useState([]);
+  const [search, setSearch] = useState("");
+  const [filteredResults, setFilteredResults] = useState([]);
 
   useEffect(() => {
     retriveAssessments();
@@ -41,6 +43,64 @@ export default function ViewAssessment() {
       }
     });
   };
+
+  const searchInterviews = (searchValue) => {
+    setSearch(searchValue);
+    if (search !== "") {
+      const filteredData = assessments.filter((item) => {
+        return Object.values(item)
+          .join("")
+          .toLowerCase()
+          .includes(search.toLowerCase());
+      });
+      setFilteredResults(filteredData);
+    } else {
+      setFilteredResults(assessments);
+    }
+  };
+
+  const TableBody = (props) => {
+    return (
+      <tbody>
+                  {props.mapArray.slice(0).reverse().map((assessment, index) => (
+                    <tr key={index}>
+                      <th scope="row">{index + 1}</th>
+                      <td>{assessment.title}</td>
+                      <td>{assessment.jobTitle}</td>
+                      <td>{assessment.description}</td>
+                      <td>{assessment.driveLink}</td>
+                      
+                      <td className="text-center">
+                        <a
+                          className="btn btn-success "
+                          href={`/assessment/update/${assessment._id}`}
+                        >
+                          <i className="fa fa-edit"></i> Edit
+                        </a>
+                      </td>
+                      <td className="text-center">
+                        <button
+                          className="btn btn-danger"
+                          type="submit"
+                          onClick={() => onDelete(assessment._id)}
+                        >
+                          <i className="fa fa-trash"></i> Delete
+                        </button>
+                      </td>
+                      <td className="text-center">
+                        <a
+                          className="btn btn-success "
+                          href={`/assessment/send/${assessment._id}`}
+                        >
+                          <i className="fa fa-arrow"></i> Send
+                        </a>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+    );
+  };
+  
   return (
     <div>
       <NavBar />
@@ -60,6 +120,7 @@ export default function ViewAssessment() {
                 className="form-control border border-dark"
                 type="search"
                 placeholder="Search"
+                onChange={(e) => searchInterviews(e.target.value)}
               ></input>
             </div>
             <hr />
@@ -98,43 +159,12 @@ export default function ViewAssessment() {
                     <th scope="col">Send</th>
                   </tr>
                 </thead>
-                <tbody>
-                  {assessments.slice(0).reverse().map((assessment, index) => (
-                    <tr key={index}>
-                      <th scope="row">{index + 1}</th>
-                      <td>{assessment.title}</td>
-                      <td>{assessment.jobTitle}</td>
-                      <td>{assessment.description}</td>
-                      <td>{assessment.driveLink}</td>
-                      
-                      <td className="text-center">
-                        <a
-                          className="btn btn-success "
-                          href={`/assessment/update/${assessment._id}`}
-                        >
-                          <i className="fa fa-edit"></i> Edit
-                        </a>
-                      </td>
-                      <td className="text-center">
-                        <button
-                          className="btn btn-danger"
-                          type="submit"
-                          onClick={() => onDelete(assessment._id)}
-                        >
-                          <i className="fa fa-trash"></i> Delete
-                        </button>
-                      </td>
-                      <td className="text-center">
-                        <a
-                          className="btn btn-success "
-                          href={`/assessment/send/${assessment._id}`}
-                        >
-                          <i className="fa fa-arrow"></i> Send
-                        </a>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
+
+                {search.length > 1 ? (
+                  <TableBody mapArray={filteredResults} />
+                ) : (
+                  <TableBody mapArray={assessments} />
+                )}
               </table>
             </div>
           </div>

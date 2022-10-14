@@ -16,7 +16,6 @@ export default function JobSeekerView() {
     axios.get(`http://localhost:5000/interview/getAll`).then((res) => {
       if (res.data.success) {
         setInterviews(res.data.exsitingInterview);
-        console.log(res.data.exsitingInterview);
       }
     });
   };
