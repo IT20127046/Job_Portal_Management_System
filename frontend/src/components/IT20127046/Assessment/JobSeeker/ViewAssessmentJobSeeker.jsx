@@ -142,7 +142,7 @@ export default function ViewAssessmentJobSeeker() {
 
                 <div className="container" style={searchPanel}>
                   <center>
-                    <h5>Serach by Your Job</h5>
+                    <h5>Your Job Roles</h5>
                   </center>
 
                   <br />
