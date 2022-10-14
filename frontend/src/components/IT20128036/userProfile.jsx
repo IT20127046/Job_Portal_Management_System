@@ -173,6 +173,8 @@ function UpdateProfile() {
                           id="dob"
                           name="dob"
                           value={dob}
+                          min="1960-01-01"
+                           max="2006-12-31"
                           onChange={(e) => {
                             setDob(e.target.value);
                           }}

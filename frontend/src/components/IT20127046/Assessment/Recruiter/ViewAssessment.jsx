@@ -112,7 +112,7 @@ export default function ViewAssessment() {
           <div className="row">
             <div className="float-left col-lg-9 mt-2 mb-2">
               &nbsp;
-              <h3><i className="fa fa-handshake-o"></i> Added Assessments</h3>
+              <h3><i className="fa fa-file"></i> Added Assessments</h3>
             </div>
             <div className="col-lg-3 mt-2 mb-2">
               &nbsp;
@@ -129,11 +129,11 @@ export default function ViewAssessment() {
           <div className="container">
             <div>
               <a className="btn btn-dark" href="/interview/recruiter">
-                <i className="fa fa-file"></i>&nbsp; Manage Interviews
+                <i className="fa fa-handshake-o"></i>&nbsp; Manage Interviews
               </a>
 
               <a className="btn btn-success" style={{ marginLeft: "10px" }} href="/sendAssessment/recruiter/view">
-                <i className="fa fa-plus"></i>&nbsp; View Send Assessments
+                <i className="fa fa-file"></i>&nbsp; View Send Assessments
               </a>
 
               <a className="btn btn-primary" style={{ marginLeft: "10px" }} href="/assessment/add">
