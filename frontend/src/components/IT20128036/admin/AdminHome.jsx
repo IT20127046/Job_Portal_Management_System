@@ -170,16 +170,30 @@ export default function AdminHome() {
       <AdminNavBar />
       <br />
 
-      <div className="row">
-        <div className="col-sm-3">
+      <div className="row" style={{ marginLeft: '1px' }}>
+        {/* <div className="col-sm-3">
           <RightSidePanel />
-        </div>
+        </div> */}
+
+
+<div className='col-sm-3' style={{ backgroundColor: '#DCDCDC' }}>
+                    <br />
+                    <RightSidePanel />
+                </div>
+
+
+
+
         <div className="col-sm-9">
           <div className="container">
             <div className="row">
               <div className="col-sm-8 ">
                 <div>
                   <h5>Analysis</h5>
+                  <h5 className="text-danger"><ul>
+  <li>LIVE</li>
+
+</ul></h5>
 
                   <BarChart
                     width={500}

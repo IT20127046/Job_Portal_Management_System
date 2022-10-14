@@ -70,13 +70,10 @@ export default class UserRoles_JobSeeker extends Component {
 
     const searchKey = e.currentTarget.value;
 
-      const type = "Job Seeker";
+    const type = "Job Seeker";
     axios.get(`http://localhost:5000/users/${type}`).then((res) => {
       if (res.data.success) {
         this.filterData(res.data.existingUsers, searchKey);
-        
-
-       
       }
     });
   };
@@ -102,8 +99,13 @@ export default class UserRoles_JobSeeker extends Component {
         <br />
 
         <div className="container">
-          <div className="row">
-            <div className="col-sm-3">
+          <div className="row" >
+            {/* <div className="col-sm-3">
+              <RightSidePanel />
+            </div> */}
+
+            <div className="col-sm-3" style={{ backgroundColor: "#DCDCDC" }}>
+              <br />
               <RightSidePanel />
             </div>
 
