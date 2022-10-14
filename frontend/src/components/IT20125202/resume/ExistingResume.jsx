@@ -142,13 +142,12 @@ const ExistingResume = () => {
                 <br />
                 <h6 style={{ textAlign: 'center' }}> Details in the resume will be automatically filled in the application forms. </h6>
                 <hr />
-                <span className="required_label" /> Required
                 <br />
                 <div className="row">
                     <div className="col">
                         <div className="form-group">
                             {/* applict's first name */}
-                            <label htmlFor="firstNameInput"><h6>First name </h6> </label>
+                            <label htmlFor="firstNameInput"><h6>First Name </h6> </label>
                             <input type="text" name='firstName' value={firstName} onChange={(e) => setFirstName(e.target.value)} className="form-control" id="firstNameInput" aria-describedby="firstNameHelp" placeholder="Enter first name" required />
                             <small id="firstNameHelp" className="form-text text-muted"></small>
                         </div>
@@ -156,7 +155,7 @@ const ExistingResume = () => {
                     <div className="col">
                         <div className="form-group">
                             {/* applicant's last name */}
-                            <label htmlFor="lastNameInput"><h6>Last name </h6> </label>
+                            <label htmlFor="lastNameInput"><h6>Last Name </h6> </label>
                             <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} className="form-control" id="lastNameInput" aria-describedby="lastNameHelp" placeholder="Enter last name" required />
                             <small id="lastNameHelp" className="form-text text-muted"></small>
                         </div>
@@ -165,16 +164,16 @@ const ExistingResume = () => {
                 <br />
                 <div className="form-group">
                     {/* applicant's email */}
-                    <label htmlFor="EmailInput"><h6>Email address </h6> </label>
+                    <label htmlFor="EmailInput"><h6>Email Address </h6> </label>
                     <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="form-control" id="EmailInput" aria-describedby="emailHelp" placeholder="Enter email" required />
-                    <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+                    <small id="emailHelp" className="form-text text-muted"></small>
                 </div>
                 <br />
                 <div className="form-group">
                     {/* applicant's phone number */}
-                    <label htmlFor="mobileNumber"><h6>Mobile number </h6> </label>
+                    <label htmlFor="mobileNumber"><h6>Mobile Number </h6> </label>
                     <input type="text" value={mobile} onChange={(e) => setMobile(e.target.value)} className="form-control" id="mobileNumber" aria-describedby="mobileHelp" placeholder="Enter mobile number" required />
-                    <small id="mobileHelp" className="form-text text-muted">We'll never share your mobile number with anyone else.</small>
+                    <small id="mobileHelp" className="form-text text-muted"></small>
                 </div>
                 <br />
                 <div className="form-group">
@@ -332,7 +331,7 @@ const ExistingResume = () => {
                 </div>
                 &nbsp;
                 <div style={{ textAlign: 'center' }}>
-                    <button type="button" className="btn btn-outline-danger" onClick={(e) => deleteResume(e)}> <h5>Delete Resume</h5></button>
+                    <button type="button" className="btn btn-outline-danger" onClick={(e) => deleteResume(e)}> <h5>Delete resume</h5></button>
                 </div>
                 <br /><br />
             </form>
