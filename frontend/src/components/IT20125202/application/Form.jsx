@@ -90,7 +90,7 @@ const Form = () => {
                     setFirstName(response.data.exsitingResume.firstName);
                     setLastName(response.data.exsitingResume.lastName);
                     setEmail(response.data.exsitingResume.email);
-                    setPhone(response.data.exsitingResume.phone);
+                    setPhone(response.data.exsitingResume.mobile);
                     setEducationalQualifications(response.data.exsitingResume.educationalQualifications);
                     setExperience(response.data.exsitingResume.experience);
                     setSkills(response.data.exsitingResume.skills);
@@ -177,7 +177,7 @@ const Form = () => {
             <form>
                 <br />
                 <hr />
-                <h6> All the fields marked with the (<span className="required_label" /> ) should be filled. </h6>
+                <h6><span className="required_label" /> Required</h6>
                 <br />
                 {/* First three fields should be filled automatically when click the apply button in vacancy */}
                 <div className="form-group">
@@ -196,7 +196,7 @@ const Form = () => {
                 <br />
                 <div className="form-group">
                     {/* job title */}
-                    <label htmlFor="jobTitle"><h6>Job title</h6></label>
+                    <label htmlFor="jobTitle"><h6>Job Title</h6></label>
                     <input type="text" className="form-control" id="jobTitle" aria-describedby="jobTitleHelp" placeholder={jobTitle} readOnly />
                     <small id="jobTitleHelp" className="form-text text-muted"></small>
                 </div>
@@ -205,7 +205,7 @@ const Form = () => {
                     <div className="col">
                         <div className="form-group">
                             {/* applict's first name */}
-                            <label htmlFor="firstNameInput"><h6>First name <span className="required_label" /></h6> </label>
+                            <label htmlFor="firstNameInput"><h6>First Name <span className="required_label" /></h6> </label>
                             <input type="text" name='firstName' value={firstName} onChange={(e) => setFirstName(e.target.value)} className="form-control" id="firstNameInput" aria-describedby="firstNameHelp" placeholder="Enter first name" required />
                             <small id="firstNameHelp" className="form-text text-muted"></small>
                         </div>
@@ -213,7 +213,7 @@ const Form = () => {
                     <div className="col">
                         <div className="form-group">
                             {/* applicant's last name */}
-                            <label htmlFor="lastNameInput"><h6>Last name <span className="required_label" /></h6> </label>
+                            <label htmlFor="lastNameInput"><h6>Last Name <span className="required_label" /></h6> </label>
                             <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} className="form-control" id="lastNameInput" aria-describedby="lastNameHelp" placeholder="Enter last name" required />
                             <small id="lastNameHelp" className="form-text text-muted"></small>
                         </div>
@@ -222,16 +222,16 @@ const Form = () => {
                 <br />
                 <div className="form-group">
                     {/* applicant's email */}
-                    <label htmlFor="EmailInput"><h6>Email address <span className="required_label" /></h6> </label>
+                    <label htmlFor="EmailInput"><h6>Email Address <span className="required_label" /></h6> </label>
                     <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="form-control" id="EmailInput" aria-describedby="emailHelp" placeholder="Enter email" required />
-                    <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+                    <small id="emailHelp" className="form-text text-muted">The email will not be used for any other purpose</small>
                 </div>
                 <br />
                 <div className="form-group">
                     {/* applicant's phone number */}
-                    <label htmlFor="mobileNumber"><h6>Mobile number <span className="required_label" /></h6> </label>
+                    <label htmlFor="mobileNumber"><h6>Mobile Number <span className="required_label" /></h6> </label>
                     <input type="text" value={phone} onChange={(e) => setPhone(e.target.value)} className="form-control" id="mobileNumber" aria-describedby="mobileHelp" placeholder="Enter mobile number" required />
-                    <small id="mobileHelp" className="form-text text-muted">We'll never share your mobile number with anyone else.</small>
+                    <small id="mobileHelp" className="form-text text-muted">The mobile number will not be used for any other purpose</small>
                 </div>
                 <br />
                 <div className="form-group">
@@ -392,7 +392,7 @@ const Form = () => {
                 <br />
                 <div className="form-group">
                     {/* additional information */}
-                    <label htmlFor="additionalInfo"><h6>Additional information</h6></label>
+                    <label htmlFor="additionalInfo"><h6>Additional Information</h6></label>
                     <textarea value={additionalInformation} onChange={(e) => setAdditionalInformation(e.target.value)} className="form-control" id="additionalInfo" rows="3"></textarea>
                 </div>
                 <br />

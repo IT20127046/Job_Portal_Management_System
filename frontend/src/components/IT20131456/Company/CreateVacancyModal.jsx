@@ -106,6 +106,8 @@ export default function CreateVacancy() {
       setJobId("J" + String(response.data.exsitingVacancy.length + 1));
     });
   }, []);
+
+
   return (
     <div>
       <div className="container">
@@ -318,7 +320,8 @@ export default function CreateVacancy() {
                         type="date"
                         className="form-control"
                         placeholder="Pick a date"
-                        name="closingDate"
+                        name="closingDate" 
+                        min={new Date().toJSON().slice(0, 10)}                   
                         onChange={(e) => setClosingDate(e.target.value)}
                       />
                     </div>

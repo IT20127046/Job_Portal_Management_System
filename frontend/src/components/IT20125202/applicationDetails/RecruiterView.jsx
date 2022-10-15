@@ -79,8 +79,12 @@ const RecruiterView = () => {
             })
                 .then(response => {
                     if (response.data.success) {
-                        swal("Application is accepted");
-                        window.location.reload(false);
+                        swal("Application is accepted!", "", "success")
+                            .then((value) => {
+                                if (value) {
+                                    window.location.reload(false);
+                                }
+                            });
                     }
                 })
                 .catch(error => {
@@ -96,20 +100,37 @@ const RecruiterView = () => {
     const rejectHandler = () => {
         //should get an confirmation alert
         if (applicationDet.status === 'Pending') {
-            axios.patch(`http://localhost:5000/applications/update/${id}`, {
-                status: 'Rejected',
-                comments: comments
+            swal({
+                title: "Are you sure?",
+                text: "Once rejected, you will not be able to change it again!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
             })
-                .then(response => {
-                    if (response.data.success) {
-                        swal("Application is rejected");
+                .then((willDelete) => {
+                    if (willDelete) {
+                        axios.patch(`http://localhost:5000/applications/update/${id}`, {
+                            status: 'Rejected',
+                            comments: comments
+                        })
+                            .then(response => {
+                                if (response.data.success) {
+                                    swal("Application is rejected!", "", "success")
+                                        .then((value) => {
+                                            if (value) {
+                                                window.location.reload(false);
+                                            }
+                                        });
+                                }
+                            }
+                            )
+                            .catch(error => {
+                                console.log('Error while rejecting the application. Error: ', error);
+                            });
+                    } else {
+                        swal("Cancelled!");
                     }
-                }
-                )
-                .catch(error => {
-                    console.log('Error while rejecting the application. Error: ', error);
-                }
-                );
+                });
         }
         else {
             swal("Application already " + applicationDet.status + ". Cannot be changed again.");
@@ -145,7 +166,7 @@ const RecruiterView = () => {
                 <br />
                 <div className="form-group">
                     {/* job title */}
-                    <label htmlFor="jobTitle"><h6>Job title</h6></label>
+                    <label htmlFor="jobTitle"><h6>Job Title</h6></label>
                     <input type="text" className="form-control" id="jobTitle" aria-describedby="jobTitleHelp" value={applicationDet.jobTitle} readOnly />
                     <small id="jobTitleHelp" className="form-text text-muted"></small>
                 </div>
@@ -154,7 +175,7 @@ const RecruiterView = () => {
                     <div className="col">
                         <div className="form-group">
                             {/* applict's first name */}
-                            <label htmlFor="firstNameInput"><h6>First name </h6> </label>
+                            <label htmlFor="firstNameInput"><h6>First Name </h6> </label>
                             <input type="text" name='firstName' value={applicationDet.applicantFirstName} className="form-control" id="firstNameInput" aria-describedby="firstNameHelp" placeholder="Enter first name" readOnly />
                             <small id="firstNameHelp" className="form-text text-muted"></small>
                         </div>
@@ -162,7 +183,7 @@ const RecruiterView = () => {
                     <div className="col">
                         <div className="form-group">
                             {/* applicant's last name */}
-                            <label htmlFor="lastNameInput"><h6>Last name </h6> </label>
+                            <label htmlFor="lastNameInput"><h6>Last Name </h6> </label>
                             <input type="text" value={applicationDet.applicantLastName} className="form-control" id="lastNameInput" aria-describedby="lastNameHelp" placeholder="Enter last name" readOnly />
                             <small id="lastNameHelp" className="form-text text-muted"></small>
                         </div>
@@ -171,13 +192,13 @@ const RecruiterView = () => {
                 <br />
                 <div className="form-group">
                     {/* applicant's email */}
-                    <label htmlFor="EmailInput"><h6>Email address </h6> </label>
+                    <label htmlFor="EmailInput"><h6>Email Address </h6> </label>
                     <input type="email" value={applicationDet.applicantEmail} className="form-control" id="EmailInput" aria-describedby="emailHelp" placeholder="Enter email" readOnly />
                 </div>
                 <br />
                 <div className="form-group">
                     {/* applicant's phone number */}
-                    <label htmlFor="mobileNumber"><h6>Mobile number </h6> </label>
+                    <label htmlFor="mobileNumber"><h6>Mobile Number </h6> </label>
                     <input type="text" value={applicationDet.applicantPhone} className="form-control" id="mobileNumber" aria-describedby="mobileHelp" placeholder="Enter mobile number" readOnly />
 
                 </div>
@@ -265,7 +286,7 @@ const RecruiterView = () => {
                 <br />
                 <div className="form-group">
                     {/* additional information */}
-                    <label htmlFor="additionalInfo"><h6>Additional information</h6></label>
+                    <label htmlFor="additionalInfo"><h6>Additional Information</h6></label>
                     <textarea value={applicationDet.additionalInformation} className="form-control" id="additionalInfo" rows="3" readOnly></textarea>
                 </div>
                 <br />

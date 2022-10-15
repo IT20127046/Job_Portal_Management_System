@@ -99,7 +99,7 @@ function Report() {
                 <div className='col-sm-9'>
                     <div className='row'>
                         <div>
-                            <br /><h1>Applciation Reports</h1>
+                            <br /><h1>Application Reports</h1>
                             <br /><br /><br />
                             <button
                                 className='btn btn-dark'
