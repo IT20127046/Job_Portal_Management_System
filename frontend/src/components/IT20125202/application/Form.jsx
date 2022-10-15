@@ -90,7 +90,7 @@ const Form = () => {
                     setFirstName(response.data.exsitingResume.firstName);
                     setLastName(response.data.exsitingResume.lastName);
                     setEmail(response.data.exsitingResume.email);
-                    setPhone(response.data.exsitingResume.phone);
+                    setPhone(response.data.exsitingResume.mobile);
                     setEducationalQualifications(response.data.exsitingResume.educationalQualifications);
                     setExperience(response.data.exsitingResume.experience);
                     setSkills(response.data.exsitingResume.skills);
