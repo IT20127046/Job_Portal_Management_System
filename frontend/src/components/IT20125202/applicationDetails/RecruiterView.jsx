@@ -79,8 +79,12 @@ const RecruiterView = () => {
             })
                 .then(response => {
                     if (response.data.success) {
-                        swal("Application is accepted");
-                        window.location.reload(false);
+                        swal("Application is accepted!", "", "success")
+                            .then((value) => {
+                                if (value) {
+                                    window.location.reload(false);
+                                }
+                            });
                     }
                 })
                 .catch(error => {
@@ -96,20 +100,37 @@ const RecruiterView = () => {
     const rejectHandler = () => {
         //should get an confirmation alert
         if (applicationDet.status === 'Pending') {
-            axios.patch(`http://localhost:5000/applications/update/${id}`, {
-                status: 'Rejected',
-                comments: comments
+            swal({
+                title: "Are you sure?",
+                text: "Once rejected, you will not be able to change it again!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
             })
-                .then(response => {
-                    if (response.data.success) {
-                        swal("Application is rejected");
+                .then((willDelete) => {
+                    if (willDelete) {
+                        axios.patch(`http://localhost:5000/applications/update/${id}`, {
+                            status: 'Rejected',
+                            comments: comments
+                        })
+                            .then(response => {
+                                if (response.data.success) {
+                                    swal("Application is rejected!", "", "success")
+                                        .then((value) => {
+                                            if (value) {
+                                                window.location.reload(false);
+                                            }
+                                        });
+                                }
+                            }
+                            )
+                            .catch(error => {
+                                console.log('Error while rejecting the application. Error: ', error);
+                            });
+                    } else {
+                        swal("Cancelled!");
                     }
-                }
-                )
-                .catch(error => {
-                    console.log('Error while rejecting the application. Error: ', error);
-                }
-                );
+                });
         }
         else {
             swal("Application already " + applicationDet.status + ". Cannot be changed again.");
